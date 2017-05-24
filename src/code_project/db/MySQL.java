@@ -1,4 +1,4 @@
-package db;
+package code_project.db;
 
 public class MySQL extends AbstractDB {
     public MySQL() {

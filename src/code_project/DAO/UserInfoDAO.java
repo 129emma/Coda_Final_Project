@@ -1,8 +1,7 @@
-package DAO;
+package code_project.DAO;
 
-import db.AbstractDB;
-
-
+import code_project.Info.UserInfo;
+import code_project.db.AbstractDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +24,7 @@ public class UserInfoDAO {
         List<UserInfo> userInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM dblab18_ex02_userinfo")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         userInfoList.add(userInfoFromResultSet(r));
@@ -51,7 +50,7 @@ public class UserInfoDAO {
         List<String> usernameList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT username FROM dblab18_ex02_userinfo")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT username FROM User_Info")) {
 
 
                 try (ResultSet r = p.executeQuery()) {
@@ -71,7 +70,7 @@ public class UserInfoDAO {
         UserInfo userInfo = null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM dblab18_ex02_userinfo WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info WHERE username = ?")) {
                 p.setString(1, username);
 
                 try (ResultSet r = p.executeQuery()) {
@@ -89,8 +88,7 @@ public class UserInfoDAO {
 
     public static void createUserInfo(AbstractDB db, String firstName, String lastName, String username, String email ) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO dblab18_ex02_userinfo VALUES (?, ?, ?, ?);")) {
-
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO User_Info VALUES (?, ?, ?, ?);")) {
                 p.setString(1, firstName);
                 p.setString(2, lastName);
                 p.setString(3, username);
@@ -104,7 +102,7 @@ public class UserInfoDAO {
 
     public static void deleteUserInfo(AbstractDB db, String username) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM dblab18_ex02_userinfo WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM User_Info WHERE username = ?;")) {
                 p.setString(1, username);
                 p.executeUpdate();
             }
