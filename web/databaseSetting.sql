@@ -32,3 +32,5 @@ CREATE TABLE Article (
   tags       VARCHAR(99),
   username   VARCHAR(99)
 );
+
+INSERT INTO Article VALUES (123,'Sample','Sample content','2016-01-03','Movie','qpen');

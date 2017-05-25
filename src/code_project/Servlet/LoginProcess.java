@@ -1,6 +1,8 @@
 package code_project.Servlet;
 
+import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.LoginInfoDAO;
+import code_project.Info.ArticleInfo;
 import code_project.Security.Passwords;
 import code_project.Info.LoginInfo;
 import code_project.db.MySQL;
@@ -23,15 +25,19 @@ public class LoginProcess extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+
         if (((String) session.getAttribute("status")) == null) {
             session.setAttribute("status","logout");
-
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
 
+
+
         if (((String) session.getAttribute("status")).equals("login")) {
+            ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(mySQL,(String)session.getAttribute("username"),"156");
+            request.setAttribute("title",articleInfo.getTitle());
+            request.setAttribute("content",articleInfo.getContent());
+            request.setAttribute("id",articleInfo.getArticle_ID());
             response.sendRedirect("Blog.jsp");
         } else {
             username = request.getParameter("username");
@@ -50,6 +56,10 @@ public class LoginProcess extends HttpServlet {
                 session.setAttribute("loginMessage", "");
                 session.setAttribute("status", "login");
                 session.setAttribute("username",username);
+                ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(mySQL,(String)session.getAttribute("username"),"156");
+                request.setAttribute("title",articleInfo.getTitle());
+                request.setAttribute("content",articleInfo.getContent());
+                request.setAttribute("id",articleInfo.getArticle_ID());
                 request.getRequestDispatcher("Blog").forward(request, response);
             } else {
                 session.setAttribute("loginMessage", "Fail to login: wrong password");

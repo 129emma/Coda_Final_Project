@@ -5,9 +5,10 @@ import code_project.Info.LoginInfo;
 import code_project.db.AbstractDB;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Date;
 /**
  * Created by txie936 on 25/05/2017.
  */
@@ -54,13 +55,14 @@ public class ArticleInfoDAO {
     }
 
 
-    public static ArticleInfo getArticleInfo(AbstractDB db, String username) {
+    public static ArticleInfo getArticleInfo(AbstractDB db, String username,String article_ID) {
 
         ArticleInfo articleInfo = null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username = ?AND article_ID=?")) {
                 p.setString(1, username);
+                p.setString(2, article_ID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         articleInfo = ArticleInfoFromResultSet(r);
@@ -91,10 +93,11 @@ public class ArticleInfoDAO {
     }
 
 
-    public static void deleteArticleInfo(AbstractDB db, String username) throws SQLException {
+    public static void deleteArticleInfo(AbstractDB db, String username,String article_ID) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM Article WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM Article WHERE username = ? AND article_ID=?;")) {
                 p.setString(1, username);
+                p.setString(2, article_ID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -112,4 +115,9 @@ public class ArticleInfoDAO {
                 );
     }
 
+
+
+    public static String getCurrentTimeStamp() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+    }
 }

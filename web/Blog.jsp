@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Content Page</title>
@@ -19,5 +20,11 @@
 <a href="/Login"><p>Login</p></a>
 <a href="/Registration"><p>Registration</p></a>
 <a href="/Logout"><p>Logout</p></a>
+<a href="/CreateArticle.jsp"><p>Create article</p></a>
+
+
+<p>${title}</p>
+<p>${content} </p><a href="ChangeArticle?articleChange='true'&articleID=${id}" >click to change</a>
+
 </body>
 </html>
