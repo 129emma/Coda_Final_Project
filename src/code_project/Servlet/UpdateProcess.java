@@ -1,7 +1,7 @@
 package code_project.Servlet;
 
 import code_project.DAO.LoginInfoDAO;
-import code_project.DAO.Passwords;
+import code_project.Security.Passwords;
 import code_project.Info.LoginInfo;
 import code_project.db.MySQL;
 

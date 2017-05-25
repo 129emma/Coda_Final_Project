@@ -13,7 +13,7 @@
 <body>
 
 <div>
-    <p style="color: mediumslateblue">Hello ${sessionScope.username}, This is content page!</p>
+    <p style="color: mediumslateblue">Hello ${sessionScope.username}, This is Blog page!</p>
 </div>
 <a href="/Update"><p>Change your password</p></a>
 <a href="/Login"><p>Login</p></a>

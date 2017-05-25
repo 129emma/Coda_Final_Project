@@ -1,7 +1,7 @@
 package code_project.Servlet;
 
 import code_project.DAO.LoginInfoDAO;
-import code_project.DAO.Passwords;
+import code_project.Security.Passwords;
 import code_project.Info.LoginInfo;
 import code_project.db.MySQL;
 
@@ -32,7 +32,7 @@ public class LoginProcess extends HttpServlet {
         }
 
         if (((String) session.getAttribute("status")).equals("login")) {
-            response.sendRedirect("Content.jsp");
+            response.sendRedirect("Blog.jsp");
         } else {
             username = request.getParameter("username");
             password = request.getParameter("password");

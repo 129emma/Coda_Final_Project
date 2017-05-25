@@ -15,41 +15,8 @@ import java.util.List;
  */
 public class LoginInfoDAO {
 
-    /**
-     * Gets all {@link LoginInfo}s from the given {@link AbstractDB}.
-     * @param db
-     * @return
-     */
-    public static List<LoginInfo> getLoginInfoList(AbstractDB db) {
-
-        List<LoginInfo> loginInfoList = new ArrayList<>();
-
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info")) {
-                try (ResultSet r = p.executeQuery()) {
-                    while (r.next()) {
-                        loginInfoList.add(userInfoFromResultSet(r));
-                    }
-                }
-            }
-
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return loginInfoList;
-
-    }
-
-    /**
-     * Gets the {@link LoginInfo} with the given id from the given {@link AbstractDB}.
-     * @param db
-     * @return
-     */
     public static List<String> getUsernameList(AbstractDB db) {
-
         List<String> usernameList = new ArrayList<>();
-
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT username FROM User_Info")) {
                 try (ResultSet r = p.executeQuery()) {
@@ -71,7 +38,7 @@ public class LoginInfoDAO {
                 p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        loginInfo = userInfoFromResultSet(r);
+                        loginInfo = loginInfoFromResultSet(r);
                     }
                 }
             }
@@ -107,16 +74,7 @@ public class LoginInfoDAO {
         }
     }
 
-
-
-    /**
-     * Extract a {@link LoginInfo} object from a given {@link ResultSet}
-     *
-     * @param r The {@link ResultSet} to extract a {@link LoginInfo} from
-     * @return A valid {@link LoginInfo} object, representing a row from the {@link ResultSet}
-     * @throws SQLException Generated in the case of an out-of-bounds column index, or for an invalid {@link ResultSet}
-     */
-    private static LoginInfo userInfoFromResultSet(ResultSet r) throws SQLException {
+    private static LoginInfo loginInfoFromResultSet(ResultSet r) throws SQLException {
         return new LoginInfo(
                 r.getString("username"),
                 r.getBlob("password"),

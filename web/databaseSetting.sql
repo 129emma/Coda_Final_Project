@@ -7,9 +7,9 @@ CREATE TABLE User_Info (
   firstName  VARCHAR(99),
   lastName   VARCHAR(99),
   email      VARCHAR(99),
-  data_birth INT,
+  data_birth DATE,
   tag        VARCHAR(99),
-  Friends    VARCHAR(99)
+  friends    VARCHAR(99)
 );
 
 DROP TABLE IF EXISTS Comment;
@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS Comment;
 CREATE TABLE Comment (
   comment_ID INT PRIMARY KEY AUTO_INCREMENT,
   cotent     VARCHAR(99),
-  post_time  INT,
+  post_time  DATETIME,
   username   VARCHAR(99),
   article_ID INT
 );
@@ -26,10 +26,8 @@ DROP TABLE IF EXISTS Article;
 
 CREATE TABLE Article (
   article_ID INT PRIMARY KEY AUTO_INCREMENT,
-  cotent     VARCHAR(99),
-  post_time  INT,
+  content    VARCHAR(99),
+  post_time  DATETIME,
   tags       VARCHAR(99),
   username   VARCHAR(99)
 );
-
-INSERT INTO User_Info (username, password, salt) VALUE ('qpen','df','fd');

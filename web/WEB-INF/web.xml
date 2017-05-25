@@ -31,14 +31,14 @@
     </servlet-mapping>
 
 
-    <!--<servlet>-->
-        <!--<servlet-name>ContentProcess</servlet-name>-->
-        <!--<servlet-class>code_project.Servlet.ContentProcess</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>ContentProcess</servlet-name>-->
-        <!--<url-pattern>/Content</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>BlogProcess</servlet-name>
+        <servlet-class>code_project.Servlet.BlogProcess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BlogProcess</servlet-name>
+        <url-pattern>/Blog</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>UpdateProcess</servlet-name>
