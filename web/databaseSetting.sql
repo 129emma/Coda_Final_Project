@@ -26,6 +26,7 @@ DROP TABLE IF EXISTS Article;
 
 CREATE TABLE Article (
   article_ID INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(50),
   content    VARCHAR(99),
   post_time  DATETIME,
   tags       VARCHAR(99),
