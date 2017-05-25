@@ -41,11 +41,11 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UpdateProcess</servlet-name>
+        <servlet-name>ChangePasswordProcess</servlet-name>
         <servlet-class>code_project.Servlet.ChangePasswordProcess</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UpdateProcess</servlet-name>
-        <url-pattern>/Update</url-pattern>
+        <servlet-name>ChangePasswordProcess</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
 </web-app>

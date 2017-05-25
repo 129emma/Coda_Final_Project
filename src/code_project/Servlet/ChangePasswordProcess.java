@@ -46,16 +46,16 @@ public class ChangePasswordProcess extends HttpServlet {
             newPassword = request.getParameter("newPassword");
             if (username == null) {
                 session.setAttribute("updateMessage", "");
-                request.getRequestDispatcher("Update.jsp").forward(request, response);
+                request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
             }
             loginInfo = LoginInfoDAO.getLoginInfo(mySQL, username);
             if (loginInfo == null || !rightUsername()) {
-                forwardWithMessage("updateMessage","Update.jsp","Fail to update: wrong username");
+                forwardWithMessage("updateMessage","ChangePassword.jsp","Fail to update: wrong username");
             }else if (rightPassword()) {
                 updatePassword();
-                forwardWithMessage("updateMessage","Update.jsp","You are successful to change the password!");
+                forwardWithMessage("updateMessage","ChangePassword.jsp","You are successful to change the password!");
             } else {
-                forwardWithMessage("updateMessage","Update.jsp","Fail to update: wrong password");
+                forwardWithMessage("updateMessage","ChangePassword.jsp","Fail to update: wrong password");
             }
         }
     }

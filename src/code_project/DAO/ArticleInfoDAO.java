@@ -80,8 +80,8 @@ public class ArticleInfoDAO {
                 p.setString(1, content);
                 p.setString(2, title);
                 p.setString(3, post_time);
-                p.setString(4, tags);
                 p.setString(5, username);
+                p.setString(4, tags);
                 p.setString(6, article_ID);
                 p.executeUpdate();
             }
