@@ -3,4 +3,49 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <servlet>
+        <servlet-name>LoginProcess</servlet-name>
+        <servlet-class>code_project.Servlet.LoginProcess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginProcess</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RegistrationProcess</servlet-name>
+        <servlet-class>code_project.Servlet.RegistrationProcess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegistrationProcess</servlet-name>
+        <url-pattern>/Registration</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogoutProcess</servlet-name>
+        <servlet-class>code_project.Servlet.LogoutProcess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutProcess</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>BlogProcess</servlet-name>
+        <servlet-class>code_project.Servlet.BlogProcess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BlogProcess</servlet-name>
+        <url-pattern>/Blog</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateProcess</servlet-name>
+        <servlet-class>code_project.Servlet.UpdateProcess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateProcess</servlet-name>
+        <url-pattern>/Update</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -1,12 +1,9 @@
-package DAO;
+package code_project.DAO;
 
-import db.AbstractDB;
+import code_project.Info.UserInfo;
+import code_project.db.AbstractDB;
 
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +14,7 @@ public class UserInfoDAO {
 
     /**
      * Gets all {@link UserInfo}s from the given {@link AbstractDB}.
+     *
      * @param db
      * @return
      */
@@ -25,7 +23,7 @@ public class UserInfoDAO {
         List<UserInfo> userInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM dblab18_ex02_userinfo")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         userInfoList.add(userInfoFromResultSet(r));
@@ -43,37 +41,16 @@ public class UserInfoDAO {
 
     /**
      * Gets the {@link UserInfo} with the given id from the given {@link AbstractDB}.
+     *
      * @param db
      * @return
      */
-    public static List<String> getUsernameList(AbstractDB db) {
-
-        List<String> usernameList = new ArrayList<>();
-
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT username FROM dblab18_ex02_userinfo")) {
-
-
-                try (ResultSet r = p.executeQuery()) {
-                    while (r.next()) {
-                        usernameList.add(r.getString("username"));
-                    }
-                }
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return usernameList;
-    }
 
     public static UserInfo getUserInfo(AbstractDB db, String username) {
-
         UserInfo userInfo = null;
-
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM dblab18_ex02_userinfo WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info WHERE username = ?")) {
                 p.setString(1, username);
-
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         userInfo = userInfoFromResultSet(r);
@@ -87,14 +64,16 @@ public class UserInfoDAO {
         return userInfo;
     }
 
-    public static void createUserInfo(AbstractDB db, String firstName, String lastName, String username, String email ) throws SQLException {
+    public static void updateUserInfo(AbstractDB db, String username, String firstName, String lastName, String email, Date data_birth, String tags, String friends) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO dblab18_ex02_userinfo VALUES (?, ?, ?, ?);")) {
-
+            try (PreparedStatement p = c.prepareStatement("UPDATE User_Info set firstName = ?, lastName=?, email=?, data_birth=?, tag = ?, friends=? WHERE username = ?;")) {
                 p.setString(1, firstName);
                 p.setString(2, lastName);
-                p.setString(3, username);
-                p.setString(4, email);
+                p.setString(3, email);
+                p.setDate(4, data_birth);
+                p.setString(5, tags);
+                p.setString(6, friends);
+                 p.setString(6, username);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -104,7 +83,7 @@ public class UserInfoDAO {
 
     public static void deleteUserInfo(AbstractDB db, String username) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM dblab18_ex02_userinfo WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM User_Info WHERE username = ?;")) {
                 p.setString(1, username);
                 p.executeUpdate();
             }
@@ -123,10 +102,14 @@ public class UserInfoDAO {
      */
     private static UserInfo userInfoFromResultSet(ResultSet r) throws SQLException {
         return new UserInfo(
+                r.getString("username"),
                 r.getString("firstName"),
                 r.getString("lastName"),
-                r.getString("username"),
-                r.getString("email"));
+                r.getString("email"),
+                r.getString("data_birth"),
+                r.getString("tags"),
+                r.getString("friends"));
+
     }
 
 }
