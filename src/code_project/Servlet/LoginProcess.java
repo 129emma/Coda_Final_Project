@@ -50,7 +50,7 @@ public class LoginProcess extends HttpServlet {
                 session.setAttribute("loginMessage", "");
                 session.setAttribute("status", "login");
                 session.setAttribute("username",username);
-                request.getRequestDispatcher("Content").forward(request, response);
+                request.getRequestDispatcher("Blog").forward(request, response);
             } else {
                 session.setAttribute("loginMessage", "Fail to login: wrong password");
                 request.getRequestDispatcher("Login.jsp").forward(request, response);

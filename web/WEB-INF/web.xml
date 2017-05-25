@@ -42,7 +42,7 @@
 
     <servlet>
         <servlet-name>UpdateProcess</servlet-name>
-        <servlet-class>code_project.Servlet.UpdateProcess</servlet-class>
+        <servlet-class>code_project.Servlet.ChangePasswordProcess</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UpdateProcess</servlet-name>

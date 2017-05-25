@@ -11,6 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <a href="/Login"><p>Login</p></a>
+  <a href="/Registration"><p>Registration</p></a>
+  <a href="/Logout"><p>Logout</p></a>
   </body>
 </html>
