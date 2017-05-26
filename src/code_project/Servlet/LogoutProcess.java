@@ -12,7 +12,7 @@ import java.io.PrintWriter;
  * Created by pqsky on 2017/5/23.
  */
 public class LogoutProcess extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
@@ -27,5 +27,8 @@ public class LogoutProcess extends HttpServlet {
             session.setAttribute("logoutMessage","You are success to logout!");
         }
         request.getRequestDispatcher("Login.jsp").forward(request, response);
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        doPost(request,response);
     }
 }

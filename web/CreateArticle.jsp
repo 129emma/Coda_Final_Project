@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<form id="form" action="ChangeArticle">
+<form id="form" action="ChangeArticle" method="post">
     <fieldset>
         <legend>Your article</legend>
         <p>title: <input type="text" name="title" placeholder="Please Enter Your Title" style="width: 300px;"/></P>

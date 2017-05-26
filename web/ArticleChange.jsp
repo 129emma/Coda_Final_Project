@@ -12,12 +12,12 @@
     <title>Title</title>
 </head>
 <body>
-<form id="form" action="ChangeArticle">
+<form id="form" action="ChangeArticle" method="post">
     <fieldset>
         <legend>Your article</legend>
-        <p>title: <input type="text" name="title" placeholder="Please Enter Your Username" style="width: 300px;"/></P>
-        <p>content: <input type="text" name="content" placeholder="Please Enter Your Password" style="width: 300px;"/></p>
-        <p>tag: <input type="text" name="tag" placeholder="Please Enter Your Password" style="width: 300px;"/></p>
+        <p>title: <input type="text" name="title"  value="${article.title}" style="width: 300px;"/></P>
+        <p>content: <input type="text" name="content"  value="${article.content}" style="width: 300px;"/></p>
+        <p>tag: <input type="text" name="tag" value="${article.tags}" style="width: 300px;"/></p>
         <input type="hidden" name="update" value="true">
         <%--<p>Re-enter New Password: <input type="password" name="reNewPassword" placeholder="Please Re-Enter Your New Password" style="width: 300px;"/></p>--%>
         <input type="submit" name="action" value="update"/> <input type="submit" name="action" value="delete"/>

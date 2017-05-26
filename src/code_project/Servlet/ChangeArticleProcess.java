@@ -1,6 +1,7 @@
 package code_project.Servlet;
 
 import code_project.DAO.ArticleInfoDAO;
+import code_project.Info.ArticleInfo;
 import code_project.db.MySQL;
 
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ import java.sql.Date;
  */
 public class ChangeArticleProcess extends HttpServlet{
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession(true);
         MySQL DB=new MySQL();
@@ -33,17 +34,19 @@ public class ChangeArticleProcess extends HttpServlet{
              String title=request.getParameter("title");
              String content=request.getParameter("content");
              String tag=request.getParameter("tag");
-             request.removeAttribute("create");
              try {
                  ArticleInfoDAO.createArticleInfo(DB,(String)session.getAttribute("articleID"),title,content,ArticleInfoDAO.getCurrentTimeStamp(),tag,(String)session.getAttribute("username"));
              }catch (Exception e){
                  e.printStackTrace();
              }
              session.removeAttribute("articleID");
-             request.getRequestDispatcher("Blog.jsp").forward(request, response);
+             request.removeAttribute("create");
+             request.getRequestDispatcher("Blog").forward(request, response);
 
          }else if(request.getParameter("articleChange")!=null) {
              String articleID=request.getParameter("articleID");
+             ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(DB,(String)session.getAttribute("username"),articleID);
+             request.setAttribute("article",articleInfo);
              session.setAttribute("articleID",articleID);
              request.removeAttribute("articleChange");
              request.getRequestDispatcher("ArticleChange.jsp").forward(request, response);
@@ -53,13 +56,11 @@ public class ChangeArticleProcess extends HttpServlet{
              String content=request.getParameter("content");
              String tag=request.getParameter("tag");
              request.removeAttribute("action");
-             String date=String.valueOf(System.currentTimeMillis());
             try{ArticleInfoDAO.updateArticleInfo(DB,(String)session.getAttribute("articleID"),content,title,ArticleInfoDAO.getCurrentTimeStamp(),tag,(String)session.getAttribute("username"));
             }catch(Exception e){
                 e.printStackTrace();
             }
              request.getRequestDispatcher("Blog").forward(request, response);
-
 
          }else if(request.getParameter("action").equals("delete")){
              try {
@@ -72,4 +73,9 @@ public class ChangeArticleProcess extends HttpServlet{
              request.getRequestDispatcher("Blog").forward(request, response);
          }
     }
-}
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        doPost(request,response);
+    }
+
+    }

@@ -17,12 +17,13 @@ public class ArticleInfoDAO {
 
 
 
-    public static List<ArticleInfo> getArticleInfoList(AbstractDB db) {
+    public static List<ArticleInfo> getArticleInfoList(AbstractDB db ,String username) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username=?")) {
+                p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         articleInfoList.add(ArticleInfoFromResultSet(r));
