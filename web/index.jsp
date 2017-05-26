@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html class="full" lang="en">
+
 <!-- Make sure the <html> tag is set to the .full CSS class. Change the background image in the full.css file. -->
 <head>
 
