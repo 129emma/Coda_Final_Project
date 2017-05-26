@@ -11,7 +11,7 @@
     <title>Update Page</title>
 </head>
 <body>
-<form id="form" action="Update">
+<form id="form" action="ChangePassword" method="post">
     <fieldset>
         <legend>Your details</legend>
         <p>Username: <input type="text" name="username" placeholder="Please Enter Your Username" style="width: 300px;"/></P>

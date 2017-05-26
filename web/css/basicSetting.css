@@ -1,0 +1,57 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+/*!
+ * Start Bootstrap - The Big Picture (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+body {
+	margin-top: 50px;
+
+    margin-left: 50px;
+	background: none;
+}
+
+.full {
+  background: url("../bgimages/page3.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-primary{
+    background-color: rgba(0,0,0,0.1);
+}
+.navbar-default {
+    border-color: transparent;
+}
+
+.navbar a{
+    color: white;
+    opacity: 0.7;
+}
+
+.btn{
+    font-family: “Roboto”, sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+  /*  background: #4CAF50 ;*/
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF ;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.login{
+    color: white;
+    padding-top: 100px;
+}
+
+.navbar-default .navbar-nav>li>a{
+    color: white;
+}
+
+
+

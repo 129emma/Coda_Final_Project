@@ -4,6 +4,18 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <servlet>
+        <servlet-name>jsp</servlet-name>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+        <url-pattern>*.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>LoginProcess</servlet-name>
         <servlet-class>code_project.Servlet.LoginProcess</servlet-class>
     </servlet>
@@ -41,11 +53,22 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UpdateProcess</servlet-name>
-        <servlet-class>code_project.Servlet.UpdateProcess</servlet-class>
+        <servlet-name>ChangePasswordProcess</servlet-name>
+        <servlet-class>code_project.Servlet.ChangePasswordProcess</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UpdateProcess</servlet-name>
-        <url-pattern>/Update</url-pattern>
+        <servlet-name>ChangePasswordProcess</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ChangeArticleProcess</servlet-name>
+        <servlet-class>code_project.Servlet.ChangeArticleProcess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeArticleProcess</servlet-name>
+        <url-pattern>/ChangeArticle</url-pattern>
+    </servlet-mapping>
+
 </web-app>

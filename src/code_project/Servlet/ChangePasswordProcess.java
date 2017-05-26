@@ -17,7 +17,7 @@ import java.sql.SQLException;
 /**
  * Created by pqsky on 2017/5/23.
  */
-public class UpdateProcess extends HttpServlet {
+public class ChangePasswordProcess extends HttpServlet {
     private MySQL mySQL = new MySQL();
     private String username;
     private String password;
@@ -27,7 +27,7 @@ public class UpdateProcess extends HttpServlet {
     private LoginInfo loginInfo;
     private HttpSession session;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         session = request.getSession(true);
         this.request = request;
         this.response = response;
@@ -46,18 +46,21 @@ public class UpdateProcess extends HttpServlet {
             newPassword = request.getParameter("newPassword");
             if (username == null) {
                 session.setAttribute("updateMessage", "");
-                request.getRequestDispatcher("Update.jsp").forward(request, response);
+                request.getRequestDispatcher("ChangePassword.jsp").forward(request, response);
             }
             loginInfo = LoginInfoDAO.getLoginInfo(mySQL, username);
             if (loginInfo == null || !rightUsername()) {
-                forwardWithMessage("updateMessage","Update.jsp","Fail to update: wrong username");
+                forwardWithMessage("updateMessage","ChangePassword.jsp","Fail to update: wrong username");
             }else if (rightPassword()) {
                 updatePassword();
-                forwardWithMessage("updateMessage","Update.jsp","You are successful to change the password!");
+                forwardWithMessage("updateMessage","ChangePassword.jsp","You are successful to change the password!");
             } else {
-                forwardWithMessage("updateMessage","Update.jsp","Fail to update: wrong password");
+                forwardWithMessage("updateMessage","ChangePassword.jsp","Fail to update: wrong password");
             }
         }
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        doPost(request,response);
     }
 
     public void forwardWithMessage(String attribute,String dispatcher,String message) throws ServletException, IOException {
