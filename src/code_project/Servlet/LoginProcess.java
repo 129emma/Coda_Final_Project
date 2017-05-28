@@ -1,6 +1,8 @@
 package code_project.Servlet;
 
+import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.LoginInfoDAO;
+import code_project.Info.ArticleInfo;
 import code_project.Security.Passwords;
 import code_project.Info.LoginInfo;
 import code_project.db.MySQL;
@@ -12,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by qpen546 on 23/05/2017.
@@ -21,18 +26,18 @@ public class LoginProcess extends HttpServlet {
     private String username;
     private String password;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
         HttpSession session = request.getSession(true);
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+
         if (((String) session.getAttribute("status")) == null) {
             session.setAttribute("status","logout");
-
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
 
         if (((String) session.getAttribute("status")).equals("login")) {
-            response.sendRedirect("Blog.jsp");
+            response.sendRedirect("Blog");
         } else {
             username = request.getParameter("username");
             password = request.getParameter("password");
@@ -56,6 +61,10 @@ public class LoginProcess extends HttpServlet {
                 request.getRequestDispatcher("Login.jsp").forward(request, response);
             }
         }
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        doPost(request,response);
     }
 
 }

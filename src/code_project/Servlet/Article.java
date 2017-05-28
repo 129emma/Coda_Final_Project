@@ -13,27 +13,27 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by qpen546 on 25/05/2017.
+ * Created by txie936 on 29/05/2017.
  */
-public class BlogProcess extends HttpServlet{
+public class Article extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
-
+          MySQL DB=new MySQL();
         response.setContentType("text/html");
         if (((String) session.getAttribute("status")) == null) {
             session.setAttribute("status","logout");
             request.getRequestDispatcher("Login").forward(request, response);
-        }else if(((String) session.getAttribute("status")) .equals("logout")){
-            session.setAttribute("logoutMessage","You already logout!");
-            request.getRequestDispatcher("Login").forward(request, response);
         }else if(((String) session.getAttribute("status")) .equals("login")){
-            MySQL DB=new MySQL();
-            List<ArticleInfo> articleInfoList= ArticleInfoDAO.getArticleInfoList(DB,(String)session.getAttribute("username"));
-            request.setAttribute("articleList",articleInfoList);
-            request.getRequestDispatcher("Blog.jsp").forward(request, response);
+            String articleID=request.getParameter("articleID");
+            ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(DB,(String)session.getAttribute("username"),articleID);
+            request.setAttribute("article",articleInfo);
+            session.setAttribute("articleID",articleID);
+            request.getRequestDispatcher("ArticlePage.jsp").forward(request, response);
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doPost(request,response);
     }
+
 }

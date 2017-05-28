@@ -11,7 +11,7 @@
     <title>Login Page</title>
 </head>
 <body>
-<form id="form" action="Login">
+<form id="form" action="Login" method="post">
     <fieldset>
         <legend>Your details</legend>
         <p>Username: <input type="text" name="username" placeholder="Please Enter Your Username" style="width: 300px;"/></P>

@@ -27,7 +27,7 @@ public class ChangePasswordProcess extends HttpServlet {
     private LoginInfo loginInfo;
     private HttpSession session;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         session = request.getSession(true);
         this.request = request;
         this.response = response;
@@ -58,6 +58,9 @@ public class ChangePasswordProcess extends HttpServlet {
                 forwardWithMessage("updateMessage","ChangePassword.jsp","Fail to update: wrong password");
             }
         }
+    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        doPost(request,response);
     }
 
     public void forwardWithMessage(String attribute,String dispatcher,String message) throws ServletException, IOException {

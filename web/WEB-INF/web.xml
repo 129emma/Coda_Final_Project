@@ -60,4 +60,28 @@
         <servlet-name>ChangePasswordProcess</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ChangeArticleProcess</servlet-name>
+        <servlet-class>code_project.Servlet.ChangeArticleProcess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeArticleProcess</servlet-name>
+        <url-pattern>/ChangeArticle</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Article</servlet-name>
+        <servlet-class>code_project.Servlet.Article</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Article</servlet-name>
+        <url-pattern>/Article</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
 </web-app>
