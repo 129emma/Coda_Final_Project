@@ -30,7 +30,6 @@ public class ChangeArticleProcess extends HttpServlet{
              request.getRequestDispatcher("Login").forward(request,response);
 
          }else if(request.getParameter("create")!=null){
-
              String title=request.getParameter("title");
              String content=request.getParameter("content");
              String tag=request.getParameter("tag");
@@ -40,8 +39,8 @@ public class ChangeArticleProcess extends HttpServlet{
                  e.printStackTrace();
              }
              session.removeAttribute("articleID");
-             request.removeAttribute("create");
-             request.getRequestDispatcher("Blog").forward(request, response);
+            request.removeAttribute("create");
+             response.sendRedirect("Blog");
 
          }else if(request.getParameter("articleChange")!=null) {
              String articleID=request.getParameter("articleID");
@@ -60,7 +59,7 @@ public class ChangeArticleProcess extends HttpServlet{
             }catch(Exception e){
                 e.printStackTrace();
             }
-             request.getRequestDispatcher("Blog").forward(request, response);
+             response.sendRedirect("Blog");;
 
          }else if(request.getParameter("action").equals("delete")){
              try {
@@ -70,7 +69,7 @@ public class ChangeArticleProcess extends HttpServlet{
              }
              session.removeAttribute("action");
              session.removeAttribute("articleID");
-             request.getRequestDispatcher("Blog").forward(request, response);
+             response.sendRedirect("Blog");;
          }
     }
 

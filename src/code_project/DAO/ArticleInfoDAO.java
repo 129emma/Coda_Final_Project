@@ -119,6 +119,6 @@ public class ArticleInfoDAO {
 
 
     public static String getCurrentTimeStamp() {
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
 }

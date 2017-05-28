@@ -9,7 +9,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Blog</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -30,8 +30,8 @@
     <div class="panel-group">
         <c:forEach var="article" items="${articleList}">
         <div class="panel panel-default">
-            <div class="panel-heading">${article.title} ${article.post_time}</div>
-            <div class="panel-body">${article.content} </p><a href="ChangeArticle?articleChange='true'&articleID=${article.article_ID}" >click to change this article</a></div>
+            <div class="panel-heading"><a href="Article?articleID=${article.article_ID}" >${article.title} </a>${article.post_time}</div>
+            <div class="panel-body">${article.content} </p></div>
         </div>
         </c:forEach>
     </div>
