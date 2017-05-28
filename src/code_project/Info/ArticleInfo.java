@@ -1,5 +1,8 @@
 package code_project.Info;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by txie936 on 25/05/2017.
  */
@@ -21,7 +24,7 @@ public class ArticleInfo {
         this.article_ID=article_ID;
         this.title=title;
         this.content=content;
-        this.post_time=post_time;
+        this.post_time =  post_time;
         this.tags=tags;
         this.username=username;
     }

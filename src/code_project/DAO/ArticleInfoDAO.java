@@ -14,9 +14,6 @@ import java.util.Date;
  */
 public class ArticleInfoDAO {
 
-
-
-
     public static List<ArticleInfo> getArticleInfoList(AbstractDB db ,String username) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
@@ -37,8 +34,6 @@ public class ArticleInfoDAO {
          return articleInfoList;
     }
 
-
-
     public static void createArticleInfo(AbstractDB db, String article_ID, String title,String content, String post_time, String tags,String username ) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO Article VALUES (?,?,?,?,?,?);")) {
@@ -54,7 +49,6 @@ public class ArticleInfoDAO {
             e.printStackTrace();
         }
     }
-
 
     public static ArticleInfo getArticleInfo(AbstractDB db, String username,String article_ID) {
 
@@ -93,7 +87,6 @@ public class ArticleInfoDAO {
         }
     }
 
-
     public static void deleteArticleInfo(AbstractDB db, String username,String article_ID) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM Article WHERE username = ? AND article_ID=?;")) {
@@ -105,20 +98,19 @@ public class ArticleInfoDAO {
             e.printStackTrace();
         }
     }
+
     private static ArticleInfo ArticleInfoFromResultSet(ResultSet r) throws SQLException {
         return new ArticleInfo(
                 r.getString("article_ID"),
                 r.getString("title"),
                 r.getString("content"),
-                r.getString("post_time"),
+                r.getDate("post_time").toString()+" "+r.getTime("post_time").toString(),
                 r.getString("tags"),
                 r.getString("username")
                 );
     }
 
-
-
     public static String getCurrentTimeStamp() {
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date());
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
 }

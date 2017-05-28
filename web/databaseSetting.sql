@@ -19,7 +19,9 @@ CREATE TABLE Comment (
   cotent     VARCHAR(99),
   post_time  DATETIME,
   username   VARCHAR(99),
-  article_ID INT
+  article_ID INT,
+  FOREIGN KEY username REFERENCES User_Info (username),
+  FOREIGN KEY ariticle_ID REFERENCES
 );
 
 DROP TABLE IF EXISTS Article;
@@ -32,5 +34,3 @@ CREATE TABLE Article (
   tags       VARCHAR(99),
   username   VARCHAR(99)
 );
-
-INSERT INTO Article VALUES (123,'Sample','Sample content','2016-01-03','Movie','qpen');
