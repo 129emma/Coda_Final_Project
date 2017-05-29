@@ -19,10 +19,10 @@ import java.util.List;
  * Created by txie936 on 29/05/2017.
  */
 public class ArticleServlet extends HttpServlet {
-
+    private MySQL mySQL=new MySQL();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
-          MySQL mySQL=new MySQL();
+
         response.setContentType("text/html");
         if (((String) session.getAttribute("status")) == null) {
             session.setAttribute("status","logout");
@@ -30,9 +30,8 @@ public class ArticleServlet extends HttpServlet {
         }else if(((String) session.getAttribute("status")) .equals("login")){
             String articleID=request.getParameter("articleID");
             ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(mySQL,(String)session.getAttribute("username"),articleID);
-            List<CommentInfo> commentInfoList = CommentInfoDAO.getCommentInfoListByArticle(mySQL,Integer.parseInt(articleID));
+
             request.setAttribute("article",articleInfo);
-            request.setAttribute("commentInfoList",commentInfoList);
             request.setAttribute("articleID",articleID);
             request.getRequestDispatcher("ArticlePage.jsp").forward(request, response);
         }
@@ -41,4 +40,14 @@ public class ArticleServlet extends HttpServlet {
         doPost(request,response);
     }
 
+    private void setCommentAttribute(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession(true);
+        String articleID=request.getParameter("articleID");
+        String username = (String)session.getAttribute("username");
+        List<CommentInfo> commentInfoList = CommentInfoDAO.getCommentInfoListByArticle(mySQL,Integer.parseInt(articleID));
+        for (CommentInfo commentInfo : commentInfoList) {
+            commentInfo.setDeleteComment(username);
+        }
+        request.setAttribute("commentInfoList",commentInfoList);
+    }
 }

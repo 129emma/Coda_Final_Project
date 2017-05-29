@@ -31,7 +31,7 @@ public class ArticleInfoDAO {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-         return articleInfoList;
+        return articleInfoList;
     }
 
     public static void createArticleInfo(AbstractDB db, String article_ID, String title,String content, String post_time, String tags,String username) throws SQLException {
@@ -107,7 +107,7 @@ public class ArticleInfoDAO {
                 r.getDate("post_time").toString()+" "+r.getTime("post_time").toString(),
                 r.getString("tags"),
                 r.getString("username")
-                );
+        );
     }
 
     public static String getCurrentTimeStamp() {

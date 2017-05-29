@@ -112,11 +112,10 @@ public class CommentInfoDAO {
         }
     }
 
-    public static void deleteCommentInfo(AbstractDB db, String username,String Comment_ID) throws SQLException {
+    public static void deleteCommentInfo(AbstractDB db, int Comment_ID) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM Comment WHERE username = ? AND Comment_ID=?;")) {
-                p.setString(1, username);
-                p.setString(2, Comment_ID);
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM Comment WHERE Comment_ID=?;")) {
+                p.setInt(1, Comment_ID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -126,11 +125,11 @@ public class CommentInfoDAO {
 
     private static CommentInfo CommentInfoFromResultSet(ResultSet r) throws SQLException {
         return new CommentInfo(
-                r.getString("Comment_ID"),
+                r.getInt("Comment_ID"),
                 r.getString("content"),
-                r.getDate("post_time").toString()+" "+r.getTime("post_time").toString(),
+                r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
                 r.getString("username"),
-                r.getString("article_ID")
+                r.getInt("articleID")
         );
     }
 

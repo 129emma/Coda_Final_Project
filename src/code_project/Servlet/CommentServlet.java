@@ -24,22 +24,74 @@ public class CommentServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
-        if (action.equals("create")) {
-            createCommentInfo(request,response);
+        switch (action) {
+            case "create":
+                createCommentInfo(request, response);
+                break;
+            case "delete":
+                deleteCommentInfo(request, response);
+                break;
+            case "edit":
+                editCommentInfo(request, response);
+                break;
+            case "update":
+                updateCommentInfo(request, response);
+                break;
+            case "reply":
+                replyCommentInfo(request, response);
+                break;
+            case "like":
+                likeCommentInfo(request, response);
+                break;
+            case "dislike":
+                dislikeCommentInfo(request, response);
+                break;
         }
-        request.getRequestDispatcher("ArticlePage.jsp").forward(request, response);
+
+        String articleID = request.getParameter("articleID");
+        response.sendRedirect("Article?articleID=" + articleID);
     }
 
-    protected void createCommentInfo(HttpServletRequest request, HttpServletResponse response) {
+
+    private void createCommentInfo(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-        String article_ID = request.getParameter("article_ID");
-        String content = request.getParameter("content");
-        String post_time = CommentInfoDAO.getCurrentTimeStamp();
+        String articleID = request.getParameter("articleID");
+        String content = request.getParameter("comment");
+        String postTime = CommentInfoDAO.getCurrentTimeStamp();
         try {
-            CommentInfoDAO.createCommentInfo(mySQL, content, post_time, username, article_ID);
+            CommentInfoDAO.createCommentInfo(mySQL, content, postTime, username, articleID);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    private void deleteCommentInfo(HttpServletRequest request, HttpServletResponse response) {
+        int commentID = Integer.parseInt(request.getParameter("commentID"));
+        try {
+            CommentInfoDAO.deleteCommentInfo(mySQL, commentID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void editCommentInfo(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    private void updateCommentInfo(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    private void replyCommentInfo(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    private void likeCommentInfo(HttpServletRequest request, HttpServletResponse response) {
+    }
+
+    private void dislikeCommentInfo(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
 }

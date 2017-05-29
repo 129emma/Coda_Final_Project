@@ -33,11 +33,11 @@
         <c:forEach var="article" items="${articleList}">
 
         <div class="panel panel-default">
-            <div class="panel-heading"><a href="Article?articleID=${article.article_ID}" >${article.title} </a>${article.post_time}</div>
+            <div class="panel-heading"><a href="Article?articleID=${article.article_ID}" >${article.title} </a>${article.postTime}</div>
             <div class="panel-body">${article.content} </p></div>
-            <%--<c:forEach var="commentInfo" items="${commentInfoListOFAllArticle.get(article.article_ID)}">--%>
+            <%--<c:forEach var="commentInfo" items="${commentInfoListOFAllArticle.get(article.articleID)}">--%>
                 <%--<div class="panel panel-default">--%>
-                    <%--<div class="panel-heading"><a href="Article?articleID=${article.article_ID}" >${commentInfo.username} </a>${commentInfo.post_time}</div>--%>
+                    <%--<div class="panel-heading"><a href="Article?articleID=${article.articleID}" >${commentInfo.username} </a>${commentInfo.postTime}</div>--%>
                     <%--<div class="panel-body">${commentInfo.content}</div>--%>
                 <%--</div>--%>
             <%--</c:forEach>--%>

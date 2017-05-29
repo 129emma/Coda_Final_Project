@@ -21,22 +21,24 @@
 <div class="panel">
     <div class="panel-body">
         <div class="panel-info">
-            Title:${article.title};${article.post_time};<br>
+            Title:${article.title};${article.postTime};<br>
             <p>${article.content}</p>
             <p>${article.tags}</p>
         </div>
-        <div class="panel"
-        <c:forEach var="comment" items="${commentInfoList}">
-            <p>${comment.username}</p>
-            <p>${comment.content}</p>
-        </c:forEach>
-        <form action="Comment" method="POST">
-
-        <button type="submit" name="action" value="create">Comment here</button>
-        </form>
+        <div class="panel">
+            <c:forEach var="comment" items="${commentInfoList}">
+                <p>${comment.username}</p>
+                <p>${comment.content}</p>
+                <p>${comment.deleteComment}</p>
+            </c:forEach>
+            <form action="Comment" method="POST">
+                <textarea name="comment" rows="5" cols="50" placeholder="Enter your comments here"></textarea><br/>
+                <input type="hidden" name="articleID" value="${articleID}">
+                <button type="submit" name="action" value="create">Comment here</button>
+            </form>
+        </div>
     </div>
-</div>
-<a href="ChangeArticle?articleChange='true'&articleID=${article.article_ID}">click to change this article</a>
+    <a href="ChangeArticle?articleChange='true'&articleID=${article.article_ID}">click to change this article</a>
 
 
 </body>

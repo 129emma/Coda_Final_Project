@@ -20,7 +20,7 @@ CREATE TABLE Article (
   article_ID INT PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(50),
   content    VARCHAR(99),
-  post_time  DATETIME,
+  postTime  DATETIME,
   tags       VARCHAR(99),
   username   VARCHAR(99)
 );
@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS Comment;
 CREATE TABLE Comment (
   comment_ID INT PRIMARY KEY AUTO_INCREMENT,
   content     VARCHAR(99),
-  post_time  DATETIME,
+  postTime  DATETIME,
   username   VARCHAR(99),
   article_ID INT
 );

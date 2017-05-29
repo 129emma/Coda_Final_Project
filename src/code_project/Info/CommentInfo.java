@@ -4,37 +4,58 @@ package code_project.Info;
  * Created by qpen546 on 29/05/2017.
  */
 public class CommentInfo {
-    public String comment_ID;
+    public int commentID;
     public String content;
-    public String post_time;
+    public String postTime;
     public String username;
-    public String article_ID;
+    public int articleID;
+    public String editComment;
+    public String deleteComment;
 
-    public CommentInfo(String comment_ID, String content, String post_time, String username, String article_ID) {
-        this.comment_ID = comment_ID;
-        this.content = content;
-        this.post_time = post_time;
-        this.username = username;
-        this.article_ID = article_ID;
+    public void setEditComment(int articleID) {
     }
 
-    public String getComment_ID() {
-        return comment_ID;
+    public void setDeleteComment(String username) {
+        if(this.username.equals(username)){
+         deleteComment = "<a href=\"Comment?action='delete'&commentID="+commentID+"\">delete</a>";
+        }
+    }
+
+    public String getEditComment() {
+        return editComment;
+    }
+
+    public String getDeleteComment() {
+        return deleteComment;
+    }
+
+    public CommentInfo(int commentID, String content, String postTime, String username, int articleID) {
+        this.commentID = commentID;
+        this.content = content;
+        this.postTime = postTime;
+        this.username = username;
+        this.articleID = articleID;
+        editComment ="";
+        deleteComment = "";
+    }
+
+    public int getCommentID() {
+        return commentID;
     }
 
     public String getContent() {
         return content;
     }
 
-    public String getPost_time() {
-        return post_time;
+    public String getPostTime() {
+        return postTime;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getArticle_ID() {
-        return article_ID;
+    public int getArticleID() {
+        return articleID;
     }
 }
