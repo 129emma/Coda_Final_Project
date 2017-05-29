@@ -32,8 +32,8 @@
     <div class="panel-group">
         <c:forEach var="article" items="${articleList}">
         <div class="panel panel-default">
-            <div class="panel-heading">${article.title} ${article.post_time}</div>
-            <div class="panel-body">${article.content} </p><a href="ChangeArticle?articleChange='true'&articleID=${article.article_ID}" >click to change this article</a></div>
+            <div class="panel-heading"><a href="Article?articleID=${article.article_ID}" >${article.title} </a>${article.post_time}</div>
+            <div class="panel-body">${article.content} </p></div>
         </div>
         </c:forEach>
     </div>

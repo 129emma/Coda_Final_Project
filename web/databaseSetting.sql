@@ -34,3 +34,4 @@ CREATE TABLE Article (
   tags       VARCHAR(99),
   username   VARCHAR(99)
 );
+
