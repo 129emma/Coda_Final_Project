@@ -18,7 +18,7 @@ public class LoginInfoDAO {
     public static List<String> getUsernameList(AbstractDB db) {
         List<String> usernameList = new ArrayList<>();
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT username FROM User_Info")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT username FROM UserInfo")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         usernameList.add(r.getString("username"));
@@ -34,7 +34,7 @@ public class LoginInfoDAO {
     public static LoginInfo getLoginInfo(AbstractDB db, String username) {
         LoginInfo loginInfo = null;
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo WHERE username = ?")) {
                 p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -50,7 +50,7 @@ public class LoginInfoDAO {
 
     public static void createLoginInfo(AbstractDB db, String username, byte[] password , byte[] salt,String icon) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO User_Info (username, password, salt,icon) VALUE (?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo (username, password, salt,icon) VALUE (?,?,?);")) {
                 p.setString(1, username);
                 p.setBytes(2, password);
                 p.setBytes(3, salt);
@@ -65,7 +65,7 @@ public class LoginInfoDAO {
 
     public static void updateLoginInfo(AbstractDB db, String username, byte[] password , byte[] salt) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE User_Info SET password = ?, salt = ? WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo SET password = ?, salt = ? WHERE username = ?;")) {
                 p.setBytes(1, password);
                 p.setBytes(2, salt);
                 p.setString(3, username);

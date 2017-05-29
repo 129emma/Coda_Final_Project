@@ -5,9 +5,9 @@ package code_project.Info;
  */
 public class ArticleInfo {
 
-    private String article_ID;
+    private String articleID;
     private String content;
-    private String post_time;
+    private String postTime;
     private String tags;
     private String username;
     private String title;
@@ -18,24 +18,24 @@ public class ArticleInfo {
 
 
     public ArticleInfo(String article_ID,String title,String content,String post_time,String tags,String username){
-        this.article_ID=article_ID;
+        this.articleID=article_ID;
         this.title=title;
         this.content=content;
-        this.post_time=post_time;
+        this.postTime=post_time;
         this.tags=tags;
         this.username=username;
     }
 
-    public String getArticle_ID() {
-        return article_ID;
+    public String getArticleID() {
+        return articleID;
     }
 
     public String getContent() {
         return content;
     }
 
-    public String getPost_time() {
-        return post_time;
+    public String getPostTime() {
+        return postTime;
     }
 
     public String getTags() {
@@ -46,16 +46,16 @@ public class ArticleInfo {
         return username;
     }
 
-    public void setArticle_ID(String article_ID) {
-        this.article_ID = article_ID;
+    public void setArticleID(String article_ID) {
+        this.articleID = article_ID;
     }
 
     public void setContent(String content) {
         this.content = content;
     }
 
-    public void setPost_time(String post_time) {
-        this.post_time = post_time;
+    public void setPostTime(String postTime) {
+        this.postTime = postTime;
     }
 
     public void setTags(String tags) {

@@ -22,13 +22,17 @@ public class Article extends HttpServlet {
           MySQL DB=new MySQL();
         response.setContentType("text/html");
         if (((String) session.getAttribute("status")) == null) {
+
             session.setAttribute("status","logout");
             request.getRequestDispatcher("Login").forward(request, response);
+
         }else if(((String) session.getAttribute("status")) .equals("login")){
+
             String articleID=request.getParameter("articleID");
             ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(DB,(String)session.getAttribute("username"),articleID);
             request.setAttribute("article",articleInfo);
             request.getRequestDispatcher("ArticlePage.jsp").forward(request, response);
+
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

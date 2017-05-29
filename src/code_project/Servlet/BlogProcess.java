@@ -25,15 +25,24 @@ public class BlogProcess extends HttpServlet{
             session.setAttribute("status","logout");
             request.getRequestDispatcher("Login").forward(request, response);
         }else if(((String) session.getAttribute("status")) .equals("logout")){
+
             session.setAttribute("logoutMessage","You already logout!");
             request.getRequestDispatcher("Login").forward(request, response);
+
         }else if(((String) session.getAttribute("status")) .equals("login")){
+
             MySQL DB=new MySQL();
             List<ArticleInfo> articleInfoList= ArticleInfoDAO.getArticleInfoList(DB,(String)session.getAttribute("username"));
+
             UserInfo userProfile= UserInfoDAO.getUserInfo(DB,(String)session.getAttribute("username"));
+
             request.setAttribute("userProfile",userProfile);
+
             request.setAttribute("articleList",articleInfoList);
+
             request.getRequestDispatcher("Blog.jsp").forward(request, response);
+
+
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

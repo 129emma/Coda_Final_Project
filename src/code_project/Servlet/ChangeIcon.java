@@ -28,7 +28,6 @@ import java.util.List;
  */
 public class ChangeIcon extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private boolean isMultipart;
     private String filePath;
     private int maxFileSize=5120*5120;
     private int maxMemSize=5120*5120;
@@ -43,100 +42,54 @@ public class ChangeIcon extends HttpServlet {
         response.setContentType("text/html");
         String username=(String)session.getAttribute("username");
 
+
+        //get User-Info path
         ServletContext servletContext=getServletContext();
-        filePath=servletContext.getRealPath("/User-Info");
-        isMultipart = ServletFileUpload.isMultipartContent(request);
+        String fullFilePath=servletContext.getRealPath("/User-Info");
+
+        String localIconFilePath=servletContext.getRealPath("/");
+
         response.setContentType("text/html");
-        //create directory
-        PrintWriter out = response.getWriter( );
-        if( !isMultipart ){
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>User-Icon upload</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<p>No file uploaded</p>");
-            out.println("</body>");
-            out.println("</html>");
-            return;
+
+     //create User-Info folder
+        File Iconfolder = new File(fullFilePath);
+
+        if (!Iconfolder.exists()) {
+            Iconfolder.mkdir();
         }
+    //create the user's own folder under User-Info folder
+        File Userfolder = new File(fullFilePath + "/" + username);
 
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        // maximum size that will be stored in memory
-        factory.setSizeThreshold(maxMemSize);
-        // Location to save data that is larger than maxMemSize.
-        factory.setRepository(new File("C:\\temp"));
-        // Create a new file upload handler
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        // maximum file size to be uploaded.
-        upload.setSizeMax( maxFileSize );
-
-        try{
-            // Parse the request to get file items.
-            List fileItems = upload.parseRequest(request);
-            // Process the uploaded file items
-            Iterator i = fileItems.iterator();
-
-            HttpSession id=request.getSession(true);
-
-
-            File Iconfolder = new File(filePath);
-            if (!Iconfolder.exists()) {
-                Iconfolder.mkdir();
-            }
-
-            File Userfolder = new File(filePath + "/" + username);
-            if (!Userfolder.exists()) {
-                Userfolder.mkdir();
-            }
-
-            filePath = servletContext.getRealPath("/User-Info/" + username);
-            //add file
-            while ( i.hasNext () )
-            {
-                FileItem fi = (FileItem)i.next();
-                if ( !fi.isFormField () )
-                {
-                    fileName = fi.getName();
-                    file = new File( filePath +"/icon.jpg") ;
-                    fi.write(file);
-                    BufferedImage icon=null;
-                    try {
-                        icon= ImageIO.read(new File(filePath+"/icon.jpg"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-                    File outputfile=new File(filePath+"/icon.jpg");
-                    //check the size of the image
-                    if((icon.getWidth()<400)&&(icon.getHeight()<400)){
-                        //write the thumbnail
-                        ImageIO.write(icon,"jpg",outputfile);
-                    }else {
-                        Double width=(double)icon.getWidth();
-                        Double height=(double)icon.getHeight();
-                        double r=(height/width)*200;
-                        try {
-                            BufferedImage image = new BufferedImage(200, (int)r, BufferedImage.TYPE_INT_RGB);
-                            image.createGraphics().drawImage(ImageIO.read(new File(filePath+"/icon.jpg")).getScaledInstance(200, (int)r, Image.SCALE_SMOOTH),0,0,null);
-                            //write the thumbnail
-                            ImageIO.write(image,"jpg",outputfile);
-                            UserInfoDAO.updateUserIcon(DB,"/User-Info/" + username+"/icon.jpg",username);
-                        }catch (IOException e){
-                            e.printStackTrace();
-                        }
-                    }
-
-                    UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
-                     request.setAttribute("userInfo",userInfo);
-                    request.getRequestDispatcher("UpdateProfile.jsp").forward(request,response);
-
-                }
-            }
-
-        }catch(Exception ex) {
-            System.out.println(ex);
+        if (!Userfolder.exists()) {
+            Userfolder.mkdir();
         }
+        //get the user's folder path
+        filePath = servletContext.getRealPath("/User-Info/" + username);
+
+            //create directory
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            // maximum size that will be stored in memory
+            factory.setSizeThreshold(maxMemSize);
+            // Location to save data that is larger than maxMemSize.
+            factory.setRepository(new File("C:\\temp"));
+            // Create a new file upload handler
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            // maximum file size to be uploaded.
+            upload.setSizeMax( maxFileSize );
+
+
+            createUserIcon(upload,request,filePath,localIconFilePath);
+
+
+            try {
+                UserInfoDAO.updateUserIcon(DB,"User-Info/" + username+"/icon.jpg",username);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
+            request.setAttribute("userInfo",userInfo);
+            request.getRequestDispatcher("UpdateProfile.jsp").forward(request,response);
+
     }
 
 
@@ -147,27 +100,100 @@ public class ChangeIcon extends HttpServlet {
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
         String username=(String)session.getAttribute("username");
+        if (((String) session.getAttribute("status")) == null) {
+            session.setAttribute("status","logout");
+            request.getRequestDispatcher("Login").forward(request, response);
+        }else if(((String) session.getAttribute("status")) .equals("logout")){
+            session.setAttribute("logoutMessage","You already logout!");
+            request.getRequestDispatcher("Login").forward(request, response);
+        }else if(((String) session.getAttribute("status")) .equals("login")){
 
-        if(request.getParameter("ChangeIcon")!=null){
-
-            UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
-
-            List<String> iconList=iconList();
-            request.setAttribute("iconList",iconList);
-
-            request.setAttribute("userInfo",userInfo);
-            request.getRequestDispatcher("changeIcon.jsp").forward(request,response);
-
+            if(request.getParameter("ChangeIcon")!=null){
+                UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
+                List<String> iconList=iconList();
+                request.setAttribute("iconList",iconList);
+                request.setAttribute("userInfo",userInfo);
+                request.getRequestDispatcher("changeIcon.jsp").forward(request,response);
+            }
         }
-
     }
 
 protected List<String> iconList(){
         List<String> iconList=new ArrayList<>();
         iconList.add("Local-IconImages/Desert.jpg");
-    iconList.add("Local-IconImages/Kiwi.png");
-    iconList.add("Local-IconImages/Mouse.png");
-    iconList.add("Local-IconImages/pig.png");
+        iconList.add("Local-IconImages/Kiwi.png");
+        iconList.add("Local-IconImages/Mouse.png");
+        iconList.add("Local-IconImages/pig.png");
         return iconList;
     }
+private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,String filePath,String localIconFilePath){
+
+    List<String> iconList=iconList();
+    try{
+        // Parse the request to get file items.
+        List fileItems = upload.parseRequest(request);
+        // Process the uploaded file items
+        Iterator i = fileItems.iterator();
+        //add file
+        while ( i.hasNext () )
+        {
+            FileItem fi = (FileItem)i.next();
+            if(fi.getFieldName().equals("result")){
+
+                //use local image as user icon
+                if(iconList.contains(fi.getString())){
+                    //get local icon's  path
+                    String localIconPath= fi.getString();
+                    BufferedImage icon=null;
+                    try {
+                        //read the local image
+                        icon= ImageIO.read(new File(localIconFilePath+ localIconPath));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    File outputfile=new File(filePath+"/icon.jpg");
+                    //write the image to the user's icon
+                    ImageIO.write(icon,"jpg",outputfile);
+                    break;
+                }
+                //if the file is from the user
+            }else if ( !fi.isFormField () )
+            {
+                fileName = fi.getName();
+                file = new File( filePath +"/icon.jpg") ;
+                fi.write(file);
+                BufferedImage icon=null;
+                try {
+                    icon= ImageIO.read(new File(filePath+"/icon.jpg"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                File outputfile=new File(filePath+"/icon.jpg");
+                //check the size of the image
+                if((icon.getWidth()<400)&&(icon.getHeight()<400)){
+                    //write the thumbnail
+                    ImageIO.write(icon,"jpg",outputfile);
+                }else {
+                    Double width=(double)icon.getWidth();
+                    Double height=(double)icon.getHeight();
+                    double r=(height/width)*200;
+                    try {
+                        BufferedImage image = new BufferedImage(200, (int)r, BufferedImage.TYPE_INT_RGB);
+                        image.createGraphics().drawImage(ImageIO.read(new File(filePath+"/icon.jpg")).getScaledInstance(200, (int)r, Image.SCALE_SMOOTH),0,0,null);
+                        //write the thumbnail
+                        ImageIO.write(image,"jpg",outputfile);
+
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+    }catch(Exception ex) {
+        System.out.println(ex);
+    }
+
+}
 }

@@ -18,6 +18,8 @@
 </head>
 <body>
 <div class="container">
+    <h2>${userProfile.username} Welcome to coda</h2>
+    <p><a href="Profile">click to change your file</a> </p>
     <a href="/ChangePassword">Change your password</a>|
     <a href="/Login">Login</a>|
     <a href="/Registration">Registration</a>|
@@ -27,7 +29,7 @@
     <div class="panel-group">
         <c:forEach var="article" items="${articleList}">
         <div class="panel panel-default">
-            <div class="panel-heading"><a href="Article?articleID=${article.article_ID}" >${article.title} </a>${article.post_time}</div>
+            <div class="panel-heading"><a href="Article?articleID=${article.articleID}" >${article.title} </a>${article.postTime}</div>
             <div class="panel-body">${article.content} </p></div>
         </div>
         </c:forEach>
