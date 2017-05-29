@@ -12,25 +12,21 @@
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/basicSetting.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
 </head>
 <body>
+
 <form id="form" action="Login" method="post">
-    <fieldset>
-        <legend>Your details</legend>
-        <p>Username: <input type="text" name="username" placeholder="Please Enter Your Username" style="width: 300px;"/></P>
-        <p>Password: <input type="password" name="password" placeholder="Please Enter Your Password" style="width: 300px;"/></p>
-        <input type="submit" value="Login"/>
-    </fieldset>
+    <div class="login-block">
+        <h1>Login</h1>
+        <div id="input">
+            <input type="text" name="username" id="username" placeholder="Username"/>
+            <input type="password" name="password" id="password" placeholder="Password"/>
+        </div>
+        <input id="button" type="submit" value="Login"/>
+        <p>No account yet? Register <a href="/Registration">HERE</a></p>
+        <p style="color: #ff7c60;">${sessionScope.loginMessage}</p>
+    </div>
 </form>
-<div>
-    <p style="color: red">${sessionScope.loginMessage}</p>
-</div>
-<div>
-    <p style="color: blue">${sessionScope.logoutMessage}</p>
-</div>
-<a href="/Login"><p>Login</p></a>
-<a href="/Registration"><p>Registration</p></a>
-<a href="/Logout"><p>Logout</p></a>
 </body>
 </html>
