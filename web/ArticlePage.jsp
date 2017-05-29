@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: txie936
@@ -9,14 +10,33 @@
 <html>
 <head>
     <title>Article</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="panel">
+    <div class="panel-body">
+        <div class="panel-info">
+            Title:${article.title};${article.post_time};<br>
+            <p>${article.content}</p>
+            <p>${article.tags}</p>
+        </div>
+        <div class="panel"
+        <c:forEach var="comment" items="${commentInfoList}">
+            <p>${comment.username}</p>
+            <p>${comment.content}</p>
+        </c:forEach>
+        <form action="Comment" method="POST">
 
-Title:${article.title};${article.post_time};<br>
-<p>${article.content}</p>
-<p>${article.tags}</p>
-<a href="ChangeArticle?articleChange='true'&articleID=${article.article_ID}" >click to change this article</a>
-
+        <button type="submit" name="action" value="create">Comment here</button>
+        </form>
+    </div>
+</div>
+<a href="ChangeArticle?articleChange='true'&articleID=${article.article_ID}">click to change this article</a>
 
 
 </body>

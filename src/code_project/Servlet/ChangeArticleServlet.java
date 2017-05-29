@@ -16,7 +16,7 @@ import java.sql.Date;
 /**
  * Created by txie936 on 25/05/2017.
  */
-public class ChangeArticleProcess extends HttpServlet {
+public class ChangeArticleServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 

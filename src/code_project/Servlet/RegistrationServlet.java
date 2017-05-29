@@ -17,7 +17,7 @@ import java.sql.SQLException;
 /**
  * Created by qpen546 on 23/05/2017.
  */
-public class RegistrationProcess extends HttpServlet{
+public class RegistrationServlet extends HttpServlet{
     private MySQL mySQL = new MySQL();
     private String username;
     private String password;

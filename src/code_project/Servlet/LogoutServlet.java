@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 /**
  * Created by pqsky on 2017/5/23.
  */
-public class LogoutProcess extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");

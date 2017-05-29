@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS Comment;
+DROP TABLE IF EXISTS Article;
 DROP TABLE IF EXISTS User_Info;
 
 CREATE TABLE User_Info (
@@ -7,21 +9,9 @@ CREATE TABLE User_Info (
   firstName  VARCHAR(99),
   lastName   VARCHAR(99),
   email      VARCHAR(99),
-  data_birth DATE,
-  tag        VARCHAR(99),
-  friends    VARCHAR(99)
-);
-
-DROP TABLE IF EXISTS Comment;
-
-CREATE TABLE Comment (
-  comment_ID INT PRIMARY KEY AUTO_INCREMENT,
-  cotent     VARCHAR(99),
-  post_time  DATETIME,
-  username   VARCHAR(99),
-  article_ID INT,
-  FOREIGN KEY username REFERENCES User_Info (username),
-  FOREIGN KEY ariticle_ID REFERENCES
+  birth_date DATE,
+  gender     VARCHAR(99),
+  icon        VARCHAR(99)
 );
 
 DROP TABLE IF EXISTS Article;
@@ -34,4 +24,16 @@ CREATE TABLE Article (
   tags       VARCHAR(99),
   username   VARCHAR(99)
 );
+
+
+DROP TABLE IF EXISTS Comment;
+
+CREATE TABLE Comment (
+  comment_ID INT PRIMARY KEY AUTO_INCREMENT,
+  content     VARCHAR(99),
+  post_time  DATETIME,
+  username   VARCHAR(99),
+  article_ID INT
+);
+
 

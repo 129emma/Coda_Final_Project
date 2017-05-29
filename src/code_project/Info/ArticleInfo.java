@@ -7,20 +7,14 @@ import java.util.Date;
  * Created by txie936 on 25/05/2017.
  */
 public class ArticleInfo {
-
-    private String article_ID;
+    private int article_ID;
     private String content;
     private String post_time;
     private String tags;
     private String username;
     private String title;
 
-  
-
-  
-
-
-    public ArticleInfo(String article_ID,String title,String content,String post_time,String tags,String username){
+    public ArticleInfo(int article_ID,String title,String content,String post_time,String tags,String username){
         this.article_ID=article_ID;
         this.title=title;
         this.content=content;
@@ -29,7 +23,7 @@ public class ArticleInfo {
         this.username=username;
     }
 
-    public String getArticle_ID() {
+    public int getArticle_ID() {
         return article_ID;
     }
 
@@ -49,7 +43,7 @@ public class ArticleInfo {
         return username;
     }
 
-    public void setArticle_ID(String article_ID) {
+    public void setArticle_ID(int article_ID) {
         this.article_ID = article_ID;
     }
 

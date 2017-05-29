@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by qpen546 on 23/05/2017.
  */
-public class LoginProcess extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     private MySQL mySQL = new MySQL();
     private String username;
     private String password;

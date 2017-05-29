@@ -17,7 +17,7 @@ import java.sql.SQLException;
 /**
  * Created by pqsky on 2017/5/23.
  */
-public class ChangePasswordProcess extends HttpServlet {
+public class ChangePasswordServlet extends HttpServlet {
     private MySQL mySQL = new MySQL();
     private String username;
     private String password;

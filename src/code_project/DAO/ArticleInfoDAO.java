@@ -34,7 +34,7 @@ public class ArticleInfoDAO {
          return articleInfoList;
     }
 
-    public static void createArticleInfo(AbstractDB db, String article_ID, String title,String content, String post_time, String tags,String username ) throws SQLException {
+    public static void createArticleInfo(AbstractDB db, String article_ID, String title,String content, String post_time, String tags,String username) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO Article VALUES (?,?,?,?,?,?);")) {
                 p.setString(1, article_ID);
@@ -101,7 +101,7 @@ public class ArticleInfoDAO {
 
     private static ArticleInfo ArticleInfoFromResultSet(ResultSet r) throws SQLException {
         return new ArticleInfo(
-                r.getString("article_ID"),
+                r.getInt("article_ID"),
                 r.getString("title"),
                 r.getString("content"),
                 r.getDate("post_time").toString()+" "+r.getTime("post_time").toString(),
