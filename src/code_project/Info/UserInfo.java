@@ -6,7 +6,7 @@ package code_project.Info;
  */
 public class UserInfo {
 
-	private String username,firstName,lastName,email,date_birth,gender,icon;
+	private String username,firstName,lastName,email,birthDate,gender,icon;
 
 
 	public UserInfo(String username, String firstName, String lastName, String email, String date_birth, String gender, String icon) {
@@ -14,7 +14,7 @@ public class UserInfo {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.date_birth = date_birth;
+		this.birthDate = date_birth;
 		this.gender = gender;
 		this.icon = icon;
 	}
@@ -35,8 +35,8 @@ public class UserInfo {
 		this.email = email;
 	}
 
-	public void setDate_birth(String date_birth) {
-		this.date_birth = date_birth;
+	public void setBirthDate(String date_birth) {
+		this.birthDate = date_birth;
 	}
 
 	public void setGender(String tags) {
@@ -63,8 +63,8 @@ public class UserInfo {
 		return email;
 	}
 
-	public String getDate_birth() {
-		return date_birth;
+	public String getBirthDate() {
+		return birthDate;
 	}
 
 	public String getGender() {

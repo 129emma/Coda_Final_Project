@@ -12,9 +12,9 @@
 </head>
 <body>
 Title:${article.title} <br>
-${article.post_time}<br>
+${article.postTime}<br>
 <p>${article.content}</p>
 <p>${article.tags}</p>
-<a href="ChangeArticle?articleChange='true'&articleID=${article.article_ID}" >click to change this article</a>
+<a href="ChangeArticle?articleChange='true'&articleID=${article.articleID}" >click to change this article</a>
 </body>
 </html>

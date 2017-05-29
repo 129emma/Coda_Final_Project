@@ -23,7 +23,7 @@
 <p>Firstname:${userProfile.firstName}</p>
 <p>Lastname:${userProfile.lastName}</p>
 <p>Email:${userProfile.email}</p>
-<p>Birthday:${userProfile.date_birth}</p>
+<p>Birthday:${userProfile.birthDate}</p>
 <p>Gender:${userProfile.gender}</p>
 <a href="ChangeProfile"><p>Change your profile</p></a>
 <a href="Blog"><p>Blog page</p></a>
