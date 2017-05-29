@@ -19,12 +19,12 @@
 <form id="form" action="Login" method="post">
     <div class="login-block">
         <h1>Login</h1>
-        <div id="input">
+        <div>
             <input type="text" name="username" id="username" placeholder="Username"/>
             <input type="password" name="password" id="password" placeholder="Password"/>
         </div>
         <input id="button" type="submit" value="Login"/>
-        <p>No account yet? Register <a href="/Registration">HERE</a></p>
+        <p>No account yet? Register <a href="Registration">HERE</a></p>
         <p style="color: #ff7c60;">${sessionScope.loginMessage}</p>
     </div>
 </form>
