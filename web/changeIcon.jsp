@@ -9,26 +9,57 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
     <title>changeIcon</title>
     <style>
         .rounded { border-radius: 50%;
             width: 100px;
             height: 100px;}
-    </style>
 
+        .image:hover{ cursor:pointer}
+    </style>
+    <script>
+        $(document).ready(function () {
+            $( ".image" ).each(function() {
+                $(this).click( function(){
+                    $("#icon").attr('src',$(this).attr('src'));
+                    $('input[type=hidden]').val($(this).attr('src'));
+                });
+            });
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#icon').attr('src', e.target.result);
+
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $('input[type=file]').change(function () {
+                readURL(this);
+                $('input[type=hidden]').val("");
+            })
+        });
+
+    </script>
 </head>
 <body>
-
-<img src="${userInfo.icon}" class="rounded" />
+<img src="${userInfo.icon}" id="icon" name="userIcon" class="rounded" />
 <form action="ChangeIcon" method="post" enctype="multipart/form-data">
-    <label for="image">Choose one image:</label><input required type="file" id="image" accept=".jpg, .gif,.png" name="icon"/><br><br>
+    <input type="hidden" name="result" id="result">
+    <label for="imageFile">Choose one image:</label><input type="file" id="imageFile" accept=".jpg, .gif,.png" name="icon"/><br><br>
     <c:forEach var="localIcon" items="${iconList}">
-        <div class="panel panel-default">
-            <img src="${localIcon}" class="rounded" />
+        <div class="panel panel-default" >
+            <img src="${localIcon}" class="rounded image" id="${localIcon}" />
         </div>
     </c:forEach>
     <br><br>
     <input type="submit" value="Submit"/>
 </form>
+
 </body>
 </html>

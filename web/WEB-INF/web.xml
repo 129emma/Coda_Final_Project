@@ -99,6 +99,7 @@
     <servlet>
         <servlet-name>ChangeIcon</servlet-name>
         <servlet-class>code_project.Servlet.ChangeIcon</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangeIcon</servlet-name>

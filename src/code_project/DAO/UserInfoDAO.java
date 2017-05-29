@@ -67,7 +67,7 @@ public class UserInfoDAO {
 
     public static void updateUserInfo(AbstractDB db, String username,String firstName, String lastName, String email, String birth_date, String gender) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE User_Info set firstName = ?, lastName=?, email=?, birth_date=?, gender = ?, icon=? WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE User_Info set firstName = ?, lastName=?, email=?, birth_date=?, gender = ? WHERE username = ?;")) {
                 p.setString(1, firstName);
                 p.setString(2, lastName);
                 p.setString(3, email);

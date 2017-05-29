@@ -11,7 +11,8 @@
     <title>Article</title>
 </head>
 <body>
-Title:${article.title};${article.post_time};<br>
+Title:${article.title} <br>
+${article.post_time}<br>
 <p>${article.content}</p>
 <p>${article.tags}</p>
 <a href="ChangeArticle?articleChange='true'&articleID=${article.article_ID}" >click to change this article</a>
