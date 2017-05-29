@@ -34,7 +34,7 @@ public class ChangeArticleProcess extends HttpServlet{
              String content=request.getParameter("content");
              String tag=request.getParameter("tag");
              try {
-                 ArticleInfoDAO.createArticleInfo(DB,(String)session.getAttribute("articleID"),title,content,ArticleInfoDAO.getCurrentTimeStamp(),tag,(String)session.getAttribute("username"));
+                 ArticleInfoDAO.createArticleInfo(DB,title,content,ArticleInfoDAO.getCurrentTimeStamp(),tag,(String)session.getAttribute("username"));
              }catch (Exception e){
                  e.printStackTrace();
              }
