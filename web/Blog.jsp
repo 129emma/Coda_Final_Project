@@ -18,9 +18,6 @@
 </head>
 <body>
 <div class="container">
-    <h2>
-        <p style="color: mediumslateblue">Hello ${sessionScope.username}, This is Blog page!</p>
-    </h2>
     <a href="/ChangePassword">Change your password</a>|
     <a href="/Login">Login</a>|
     <a href="/Registration">Registration</a>|

@@ -39,15 +39,14 @@ public class ArticleInfoDAO {
 
 
 
-    public static void createArticleInfo(AbstractDB db, String article_ID, String title,String content, String post_time, String tags,String username ) throws SQLException {
+    public static void createArticleInfo(AbstractDB db, String title,String content, String post_time, String tags,String username ) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO Article VALUES (?,?,?,?,?,?);")) {
-                p.setString(1, article_ID);
-                p.setString(2, title);
-                p.setString(3, content);
-                p.setString(4, post_time);
-                p.setString(5, tags);
-                p.setString(6, username);
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO Article(title,content,post_time,tags,username) VALUES (?,?,?,?,?);")) {
+                p.setString(1, title);
+                p.setString(2, content);
+                p.setString(3, post_time);
+                p.setString(4, tags);
+                p.setString(5, username);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -110,7 +109,7 @@ public class ArticleInfoDAO {
                 r.getString("article_ID"),
                 r.getString("title"),
                 r.getString("content"),
-                r.getString("post_time"),
+                r.getDate("post_time").toString()+" "+r.getTime("post_time").toString(),
                 r.getString("tags"),
                 r.getString("username")
                 );

@@ -80,7 +80,30 @@
         <url-pattern>/Article</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>code_project.Servlet.UserProfile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/Profile</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ChangeProfile</servlet-name>
+        <servlet-class>code_project.Servlet.ChangeUserProfileProcess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeProfile</servlet-name>
+        <url-pattern>/ChangeProfile</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ChangeIcon</servlet-name>
+        <servlet-class>code_project.Servlet.ChangeIcon</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeIcon</servlet-name>
+        <url-pattern>/ChangeIcon</url-pattern>
+    </servlet-mapping>
 
 
 

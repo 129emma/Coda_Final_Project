@@ -41,7 +41,7 @@ public class RegistrationProcess extends HttpServlet{
             byte[] salt= Passwords.getNextSalt();
             byte[] hashPassword = Passwords.hash(password.toCharArray(),salt,5);
             try {
-                LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt);
+                LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt,"bgimages/welcomepage.jpg");
                 LoginInfo loginInfo = LoginInfoDAO.getLoginInfo(mySQL,username);
                 out.println("<p>Your username: "+loginInfo.getUsername()+"<br/>Your Password: "+password+"</p>");
                 out.println("<a href=\"Login\"><p>Login</p></a>");

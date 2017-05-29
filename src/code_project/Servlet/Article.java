@@ -28,7 +28,6 @@ public class Article extends HttpServlet {
             String articleID=request.getParameter("articleID");
             ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(DB,(String)session.getAttribute("username"),articleID);
             request.setAttribute("article",articleInfo);
-            session.setAttribute("articleID",articleID);
             request.getRequestDispatcher("ArticlePage.jsp").forward(request, response);
         }
     }
