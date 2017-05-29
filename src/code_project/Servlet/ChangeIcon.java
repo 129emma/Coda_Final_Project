@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,18 +33,18 @@ public class ChangeIcon extends HttpServlet {
     private int maxFileSize=5120*5120;
     private int maxMemSize=5120*5120;
     private File file;
-    static String imageName;
     static String fileName;
-    static String caption;
-
+    MySQL DB=new MySQL();
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
+        String username=(String)session.getAttribute("username");
 
         ServletContext servletContext=getServletContext();
-        filePath=servletContext.getRealPath("/Uploaded-Photos");
+        filePath=servletContext.getRealPath("/User-Info");
         isMultipart = ServletFileUpload.isMultipartContent(request);
         response.setContentType("text/html");
         //create directory
@@ -51,7 +52,7 @@ public class ChangeIcon extends HttpServlet {
         if( !isMultipart ){
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Enhanced Servlet upload</title>");
+            out.println("<title>User-Icon upload</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<p>No file uploaded</p>");
@@ -59,8 +60,6 @@ public class ChangeIcon extends HttpServlet {
             out.println("</html>");
             return;
         }
-
-
 
         DiskFileItemFactory factory = new DiskFileItemFactory();
         // maximum size that will be stored in memory
@@ -77,92 +76,64 @@ public class ChangeIcon extends HttpServlet {
             List fileItems = upload.parseRequest(request);
             // Process the uploaded file items
             Iterator i = fileItems.iterator();
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet upload</title>");
-            out.println("</head>");
-            out.println("<body>");
-            //create session
+
             HttpSession id=request.getSession(true);
-            File folder = new File(filePath + "/" + id);
-            if (!folder.exists()) {
-                folder.mkdir();
+
+
+            File Iconfolder = new File(filePath);
+            if (!Iconfolder.exists()) {
+                Iconfolder.mkdir();
             }
 
-            filePath = servletContext.getRealPath("/Uploaded-Photos/" + id);
+            File Userfolder = new File(filePath + "/" + username);
+            if (!Userfolder.exists()) {
+                Userfolder.mkdir();
+            }
+
+            filePath = servletContext.getRealPath("/User-Info/" + username);
             //add file
             while ( i.hasNext () )
             {
                 FileItem fi = (FileItem)i.next();
-                //add text file
-                if(fi.getFieldName().equals("caption")){
-                    File text=new File(filePath+"/"+id+".txt");
-                    BufferedWriter writer=new BufferedWriter(new FileWriter(text));
-                    caption=fi.getString();
-                    id.setAttribute("caption",caption);
-                    writer.write(caption);
-                    fi.write(text);
-                    writer.close();
-                    out.print("<p>Caption: "+ fi.getString()+"</p>");
-                }
-
                 if ( !fi.isFormField () )
                 {
-                    // Get the uploaded file parameters
-                    //String fieldName = fi.getFieldName();
                     fileName = fi.getName();
-                    //String contentType = fi.getContentType();
-                    //boolean isInMemory = fi.isInMemory();
-                    //long sizeInBytes = fi.getSize();
-                    // Write the file
-                    imageName=fileName.substring(0,fileName.indexOf("."));
-                    if( fileName.lastIndexOf("\\") >= 0 ){
-                        file = new File( filePath +"/fullsize_"+
-                                fileName.substring( fileName.lastIndexOf("\\"))) ;
-                    }else{
-                        file = new File( filePath +"/fullsize_"+
-                                fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-                    }
-
+                    file = new File( filePath +"/icon.jpg") ;
                     fi.write(file);
-                    BufferedImage thumbnail=null;
+                    BufferedImage icon=null;
                     try {
-                        thumbnail= ImageIO.read(new File(filePath+"/fullsize_"+fileName));
-
+                        icon= ImageIO.read(new File(filePath+"/icon.jpg"));
                     } catch (IOException e) {
                         e.printStackTrace();
                         return;
                     }
-                    File outputfile=new File(filePath+"/"+imageName+"_thumbnail.png");
+                    File outputfile=new File(filePath+"/icon.jpg");
                     //check the size of the image
-                    if((thumbnail.getWidth()<400)&&(thumbnail.getHeight()<400)){
+                    if((icon.getWidth()<400)&&(icon.getHeight()<400)){
                         //write the thumbnail
-                        ImageIO.write(thumbnail,"png",outputfile);
+                        ImageIO.write(icon,"jpg",outputfile);
                     }else {
-                        Double width=(double)thumbnail.getWidth();
-                        Double height=(double)thumbnail.getHeight();
+                        Double width=(double)icon.getWidth();
+                        Double height=(double)icon.getHeight();
                         double r=(height/width)*200;
                         try {
                             BufferedImage image = new BufferedImage(200, (int)r, BufferedImage.TYPE_INT_RGB);
-                            image.createGraphics().drawImage(ImageIO.read(new File(filePath+"/fullsize_"+fileName)).getScaledInstance(200, (int)r, Image.SCALE_SMOOTH),0,0,null);
+                            image.createGraphics().drawImage(ImageIO.read(new File(filePath+"/icon.jpg")).getScaledInstance(200, (int)r, Image.SCALE_SMOOTH),0,0,null);
                             //write the thumbnail
-                            ImageIO.write(image,"png",outputfile);
-
+                            ImageIO.write(image,"jpg",outputfile);
+                            UserInfoDAO.updateUserIcon(DB,"/User-Info/" + username+"/icon.jpg",username);
                         }catch (IOException e){
                             e.printStackTrace();
                         }
                     }
-                    out.println("<a href='/Uploaded-Photos/"+id+"/fullsize_"+fileName+"'><img src='/Uploaded-Photos/"+id+"/"+imageName+"_thumbnail.png'></a><br>");
-                    //out.println("Uploaded Filename: " + fileName + "<br>");
 
-                    id.setAttribute("fileName",fileName);
-                    id.setAttribute("imageName",imageName);
-
+                    UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
+                     request.setAttribute("userInfo",userInfo);
+                    request.getRequestDispatcher("UpdateProfile.jsp").forward(request,response);
 
                 }
             }
-            out.println("</body>");
-            out.println("</html>");
+
         }catch(Exception ex) {
             System.out.println(ex);
         }
@@ -172,32 +143,31 @@ public class ChangeIcon extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        doPost(request,response);
-        response.setContentType("text/html");
-        ServletContext servletContext=getServletContext();
-        String filePath=servletContext.getRealPath("/Uploaded-Photos");
-        PrintWriter out = response.getWriter();
-        out.println("<!DOCTYPE html>");
-        out.println("<html lang=\"en\">");
-        out.println("<head>");
-        out.println("<meta charset=\"UTF-8\">");
-        out.println("<title>Display image</title>");
-        out.println("</head>");
-        out.println("<body>");
-        HttpSession id= request.getSession(false);
-        File file=new File(filePath+"/"+id);
-        if(!file.exists()){
-            response.sendRedirect("/ex03.html");
 
-        }else {
-            out.println("Thumbnail image:<br><img src='/Uploaded-Photos/"+id+"/"+id.getAttribute("imageName")+"_thumbnail.png'><br>"+"Caption:"+id.getAttribute("caption")+
-                    "<br><br>Full-size image:<br><img src='/Uploaded-Photos/"+id+"/fullsize_"+id.getAttribute("fileName")+"'><br>"
-            );
+        HttpSession session = request.getSession(true);
+        response.setContentType("text/html");
+        String username=(String)session.getAttribute("username");
+
+        if(request.getParameter("ChangeIcon")!=null){
+
+            UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
+
+            List<String> iconList=iconList();
+            request.setAttribute("iconList",iconList);
+
+            request.setAttribute("userInfo",userInfo);
+            request.getRequestDispatcher("changeIcon.jsp").forward(request,response);
+
         }
-        out.println("</body>");
-        out.println("</html>");
 
     }
 
-
+protected List<String> iconList(){
+        List<String> iconList=new ArrayList<>();
+        iconList.add("Local-IconImages/Desert.jpg");
+    iconList.add("Local-IconImages/Kiwi.png");
+    iconList.add("Local-IconImages/Mouse.png");
+    iconList.add("Local-IconImages/pig.png");
+        return iconList;
+    }
 }

@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<img src="bgimages/welcomepage.jpg" class="rounded" />
+<img src="${userProfile.icon}" class="rounded" />
 <p>Username:${userProfile.username}</p>
 <p>Firstname:${userProfile.firstName}</p>
 <p>Lastname:${userProfile.lastName}</p>

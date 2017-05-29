@@ -65,7 +65,7 @@ public class UserInfoDAO {
         return userInfo;
     }
 
-    public static void updateUserInfo(AbstractDB db, String username,String firstName, String lastName, String email, String birth_date, String gender, String icon) throws SQLException {
+    public static void updateUserInfo(AbstractDB db, String username,String firstName, String lastName, String email, String birth_date, String gender) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("UPDATE User_Info set firstName = ?, lastName=?, email=?, birth_date=?, gender = ?, icon=? WHERE username = ?;")) {
                 p.setString(1, firstName);
@@ -73,8 +73,19 @@ public class UserInfoDAO {
                 p.setString(3, email);
                 p.setString(4, birth_date);
                 p.setString(5, gender);
-                p.setString(6, icon);
-                 p.setString(7, username);
+                 p.setString(6, username);
+                p.executeUpdate();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateUserIcon(AbstractDB db, String icon,String username) throws SQLException {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE User_Info set icon=? WHERE username = ?;")) {
+                p.setString(1, icon);
+                p.setString(2, username);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {

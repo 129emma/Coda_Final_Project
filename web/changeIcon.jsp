@@ -10,17 +10,25 @@
 <html>
 <head>
     <title>changeIcon</title>
+    <style>
+        .rounded { border-radius: 50%;
+            width: 100px;
+            height: 100px;}
+    </style>
 
 </head>
 <body>
 
-
-<form action="/ChangeIcon" method="post" enctype="multipart/form-data">
-
+<img src="${userInfo.icon}" class="rounded" />
+<form action="ChangeIcon" method="post" enctype="multipart/form-data">
     <label for="image">Choose one image:</label><input required type="file" id="image" accept=".jpg, .gif,.png" name="icon"/><br><br>
+    <c:forEach var="localIcon" items="${iconList}">
+        <div class="panel panel-default">
+            <img src="${localIcon}" class="rounded" />
+        </div>
+    </c:forEach>
     <br><br>
-    <input type="submit" value="icon"/>
-
+    <input type="submit" value="Submit"/>
 </form>
 </body>
 </html>

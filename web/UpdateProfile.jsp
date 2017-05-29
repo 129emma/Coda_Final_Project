@@ -20,11 +20,12 @@
 <form id="form" action="ChangeProfile" method="post">
     <fieldset>
         <legend>Your details</legend>
-        <img src="bgimages/welcomepage.jpg" class="rounded" /><a href="changIcon.jsp">click to chnage your icon</a>
+        <img src="${userInfo.icon}" class="rounded" /><a href="ChangeIcon?ChangeIcon='true'">click to change your icon</a>
         <p>Firstname: <input type="text" name="firstname" value="${userInfo.firstName}" style="width: 300px;"/></p>
         <p>Lastname: <input type="text" name="lastname" value="${userInfo.lastName}" style="width: 300px;"/></p>
         <p>Email: <input type="email" name="email"  value="${userInfo.email}" style="width: 300px;"/></p>
         <p>Birthday: <input type="date" name="birthday"  value="${userInfo.date_birth}" style="width: 300px;"/></p>
+
         Gender:<select name="gender">
             <option value="Female">Female</option>
             <option value="Male">Male</option>
