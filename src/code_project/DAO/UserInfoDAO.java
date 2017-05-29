@@ -23,7 +23,7 @@ public class UserInfoDAO {
         List<UserInfo> userInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         userInfoList.add(userInfoFromResultSet(r));
@@ -49,7 +49,7 @@ public class UserInfoDAO {
     public static UserInfo getUserInfo(AbstractDB db, String username) {
         UserInfo userInfo = null;
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo WHERE username = ?")) {
                 p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -64,15 +64,15 @@ public class UserInfoDAO {
         return userInfo;
     }
 
-    public static void updateUserInfo(AbstractDB db, String username, String firstName, String lastName, String email, Date data_birth, String tags, String friends) throws SQLException {
+    public static void updateUserInfo(AbstractDB db, String username, String firstName, String lastName, String email, Date birthDate, String gender, String icon) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE User_Info set firstName = ?, lastName=?, email=?, data_birth=?, tag = ?, friends=? WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo set firstName = ?, lastName=?, email=?, birthDate=?, gender = ?, icon=? WHERE username = ?;")) {
                 p.setString(1, firstName);
                 p.setString(2, lastName);
                 p.setString(3, email);
-                p.setDate(4, data_birth);
-                p.setString(5, tags);
-                p.setString(6, friends);
+                p.setDate(4, birthDate);
+                p.setString(5, gender);
+                p.setString(6, icon);
                  p.setString(6, username);
                 p.executeUpdate();
             }
@@ -83,7 +83,7 @@ public class UserInfoDAO {
 
     public static void deleteUserInfo(AbstractDB db, String username) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM User_Info WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM UserInfo WHERE username = ?;")) {
                 p.setString(1, username);
                 p.executeUpdate();
             }

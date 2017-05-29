@@ -25,13 +25,13 @@ public class CommentInfoDAO {
         return commentInfoListsOfAllArticle;
     }
 
-    public static List<CommentInfo> getCommentInfoListByArticle(AbstractDB db , int article_ID) {
+    public static List<CommentInfo> getCommentInfoListByArticle(AbstractDB db , int articleID) {
 
         List<CommentInfo> CommentInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment WHERE article_ID=?")) {
-                p.setInt(1,article_ID);
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment WHERE articleID=?")) {
+                p.setInt(1,articleID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         CommentInfoList.add(CommentInfoFromResultSet(r));
@@ -65,13 +65,13 @@ public class CommentInfoDAO {
         return CommentInfoList;
     }
 
-    public static void createCommentInfo(AbstractDB db, String content, String post_time, String username, String article_ID ) throws SQLException {
+    public static void createCommentInfo(AbstractDB db, String content, String postTime, String username, String articleID ) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO Comment(content, post_time, username, article_ID) VALUES (?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO Comment(content, postTime, username, articleID) VALUES (?,?,?,?);")) {
                 p.setString(1, content);
-                p.setString(2, post_time);
+                p.setString(2, postTime);
                 p.setString(3, username);
-                p.setString(4, article_ID);
+                p.setString(4, articleID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -79,13 +79,13 @@ public class CommentInfoDAO {
         }
     }
 
-    public static CommentInfo getCommentInfo(AbstractDB db, String comment_ID) {
+    public static CommentInfo getCommentInfo(AbstractDB db, String commentID) {
 
         CommentInfo CommentInfo = null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment WHERE comment_ID = ?")) {
-                p.setString(1, comment_ID);
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment WHERE commentID = ?")) {
+                p.setString(1, commentID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         CommentInfo = CommentInfoFromResultSet(r);
@@ -99,12 +99,12 @@ public class CommentInfoDAO {
         return CommentInfo;
     }
 
-    public static void updateCommentInfo(AbstractDB db,int comment_ID,String content, String post_time) throws SQLException {
+    public static void updateCommentInfo(AbstractDB db,int commentID,String content, String postTime) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE Comment set content =?,post_time=? AND comment_ID=?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE Comment set content =?,postTime=? AND commentID=?;")) {
                 p.setString(1, content);
-                p.setString(2, post_time);
-                p.setInt(3, comment_ID);
+                p.setString(2, postTime);
+                p.setInt(3, commentID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -112,10 +112,10 @@ public class CommentInfoDAO {
         }
     }
 
-    public static void deleteCommentInfo(AbstractDB db, int Comment_ID) throws SQLException {
+    public static void deleteCommentInfo(AbstractDB db, int CommentID) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM Comment WHERE Comment_ID=?;")) {
-                p.setInt(1, Comment_ID);
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM Comment WHERE CommentID=?;")) {
+                p.setInt(1, CommentID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -125,7 +125,7 @@ public class CommentInfoDAO {
 
     private static CommentInfo CommentInfoFromResultSet(ResultSet r) throws SQLException {
         return new CommentInfo(
-                r.getInt("Comment_ID"),
+                r.getInt("CommentID"),
                 r.getString("content"),
                 r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
                 r.getString("username"),
