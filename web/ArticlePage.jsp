@@ -38,7 +38,7 @@
             </form>
         </div>
     </div>
-    <a href="ChangeArticle?articleChange='true'&articleID=${article.article_ID}">click to change this article</a>
+    <a href="ChangeArticle?articleChange=true&articleID=${article.article_ID}">click to change this article</a>
 
 
 </body>

@@ -30,7 +30,7 @@ public class ArticleServlet extends HttpServlet {
         }else if(((String) session.getAttribute("status")) .equals("login")){
             String articleID=request.getParameter("articleID");
             ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(mySQL,(String)session.getAttribute("username"),articleID);
-
+            setCommentAttribute(request,response);
             request.setAttribute("article",articleInfo);
             request.setAttribute("articleID",articleID);
             request.getRequestDispatcher("ArticlePage.jsp").forward(request, response);
@@ -45,8 +45,10 @@ public class ArticleServlet extends HttpServlet {
         String articleID=request.getParameter("articleID");
         String username = (String)session.getAttribute("username");
         List<CommentInfo> commentInfoList = CommentInfoDAO.getCommentInfoListByArticle(mySQL,Integer.parseInt(articleID));
-        for (CommentInfo commentInfo : commentInfoList) {
-            commentInfo.setDeleteComment(username);
+        if(commentInfoList!=null) {
+            for (CommentInfo commentInfo : commentInfoList) {
+                commentInfo.setDeleteComment(username);
+            }
         }
         request.setAttribute("commentInfoList",commentInfoList);
     }

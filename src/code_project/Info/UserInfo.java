@@ -6,15 +6,15 @@ package code_project.Info;
  */
 public class UserInfo {
 
-	private String username,firstName,lastName,email,data_birth,tags,friends;
+	private String username,firstName,lastName,email, birthDate,tags,friends;
 
 
-	public UserInfo(String username, String firstName, String lastName, String email, String data_birth, String tags, String friends) {
+	public UserInfo(String username, String firstName, String lastName, String email, String birthDate, String tags, String friends) {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.data_birth = data_birth;
+		this.birthDate = birthDate;
 		this.tags = tags;
 		this.friends = friends;
 	}
@@ -35,8 +35,8 @@ public class UserInfo {
 		this.email = email;
 	}
 
-	public void setData_birth(String data_birth) {
-		this.data_birth = data_birth;
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public void setTags(String tags) {
@@ -63,8 +63,8 @@ public class UserInfo {
 		return email;
 	}
 
-	public String getData_birth() {
-		return data_birth;
+	public String getBirthDate() {
+		return birthDate;
 	}
 
 	public String getTags() {

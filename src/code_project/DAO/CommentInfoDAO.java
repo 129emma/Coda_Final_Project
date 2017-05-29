@@ -112,10 +112,10 @@ public class CommentInfoDAO {
         }
     }
 
-    public static void deleteCommentInfo(AbstractDB db, int CommentID) throws SQLException {
+    public static void deleteCommentInfo(AbstractDB db, int commentID) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM Comment WHERE CommentID=?;")) {
-                p.setInt(1, CommentID);
+                p.setInt(1, commentID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
