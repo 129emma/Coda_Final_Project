@@ -48,12 +48,14 @@ public class LoginInfoDAO {
         return loginInfo;
     }
 
-    public static void createLoginInfo(AbstractDB db, String username, byte[] password , byte[] salt) throws SQLException {
+    public static void createLoginInfo(AbstractDB db, String username, byte[] password , byte[] salt,String icon) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo (username, password, salt) VALUE (?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo (username, password, salt,icon) VALUE (?,?,?,?);")) {
                 p.setString(1, username);
                 p.setBytes(2, password);
                 p.setBytes(3, salt);
+                p.setString(4, icon);
+
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {

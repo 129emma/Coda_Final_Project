@@ -23,7 +23,7 @@ public class ArticleInfo {
         this.username=username;
     }
 
-    public int getArticle_ID() {
+    public int getArticleID() {
         return articleID;
     }
 

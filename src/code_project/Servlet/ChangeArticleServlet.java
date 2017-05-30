@@ -16,68 +16,90 @@ import java.sql.Date;
 /**
  * Created by txie936 on 25/05/2017.
  */
-public class ChangeArticleServlet extends HttpServlet {
-
+public class ChangeArticleProcess extends HttpServlet{
+    MySQL DB=new MySQL();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession(true);
-        MySQL DB = new MySQL();
+
 
         response.setContentType("text/html");
 
-        if (session.getAttribute("username") == null) {
+         if(session.getAttribute("username")==null){
 
-            request.getRequestDispatcher("Login").forward(request, response);
+             request.getRequestDispatcher("Login").forward(request,response);
 
-        } else if (request.getParameter("create") != null) {
-            String title = request.getParameter("title");
-            String content = request.getParameter("content");
-            String tag = request.getParameter("tag");
-            try {
-                ArticleInfoDAO.createArticleInfo(DB, (String) session.getAttribute("articleID"), title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, (String) session.getAttribute("username"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            session.removeAttribute("articleID");
-            request.removeAttribute("create");
-            response.sendRedirect("Blog");
+         }else if(request.getParameter("create")!=null){
 
-        } else if (request.getParameter("articleChange") != null) {
-            String articleID = request.getParameter("articleID");
-            ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(DB, (String) session.getAttribute("username"), articleID);
-            request.setAttribute("article", articleInfo);
-            session.setAttribute("articleID", articleID);
-            request.removeAttribute("articleChange");
-            request.getRequestDispatcher("ArticleChange.jsp").forward(request, response);
+             createArticle(request,response,session);
 
-        } else if (request.getParameter("action").equals("update")) {
-            String title = request.getParameter("title");
-            String content = request.getParameter("content");
-            String tag = request.getParameter("tag");
-            request.removeAttribute("action");
-            try {
-                ArticleInfoDAO.updateArticleInfo(DB, (String) session.getAttribute("articleID"), content, title, ArticleInfoDAO.getCurrentTimeStamp(), tag, (String) session.getAttribute("username"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            response.sendRedirect("Blog");
-            ;
+         }else if(request.getParameter("articleChange")!=null) {
 
-        } else if (request.getParameter("action").equals("delete")) {
-            try {
-                ArticleInfoDAO.deleteArticleInfo(DB, (String) session.getAttribute("username"), (String) session.getAttribute("articleID"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            session.removeAttribute("action");
-            session.removeAttribute("articleID");
-            response.sendRedirect("Blog");
-            ;
-        }
+             goToArticleChangePage(request,response,session);
+
+         }else if(request.getParameter("action").equals("update")){
+
+
+            updateArticle(request,response,session);
+
+         }else if(request.getParameter("action").equals("delete")){
+            deleteArticle(request,response,session);
+         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        doPost(request, response);
+        doPost(request,response);
     }
+private void createArticle(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
 
+    String title=request.getParameter("title");
+    String content=request.getParameter("content");
+    String tag=request.getParameter("tag");
+    request.removeAttribute("create");
+
+    try {
+        ArticleInfoDAO.createArticleInfo(DB,title,content,ArticleInfoDAO.getCurrentTimeStamp(),tag,(String)session.getAttribute("username"));
+        response.sendRedirect("Blog");
+    }catch (Exception e){
+        e.printStackTrace();
+    }
 }
+
+    private void goToArticleChangePage(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
+
+        String articleID=request.getParameter("articleID");
+        ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(DB,(String)session.getAttribute("username"),articleID);
+        request.setAttribute("article",articleInfo);
+        request.removeAttribute("articleChange");
+        try {
+            request.getRequestDispatcher("ArticleChange.jsp").forward(request, response);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    private void updateArticle(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
+
+        String title=request.getParameter("title");
+        String content=request.getParameter("content");
+        String tag=request.getParameter("tag");
+        request.removeAttribute("action");
+        try{
+            ArticleInfoDAO.updateArticleInfo(DB,request.getParameter("articleID"),content,title,ArticleInfoDAO.getCurrentTimeStamp(),tag,(String)session.getAttribute("username"));
+            response.sendRedirect("Blog");;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    private void deleteArticle(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
+
+        try {
+            ArticleInfoDAO.deleteArticleInfo(DB,(String)session.getAttribute("username"),request.getParameter("articleID"));
+            session.removeAttribute("action");
+            response.sendRedirect("Blog");;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    }

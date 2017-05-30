@@ -34,6 +34,7 @@ public class ArticleServlet extends HttpServlet {
             request.setAttribute("article",articleInfo);
             request.setAttribute("articleID",articleID);
             request.getRequestDispatcher("ArticlePage.jsp").forward(request, response);
+
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

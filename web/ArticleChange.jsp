@@ -18,7 +18,7 @@
         <p>title: <input type="text" name="title"  value="${article.title}" style="width: 300px;"/></P>
         <p>content: <textarea  name="content" rows="50" cols="100">${article.content}</textarea></p>
         <p>tag: <input type="text" name="tag" value="${article.tags}" style="width: 300px;"/></p>
-        <input type="hidden" name="update" value="true">
+        <input type="hidden" name="articleID" value="${article.articleID}">
         <%--<p>Re-enter New Password: <input type="password" name="reNewPassword" placeholder="Please Re-Enter Your New Password" style="width: 300px;"/></p>--%>
         <input type="submit" name="action" value="update"/> <input type="submit" name="action" value="delete"/>
     </fieldset>

@@ -40,10 +40,8 @@ public abstract class AbstractDB {
 
     public Connection connection() throws ClassNotFoundException, SQLException {
         Connection c = null;
-
         Class.forName(this.driver);
         c = DriverManager.getConnection(connectionString(), getProperties());
-
         return c;
     }
 }

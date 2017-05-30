@@ -34,15 +34,16 @@ public class ArticleInfoDAO {
         return articleInfoList;
     }
 
-    public static void createArticleInfo(AbstractDB db, String articleID, String title,String content, String postTime, String tags,String username) throws SQLException {
+
+
+    public static void createArticleInfo(AbstractDB db, String title,String content, String postTime, String tags,String username ) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO Article VALUES (?,?,?,?,?,?);")) {
-                p.setString(1, articleID);
-                p.setString(2, title);
-                p.setString(3, content);
-                p.setString(4, postTime);
-                p.setString(5, tags);
-                p.setString(6, username);
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO Article(title,content,postTime,tags,username) VALUES (?,?,?,?,?);")) {
+                p.setString(1, title);
+                p.setString(2, content);
+                p.setString(3, postTime);
+                p.setString(4, tags);
+                p.setString(5, username);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
