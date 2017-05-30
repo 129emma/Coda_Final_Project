@@ -107,8 +107,7 @@ public class ChangeIconServlet extends HttpServlet {
             session.setAttribute("logoutMessage","You already logout!");
             request.getRequestDispatcher("Login").forward(request, response);
         }else if(((String) session.getAttribute("status")) .equals("login")){
-
-            if(request.getParameter("ChangeIconServlet")!=null){
+            if(request.getParameter("ChangeIcon")!=null){
                 UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
                 List<String> iconList=iconList();
                 request.setAttribute("iconList",iconList);

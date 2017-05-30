@@ -14,8 +14,8 @@ public class ArticleInfo {
     public String username;
     public String title;
 
-    public ArticleInfo(int article_ID,String title,String content,String post_time,String tags,String username){
-        this.articleID=article_ID;
+    public ArticleInfo(int articleID,String title,String content,String post_time,String tags,String username){
+        this.articleID=articleID;
         this.title=title;
         this.content=content;
         this.postTime =  post_time;
