@@ -104,6 +104,7 @@
         <servlet-name>ChangeProfile</servlet-name>
         <url-pattern>/ChangeProfile</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>ChangeIcon</servlet-name>
         <servlet-class>code_project.Servlet.ChangeIconServlet</servlet-class>
@@ -115,5 +116,25 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>Albums</servlet-name>
+        <servlet-class>code_project.Servlet.AlbumsServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Albums</servlet-name>
+        <url-pattern>/Albums</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>AlbumsChange</servlet-name>
+        <servlet-class>code_project.Servlet.AlbumsChangeServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AlbumsChange</servlet-name>
+        <url-pattern>/AlbumsChange</url-pattern>
+    </servlet-mapping>
 
 </web-app>

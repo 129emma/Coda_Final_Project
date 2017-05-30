@@ -23,11 +23,12 @@
 <div class="container">
     <h2>${userProfile.username} Welcome to coda</h2>
     <p><a href="Profile">click to change your file</a> </p>
-    <a href="/ChangePassword">Change your password</a>|
-    <a href="/Login">Login</a>|
-    <a href="/Logout">Logout</a>
+    <a href="ChangePassword">Change your password</a>|
+    <a href="Login">Login</a>|
+    <a href="Logout">Logout</a>|
+    <a href="Albums">Albums</a>
     <br>
-    <a href="/CreateArticle.jsp"><p>Create article</p></a>
+    <a href="CreateArticle.jsp"><p>Create article</p></a>
     <div class="panel-group">
         <c:forEach var="article" items="${articleList}">
 
