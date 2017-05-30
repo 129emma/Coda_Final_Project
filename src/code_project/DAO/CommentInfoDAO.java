@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/**
+/*
  * Created by qpen546 on 29/05/2017.
  */
 public class CommentInfoDAO {
@@ -19,8 +19,8 @@ public class CommentInfoDAO {
     public static Map<Integer,CommentInfoList> getCommentInfoListOfAllArticle(AbstractDB db , List<ArticleInfo> articleInfoList) {
         Map<Integer,CommentInfoList> commentInfoListsOfAllArticle= new HashMap<>();
         for (ArticleInfo articleInfo : articleInfoList) {
-            CommentInfoList commentInfoList= new CommentInfoList(getCommentInfoListByArticle(db,articleInfo.getArticle_ID()));
-            commentInfoListsOfAllArticle.put(articleInfo.getArticle_ID(),commentInfoList);
+            CommentInfoList commentInfoList= new CommentInfoList(getCommentInfoListByArticle(db,articleInfo.getArticleID()));
+            commentInfoListsOfAllArticle.put(articleInfo.getArticleID(),commentInfoList);
         }
         return commentInfoListsOfAllArticle;
     }

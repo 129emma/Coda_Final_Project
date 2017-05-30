@@ -32,12 +32,8 @@ public class BlogServlet extends HttpServlet{
 
             session.setAttribute("logoutMessage","You already logout!");
             request.getRequestDispatcher("Login").forward(request, response);
-        }else if(((String) session.getAttribute("status")) .equals("login")){
-            MySQL mySQL=new MySQL();
-            List<ArticleInfo> articleInfoList= ArticleInfoDAO.getArticleInfoList(mySQL,(String)session.getAttribute("username"));
-           // Map<Integer,CommentInfoList> commentInfoListOFAllArticle = CommentInfoDAO.getCommentInfoListOfAllArticle(mySQL,articleInfoList);
-
         }else if((session.getAttribute("status")) .equals("login")){
+            // Map<Integer,CommentInfoList> commentInfoListOFAllArticle = CommentInfoDAO.getCommentInfoListOfAllArticle(mySQL,articleInfoList);
 
             MySQL DB=new MySQL();
 

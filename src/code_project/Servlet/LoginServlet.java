@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("Login.jsp").forward(request, response);
             }
             LoginInfo loginInfo = LoginInfoDAO.getLoginInfo(mySQL, username);
+
             if (loginInfo == null){
                 session.setAttribute("loginMessage", "Fail to login: wrong username");
                 request.getRequestDispatcher("Login.jsp").forward(request, response);

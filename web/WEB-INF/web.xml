@@ -90,7 +90,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Profile</servlet-name>
-        <servlet-class>code_project.Servlet.UserProfile</servlet-class>
+        <servlet-class>code_project.Servlet.UserProfileServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
@@ -98,7 +98,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ChangeProfile</servlet-name>
-        <servlet-class>code_project.Servlet.ChangeUserProfileProcess</servlet-class>
+        <servlet-class>code_project.Servlet.ChangeUserProfileServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfile</servlet-name>
@@ -106,7 +106,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ChangeIcon</servlet-name>
-        <servlet-class>code_project.Servlet.ChangeIcon</servlet-class>
+        <servlet-class>code_project.Servlet.ChangeIconServlet</servlet-class>
 
     </servlet>
     <servlet-mapping>

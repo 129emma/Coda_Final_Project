@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Created by txie936 on 29/05/2017.
  */
-public class ChangeIcon extends HttpServlet {
+public class ChangeIconServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private String filePath;
     private int maxFileSize=5120*5120;
@@ -108,7 +108,7 @@ public class ChangeIcon extends HttpServlet {
             request.getRequestDispatcher("Login").forward(request, response);
         }else if(((String) session.getAttribute("status")) .equals("login")){
 
-            if(request.getParameter("ChangeIcon")!=null){
+            if(request.getParameter("ChangeIconServlet")!=null){
                 UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
                 List<String> iconList=iconList();
                 request.setAttribute("iconList",iconList);

@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by txie936 on 29/05/2017.
  */
-public class UserProfile extends HttpServlet {
+public class UserProfileServlet extends HttpServlet {
        private MySQL DB=new MySQL();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

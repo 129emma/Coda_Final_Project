@@ -11,13 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.sql.Date;
 
 /**
  * Created by txie936 on 25/05/2017.
  */
-public class ChangeArticleProcess extends HttpServlet{
-    MySQL DB=new MySQL();
+public class ChangeArticleServlet extends HttpServlet{
+    MySQL mySQL =new MySQL();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession(true);
@@ -58,7 +57,7 @@ private void createArticle(HttpServletRequest request,HttpServletResponse respon
     request.removeAttribute("create");
 
     try {
-        ArticleInfoDAO.createArticleInfo(DB,title,content,ArticleInfoDAO.getCurrentTimeStamp(),tag,(String)session.getAttribute("username"));
+        ArticleInfoDAO.createArticleInfo(mySQL,title,content,ArticleInfoDAO.getCurrentTimeStamp(),tag,(String)session.getAttribute("username"));
         response.sendRedirect("Blog");
     }catch (Exception e){
         e.printStackTrace();
@@ -68,7 +67,7 @@ private void createArticle(HttpServletRequest request,HttpServletResponse respon
     private void goToArticleChangePage(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
 
         String articleID=request.getParameter("articleID");
-        ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(DB,(String)session.getAttribute("username"),articleID);
+        ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(mySQL,(String)session.getAttribute("username"),articleID);
         request.setAttribute("article",articleInfo);
         request.removeAttribute("articleChange");
         try {
@@ -85,7 +84,7 @@ private void createArticle(HttpServletRequest request,HttpServletResponse respon
         String tag=request.getParameter("tag");
         request.removeAttribute("action");
         try{
-            ArticleInfoDAO.updateArticleInfo(DB,request.getParameter("articleID"),content,title,ArticleInfoDAO.getCurrentTimeStamp(),tag,(String)session.getAttribute("username"));
+            ArticleInfoDAO.updateArticleInfo(mySQL,request.getParameter("articleID"),content,title,ArticleInfoDAO.getCurrentTimeStamp(),tag,(String)session.getAttribute("username"));
             response.sendRedirect("Blog");;
         }catch(Exception e){
             e.printStackTrace();
@@ -94,7 +93,7 @@ private void createArticle(HttpServletRequest request,HttpServletResponse respon
     private void deleteArticle(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
 
         try {
-            ArticleInfoDAO.deleteArticleInfo(DB,(String)session.getAttribute("username"),request.getParameter("articleID"));
+            ArticleInfoDAO.deleteArticleInfo(mySQL,(String)session.getAttribute("username"),request.getParameter("articleID"));
             session.removeAttribute("action");
             response.sendRedirect("Blog");;
         }catch (Exception e){

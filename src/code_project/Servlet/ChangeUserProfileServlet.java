@@ -19,7 +19,7 @@ import java.util.Date;
 /**
  * Created by qpen546 on 25/05/2017.
  */
-public class ChangeUserProfileProcess extends HttpServlet{
+public class ChangeUserProfileServlet extends HttpServlet{
     MySQL DB=new MySQL();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
