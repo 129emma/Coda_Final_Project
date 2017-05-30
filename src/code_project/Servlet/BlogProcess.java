@@ -21,17 +21,19 @@ public class BlogProcess extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
-        if (((String) session.getAttribute("status")) == null) {
+        if ((session.getAttribute("status")) == null) {
             session.setAttribute("status","logout");
             request.getRequestDispatcher("Login").forward(request, response);
-        }else if(((String) session.getAttribute("status")) .equals("logout")){
+        }else if((session.getAttribute("status")) .equals("logout")){
 
             session.setAttribute("logoutMessage","You already logout!");
             request.getRequestDispatcher("Login").forward(request, response);
 
-        }else if(((String) session.getAttribute("status")) .equals("login")){
+        }else if((session.getAttribute("status")) .equals("login")){
 
             MySQL DB=new MySQL();
+
+
             List<ArticleInfo> articleInfoList= ArticleInfoDAO.getArticleInfoList(DB,(String)session.getAttribute("username"));
 
             UserInfo userProfile= UserInfoDAO.getUserInfo(DB,(String)session.getAttribute("username"));
