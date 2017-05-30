@@ -21,12 +21,12 @@ public class Article extends HttpServlet {
         HttpSession session = request.getSession(true);
           MySQL DB=new MySQL();
         response.setContentType("text/html");
-        if (((String) session.getAttribute("status")) == null) {
+        if ((session.getAttribute("status")) == null) {
 
             session.setAttribute("status","logout");
             request.getRequestDispatcher("Login").forward(request, response);
 
-        }else if(((String) session.getAttribute("status")) .equals("login")){
+        }else if((session.getAttribute("status")) .equals("login")){
 
             String articleID=request.getParameter("articleID");
             ArticleInfo articleInfo=ArticleInfoDAO.getArticleInfo(DB,(String)session.getAttribute("username"),articleID);

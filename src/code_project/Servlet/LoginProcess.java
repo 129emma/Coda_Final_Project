@@ -32,12 +32,12 @@ public class LoginProcess extends HttpServlet {
 
         HttpSession session = request.getSession(true);
 
-        if (((String) session.getAttribute("status")) == null) {
+        if (( session.getAttribute("status")) == null) {
             session.setAttribute("status","logout");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
 
-        if (((String) session.getAttribute("status")).equals("login")) {
+        if ((session.getAttribute("status")).equals("login")) {
             response.sendRedirect("Blog");
         } else {
             username = request.getParameter("username");

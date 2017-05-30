@@ -15,14 +15,13 @@ public class LogoutProcess extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
 
-        if (((String) session.getAttribute("status")) == null) {
+        if ((session.getAttribute("status")) == null) {
             session.setAttribute("status","logout");
             session.setAttribute("logoutMessage","You didn't login yet!");
-        }else if(((String) session.getAttribute("status")) .equals("logout")){
+        }else if((session.getAttribute("status")) .equals("logout")){
             session.setAttribute("logoutMessage","You already logout!");
-        }else if(((String) session.getAttribute("status")) .equals("login")){
+        }else if((session.getAttribute("status")) .equals("login")){
             session.setAttribute("status","logout");
             session.setAttribute("logoutMessage","You are success to logout!");
         }
