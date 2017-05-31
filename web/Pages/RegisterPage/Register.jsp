@@ -17,7 +17,7 @@
         <legend>Your details</legend>
         <p>Username: <input type="text" name="username" placeholder="Please Enter Your Username" style="width: 300px;"/></P>
         <p>Password: <input type="password" name="password" placeholder="Please Enter Your Password" style="width: 300px;"/></p>
-        <input type="submit" name="action" value="Register"/>
+        <input type="submit" name="action" value="register"/>
     </fieldset>
 </form>
 <div>

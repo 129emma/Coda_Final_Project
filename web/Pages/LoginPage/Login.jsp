@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html class="full">
 <head>
-    <title>Registration Page</title>
+    <title>Login Page</title>
 </head>
 <body>
 <form id="form" action="Login" method="post">
@@ -16,12 +16,13 @@
         <legend>Your details</legend>
         <p>Username: <input type="text" name="username" placeholder="Please Enter Your Username" style="width: 300px;"/></P>
         <p>Password: <input type="password" name="password" placeholder="Please Enter Your Password" style="width: 300px;"/></p>
-        <input type="submit" name="action" value="Register"/>
+        <input type="submit" name="action" value="login"/>
     </fieldset>
 </form>
 <div>
-    <p style="color: red">${sessionScope.RegisterMessage}</p>
+    <p style="color: red">${message}</p>
 </div>
+
 <a href="Login?action=login"><p>Login</p></a>
 <a href="Login?action=register"><p>Registration</p></a>
 <a href="Login?action=logout"><p>Logout</p></a>

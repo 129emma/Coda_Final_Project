@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
     <servlet>
         <servlet-name>jsp</servlet-name>
     </servlet>
@@ -16,30 +17,30 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>LoginProcess</servlet-name>
+        <servlet-name>Login</servlet-name>
         <servlet-class>code_project.Servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginProcess</servlet-name>
+        <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
 
 
     <servlet>
-        <servlet-name>BlogProcess</servlet-name>
+        <servlet-name>Blog</servlet-name>
         <servlet-class>code_project.Servlet.BlogServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>BlogProcess</servlet-name>
+        <servlet-name>Blog</servlet-name>
         <url-pattern>/Blog</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>ChangePasswordProcess</servlet-name>
+        <servlet-name>ChangePassword</servlet-name>
         <servlet-class>code_project.Servlet.ChangePasswordServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ChangePasswordProcess</servlet-name>
+        <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
 
@@ -77,15 +78,13 @@
         <url-pattern>/ChangeProfile</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>ChangeIcon</servlet-name>
-        <servlet-class>code_project.Servlet.ChangeIconServlet</servlet-class>
+        <servlet-name>AvatarEdit</servlet-name>
+        <servlet-class>code_project.Servlet.AvatarEditServlet</servlet-class>
 
     </servlet>
     <servlet-mapping>
-        <servlet-name>ChangeIcon</servlet-name>
-        <url-pattern>/ChangeIcon</url-pattern>
+        <servlet-name>AvatarEdit</servlet-name>
+        <url-pattern>/AvatarEdit</url-pattern>
     </servlet-mapping>
-
-
 
 </web-app>

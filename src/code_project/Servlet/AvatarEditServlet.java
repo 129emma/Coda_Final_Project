@@ -4,6 +4,7 @@ import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.UserInfoDAO;
 import code_project.Info.ArticleInfo;
 import code_project.Info.UserInfo;
+import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * Created by txie936 on 29/05/2017.
  */
-public class ChangeIconServlet extends HttpServlet {
+public class AvatarEditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private String filePath;
     private int maxFileSize=5120*5120;
@@ -37,7 +38,7 @@ public class ChangeIconServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+        LoginStatus.verifyStatus(request,response);
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
         String username=(String)session.getAttribute("username");
@@ -88,7 +89,7 @@ public class ChangeIconServlet extends HttpServlet {
             }
             UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
             request.setAttribute("userInfo",userInfo);
-            request.getRequestDispatcher("UpdateProfile.jsp").forward(request,response);
+            request.getRequestDispatcher("Pages/UpdateProfilePage/UpdateProfile.jsp").forward(request,response);
 
     }
 
@@ -112,17 +113,17 @@ public class ChangeIconServlet extends HttpServlet {
                 List<String> iconList=iconList();
                 request.setAttribute("iconList",iconList);
                 request.setAttribute("userInfo",userInfo);
-                request.getRequestDispatcher("changeIcon.jsp").forward(request,response);
+                request.getRequestDispatcher("Pages/AvatarEditPage/AvatarEdit.jsp").forward(request,response);
             }
         }
     }
 
 protected List<String> iconList(){
         List<String> iconList=new ArrayList<>();
-        iconList.add("Local-IconImages/Desert.jpg");
-        iconList.add("Local-IconImages/Kiwi.png");
-        iconList.add("Local-IconImages/Mouse.png");
-        iconList.add("Local-IconImages/pig.png");
+        iconList.add("Pages/AvatarEditPage/DefaultAvatar/Desert.jpg");
+        iconList.add("Pages/AvatarEditPage/DefaultAvatar/Kiwi.png");
+        iconList.add("Pages/AvatarEditPage/DefaultAvatar/Mouse.png");
+        iconList.add("Pages/AvatarEditPage/DefaultAvatar/pig.png");
         return iconList;
     }
 private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,String filePath,String localIconFilePath){

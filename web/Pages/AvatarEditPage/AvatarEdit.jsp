@@ -49,7 +49,7 @@
 </head>
 <body>
 <img src="${userInfo.icon}" id="icon" name="userIcon" class="rounded" />
-<form action="ChangeIcon" method="post" enctype="multipart/form-data">
+<form action="AvatarEdit" method="post" enctype="multipart/form-data">
     <input type="hidden" name="result" id="result">
     <label for="imageFile">Choose one image:</label><input type="file" id="imageFile" accept=".jpg, .gif,.png" name="icon"/><br><br>
     <c:forEach var="localIcon" items="${iconList}">

@@ -85,6 +85,6 @@ public class ChangeUserProfileServlet extends HttpServlet{
     private void getUserProfile(HttpServletRequest request, HttpServletResponse response,HttpSession session)throws IOException, ServletException{
         UserInfo userInfo=UserInfoDAO.getUserInfo(DB,(String)session.getAttribute("username"));
         request.setAttribute("userInfo",userInfo);
-        request.getRequestDispatcher("UpdateProfile.jsp").forward(request, response);
+        request.getRequestDispatcher("Pages/UpdateProfilePage/UpdateProfile.jsp").forward(request, response);
     }
 }
