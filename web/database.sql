@@ -4,8 +4,9 @@ DROP TABLE IF EXISTS AlbumsImage;
 CREATE TABLE IF NOT EXISTS AlbumsImage(
   id INT AUTO_INCREMENT,
   username CHAR(10),
-  address CHAR(40) NOT NULL ,
+  address CHAR(100) NOT NULL ,
   postTime DATETIME,
+
   PRIMARY KEY(id)
 );
 
@@ -16,5 +17,6 @@ CREATE TABLE IF NOT EXISTS AlbumsVideo(
   username CHAR(10),
   address CHAR(200) NOT NULL ,
   postTime DATETIME,
+
   PRIMARY KEY(id)
 );

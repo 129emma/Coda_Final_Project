@@ -36,7 +36,6 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("status","logout");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
-
         if ((session.getAttribute("status")).equals("login")) {
             response.sendRedirect("Blog?page=home");
         } else {

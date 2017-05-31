@@ -16,10 +16,13 @@
     <fieldset>
         <legend>Your article</legend>
         <p>title: <input type="text" name="title" placeholder="Please Enter Your Title" value="${articleInfo.title}" style="width: 300px;"/></P>
-        <p>content: <textarea  name="content" placeholder="Please Enter Your Content" rows="50" cols="100">${articleInfo.content}</textarea></p>
+        <p>content:<br> <textarea  name="content" placeholder="Please Enter Your Content" rows="50" cols="100">${articleInfo.content}</textarea></p>
         <p>tag: <input type="text" name="tag" placeholder="Please Enter Your Tag"  value="${articleInfo.tags}" style="width: 300px;"/></p>
         ${hiddenElement}
         ${submitElement}
         ${deleteElement}
     </fieldset>
 </form>
+
+<jsp:include page="addImageToArticle.jsp"></jsp:include><br>
+<jsp:include page="addImageToArticle.jsp"></jsp:include><br>

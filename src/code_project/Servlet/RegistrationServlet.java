@@ -25,6 +25,8 @@ public class RegistrationServlet extends HttpServlet{
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+
+
         if ((session.getAttribute("status")) == null) {
             session.setAttribute("status","logout");
         }

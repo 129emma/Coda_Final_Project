@@ -4,6 +4,7 @@ import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.UserInfoDAO;
 import code_project.Info.ArticleInfo;
 import code_project.Info.UserInfo;
+import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 
 import javax.servlet.ServletException;
@@ -21,20 +22,10 @@ public class UserProfileServlet extends HttpServlet {
        private MySQL DB=new MySQL();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+        LoginStatus.verifyStatus(request, response);
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
-        if ((session.getAttribute("status")) == null) {
-            session.setAttribute("status","logout");
-            request.getRequestDispatcher("Login").forward(request, response);
-        }else if((session.getAttribute("status")) .equals("logout")){
-            session.setAttribute("logoutMessage","You already logout!");
-            request.getRequestDispatcher("Login").forward(request, response);
-        }else if((session.getAttribute("status")) .equals("login")){
-
             getUserProfile(request,response,session);
-
-        }
     }
 
 

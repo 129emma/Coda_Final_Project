@@ -5,6 +5,7 @@ import code_project.DAO.AlbumsVideoDAO;
 import code_project.DAO.UserInfoDAO;
 import code_project.Info.AlbumsVideoInfo;
 import code_project.Info.UserInfo;
+import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -42,19 +43,10 @@ public class AlbumsChangeServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+        LoginStatus.verifyStatus(request, response);
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
         String username = (String) session.getAttribute("username");
-        if ((session.getAttribute("status")) == null) {
-            session.setAttribute("status", "logout");
-            request.getRequestDispatcher("Login").forward(request, response);
-
-        } else if ((session.getAttribute("status")).equals("logout")) {
-            session.setAttribute("logoutMessage", "You already logout!");
-            request.getRequestDispatcher("Login").forward(request, response);
-
-        } else if ((session.getAttribute("status")).equals("login")) {
 
             if(request.getParameter("action") != null) {
                 switch (request.getParameter("action")){
@@ -70,7 +62,6 @@ public class AlbumsChangeServlet extends HttpServlet {
             } else {
                     addImageToUserAlbums(request,response, username);
             }
-        }
 
     }
 

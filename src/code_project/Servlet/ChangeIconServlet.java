@@ -4,6 +4,7 @@ import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.UserInfoDAO;
 import code_project.Info.ArticleInfo;
 import code_project.Info.UserInfo;
+import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -42,6 +43,7 @@ public class ChangeIconServlet extends HttpServlet {
         response.setContentType("text/html");
         String username=(String)session.getAttribute("username");
 
+        LoginStatus.verifyStatus(request, response);
 
         //get User-Info path
         ServletContext servletContext=getServletContext();

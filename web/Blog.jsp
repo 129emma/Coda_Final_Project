@@ -9,7 +9,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html class="full" lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Blog</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -54,12 +54,6 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><a href="${article.retrieveAddress}">${article.title}</a>${article.postTime}</div>
                 <div class="panel-body">${article.content} </p></div>
-                    <%--<c:forEach var="commentInfo" items="${commentInfoListOFAllArticle.get(article.articleID)}">--%>
-                    <%--<div class="panel panel-default">--%>
-                    <%--<div class="panel-heading"><a href="Article?articleID=${article.articleID}" >${commentInfo.username} </a>${commentInfo.postTime}</div>--%>
-                    <%--<div class="panel-body">${commentInfo.content}</div>--%>
-                    <%--</div>--%>
-                    <%--</c:forEach>--%>
             </div>
         </c:forEach>
     </div>

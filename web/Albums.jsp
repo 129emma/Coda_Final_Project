@@ -13,18 +13,14 @@
 </head>
 <body>
 
-
+<h2>Your Albums</h2>
     <c:forEach var="albumsImage" items="${albumsImageInfoList}">
-
-
             <div ><img src="${albumsImage.address}"></div>|
             <a href="AlbumsChange?albumsImageId=${albumsImage.id}&action=deleteImage"> Click to delete the image</a>|
 
     </c:forEach>
 <br><br>
-
     <c:forEach var="albumsVideo" items="${albumsVideoInfoList}">
-
             <div>${albumsVideo.address}</div>|
             <a href="AlbumsChange?albumsVideoId=${albumsVideo.id}&action=deleteVideo"> Click to delete the video</a>|
     </c:forEach>

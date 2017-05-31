@@ -4,6 +4,7 @@ import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.UserInfoDAO;
 import code_project.Info.ArticleInfo;
 import code_project.Info.UserInfo;
+import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 
 import javax.servlet.ServletException;
@@ -28,11 +29,9 @@ public class ChangeUserProfileServlet extends HttpServlet{
 
         response.setContentType("text/html");
 
-        if(session.getAttribute("username")==null){
+        LoginStatus.verifyStatus(request,response);
 
-            response.sendRedirect("Login");
-
-        }else if(request.getParameter("profileAction")==null){
+        if(request.getParameter("profileAction")==null){
 
            getUserProfile(request,response,session);
 
@@ -77,8 +76,8 @@ public class ChangeUserProfileServlet extends HttpServlet{
         }
         session.removeAttribute("profile");
         session.removeAttribute("username");
+        session.setAttribute("status","logout");
         response.sendRedirect("Login");
-
     }
 
 

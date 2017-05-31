@@ -33,8 +33,8 @@
         }
     }
     function validateInput() {
-        if( document.getElementById("link").val=null){
-            return false;
+        if( document.getElementById("link").value.trim().length=0){
+                return false;
         }
     }
 </script>

@@ -27,7 +27,6 @@ public class ArticleServlet extends HttpServlet {
 
         response.setContentType("text/html");
         session = request.getSession(true);
-
         String action = request.getParameter("action");
         switch (action) {
             case "create":
@@ -121,7 +120,7 @@ public class ArticleServlet extends HttpServlet {
 
     private void createArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (((String) request.getHeader("referer")).contains("Blog")) {
-            String submitElement = "<input type='submit' name='create' value='create'/>";
+            String submitElement = "<input type='submit' name='action' value='create'/>";
             request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
             return;
