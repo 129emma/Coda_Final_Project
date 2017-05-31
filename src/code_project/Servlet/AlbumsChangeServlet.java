@@ -2,6 +2,7 @@ package code_project.Servlet;
 
 import code_project.DAO.AlbumsImageDAO;
 import code_project.DAO.AlbumsVideoDAO;
+import code_project.Info.AlbumsVideoInfo;
 import code_project.Info.ArticleInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
@@ -72,17 +73,31 @@ public class AlbumsChangeServlet extends HttpServlet {
 
     private void addVideoToUserAlbums(HttpServletRequest request,HttpServletResponse response, String username) throws IOException, ServletException {
         try {
+            String content = "";
+            String title = "";
+            String tags = "";
+            String videoAddress="";
+           content=request.getParameter("articleContent");
+           title=request.getParameter("articleTitle");
+           tags=request.getParameter("articleTags");
+           videoAddress =request.getParameter("videoAddress");
 
-            String content=request.getParameter("ArticleContent");
-            AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, content);
+            AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, videoAddress);
+
+
             request.setAttribute("information", "Success");
 
-            ArticleInfo articleInfo=new ArticleInfo("title",content,"tag");
+            ArticleInfo articleInfo=new ArticleInfo(title,content,tags);
+
+            request.setAttribute("video",videoAddress);
+
             request.setAttribute("articleInfo",articleInfo);
 
             String submitElement = "<input type='submit' name='action' value='create'/>";
             request.setAttribute("submitElement", submitElement);
+
             request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
+
         } catch (Exception e) {
             request.setAttribute("information", "Fail to upload the file, please try again");
         }
@@ -143,9 +158,6 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
         upload.setSizeMax(maxFileSize);
         try {
             createUserAlbumsImage(upload, request,filePath,username);
-            request.setAttribute("information", "Success");
-            String submitElement = "<input type='submit' name='action' value='create'/>";
-            request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
         }catch (Exception e){
             request.setAttribute("information", "Fail to upload the file, please try again");
@@ -156,7 +168,10 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
 
     private void createUserAlbumsImage(ServletFileUpload upload, HttpServletRequest request, String filePath,String username) throws IOException, ServletException, FileUploadException,SQLException {
 
-String imageAddress="";
+        String imageAddress = "";
+        String content = "";
+        String title = "";
+        String tags = "";
         // Parse the request to get file items.
         List fileItems = upload.parseRequest(request);
         // Process the uploaded file items
@@ -166,47 +181,57 @@ String imageAddress="";
             FileItem fi = (FileItem) i.next();
 
             if (!fi.isFormField()) {
-                String currentTime=getCurrentTimeStamp();
+                String currentTime = getCurrentTimeStamp();
 
-                    fileName = fi.getName();
-                    file = new File(filePath + "/" + currentTime + ".jpg");
-                    try {
-                        fi.write(file);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
+                fileName = fi.getName();
+                file = new File(filePath + "/" + currentTime + ".jpg");
+                try {
+                    fi.write(file);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                    BufferedImage AlbumImage = null;
+                BufferedImage AlbumImage = null;
 
-                    AlbumImage = ImageIO.read(new File(filePath + "/" + currentTime + ".jpg"));
+                AlbumImage = ImageIO.read(new File(filePath + "/" + currentTime + ".jpg"));
 
-                    File outputfile = new File(filePath + "/" + currentTime + ".jpg");
-                    //check the size of the image
-                    if ((AlbumImage.getWidth() < 400) && (AlbumImage.getHeight() < 400)) {
-                        //write the thumbnail
-                        ImageIO.write(AlbumImage, "jpg", outputfile);
+                File outputfile = new File(filePath + "/" + currentTime + ".jpg");
+                //check the size of the image
+                if ((AlbumImage.getWidth() < 400) && (AlbumImage.getHeight() < 400)) {
+                    //write the thumbnail
+                    ImageIO.write(AlbumImage, "jpg", outputfile);
 
-                    } else {
-                        Double width = (double) AlbumImage.getWidth();
-                        Double height = (double) AlbumImage.getHeight();
-                        double r = (height / width) * 200;
-                            BufferedImage image = new BufferedImage(200, (int) r, BufferedImage.TYPE_INT_RGB);
-                            image.createGraphics().drawImage(ImageIO.read(new File(filePath + "/" + currentTime + ".jpg")).getScaledInstance(200, (int) r, Image.SCALE_SMOOTH), 0, 0, null);
-                            //write the thumbnail
-                            ImageIO.write(image, "jpg", outputfile);
+                } else {
+                    Double width = (double) AlbumImage.getWidth();
+                    Double height = (double) AlbumImage.getHeight();
+                    double r = (height / width) * 200;
+                    BufferedImage image = new BufferedImage(200, (int) r, BufferedImage.TYPE_INT_RGB);
+                    image.createGraphics().drawImage(ImageIO.read(new File(filePath + "/" + currentTime + ".jpg")).getScaledInstance(200, (int) r, Image.SCALE_SMOOTH), 0, 0, null);
+                    //write the thumbnail
+                    ImageIO.write(image, "jpg", outputfile);
 
-                    }
-                   imageAddress="<img style='margin:auto' src='User-Info/" +username+ "/" + currentTime + ".jpg'>";
-                    AlbumsImageDAO.createAlbumsImageInfo(mySQL,username,imageAddress,currentTime);
-            }else if(fi.isFormField()){
-               if(fi.getFieldName().equals("ArticleContent")){
-                   String content=fi.getString();
-                   ArticleInfo articleInfo=new ArticleInfo("title",content+imageAddress,"aa");
-                   request.setAttribute("articleInfo",articleInfo);
-               }
+                }
+                imageAddress = "<img style='margin:auto' src='User-Info/" + username + "/" + currentTime + ".jpg'>";
+                AlbumsImageDAO.createAlbumsImageInfo(mySQL, username, imageAddress, currentTime);
+            } else if (fi.isFormField()) {
+                if (fi.getFieldName().equals("articleContent")) {
+                    content = fi.getString();
+                }else if(fi.getFieldName().equals("articleTitle")){
+                    title=fi.getString();
+                }else if(fi.getFieldName().equals("articleTags")){
+                    tags=fi.getString();
+                }
             }
+
+
         }
 
+
+        ArticleInfo articleInfo = new ArticleInfo(title, content + imageAddress, tags);
+        request.setAttribute("articleInfo", articleInfo);
+        request.setAttribute("information", "Success");
+        String submitElement = "<input type='submit' name='action' value='create'/>";
+        request.setAttribute("submitElement", submitElement);
     }
 
 
