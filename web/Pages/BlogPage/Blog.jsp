@@ -10,32 +10,37 @@
 <html class="full" lang="en">
 <head>
     <title>Blog</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="../../css/basicSetting.css" rel="stylesheet">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/Pages/BlogPage/Blog.css">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.0.js"
+            integrity="sha256-wPFJNIFlVY49B+CuAIrDr932XSb6Jk3J1M22M3E2ylQ=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<h2>${userProfile.username} Welcome to coda</h2>
-<nav class="navbar navbar-default navbar-dark bg-primary fixed-top" role="navigation">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
+<nav class="navbar navbar-top navbar-inverse">
+    <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand">Main Menu</a>
+            <a class="navbar-brand">Code Blog</a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="Blog?page=home">Home</a></li>
                 <li><a href="Blog?page=spotlight">Spotlight</a></li>
@@ -48,7 +53,21 @@
 </nav>
 
 <div class="container">
-    <div class="panel-group">
+    <div class="col-xs-12 col-md-3 panel panel-default">
+        <img class="img-circle img-responsive" src="" alt="avatar" id="image">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Profile</h3>
+            </div>
+            <div class="panel-body" id="profile_content">
+                <p><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Full Name</p>
+                <p><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Location</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-9 panel panel-default">
+        <div style="margin-bottom: 20px"></div>
         <c:forEach var="article" items="${articleInfoList}">
             <div class="panel panel-default">
                 <div class="panel-heading"><a href="${article.retrieveAddress}">${article.title}</a>${article.postTime}</div>

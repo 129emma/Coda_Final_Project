@@ -21,11 +21,9 @@
     </fieldset>
 </form>
 <div>
-    <p style="color: red">${sessionScope.RegisterMessage}</p>
+    <p style="color: red">${message}</p>
 </div>
-<a href="/Login"><p>Login</p></a>
-<a href="/Registration"><p>Registration</p></a>
-<a href="/Logout"><p>Logout</p></a>
+<a href="/Login?action=login"><p>Login</p></a>
 </body>
 
 </html>
