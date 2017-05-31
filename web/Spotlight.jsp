@@ -38,10 +38,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="Profile">click to change your file</a></li>
-                <li><a href="/ChangePassword">Change your password</a></li>
-                <li><a href="/Login">Login</a></li>
-                <li><a href="/Logout">Logout</a></li>
-                <li><a href="/Spotlight">Spotlight</a></li>
+
+                <li><a href="Login">Login</a></li>
+                <li><a href="Logout">Logout</a></li>
+                <li><a href="Blog?action=spotlight">Spotlight</a></li>
             </ul>
         </div>
     </div>

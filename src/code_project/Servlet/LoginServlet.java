@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         if ((session.getAttribute("status")).equals("login")) {
-            response.sendRedirect("Blog");
+            response.sendRedirect("Blog?page=home");
         } else {
             username = request.getParameter("username");
             password = request.getParameter("password");
@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("loginMessage", "");
                 session.setAttribute("status", "login");
                 session.setAttribute("username",username);
-                request.getRequestDispatcher("Blog").forward(request, response);
+                response.sendRedirect("Blog?page=home");
             } else {
                 session.setAttribute("loginMessage", "Fail to login: wrong password");
                 request.getRequestDispatcher("Login.jsp").forward(request, response);

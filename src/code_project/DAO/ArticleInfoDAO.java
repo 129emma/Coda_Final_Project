@@ -34,6 +34,26 @@ public class ArticleInfoDAO {
         return articleInfoList;
     }
 
+    public static List<ArticleInfo> getSpotlightArticleInfoList(AbstractDB db ,int pageNumber) {
+
+        List<ArticleInfo> articleInfoList = new ArrayList<>();
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article ORDER BY articleID ASC LIMIT 10 OFFSET ?")) {
+                p.setInt(1,pageNumber);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        articleInfoList.add(ArticleInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return articleInfoList;
+    }
+
 
 
     public static void createArticleInfo(AbstractDB db, String title,String content, String postTime, String tags,String username ) throws SQLException {
@@ -51,14 +71,13 @@ public class ArticleInfoDAO {
         }
     }
 
-    public static ArticleInfo getArticleInfo(AbstractDB db, String username,String articleID) {
+    public static ArticleInfo getArticleInfo(AbstractDB db,String articleID) {
 
         ArticleInfo articleInfo = null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username = ?AND articleID=?")) {
-                p.setString(1, username);
-                p.setString(2, articleID);
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE articleID=?")) {
+                p.setString(1, articleID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         articleInfo = ArticleInfoFromResultSet(r);

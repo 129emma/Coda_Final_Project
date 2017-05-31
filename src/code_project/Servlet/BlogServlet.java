@@ -27,27 +27,41 @@ public class BlogServlet extends HttpServlet {
         response.setContentType("text/html");
         session = request.getSession(true);
 
-        String action = request.getParameter("action");
-        switch (action){
-            case "home": retrieveHomePage(request,response);
-            break;
-            case "spotlight": retrieveSpotlightPage(request,response);
-            break;
-            default: retrieveHomePage(request,response);
+        String page = request.getParameter("page");
+        if(page == null){
+            retrieveHomePage(request,response);
+        }else {
+            switch (page) {
+                case "home":
+                    retrieveHomePage(request, response);
+                    return;
+                case "spotlight":
+                    retrieveSpotlightPage(request, response);
+                    return;
+                default:
+                    retrieveHomePage(request, response);
+            }
         }
     }
 
-    private void retrieveSpotlightPage(HttpServletRequest request, HttpServletResponse response) {
-
+    private void retrieveSpotlightPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = (String) session.getAttribute("username");
+        List<ArticleInfo> articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, 0);
+        // Map<Integer,CommentInfoList> commentInfoListOFAllArticle = CommentInfoDAO.getCommentInfoListOfAllArticle(mySQL,articleInfoList);
+        UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
+        request.setAttribute("UserInfo", userInfo);
+        request.setAttribute("articleInfoList", articleInfoList);
+        //request.setAttribute("commentInfoListOFAllArticle",commentInfoListOFAllArticle);
+        request.getRequestDispatcher("Blog.jsp").forward(request, response);
     }
 
     private void retrieveHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = (String) session.getAttribute("username");
         List<ArticleInfo> articleInfoList = ArticleInfoDAO.getArticleInfoList(mySQL, username);
         // Map<Integer,CommentInfoList> commentInfoListOFAllArticle = CommentInfoDAO.getCommentInfoListOfAllArticle(mySQL,articleInfoList);
-        UserInfo userProfile = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
-        request.setAttribute("userProfile", userProfile);
-        request.setAttribute("articleList", articleInfoList);
+        UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
+        request.setAttribute("UserInfo", userInfo);
+        request.setAttribute("articleInfoList", articleInfoList);
         //request.setAttribute("commentInfoListOFAllArticle",commentInfoListOFAllArticle);
         request.getRequestDispatcher("Blog.jsp").forward(request, response);
     }

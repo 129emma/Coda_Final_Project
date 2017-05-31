@@ -60,7 +60,7 @@ public class ArticleServlet extends HttpServlet {
     private void retrieveArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String articleID = request.getParameter("articleID");
         String username = (String) session.getAttribute("username");
-        ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL,username , articleID);
+        ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL, articleID);
         articleInfo.setEditArticle(username);
         articleInfo.setDeleteArticle(username);
         retrieveComments(request, response);
@@ -94,7 +94,7 @@ public class ArticleServlet extends HttpServlet {
 
     private void editArticle(HttpServletRequest request, HttpServletResponse response) {
         String articleID = request.getParameter("articleID");
-        ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL, (String) session.getAttribute("username"), articleID);
+        ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL, articleID);
         request.setAttribute("articleInfo", articleInfo);
         String hiddenElement = "<input type='hidden' name='articleID' value='"+articleID+"'>";
         String submitElement = "<input type='submit' name='action' value='update'/> ";
