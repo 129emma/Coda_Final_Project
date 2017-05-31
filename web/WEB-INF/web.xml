@@ -61,16 +61,6 @@
         <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
 
-
-    <servlet>
-        <servlet-name>ChangeArticleProcess</servlet-name>
-        <servlet-class>code_project.Servlet.ChangeArticleServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ChangeArticleProcess</servlet-name>
-        <url-pattern>/ChangeArticle</url-pattern>
-    </servlet-mapping>
-
     <servlet>
         <servlet-name>Article</servlet-name>
         <servlet-class>code_project.Servlet.ArticleServlet</servlet-class>

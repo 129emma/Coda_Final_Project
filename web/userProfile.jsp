@@ -26,6 +26,8 @@
 <p>Birthday:${userProfile.birthDate}</p>
 <p>Gender:${userProfile.gender}</p>
 <a href="ChangeProfile"><p>Change your profile</p></a>
+<li><a href="ChangePassword">Change your password</a></li>
 <a href="Blog"><p>Blog page</p></a>
+
 </body>
 </html>
