@@ -2,15 +2,14 @@ package code_project.Servlet;
 
 import code_project.DAO.AlbumsImageDAO;
 import code_project.DAO.AlbumsVideoDAO;
-import code_project.DAO.UserInfoDAO;
-import code_project.Info.AlbumsVideoInfo;
-import code_project.Info.UserInfo;
+import code_project.Info.ArticleInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.lang.StringEscapeUtils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
@@ -52,17 +51,19 @@ public class AlbumsChangeServlet extends HttpServlet {
                 switch (request.getParameter("action")){
                     case "deleteImage":
                         deleteAlbumsImage(request, response,username);
+
                         break;
                     case "deleteVideo":
                         deleteAlbumsVideo(request, response,username);
                         break;
-                    default:
+                    case "createVideo":
                         addVideoToUserAlbums(request,response,username);
-                }
-            } else {
-                    addImageToUserAlbums(request,response,username);
-            }
+                        break;
 
+                }
+            }else {
+                addImageToUserAlbums(request,response,username);
+            }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -71,9 +72,16 @@ public class AlbumsChangeServlet extends HttpServlet {
 
     private void addVideoToUserAlbums(HttpServletRequest request,HttpServletResponse response, String username) throws IOException, ServletException {
         try {
-            String address = request.getParameter("action");
-            AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, address);
+
+            String content=request.getParameter("ArticleContent");
+            AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, content);
             request.setAttribute("information", "Success");
+
+            ArticleInfo articleInfo=new ArticleInfo("title",content,"tag");
+            request.setAttribute("articleInfo",articleInfo);
+
+            String submitElement = "<input type='submit' name='action' value='create'/>";
+            request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("information", "Fail to upload the file, please try again");
@@ -108,7 +116,7 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
 
         ServletContext servletContext = getServletContext();
         String fullFilePath = servletContext.getRealPath("/User-Info");
-System.out.println(request.getParameter("articleID")+"a");
+
         //create User-Info folder
         File userInfoFolder = new File(fullFilePath);
         if (!userInfoFolder.exists()) {
@@ -136,16 +144,19 @@ System.out.println(request.getParameter("articleID")+"a");
         try {
             createUserAlbumsImage(upload, request,filePath,username);
             request.setAttribute("information", "Success");
+            String submitElement = "<input type='submit' name='action' value='create'/>";
+            request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
         }catch (Exception e){
             request.setAttribute("information", "Fail to upload the file, please try again");
+
         }
     }
 
 
     private void createUserAlbumsImage(ServletFileUpload upload, HttpServletRequest request, String filePath,String username) throws IOException, ServletException, FileUploadException,SQLException {
 
-
+String imageAddress="";
         // Parse the request to get file items.
         List fileItems = upload.parseRequest(request);
         // Process the uploaded file items
@@ -185,8 +196,14 @@ System.out.println(request.getParameter("articleID")+"a");
                             ImageIO.write(image, "jpg", outputfile);
 
                     }
-                    String imageAddress="<img src='User-Info/" +username+ "/" + currentTime + ".jpg'>";
+                   imageAddress="<img style='margin:auto' src='User-Info/" +username+ "/" + currentTime + ".jpg'>";
                     AlbumsImageDAO.createAlbumsImageInfo(mySQL,username,imageAddress,currentTime);
+            }else if(fi.isFormField()){
+               if(fi.getFieldName().equals("ArticleContent")){
+                   String content=fi.getString();
+                   ArticleInfo articleInfo=new ArticleInfo("title",content+imageAddress,"aa");
+                   request.setAttribute("articleInfo",articleInfo);
+               }
             }
         }
 

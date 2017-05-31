@@ -36,6 +36,7 @@ public class AlbumsServlet extends HttpServlet {
 
             request.setAttribute("albumsImageInfoList",albumsImageInfoList);
             request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
+
             request.getRequestDispatcher("Albums.jsp").forward(request, response);
 
     }

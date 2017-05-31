@@ -132,7 +132,7 @@ public class ArticleServlet extends HttpServlet {
         try {
             ArticleInfoDAO.createArticleInfo(mySQL, title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, (String) session.getAttribute("username"));
             response.sendRedirect("Blog");
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
