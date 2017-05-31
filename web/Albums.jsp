@@ -15,9 +15,8 @@
 
 <h2>Your Albums</h2>
     <c:forEach var="albumsImage" items="${albumsImageInfoList}">
-            <div ><img src="${albumsImage.address}"></div>|
+            <div >${albumsImage.address}</div>|
             <a href="AlbumsChange?albumsImageId=${albumsImage.id}&action=deleteImage"> Click to delete the image</a>|
-
     </c:forEach>
 <br><br>
     <c:forEach var="albumsVideo" items="${albumsVideoInfoList}">

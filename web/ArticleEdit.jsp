@@ -10,13 +10,15 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
 </head>
 <body>
 <form id="form" action="Article" method="post">
     <fieldset>
         <legend>Your article</legend>
         <p>title: <input type="text" name="title" placeholder="Please Enter Your Title" value="${articleInfo.title}" style="width: 300px;"/></P>
-        <p>content:<br> <textarea  name="content" placeholder="Please Enter Your Content" rows="50" cols="100">${articleInfo.content}</textarea></p>
+        <p>content:<br> <textarea  id="content" name="content" placeholder="Please Enter Your Content" rows="50" cols="100">${articleInfo.content}</textarea></p>
         <p>tag: <input type="text" name="tag" placeholder="Please Enter Your Tag"  value="${articleInfo.tags}" style="width: 300px;"/></p>
         ${hiddenElement}
         ${submitElement}
@@ -24,5 +26,35 @@
     </fieldset>
 </form>
 
-<jsp:include page="addImageToArticle.jsp"></jsp:include><br>
-<jsp:include page="addImageToArticle.jsp"></jsp:include><br>
+<form action="AlbumsChange?" method="post" enctype="multipart/form-data">
+    <p>click to add image <input type="file" id="imageFile" accept=".jpg, .gif,.png" name="icon"/><br></p>
+    <input type="submit" name="submit">
+</form>
+<c:if test = "${information != null}">
+    <p>${information}</p>
+</c:if>
+<p>click to add the Youtube video(Please use the link under "Embed")</p><button onclick="readLink()">click</button><br><br>
+<div id="frame"></div>
+<form action="AlbumsChange" method="Post">
+    Video address: <input type="text" readonly name="action" id="videoAddress">
+    <input type="submit" onclick="return validateInput()" name="submit">
+</form>
+<c:if test = "${error != null}">
+    <p>${error}</p>
+</c:if>
+<script>
+    function readLink() {
+        var input = prompt("Please put your video link", "link here");
+        if (input != null) {
+            document.getElementById("videoAddress").value=input;
+            document.getElementById("frame").innerHTML=input;
+        }
+    }
+    function validateInput() {
+        if( document.getElementById("link").value.trim().length=0){
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

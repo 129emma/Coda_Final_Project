@@ -57,10 +57,10 @@ public class AlbumsChangeServlet extends HttpServlet {
                         deleteAlbumsVideo(request, response,username);
                         break;
                     default:
-                        addVideoToUserAlbums(request, response, username);
+                        addVideoToUserAlbums(request,response,username);
                 }
             } else {
-                    addImageToUserAlbums(request,response, username);
+                    addImageToUserAlbums(request,response,username);
             }
 
     }
@@ -69,20 +69,25 @@ public class AlbumsChangeServlet extends HttpServlet {
         doPost(request, response);
     }
 
-    private void addVideoToUserAlbums(HttpServletRequest request, HttpServletResponse response, String username) throws IOException, ServletException {
+    private void addVideoToUserAlbums(HttpServletRequest request,HttpServletResponse response, String username) throws IOException, ServletException {
         try {
             String address = request.getParameter("action");
             AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, address);
-            response.sendRedirect("Albums");
+            request.setAttribute("information", "Success");
+            request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
         } catch (Exception e) {
-            request.setAttribute("error", "Fail to upload the file, please try again");
-            request.getRequestDispatcher("addVideoToArticle.jsp").forward(request, response);
+            request.setAttribute("information", "Fail to upload the file, please try again");
         }
     }
 
 private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse response,String username){
         try {
-            AlbumsImageDAO.deleteAlbumsImageInfo(mySQL,username,request.getParameter("albumsImageId"));
+              String imageID=request.getParameter("albumsImageId");
+            AlbumsImageDAO.deleteAlbumsImageInfo(mySQL,username,imageID);
+            ServletContext servletContext = getServletContext();
+           String imagePath = servletContext.getRealPath("/User-Info/" + username);
+           File file=new File(imagePath+"/"+imageID+".jpg");
+           Boolean result=file.delete();
             response.sendRedirect("Albums");
         }catch (Exception e){
             e.printStackTrace();
@@ -99,11 +104,11 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
         }
 
     }
-    private void addImageToUserAlbums(HttpServletRequest request, HttpServletResponse response,String username) throws IOException, ServletException {
+    private void addImageToUserAlbums(HttpServletRequest request,HttpServletResponse response, String username) throws IOException, ServletException {
 
         ServletContext servletContext = getServletContext();
         String fullFilePath = servletContext.getRealPath("/User-Info");
-
+System.out.println(request.getParameter("articleID")+"a");
         //create User-Info folder
         File userInfoFolder = new File(fullFilePath);
         if (!userInfoFolder.exists()) {
@@ -129,15 +134,12 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
         // maximum file size to be uploaded.
         upload.setSizeMax(maxFileSize);
         try {
-            createUserAlbumsImage(upload, request, filePath,username);
-            response.sendRedirect("Albums");
+            createUserAlbumsImage(upload, request,filePath,username);
+            request.setAttribute("information", "Success");
+            request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
         }catch (Exception e){
-            request.setAttribute("error", "Fail to upload the file, please try again");
-            request.getRequestDispatcher("addImageToArticle.jsp").forward(request, response);
+            request.setAttribute("information", "Fail to upload the file, please try again");
         }
-
-
-
     }
 
 
@@ -183,7 +185,8 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
                             ImageIO.write(image, "jpg", outputfile);
 
                     }
-                    AlbumsImageDAO.createAlbumsImageInfo(mySQL,username,"<img src='User-Info/" +username+ "/" + currentTime + ".jpg'>");
+                    String imageAddress="<img src='User-Info/" +username+ "/" + currentTime + ".jpg'>";
+                    AlbumsImageDAO.createAlbumsImageInfo(mySQL,username,imageAddress,currentTime);
             }
         }
 

@@ -4,23 +4,23 @@ package code_project.Info;
  * Created by txie936 on 31/05/2017.
  */
 public class AlbumsImageInfo {
-    private int id;
+    private String id;
     private String username;
     private String address;
     private String postTime;
 
-    public AlbumsImageInfo(int id, String username, String address, String postTime) {
+    public AlbumsImageInfo(String id, String username, String address, String postTime) {
         this.id = id;
         this.username = username;
         this.address = address;
         this.postTime = postTime;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
