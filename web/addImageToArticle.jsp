@@ -20,8 +20,5 @@
 <c:if test = "${error != null}">
     <p>${error}</p>
 </c:if>
-
-
-
 </body>
 </html>

@@ -183,10 +183,7 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
                             ImageIO.write(image, "jpg", outputfile);
 
                     }
-
-                    AlbumsImageDAO.createAlbumsImageInfo(mySQL,username,"User-Info/" +username+ "/" + currentTime + ".jpg");
-
-
+                    AlbumsImageDAO.createAlbumsImageInfo(mySQL,username,"<img src='User-Info/" +username+ "/" + currentTime + ".jpg'>");
             }
         }
 
