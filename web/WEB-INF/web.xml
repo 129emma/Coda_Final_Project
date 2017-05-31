@@ -17,7 +17,7 @@
 
     <servlet>
         <servlet-name>LoginProcess</servlet-name>
-        <servlet-class>code_project.Servlet.LoginProcess</servlet-class>
+        <servlet-class>code_project.Servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginProcess</servlet-name>
@@ -26,7 +26,7 @@
 
     <servlet>
         <servlet-name>RegistrationProcess</servlet-name>
-        <servlet-class>code_project.Servlet.RegistrationProcess</servlet-class>
+        <servlet-class>code_project.Servlet.RegistrationServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegistrationProcess</servlet-name>
@@ -35,7 +35,7 @@
 
     <servlet>
         <servlet-name>LogoutProcess</servlet-name>
-        <servlet-class>code_project.Servlet.LogoutProcess</servlet-class>
+        <servlet-class>code_project.Servlet.LogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutProcess</servlet-name>
@@ -45,7 +45,7 @@
 
     <servlet>
         <servlet-name>BlogProcess</servlet-name>
-        <servlet-class>code_project.Servlet.BlogProcess</servlet-class>
+        <servlet-class>code_project.Servlet.BlogServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BlogProcess</servlet-name>
@@ -54,26 +54,16 @@
 
     <servlet>
         <servlet-name>ChangePasswordProcess</servlet-name>
-        <servlet-class>code_project.Servlet.ChangePasswordProcess</servlet-class>
+        <servlet-class>code_project.Servlet.ChangePasswordServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordProcess</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
     </servlet-mapping>
 
-
-    <servlet>
-        <servlet-name>ChangeArticleProcess</servlet-name>
-        <servlet-class>code_project.Servlet.ChangeArticleProcess</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ChangeArticleProcess</servlet-name>
-        <url-pattern>/ChangeArticle</url-pattern>
-    </servlet-mapping>
-
     <servlet>
         <servlet-name>Article</servlet-name>
-        <servlet-class>code_project.Servlet.Article</servlet-class>
+        <servlet-class>code_project.Servlet.ArticleServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Article</servlet-name>
@@ -81,8 +71,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Comment</servlet-name>
+        <servlet-class>code_project.Servlet.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Comment</servlet-name>
+        <url-pattern>/Comment</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>Profile</servlet-name>
-        <servlet-class>code_project.Servlet.UserProfile</servlet-class>
+        <servlet-class>code_project.Servlet.UserProfileServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
@@ -90,15 +88,17 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ChangeProfile</servlet-name>
-        <servlet-class>code_project.Servlet.ChangeUserProfileProcess</servlet-class>
+        <servlet-class>code_project.Servlet.ChangeUserProfileServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangeProfile</servlet-name>
         <url-pattern>/ChangeProfile</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>ChangeIcon</servlet-name>
-        <servlet-class>code_project.Servlet.ChangeIcon</servlet-class>
+        <servlet-class>code_project.Servlet.ChangeIconServlet</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangeIcon</servlet-name>
@@ -106,5 +106,25 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>Albums</servlet-name>
+        <servlet-class>code_project.Servlet.AlbumsServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Albums</servlet-name>
+        <url-pattern>/Albums</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>AlbumsChange</servlet-name>
+        <servlet-class>code_project.Servlet.AlbumsChangeServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AlbumsChange</servlet-name>
+        <url-pattern>/AlbumsChange</url-pattern>
+    </servlet-mapping>
 
 </web-app>

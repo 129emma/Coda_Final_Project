@@ -9,7 +9,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html class="full" lang="en">
 <head>
-    <title>Blog</title>
+    <title>Bootstrap Example</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -37,23 +37,29 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="Blog?page=home">Home</a></li>
-                <li><a href="Blog?page=spotlight">Spotlight</a></li>
-                <li><a href="Profile">Profile</a></li>
-                <li><a href="Article?action=create"><p>Create article</p></a></li>
+                <li><a href="Profile">click to change your file</a></li>
+
+                <li><a href="Login">Login</a></li>
                 <li><a href="Logout">Logout</a></li>
-                <li><a href="Albums">Albums</a></li>
+                <li><a href="Blog?action=spotlight">Spotlight</a></li>
             </ul>
         </div>
     </div>
 </nav>
-
 <div class="container">
     <div class="panel-group">
-        <c:forEach var="article" items="${articleInfoList}">
+        <c:forEach var="article" items="${articleList}">
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="${article.retrieveAddress}">${article.title}</a>${article.postTime}</div>
+                <div class="panel-heading"><a
+                        href="Article?articleID=${article.articleID}">${article.title} </a>${article.postTime}
+                </div>
                 <div class="panel-body">${article.content} </p></div>
+                    <%--<c:forEach var="commentInfo" items="${commentInfoListOFAllArticle.get(article.articleID)}">--%>
+                    <%--<div class="panel panel-default">--%>
+                    <%--<div class="panel-heading"><a href="Article?articleID=${article.articleID}" >${commentInfo.username} </a>${commentInfo.postTime}</div>--%>
+                    <%--<div class="panel-body">${commentInfo.content}</div>--%>
+                    <%--</div>--%>
+                    <%--</c:forEach>--%>
             </div>
         </c:forEach>
     </div>

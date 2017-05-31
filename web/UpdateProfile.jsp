@@ -20,18 +20,18 @@
 <form id="form" action="ChangeProfile" method="post">
     <fieldset>
         <legend>Your details</legend>
-        <img src="${userInfo.icon}" class="rounded" /><a href="ChangeIcon?ChangeIcon='true'">click to change your icon</a>
+        <img src="${userInfo.icon}" class="rounded" /><a href="ChangeIcon?ChangeIcon=true">click to change your icon</a>
         <p>Firstname: <input type="text" name="firstname" value="${userInfo.firstName}" style="width: 300px;"/></p>
         <p>Lastname: <input type="text" name="lastname" value="${userInfo.lastName}" style="width: 300px;"/></p>
         <p>Email: <input type="email" name="email"  value="${userInfo.email}" style="width: 300px;"/></p>
-        <p>Birthday: <input type="date" name="birthday"  value="${userInfo.date_birth}" style="width: 300px;"/></p>
+        <p>Birthday: <input type="date" name="birthday"  value="${userInfo.birthDate}" style="width: 300px;"/></p>
 
         Gender:<select name="gender">
             <option value="Female">Female</option>
             <option value="Male">Male</option>
         </select>
         <%--<p>Re-enter New Password: <input type="password" name="reNewPassword" placeholder="Please Re-Enter Your New Password" style="width: 300px;"/></p>--%>
-        <input type="submit" name="profile" value="update"/> <input type="submit" name="profile" value="delete"/>
+        <input type="submit" name="profileAction" value="update"/> <input type="submit" name="profileAction" value="delete"/>
     </fieldset>
 </form>
 

@@ -4,6 +4,7 @@ import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.UserInfoDAO;
 import code_project.Info.ArticleInfo;
 import code_project.Info.UserInfo;
+import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 
 import javax.servlet.ServletException;
@@ -17,27 +18,29 @@ import java.util.List;
 /**
  * Created by txie936 on 29/05/2017.
  */
-public class UserProfile extends HttpServlet {
+public class UserProfileServlet extends HttpServlet {
+       private MySQL DB=new MySQL();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        LoginStatus.verifyStatus(request, response);
         HttpSession session = request.getSession(true);
-        MySQL DB=new MySQL();
         response.setContentType("text/html");
-        if (((String) session.getAttribute("status")) == null) {
-            session.setAttribute("status","logout");
-            request.getRequestDispatcher("Login").forward(request, response);
-        }else if(((String) session.getAttribute("status")) .equals("logout")){
-            session.setAttribute("logoutMessage","You already logout!");
-            request.getRequestDispatcher("Login").forward(request, response);
-        }else if(((String) session.getAttribute("status")) .equals("login")){
-           UserInfo userProfile= UserInfoDAO.getUserInfo(DB,(String)session.getAttribute("username"));
-           request.setAttribute("userProfile",userProfile);
-            request.getRequestDispatcher("userProfile.jsp").forward(request, response);
-        }
+            getUserProfile(request,response,session);
     }
+
+
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doPost(request,response);
     }
 
 
+
+private void getUserProfile(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException, ServletException {
+
+    UserInfo userProfile= UserInfoDAO.getUserInfo(DB,(String)session.getAttribute("username"));
+    request.setAttribute("userProfile",userProfile);
+    request.getRequestDispatcher("userProfile.jsp").forward(request, response);
+
+}
 }

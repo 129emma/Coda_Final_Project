@@ -6,9 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html class="full">
 <head>
     <title>Login Page</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/basicSetting.css" rel="stylesheet">
 </head>
 <body>
 <form id="form" action="Login" method="post">
