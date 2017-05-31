@@ -18,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="Blog.js"></script>
 </head>
 <body>
 <h2>${userProfile.username} Welcome to coda</h2>
@@ -41,7 +42,7 @@
                 <li><a href="Blog?page=spotlight">Spotlight</a></li>
                 <li><a href="Profile">Profile</a></li>
                 <li><a href="Article?action=create"><p>Create article</p></a></li>
-                <li><a href="Login?action=logout">Logout</a></li>
+                <li><a href="Logout">Logout</a></li>
             </ul>
         </div>
     </div>

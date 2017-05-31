@@ -86,7 +86,7 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, iusto, unde, sunt incidunt id sapiente rerum soluta voluptate harum veniam fuga odit ea pariatur vel eaque sint sequi tenetur eligendi.</p>
 
       <ul id="btn">
-        <a  target="_blank" href="Registration" class="btn btn-md ">Sign up!</a>
+        <a  target="_blank" href="Login?action=register" class="btn btn-md ">Sign up!</a>
         <a  target="_blank" href="Login" class="btn btn-md ">Login</a>
       </ul>
 

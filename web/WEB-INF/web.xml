@@ -24,24 +24,6 @@
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>RegistrationProcess</servlet-name>
-        <servlet-class>code_project.Servlet.RegistrationServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RegistrationProcess</servlet-name>
-        <url-pattern>/Registration</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>LogoutProcess</servlet-name>
-        <servlet-class>code_project.Servlet.LogoutServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LogoutProcess</servlet-name>
-        <url-pattern>/Logout</url-pattern>
-    </servlet-mapping>
-
 
     <servlet>
         <servlet-name>BlogProcess</servlet-name>

@@ -1,15 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: qpen546
-  Date: 23/05/2017
-  Time: 1:43 PM
+  Date: 31/05/2017
+  Time: 5:41 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Registration Page</title>
+    <title>Register</title>
 </head>
+
 <body>
 <form id="form" action="Login" method="post">
     <fieldset>
@@ -22,8 +23,9 @@
 <div>
     <p style="color: red">${sessionScope.RegisterMessage}</p>
 </div>
-<a href="Login?action=login"><p>Login</p></a>
-<a href="Login?action=register"><p>Registration</p></a>
-<a href="Login?action=logout"><p>Logout</p></a>
+<a href="/Login"><p>Login</p></a>
+<a href="/Registration"><p>Registration</p></a>
+<a href="/Logout"><p>Logout</p></a>
 </body>
+
 </html>
