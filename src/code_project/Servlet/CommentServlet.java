@@ -49,7 +49,7 @@ public class CommentServlet extends HttpServlet {
         }
 
         String articleID = request.getParameter("articleID");
-        response.sendRedirect("Article?articleID=" + articleID);
+        response.sendRedirect("Article?action=retrieve&articleID=" + articleID);
     }
 
 

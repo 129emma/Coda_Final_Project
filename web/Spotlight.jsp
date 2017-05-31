@@ -41,7 +41,6 @@
                 <li><a href="/ChangePassword">Change your password</a></li>
                 <li><a href="/Login">Login</a></li>
                 <li><a href="/Logout">Logout</a></li>
-                <li><a href="/CreateArticle.jsp"><p>Create article</p></a></li>
                 <li><a href="/Spotlight">Spotlight</a></li>
             </ul>
         </div>

@@ -17,7 +17,7 @@ public class CommentInfo {
 
     public void setDeleteComment(String username) {
         if(this.username.equals(username)){
-         deleteComment = "<a href=\"Comment?action=delete&articleID="+articleID+"&commentID="+commentID+"\">delete</a>";
+            deleteComment = "<a href=\"Comment?action=delete&articleID="+articleID+"&commentID="+commentID+"\">delete</a>";
         }
     }
 

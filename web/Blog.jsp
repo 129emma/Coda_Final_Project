@@ -9,7 +9,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html class="full" lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Blog</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -38,11 +38,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="Profile">click to change your file</a></li>
-                <li><a href="/ChangePassword">Change your password</a></li>
-                <li><a href="/Login">Login</a></li>
-                <li><a href="/Logout">Logout</a></li>
-                <li><a href="/CreateArticle.jsp"><p>Create article</p></a></li>
-                <li><a href="/Spotlight">Spotlight</a></li>
+                <li><a href="ChangePassword">Change your password</a></li>
+                <li><a href="Login">Login</a></li>
+                <li><a href="Logout">Logout</a></li>
+                <li><a href="Article?action=create"><p>Create article</p></a></li>
+                <li><a href="Spotlight">Spotlight</a></li>
             </ul>
         </div>
     </div>
@@ -52,8 +52,7 @@
     <div class="panel-group">
         <c:forEach var="article" items="${articleList}">
             <div class="panel panel-default">
-                <div class="panel-heading"><a
-                        href="Article?articleID=${article.articleID}">${article.title} </a>${article.postTime}</div>
+                <div class="panel-heading"><a href="${article.retrieveAddress}">${article.title}</a>${article.postTime}</div>
                 <div class="panel-body">${article.content} </p></div>
                     <%--<c:forEach var="commentInfo" items="${commentInfoListOFAllArticle.get(article.articleID)}">--%>
                     <%--<div class="panel panel-default">--%>

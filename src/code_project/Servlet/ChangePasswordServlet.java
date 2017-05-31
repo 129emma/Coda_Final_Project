@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 
 /**
- * Created by pqsky on 2017/5/23.
+ * Created by qpen546 on 2017/5/23.
  */
 public class ChangePasswordServlet extends HttpServlet {
     private MySQL mySQL = new MySQL();
