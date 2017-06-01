@@ -46,8 +46,9 @@
                 <li><a href="Blog?page=spotlight">Spotlight</a></li>
                 <li><a href="Profile">Profile</a></li>
                 <li><a href="Article?action=create"><p>Create article</p></a></li>
-                <li><a href="Login?action=logout">Logout</a></li>
                 <li><a href="Albums">Albums</a></li>
+                <li><a href="Login?action=logout">Logout</a></li>
+
             </ul>
         </div>
     </div>
