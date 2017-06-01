@@ -48,6 +48,7 @@
     </script>
 </head>
 <body>
+<jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
 <img src="${userInfo.icon}" id="icon" name="userIcon" class="rounded" />
 <form action="AvatarEdit" method="post" enctype="multipart/form-data">
     <input type="hidden" name="result" id="result">

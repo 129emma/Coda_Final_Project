@@ -26,7 +26,7 @@
 </style>
 </head>
 <body>
-
+<jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
 <form id="form" action="Article" method="post" onsubmit="prepareContent()">
     <fieldset>
         <legend>Your article</legend>
