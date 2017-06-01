@@ -64,7 +64,7 @@ public class ArticleServlet extends HttpServlet {
         articleInfo.setDeleteArticle(username);
         retrieveComments(request, response);
         request.setAttribute("articleInfo", articleInfo);
-        request.getRequestDispatcher("ArticlePage.jsp").forward(request, response);
+        request.getRequestDispatcher("Pages/ArticlePage/Article.jsp").forward(request, response);
     }
 
     private void retrieveComments(HttpServletRequest request, HttpServletResponse response) {
@@ -102,7 +102,7 @@ public class ArticleServlet extends HttpServlet {
         request.setAttribute("submitElement",submitElement);
         request.setAttribute("deleteElement",deleteElement);
         try {
-            request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
+            request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -122,7 +122,7 @@ public class ArticleServlet extends HttpServlet {
         if (((String) request.getHeader("referer")).contains("Blog")) {
             String submitElement = "<input type='submit' name='action' value='create'/>";
             request.setAttribute("submitElement", submitElement);
-            request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
+            request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
             return;
         }
 
@@ -132,7 +132,7 @@ public class ArticleServlet extends HttpServlet {
         try {
             ArticleInfoDAO.createArticleInfo(mySQL, title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, (String) session.getAttribute("username"));
             response.sendRedirect("Blog");
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
     }

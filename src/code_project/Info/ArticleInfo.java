@@ -21,7 +21,11 @@ public class ArticleInfo {
         deleteArticle = "";
         retrieveAddress = "Article?action=retrieve&articleID="+articleID;
     }
-
+public ArticleInfo(String title,String content,String tags){
+        this.title=title;
+        this.content=content;
+        this.tags=tags;
+}
     public int getArticleID() {
         return articleID;
     }

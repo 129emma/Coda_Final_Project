@@ -35,7 +35,9 @@ public class AlbumsServlet extends HttpServlet {
             List<AlbumsVideoInfo> albumsVideoInfoList= AlbumsVideoDAO.getAlbumsImageList(DB,username);
 
             request.setAttribute("albumsImageInfoList",albumsImageInfoList);
+
             request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
+
             request.getRequestDispatcher("Albums.jsp").forward(request, response);
 
     }

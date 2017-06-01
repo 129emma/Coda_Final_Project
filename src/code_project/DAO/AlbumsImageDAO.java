@@ -38,12 +38,13 @@ public class AlbumsImageDAO {
         return AlbumsImageInfoList;
     }
 
-    public static void createAlbumsImageInfo(AbstractDB db, String username,String address) throws SQLException {
+    public static void createAlbumsImageInfo(AbstractDB db, String username,String address,String id) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsImage(username,address,postTime) VALUES (?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsImage(username,address,postTime,id) VALUES (?,?,?,?)")) {
                 p.setString(1, username);
                 p.setString(2, address);
                 p.setString(3, getCurrentTimeStamp());
+                p.setString(4,id);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -90,7 +91,7 @@ public class AlbumsImageDAO {
 
     private static AlbumsImageInfo AlbumsImageInfoFromResultSet(ResultSet r) throws SQLException {
         return new AlbumsImageInfo(
-                r.getInt("id"),
+                r.getString("id"),
                 r.getString("username"),
                 r.getString("address"),
                 r.getDate("postTime").toString()+" "+r.getTime("postTime").toString()
