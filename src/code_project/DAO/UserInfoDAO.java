@@ -6,6 +6,7 @@ import code_project.db.AbstractDB;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 /**
  * Allows us to get articles from elsewhere in the code without worrying about SQL statements.
@@ -23,7 +24,7 @@ public class UserInfoDAO {
         List<UserInfo> userInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         userInfoList.add(userInfoFromResultSet(r));
@@ -49,7 +50,7 @@ public class UserInfoDAO {
     public static UserInfo getUserInfo(AbstractDB db, String username) {
         UserInfo userInfo = null;
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM User_Info WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo WHERE username = ?")) {
                 p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -64,16 +65,27 @@ public class UserInfoDAO {
         return userInfo;
     }
 
-    public static void updateUserInfo(AbstractDB db, String username, String firstName, String lastName, String email, Date data_birth, String tags, String friends) throws SQLException {
+    public static void updateUserInfo(AbstractDB db, String username,String firstName, String lastName, String email, String birthDate, String gender) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE User_Info set firstName = ?, lastName=?, email=?, data_birth=?, tag = ?, friends=? WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo set firstName = ?, lastName=?, email=?, birthDate=?, gender = ? WHERE username = ?;")) {
                 p.setString(1, firstName);
                 p.setString(2, lastName);
                 p.setString(3, email);
-                p.setDate(4, data_birth);
-                p.setString(5, tags);
-                p.setString(6, friends);
+                p.setString(4, birthDate);
+                p.setString(5, gender);
                  p.setString(6, username);
+                p.executeUpdate();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateUserIcon(AbstractDB db, String icon,String username) throws SQLException {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo set icon=? WHERE username = ?;")) {
+                p.setString(1, icon);
+                p.setString(2, username);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -83,7 +95,7 @@ public class UserInfoDAO {
 
     public static void deleteUserInfo(AbstractDB db, String username) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM User_Info WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM UserInfo WHERE username = ?;")) {
                 p.setString(1, username);
                 p.executeUpdate();
             }
@@ -94,6 +106,7 @@ public class UserInfoDAO {
 
 
     /**
+     *
      * Extract a {@link UserInfo} object from a given {@link ResultSet}
      *
      * @param r The {@link ResultSet} to extract a {@link UserInfo} from
@@ -106,9 +119,9 @@ public class UserInfoDAO {
                 r.getString("firstName"),
                 r.getString("lastName"),
                 r.getString("email"),
-                r.getString("data_birth"),
-                r.getString("tags"),
-                r.getString("friends"));
+                r.getString("birthDate"),
+                r.getString("gender"),
+                r.getString("icon"));
 
     }
 

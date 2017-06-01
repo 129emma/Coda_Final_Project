@@ -1,41 +1,38 @@
 package code_project.Info;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by txie936 on 25/05/2017.
  */
 public class ArticleInfo {
+    public int articleID;
+    public String content;
+    public String postTime;
+    public String tags;
+    public String username;
+    public String title;
 
-    private String article_ID;
-    private String content;
-    private String post_time;
-    private String tags;
-    private String username;
-    private String title;
-
-  
-
-  
-
-
-    public ArticleInfo(String article_ID,String title,String content,String post_time,String tags,String username){
-        this.article_ID=article_ID;
+    public ArticleInfo(int articleID,String title,String content,String post_time,String tags,String username){
+        this.articleID=articleID;
         this.title=title;
         this.content=content;
-        this.post_time=post_time;
+        this.postTime =  post_time;
         this.tags=tags;
         this.username=username;
     }
 
-    public String getArticle_ID() {
-        return article_ID;
+    public int getArticleID() {
+        return articleID;
     }
 
     public String getContent() {
         return content;
     }
 
-    public String getPost_time() {
-        return post_time;
+    public String getPostTime() {
+        return postTime;
     }
 
     public String getTags() {
@@ -46,16 +43,20 @@ public class ArticleInfo {
         return username;
     }
 
-    public void setArticle_ID(String article_ID) {
-        this.article_ID = article_ID;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setArticleID(int articleID) {
+        this.articleID = articleID;
     }
 
     public void setContent(String content) {
         this.content = content;
     }
 
-    public void setPost_time(String post_time) {
-        this.post_time = post_time;
+    public void setPostTime(String postTime) {
+        this.postTime = postTime;
     }
 
     public void setTags(String tags) {
@@ -64,11 +65,6 @@ public class ArticleInfo {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-
-    public String getTitle() {
-        return title;
     }
 
     public void setTitle(String title) {

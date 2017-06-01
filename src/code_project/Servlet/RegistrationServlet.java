@@ -17,7 +17,7 @@ import java.sql.SQLException;
 /**
  * Created by qpen546 on 23/05/2017.
  */
-public class RegistrationProcess extends HttpServlet{
+public class RegistrationServlet extends HttpServlet{
     private MySQL mySQL = new MySQL();
     private String username;
     private String password;
@@ -25,11 +25,11 @@ public class RegistrationProcess extends HttpServlet{
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        if (((String) session.getAttribute("status")) == null) {
+        if ((session.getAttribute("status")) == null) {
             session.setAttribute("status","logout");
         }
 
-        if(((String) session.getAttribute("status")).equals("login")){
+        if((session.getAttribute("status")).equals("login")){
             response.sendRedirect("Blog");
         }else{
             username = request.getParameter("username");
@@ -41,7 +41,7 @@ public class RegistrationProcess extends HttpServlet{
             byte[] salt= Passwords.getNextSalt();
             byte[] hashPassword = Passwords.hash(password.toCharArray(),salt,5);
             try {
-                LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt);
+                LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt,"bgimages/welcomepage.jpg");
                 LoginInfo loginInfo = LoginInfoDAO.getLoginInfo(mySQL,username);
                 out.println("<p>Your username: "+loginInfo.getUsername()+"<br/>Your Password: "+password+"</p>");
                 out.println("<a href=\"Login\"><p>Login</p></a>");
