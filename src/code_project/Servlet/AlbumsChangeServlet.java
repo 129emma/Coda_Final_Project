@@ -98,7 +98,7 @@ public class AlbumsChangeServlet extends HttpServlet {
             String submitElement = "<input type='submit' name='action' value='create'/>";
             request.setAttribute("submitElement", submitElement);
 
-            request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
+            request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
 
         } catch (Exception e) {
             request.setAttribute("information", "Fail to upload the file, please try again");
@@ -160,7 +160,7 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
         upload.setSizeMax(maxFileSize);
         try {
             createUserAlbumsImage(upload, request,filePath,username);
-            request.getRequestDispatcher("ArticleEdit.jsp").forward(request, response);
+            request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
         }catch (Exception e){
             request.setAttribute("information", "Fail to upload the file, please try again");
 

@@ -38,7 +38,7 @@ public class AlbumsServlet extends HttpServlet {
 
             request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
 
-            request.getRequestDispatcher("Albums.jsp").forward(request, response);
+            request.getRequestDispatcher("Pages/AlbumsPage/Albums.jsp").forward(request, response);
 
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
