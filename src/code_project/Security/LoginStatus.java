@@ -15,10 +15,8 @@ public class LoginStatus {
 
     public static void verifyStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        String status = (String) session.getAttribute("status");
-        if(status==null){
-            status="";
-        }
+        String status;
+        if((status = (String) session.getAttribute("status"))==null){status="";}
         switch (status) {
             case "login":
                 return;

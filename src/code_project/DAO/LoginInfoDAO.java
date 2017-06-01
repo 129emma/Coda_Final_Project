@@ -10,9 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Allows us to get articles from elsewhere in the code without worrying about SQL statements.
- */
+
 public class LoginInfoDAO {
 
     public static List<String> getUsernameList(AbstractDB db) {

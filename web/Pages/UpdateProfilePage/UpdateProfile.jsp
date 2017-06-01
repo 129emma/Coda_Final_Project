@@ -20,7 +20,7 @@
 <form id="form" action="ChangeProfile" method="post">
     <fieldset>
         <legend>Your details</legend>
-        <img src="${userInfo.icon}" class="rounded" /><a href="ChangeIcon?ChangeIcon=true">click to change your icon</a>
+        <img src="${userInfo.icon}" class="rounded" /><a href="AvatarEdit?ChangeIcon=true">click to change your icon</a>
         <p>Firstname: <input type="text" name="firstname" value="${userInfo.firstName}" style="width: 300px;"/></p>
         <p>Lastname: <input type="text" name="lastname" value="${userInfo.lastName}" style="width: 300px;"/></p>
         <p>Email: <input type="email" name="email"  value="${userInfo.email}" style="width: 300px;"/></p>
