@@ -7,11 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html class="full" lang="en">
+<html lang="en">
 <head>
     <title>Blog</title>
-
-    <link rel="stylesheet" type="text/css" href="/Pages/BlogPage/Blog.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.2.0.js"
             integrity="sha256-wPFJNIFlVY49B+CuAIrDr932XSb6Jk3J1M22M3E2ylQ=" crossorigin="anonymous"></script>
@@ -26,35 +25,13 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 </head>
+
 <body>
-<nav class="navbar navbar-top navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand">Code Blog</a>
-        </div>
 
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="Blog?page=home">Home</a></li>
-                <li><a href="Blog?page=spotlight">Spotlight</a></li>
-                <li><a href="Profile">Profile</a></li>
-                <li><a href="Article?action=create"><p>Create article</p></a></li>
-                <li><a href="Albums">Albums</a></li>
-                <li><a href="Login?action=logout">Logout</a></li>
+<jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
 
-            </ul>
-        </div>
-    </div>
-</nav>
+<div class="container" id="containerProfile">
 
-<div class="container">
     <div class="col-xs-12 col-md-3 panel panel-default">
         <img class="img-circle img-responsive" src="" alt="avatar" id="image">
         <div class="panel panel-default">
@@ -68,7 +45,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-9 panel panel-default">
+    <div class="col-xs-12 col-md-9 panel panel-default" id="containerContent">
         <div style="margin-bottom: 20px"></div>
         <c:forEach var="article" items="${articleInfoList}">
             <div class="panel panel-default">
@@ -84,5 +61,37 @@
         </c:forEach>
     </div>
 </div>
+
+
+<script>
+
+//$('#Albums').click(function(){
+//    $.ajax({
+//        url:"Albums",
+//        method:"post",
+//        success:function (result) {
+//            $("#containerProfile").html(result)
+//        }
+//    });
+//});
+//$('#Profile').click(function(){
+//    $.ajax({
+//        url:"Profile",
+//        method:"post",
+//        success:function (result) {
+//            $("#containerProfile").html(result)
+//        }
+//    });
+//});
+//$('#Article').click(function(){
+//    $.ajax({
+//        url:"Article?action=create",
+//        method:"post",
+//        success:function (result) {
+//            $("#containerProfile").html(result)
+//        }
+//    });
+//});
+</script>
 </body>
 </html>

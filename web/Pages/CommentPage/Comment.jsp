@@ -11,6 +11,7 @@
     <title>Edit Comment</title>
 </head>
 <body>
+<jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
 <form action="Comment" method="POST">
     <fieldset>
         <legend>Edit Comment</legend>
