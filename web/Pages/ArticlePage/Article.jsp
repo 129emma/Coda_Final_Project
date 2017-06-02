@@ -11,6 +11,9 @@
 <html>
 <head>
     <title>Article</title>
+
+
+
 </head>
 <body>
 <jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
