@@ -30,9 +30,6 @@
     margin: auto;
 }
 
-    div.click-to-top span {display: none;  background: #333; color: #fff; }
-
-    div.click-to-top:hover span {display: block; }
 
 
 
@@ -55,13 +52,13 @@
     </fieldset>
 </form>
 
-<div class="click-to-top">
+
     <span>Add image</span>
     <label for="image-input">
-        <img src="http://www.hugorc.es/static/images/galeria2.png" width="40px" height="40px" >
+        <img  title="add image" src="http://www.hugorc.es/static/images/galeria2.png" width="40px" height="40px" >
     </label>
     <input id="image-input"  type="file" style="display: none ;cursor: pointer;" accept=".jpg, .gif,.png">
-  </div>
+
 
 
 
@@ -69,12 +66,13 @@
 
 
     <label for="audio-input">
-        <img src="http://www.iconsfind.com/wp-content/uploads/2016/04/20160405_57033268db0ea.png" width="40px" height="40px"/>
+        <img title="add video" src="http://www.iconsfind.com/wp-content/uploads/2016/04/20160405_57033268db0ea.png" width="40px" height="40px"/>
     </label>
     <input id="audio-input"  type="file" style="display: none;cursor: pointer;" >
 
+
     <label for="video-input">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Circle-icons-videocameracompact.svg/1000px-Circle-icons-videocameracompact.svg.png" width="40px" height="40px"/>
+        <img title="add video"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Circle-icons-videocameracompact.svg/1000px-Circle-icons-videocameracompact.svg.png" width="40px" height="40px"/>
     </label>
     <input id="video-input"  type="file" style="display: none;cursor: pointer;" >
 
