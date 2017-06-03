@@ -10,7 +10,8 @@
 <html lang="en">
 <head>
     <title>Blog</title>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.2.0.js"
             integrity="sha256-wPFJNIFlVY49B+CuAIrDr932XSb6Jk3J1M22M3E2ylQ=" crossorigin="anonymous"></script>
@@ -25,73 +26,48 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 </head>
-
+<script src="Pages/BlogPage/Blog.js"></script>
 <body>
 
-<jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
+<jsp:include page="/Pages/NavBar/title.jsp">
+    <jsp:param name="title" value=""/>
+</jsp:include>
 
 <div class="container" id="containerProfile">
 
-    <div class="col-xs-12 col-md-3 panel panel-default">
-        <img class="img-circle img-responsive" src="" alt="avatar" id="image">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Profile</h3>
-            </div>
-            <div class="panel-body" id="profile_content">
-                <p><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Full Name</p>
-                <p><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Location</p>
-            </div>
-        </div>
-    </div>
 
-    <div class="col-xs-12 col-md-9 panel panel-default" id="containerContent">
-        <div style="margin-bottom: 20px"></div>
-        <c:forEach var="article" items="${articleInfoList}">
-            <div class="panel panel-default">
-                <div class="panel-heading"><a href="${article.retrieveAddress}">${article.title}</a>${article.postTime}</div>
-                <div class="panel-body">${article.content} </p></div>
-                    <%--<c:forEach var="commentInfo" items="${commentInfoListOFAllArticle.get(article.articleID)}">--%>
-                    <%--<div class="panel panel-default">--%>
-                    <%--<div class="panel-heading"><a href="Article?articleID=${article.articleID}" >${commentInfo.username} </a>${commentInfo.postTime}</div>--%>
-                    <%--<div class="panel-body">${commentInfo.content}</div>--%>
-                    <%--</div>--%>
-                    <%--</c:forEach>--%>
+    <div class="col-xs-12 col-md-9 panel panel-default" id="ContentContainer">
+        <div class="panel panel-default">
+            <div class="panel-heading">Article View</div>
+            <div class="panel-body ArticleContainer" id="ArticleContainer">
+
+                <div class="panel panel-default Article" id="original">
+                    <div class="panel-heading">An article title</div>
+                    <div class="panel-body">
+                        <p>Author name</p>
+                        <p>An article summary</p>
+                        <div class="text-center bg-info">Show full content</div>
+                    </div>
+                </div>
+
             </div>
-        </c:forEach>
+
+            <div class="text-center bg-primary" id="loadArticleButton">Load more articles</div>
+        </div>
+
+        <%--<c:forEach var="article" items="${articleInfoList}">--%>
+        <%--<div class="panel panel-default">--%>
+        <%--<div class="panel-heading"><a href="${article.retrieveAddress}">${article.title}</a>${article.postTime}</div>--%>
+        <%--<div class="panel-body">${article.content} </p></div>--%>
+        <%--&lt;%&ndash;<c:forEach var="commentInfo" items="${commentInfoListOFAllArticle.get(article.articleID)}">&ndash;%&gt;--%>
+        <%--&lt;%&ndash;<div class="panel panel-default">&ndash;%&gt;--%>
+        <%--&lt;%&ndash;<div class="panel-heading"><a href="Article?articleID=${article.articleID}" >${commentInfo.username} </a>${commentInfo.postTime}</div>&ndash;%&gt;--%>
+        <%--&lt;%&ndash;<div class="panel-body">${commentInfo.content}</div>&ndash;%&gt;--%>
+        <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+        <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
+        <%--</div>--%>
+        <%--</c:forEach>--%>
     </div>
 </div>
-
-
-<script>
-
-//$('#Albums').click(function(){
-//    $.ajax({
-//        url:"Albums",
-//        method:"post",
-//        success:function (result) {
-//            $("#containerProfile").html(result)
-//        }
-//    });
-//});
-//$('#Profile').click(function(){
-//    $.ajax({
-//        url:"Profile",
-//        method:"post",
-//        success:function (result) {
-//            $("#containerProfile").html(result)
-//        }
-//    });
-//});
-//$('#Article').click(function(){
-//    $.ajax({
-//        url:"Article?action=create",
-//        method:"post",
-//        success:function (result) {
-//            $("#containerProfile").html(result)
-//        }
-//    });
-//});
-</script>
 </body>
 </html>

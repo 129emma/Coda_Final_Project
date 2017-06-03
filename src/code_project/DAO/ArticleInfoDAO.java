@@ -34,6 +34,46 @@ public class ArticleInfoDAO {
         return articleInfoList;
     }
 
+
+
+    public static List<ArticleInfo> getArticleInfoList(AbstractDB db ,String username,int number) {
+
+        List<ArticleInfo> articleInfoList = new ArrayList<>();
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username=? LIMIT ?")) {
+                p.setString(1,username);
+                p.setInt(2,number);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        articleInfoList.add(ArticleInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return articleInfoList;
+    }
+
+    public static int getTotalArticleNumber(AbstractDB db){
+        int totalArticleNumber = 0;
+        try (Connection c = db.connection()) {
+            try (Statement stmt = c.createStatement()) {
+                try (ResultSet r = stmt.executeQuery("SELECT COUNT(*) FROM Article")) {
+                    while (r.next()) {
+                        totalArticleNumber = r.getInt(1);
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return totalArticleNumber;
+    }
+
     public static List<ArticleInfo> getSpotlightArticleInfoList(AbstractDB db ,int pageNumber) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();

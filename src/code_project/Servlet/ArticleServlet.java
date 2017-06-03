@@ -2,10 +2,13 @@ package code_project.Servlet;
 
 import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.CommentInfoDAO;
+import code_project.DAO.UserInfoDAO;
 import code_project.Info.ArticleInfo;
 import code_project.Info.CommentInfo;
+import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
+import org.json.simple.JSONArray;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +35,9 @@ public class ArticleServlet extends HttpServlet {
             case "create":
                 createArticle(request, response);
                 break;
+            case "preview":
+                previewArticle(request, response);
+                break;
             case "retrieve":
                 retrieveArticle(request, response);
                 break;
@@ -54,6 +60,23 @@ public class ArticleServlet extends HttpServlet {
                 dislikeArticle(request, response);
                 break;
         }
+    }
+
+    private void previewArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = (String) session.getAttribute("username");
+        String loadMoreArticle;
+        int articleNumber = Integer.parseInt(request.getParameter("articleNumber"));
+        int totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL)-1;
+        if(articleNumber>=totalArticleNumber){
+            articleNumber = totalArticleNumber;
+            loadMoreArticle  = "<div class=\"text-center bg-danger\" id=\"loadArticleButton\">Load more articles</div>";
+        }else{
+            loadMoreArticle  = "<div class=\"text-center bg-primary\" id=\"loadArticleButton\">Load more articles</div>";
+        }
+        List<ArticleInfo> articleInfoList = ArticleInfoDAO.getArticleInfoList(mySQL, username, articleNumber);
+        request.setAttribute("articleInfoList", articleInfoList);
+        request.setAttribute("loadMoreArticle",loadMoreArticle);
+        request.getRequestDispatcher("Pages/ArticleRetrieving/ArticlePreview.jsp").forward(request, response);
     }
 
     private void retrieveArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -95,12 +118,12 @@ public class ArticleServlet extends HttpServlet {
         String articleID = request.getParameter("articleID");
         ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL, articleID);
         request.setAttribute("articleInfo", articleInfo);
-        String hiddenElement = "<input type='hidden' name='articleID' value='"+articleID+"'>";
+        String hiddenElement = "<input type='hidden' name='articleID' value='" + articleID + "'>";
         String submitElement = "<input type='submit' name='action' value='update'/> ";
         String deleteElement = "<input type='submit' name='action' value='delete'/>";
-        request.setAttribute("hiddenElement",hiddenElement);
-        request.setAttribute("submitElement",submitElement);
-        request.setAttribute("deleteElement",deleteElement);
+        request.setAttribute("hiddenElement", hiddenElement);
+        request.setAttribute("submitElement", submitElement);
+        request.setAttribute("deleteElement", deleteElement);
         try {
             request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
         } catch (Exception e) {
@@ -124,7 +147,7 @@ public class ArticleServlet extends HttpServlet {
         String content = request.getParameter("content");
         String tag = request.getParameter("tag");
 
-        if (content==null||content.isEmpty()) {
+        if (content == null || content.isEmpty()) {
             String submitElement = "<input type='submit' name='action' value='create'/>";
             request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
@@ -135,7 +158,7 @@ public class ArticleServlet extends HttpServlet {
         try {
             ArticleInfoDAO.createArticleInfo(mySQL, title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, (String) session.getAttribute("username"));
             response.sendRedirect("Blog");
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
