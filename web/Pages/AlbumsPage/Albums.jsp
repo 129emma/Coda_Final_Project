@@ -23,6 +23,10 @@
             <div>${albumsVideo.address}</div>|
             <a href="AlbumsChange?albumsVideoId=${albumsVideo.id}&action=deleteVideo"> Click to delete the video</a>|
     </c:forEach>
+<c:forEach var="albumsAudio" items="${albumsAudioInfoList}">
+    <div>${albumsAudio.address}</div>|
+    <a href="AlbumsChange?albumsAudioId=${albumsAudio.id}&action=deleteAudio"> Click to delete the video</a>|
+</c:forEach>
 
 <br><br>
 

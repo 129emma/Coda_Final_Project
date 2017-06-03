@@ -43,8 +43,8 @@ public class AlbumsImageDAO {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsImage(username,address,postTime,id) VALUES (?,?,?,?)")) {
                 p.setString(1, username);
                 p.setString(2, address);
-                p.setString(3, getCurrentTimeStamp());
                 p.setString(4,id);
+                p.setString(3, getCurrentTimeStamp());
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {

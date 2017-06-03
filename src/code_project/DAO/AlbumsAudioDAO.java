@@ -1,6 +1,6 @@
 package code_project.DAO;
 
-import code_project.Info.AlbumsVideoInfo;
+import code_project.Info.AlbumsAudioInfo;
 import code_project.db.AbstractDB;
 
 import java.sql.Connection;
@@ -13,21 +13,20 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by txie936 on 31/05/2017.
+ * Created by txie936 on 3/06/2017.
  */
-public class AlbumsVideoDAO {
+public class AlbumsAudioDAO {
 
+    public static List<AlbumsAudioInfo> getAlbumsAudioList(AbstractDB db , String username) {
 
-    public static List<AlbumsVideoInfo> getAlbumsImageList(AbstractDB db , String username) {
-
-        List<AlbumsVideoInfo> AlbumsVideoInfoList = new ArrayList<>();
+        List<AlbumsAudioInfo> AlbumsAudioInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio WHERE username=?")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        AlbumsVideoInfoList.add(AlbumsVideoInfoFromResultSet(r));
+                        AlbumsAudioInfoList.add(AlbumsAudioInfoFromResultSet(r));
                     }
                 }
             }
@@ -35,18 +34,16 @@ public class AlbumsVideoDAO {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return AlbumsVideoInfoList;
+        return AlbumsAudioInfoList;
     }
 
-
-
-    public static void createAlbumsVideoInfo(AbstractDB db, String username,String address,String id) throws SQLException {
+    public static void createAlbumsAudioInfo(AbstractDB db, String username,String address,String id) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsVideo(username,address,postTime,id) VALUES (?,?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsAudio(username,address,postTime,id) VALUES (?,?,?,?)")) {
                 p.setString(1, username);
-                p.setString(4,id);
                 p.setString(2, address);
                 p.setString(3, getCurrentTimeStamp());
+                p.setString(4,id);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -54,9 +51,9 @@ public class AlbumsVideoDAO {
         }
     }
 
-    public static void deleteAlbumsVideoInfo(AbstractDB db, String username,String id) throws SQLException {
+    public static void deleteAlbumsAudioInfo(AbstractDB db, String username,String id) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsVideo WHERE username = ? AND id=?")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsAudio WHERE username = ? AND id=?")) {
                 p.setString(1, username);
                 p.setString(2, id);
                 p.executeUpdate();
@@ -68,17 +65,17 @@ public class AlbumsVideoDAO {
 
 
 
-    public static AlbumsVideoInfo getAlbumsVideoInfo(AbstractDB db, String username,String id) {
+    public static AlbumsAudioInfo getAlbumsAudioInfo(AbstractDB db, String username,String id) {
 
-        AlbumsVideoInfo AlbumsVideoInfo= null;
+        AlbumsAudioInfo AlbumsAudioInfo= null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username = ?AND id=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio WHERE username = ?AND id=?")) {
                 p.setString(1, username);
                 p.setString(2, id);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        AlbumsVideoInfo = AlbumsVideoInfoFromResultSet(r);
+                        AlbumsAudioInfo = AlbumsAudioInfoFromResultSet(r);
                     }
                 }
             }
@@ -86,23 +83,21 @@ public class AlbumsVideoDAO {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return AlbumsVideoInfo;
+        return AlbumsAudioInfo;
     }
 
 
 
-    private static AlbumsVideoInfo  AlbumsVideoInfoFromResultSet(ResultSet r) throws SQLException {
-        return new AlbumsVideoInfo(
-                r.getInt("id"),
+    private static AlbumsAudioInfo AlbumsAudioInfoFromResultSet(ResultSet r) throws SQLException {
+        return new AlbumsAudioInfo(
+                r.getString("id"),
                 r.getString("username"),
                 r.getString("address"),
                 r.getDate("postTime").toString()+" "+r.getTime("postTime").toString()
         );
     }
-
-
-
     private static String getCurrentTimeStamp() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
+    
 }

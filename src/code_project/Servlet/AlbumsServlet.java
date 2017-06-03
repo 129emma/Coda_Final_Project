@@ -1,13 +1,7 @@
 package code_project.Servlet;
 
-import code_project.DAO.AlbumsImageDAO;
-import code_project.DAO.AlbumsVideoDAO;
-import code_project.DAO.ArticleInfoDAO;
-import code_project.DAO.UserInfoDAO;
-import code_project.Info.AlbumsImageInfo;
-import code_project.Info.AlbumsVideoInfo;
-import code_project.Info.ArticleInfo;
-import code_project.Info.UserInfo;
+import code_project.DAO.*;
+import code_project.Info.*;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 
@@ -33,10 +27,12 @@ public class AlbumsServlet extends HttpServlet {
 
             List<AlbumsImageInfo> albumsImageInfoList= AlbumsImageDAO.getAlbumsImageList(DB,username);
             List<AlbumsVideoInfo> albumsVideoInfoList= AlbumsVideoDAO.getAlbumsImageList(DB,username);
+            List<AlbumsAudioInfo> albumsAudioInfoList=AlbumsAudioDAO.getAlbumsAudioList(DB,username);
 
             request.setAttribute("albumsImageInfoList",albumsImageInfoList);
 
             request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
+            request.setAttribute("albumsAudioInfoList",albumsAudioInfoList);
 
             request.getRequestDispatcher("Pages/AlbumsPage/Albums.jsp").forward(request, response);
 

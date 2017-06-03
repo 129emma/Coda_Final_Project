@@ -1,11 +1,13 @@
 package code_project.Servlet;
 
+import code_project.DAO.AlbumsAudioDAO;
 import code_project.DAO.AlbumsImageDAO;
 import code_project.DAO.AlbumsVideoDAO;
 import code_project.Info.AlbumsVideoInfo;
 import code_project.Info.ArticleInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
+import com.sun.deploy.net.HttpResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -50,86 +52,52 @@ public class AlbumsChangeServlet extends HttpServlet {
         response.setContentType("text/html");
         String username = (String) session.getAttribute("username");
 
-            if(request.getParameter("action") != null) {
-                switch (request.getParameter("action")){
-                    case "deleteImage":
-                        deleteAlbumsImage(request, response,username);
-
-                        break;
-                    case "deleteVideo":
-                        deleteAlbumsVideo(request, response,username);
-                        break;
-                    case "createVideo":
-                        addVideoToUserAlbums(request,response,username);
-                        break;
-
-                }
-            }else {
-                addImageToUserAlbums(request,response,username);
+        if(request.getParameter("action")!=null){
+            switch (request.getParameter("action")){
+                case "deleteAudio":
+                    deleteAlbumsImage(request,response,username);
+                    break;
+                case "deleteVideo":
+                    break;
+                case "deleteImage":
+                    break;
             }
+        }else{
+            addNewThingsToAlbums(request, response, username);
+        }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doPost(request, response);
     }
 
-    private void addVideoToUserAlbums(HttpServletRequest request,HttpServletResponse response, String username) throws IOException, ServletException {
+
+    private void deleteAlbumsImage(HttpServletRequest request, HttpServletResponse response, String username) {
         try {
-            String content = "";
-            String title = "";
-            String tags = "";
-            String videoAddress="";
-           content=request.getParameter("articleContent");
-           title=request.getParameter("articleTitle");
-           tags=request.getParameter("articleTags");
-           videoAddress =request.getParameter("videoAddress");
-
-            AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, videoAddress);
-
-
-            request.setAttribute("information", "Success");
-
-            ArticleInfo articleInfo=new ArticleInfo(title,content,tags);
-
-            request.setAttribute("video",videoAddress);
-
-            request.setAttribute("articleInfo",articleInfo);
-
-            String submitElement = "<input type='submit' name='action' value='create'/>";
-            request.setAttribute("submitElement", submitElement);
-
-            request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
-
-        } catch (Exception e) {
-            request.setAttribute("information", "Fail to upload the file, please try again");
-        }
-    }
-
-private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse response,String username){
-        try {
-              String imageID=request.getParameter("albumsImageId");
-            AlbumsImageDAO.deleteAlbumsImageInfo(mySQL,username,imageID);
+            String imageID = request.getParameter("albumsImageId");
+            AlbumsImageDAO.deleteAlbumsImageInfo(mySQL, username, imageID);
             ServletContext servletContext = getServletContext();
-           String imagePath = servletContext.getRealPath("/User-Info/" + username);
-           File file=new File(imagePath+"/"+imageID+".jpg");
-           Boolean result=file.delete();
+            String imagePath = servletContext.getRealPath("/User-Info/" + username);
+            File file = new File(imagePath + "/" + imageID + ".jpg");
+            Boolean result = file.delete();
             response.sendRedirect("Albums");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-}
-
-    private void deleteAlbumsVideo(HttpServletRequest request,HttpServletResponse response,String username){
-        try {
-            AlbumsVideoDAO.deleteAlbumsVideoInfo(mySQL,username,request.getParameter("albumsVideoId"));
-            response.sendRedirect("Albums");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-    private void addImageToUserAlbums(HttpServletRequest request,HttpServletResponse response, String username) throws IOException, ServletException {
+
+    private void deleteAlbumsVideo(HttpServletRequest request, HttpServletResponse response, String username) {
+        try {
+            AlbumsVideoDAO.deleteAlbumsVideoInfo(mySQL, username, request.getParameter("albumsVideoId"));
+            response.sendRedirect("Albums");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addNewThingsToAlbums(HttpServletRequest request, HttpServletResponse response, String username) throws IOException, ServletException {
 
         ServletContext servletContext = getServletContext();
         String fullFilePath = servletContext.getRealPath("/User-Info");
@@ -145,8 +113,9 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
         if (!Userfolder.exists()) {
             Userfolder.mkdir();
         }
+
         //get the user's folder path
-        filePath = servletContext.getRealPath("/User-Info/" + username);
+        filePath = servletContext.getRealPath("/User-Info/" + username+"/");
 
         //create directory
         DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -159,21 +128,20 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
         // maximum file size to be uploaded.
         upload.setSizeMax(maxFileSize);
         try {
-            createUserAlbumsImage(upload, request,filePath,username);
-            request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
-        }catch (Exception e){
-            request.setAttribute("information", "Fail to upload the file, please try again");
-
+            createNewFile(upload, request, response, filePath, username);
+            //request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
+        } catch (Exception e) {
+            response.setContentType("text/plain");
+            response.getWriter().write("Fail to upload the file, please try again");
         }
+
     }
 
 
-    private void createUserAlbumsImage(ServletFileUpload upload, HttpServletRequest request, String filePath,String username) throws IOException, ServletException, FileUploadException,SQLException {
+    private void createNewFile(ServletFileUpload upload, HttpServletRequest request, HttpServletResponse response, String filePath, String username) throws IOException, ServletException, FileUploadException, SQLException {
 
-        String imageAddress = "";
-        String content = "";
-        String title = "";
-        String tags = "";
+        String fileAddress = "";
+
         // Parse the request to get file items.
         List fileItems = upload.parseRequest(request);
         // Process the uploaded file items
@@ -183,92 +151,96 @@ private void deleteAlbumsImage(HttpServletRequest request,HttpServletResponse re
             FileItem fi = (FileItem) i.next();
 
             if (!fi.isFormField()) {
-                String currentTime = getCurrentTimeStamp();
-
                 fileName = fi.getName();
-                file = new File(filePath + "/" + currentTime + ".jpg");
-                try {
-                    fi.write(file);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                if (fileName.contains(".jpg") || fileName.contains(".gif") || fileName.contains(".png")) {
+                          fileAddress=createImage(fi,filePath,username);
+                } else if (fileName.contains(".mp3") || fileName.contains(".wav")) {
 
-                BufferedImage AlbumImage = null;
+                    fileAddress = createAudio(fi, fileName, filePath, username);
 
-                AlbumImage = ImageIO.read(new File(filePath + "/" + currentTime + ".jpg"));
 
-                File outputfile = new File(filePath + "/" + currentTime + ".jpg");
-                //check the size of the image
-                if ((AlbumImage.getWidth() < 400) && (AlbumImage.getHeight() < 400)) {
-                    //write the thumbnail
-                    ImageIO.write(AlbumImage, "jpg", outputfile);
+                } else if (fileName.contains(".mp4") || fileName.contains(".ogg")) {
 
-                } else {
-                    Double width = (double) AlbumImage.getWidth();
-                    Double height = (double) AlbumImage.getHeight();
-                    double r = (height / width) * 200;
-                    BufferedImage image = new BufferedImage(200, (int) r, BufferedImage.TYPE_INT_RGB);
-                    image.createGraphics().drawImage(ImageIO.read(new File(filePath + "/" + currentTime + ".jpg")).getScaledInstance(200, (int) r, Image.SCALE_SMOOTH), 0, 0, null);
-                    //write the thumbnail
-                    ImageIO.write(image, "jpg", outputfile);
-
-                }
-                imageAddress = "<img style='margin:auto' src='User-Info/" + username + "/" + currentTime + ".jpg'>";
-                AlbumsImageDAO.createAlbumsImageInfo(mySQL, username, imageAddress, currentTime);
-            } else if (fi.isFormField()) {
-                if (fi.getFieldName().equals("articleContent")) {
-                    content = fi.getString();
-                }else if(fi.getFieldName().equals("articleTitle")){
-                    title=fi.getString();
-                }else if(fi.getFieldName().equals("articleTags")){
-                    tags=fi.getString();
+                    fileAddress = createVideo(fi, fileName, filePath, username);
                 }
             }
         }
-        ArticleInfo articleInfo = new ArticleInfo(title, content + imageAddress, tags);
-        request.setAttribute("articleInfo", articleInfo);
-        request.setAttribute("information", "Success");
-        String submitElement = "<input type='submit' name='action' value='create'/>";
-        request.setAttribute("submitElement", submitElement);
+
+        response.setContentType("text/plain");
+        response.getWriter().write(fileAddress);
     }
 
+    private String createImage(FileItem fileItem, String filePath, String username) {
 
 
+        String currentTime = getCurrentTimeStamp();
+        file = new File(filePath + currentTime + ".jpg");
+        try {
+            fileItem.write(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-    public void createVideo() throws Exception{
+        BufferedImage AlbumImage = null;
+        try {
+            AlbumImage = ImageIO.read(new File(filePath + currentTime + ".jpg"));
 
+            File outputfile = new File(filePath +currentTime + ".jpg");
+            //check the size of the image
+            if ((AlbumImage.getWidth() > 400) || (AlbumImage.getHeight() > 400)) {
 
-        File file = new File(".mp4");
-        FileInputStream fin = new FileInputStream(file);
-        byte b[] = new byte[(int)file.length()];
-        fin.read(b);
-        File nf = new File("D:/K.mp4");
-        FileOutputStream fw = new FileOutputStream(nf);
-        fw.write(b);
-        fw.flush();
-        fw.close();
-
-    }
-    public void createAudio() throws Exception{
-
-
-        File file = new File(".mp3");
-
-        FileInputStream fin = new FileInputStream(file);
-
-        byte b[] = new byte[(int)file.length()];
-
-        fin.read(b);
-
-        File nf = new File("D:/K.mp3");
-
-        FileOutputStream fw = new FileOutputStream(nf);
-
-        fw.write(b);
-        fw.flush();
-        fw.close();
+                Double width = (double) AlbumImage.getWidth();
+                Double height = (double) AlbumImage.getHeight();
+                double r = (height / width) * 200;
+                BufferedImage image = new BufferedImage(200, (int) r, BufferedImage.TYPE_INT_RGB);
+                image.createGraphics().drawImage(ImageIO.read(new File(filePath + currentTime + ".jpg")).getScaledInstance(200, (int) r, Image.SCALE_SMOOTH), 0, 0, null);
+                //write the thumbnail
+                ImageIO.write(image, "jpg", outputfile);
+            }
+            String fileAddress = "<div><img style='margin:auto' src='User-Info/" + username + "/" + currentTime + ".jpg'><div>";
+            AlbumsImageDAO.createAlbumsImageInfo(mySQL, username, fileAddress,currentTime);
+            return fileAddress;
+        } catch (Exception e) {
+            return "Fail to upload the image!";
+        }
 
     }
+
+    private String createVideo(FileItem fileItem, String fileName, String filePath, String username) {
+        String currentTime = getCurrentTimeStamp();
+        try {
+            File file = new File(filePath + fileName);
+            fileItem.write(file);
+            String address = "<div><video width='400px' height='200px' controls >\n" +
+                    "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"video/mp4\">\n" +
+                    "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"video/ogg\">\n" +
+                    "  Your browser does not support the video tag.\n" +
+                    "</video><div>";
+            AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, address,currentTime);
+            return address;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private String createAudio(FileItem fileItem, String fileName, String filePath, String username) {
+        String currentTime = getCurrentTimeStamp();
+        try {
+            File file = new File(filePath + fileName);
+            fileItem.write(file);
+            String address = "<div><audio controls width='200px'>\n" +
+                    "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"audio/ogg\">\n" +
+                    "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"audio/mpeg\">\n" +
+                    "  Your browser does not support the audio tag.\n" +
+                    "</audio><div>";
+            AlbumsAudioDAO.createAlbumsAudioInfo(mySQL, username, address,currentTime);
+            return address;
+        } catch (Exception e) {
+            return "Fail to upload the audio!";
+        }
+    }
+
     private static String getCurrentTimeStamp() {
         return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
     }
