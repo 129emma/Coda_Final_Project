@@ -8,17 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
-/**
- * Allows us to get articles from elsewhere in the code without worrying about SQL statements.
- */
 public class UserInfoDAO {
 
-    /**
-     * Gets all {@link UserInfo}s from the given {@link AbstractDB}.
-     *
-     * @param db
-     * @return
-     */
     public static List<UserInfo> getUserInfoList(AbstractDB db) {
 
         List<UserInfo> userInfoList = new ArrayList<>();
@@ -105,14 +96,6 @@ public class UserInfoDAO {
     }
 
 
-    /**
-     *
-     * Extract a {@link UserInfo} object from a given {@link ResultSet}
-     *
-     * @param r The {@link ResultSet} to extract a {@link UserInfo} from
-     * @return A valid {@link UserInfo} object, representing a row from the {@link ResultSet}
-     * @throws SQLException Generated in the case of an out-of-bounds column index, or for an invalid {@link ResultSet}
-     */
     private static UserInfo userInfoFromResultSet(ResultSet r) throws SQLException {
         return new UserInfo(
                 r.getString("username"),
