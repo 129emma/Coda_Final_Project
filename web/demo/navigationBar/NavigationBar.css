@@ -1,6 +1,9 @@
-#icon{
-    width: 100px;
-    height: 30px;
+.ui.small.image {
+    margin-left: 200px;
+    margin-top: 5px;
+}
+.ui.vertical.animated.button { /*change animated button's background color*/
+    background-color: white;
 }
 
 
