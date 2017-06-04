@@ -16,16 +16,16 @@
 <h2>Your Albums</h2>
     <c:forEach var="albumsImage" items="${albumsImageInfoList}">
             <div>${albumsImage.address}</div>|
-            <a href="AlbumsChange?albumsImageId=${albumsImage.id}&action=deleteImage"> Click to delete the image</a>|
+            <a href="AlbumsChange?imageFileName=${albumsImage.fileName}&imageID=${albumsImage.id}&action=deleteImage"> Click to delete the image</a>|
     </c:forEach>
 <br><br>
     <c:forEach var="albumsVideo" items="${albumsVideoInfoList}">
             <div>${albumsVideo.address}</div>|
-            <a href="AlbumsChange?albumsVideoId=${albumsVideo.id}&action=deleteVideo"> Click to delete the video</a>|
+            <a href="AlbumsChange?videoFileName=${albumsVideo.fileName}&videoID=${albumsVideo.id}&action=deleteVideo"> Click to delete the video</a>|
     </c:forEach>
 <c:forEach var="albumsAudio" items="${albumsAudioInfoList}">
     <div>${albumsAudio.address}</div>|
-    <a href="AlbumsChange?albumsAudioId=${albumsAudio.id}&action=deleteAudio"> Click to delete the video</a>|
+    <a href="AlbumsChange?audioFileName=${albumsAudio.fileName}&audioID=${albumsAudio.id}&action=deleteAudio"> Click to delete the audio</a>|
 </c:forEach>
 
 <br><br>

@@ -40,11 +40,11 @@ public class AlbumsVideoDAO {
 
 
 
-    public static void createAlbumsVideoInfo(AbstractDB db, String username,String address,String id) throws SQLException {
+    public static void createAlbumsVideoInfo(AbstractDB db, String username,String address,String fileName) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsVideo(username,address,postTime,id) VALUES (?,?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsVideo(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
                 p.setString(1, username);
-                p.setString(4,id);
+                p.setString(4,fileName);
                 p.setString(2, address);
                 p.setString(3, getCurrentTimeStamp());
                 p.executeUpdate();
@@ -54,11 +54,11 @@ public class AlbumsVideoDAO {
         }
     }
 
-    public static void deleteAlbumsVideoInfo(AbstractDB db, String username,String id) throws SQLException {
+    public static void deleteAlbumsVideoInfo(AbstractDB db, String username,int id) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsVideo WHERE username = ? AND id=?")) {
                 p.setString(1, username);
-                p.setString(2, id);
+                p.setInt(2, id);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -94,6 +94,7 @@ public class AlbumsVideoDAO {
     private static AlbumsVideoInfo  AlbumsVideoInfoFromResultSet(ResultSet r) throws SQLException {
         return new AlbumsVideoInfo(
                 r.getInt("id"),
+                r.getString("fileName"),
                 r.getString("username"),
                 r.getString("address"),
                 r.getDate("postTime").toString()+" "+r.getTime("postTime").toString()

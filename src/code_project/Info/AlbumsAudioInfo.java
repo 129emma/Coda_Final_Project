@@ -4,23 +4,33 @@ package code_project.Info;
  * Created by txie936 on 3/06/2017.
  */
 public class AlbumsAudioInfo {
-    private String id;
+    private int id;
+    private String fileName;
     private String username;
     private String address;
     private String postTime;
 
-    public AlbumsAudioInfo(String id, String username, String address, String postTime) {
-        this.id = id;
+
+    public AlbumsAudioInfo(int id,String fileName, String username, String address, String postTime) {
+        this.fileName=fileName;
         this.username = username;
         this.address = address;
         this.postTime = postTime;
+        this.id=id;
+    }
+    public String getFileName() {
+        return fileName;
     }
 
-    public String getId() {
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

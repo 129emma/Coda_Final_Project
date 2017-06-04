@@ -96,8 +96,8 @@ public class ArticleServlet extends HttpServlet {
         ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL, articleID);
         request.setAttribute("articleInfo", articleInfo);
         String hiddenElement = "<input type='hidden' name='articleID' value='"+articleID+"'>";
-        String submitElement = "<input type='submit' name='action' value='update'/> ";
-        String deleteElement = "<input type='submit' name='action' value='delete'/>";
+        String submitElement = "<input class=\"btn btn-primary\" type='submit' name='action' value='update'/> ";
+        String deleteElement = "<input class=\"btn btn-primary\" type='submit' name='action' value='delete'/>";
         request.setAttribute("hiddenElement",hiddenElement);
         request.setAttribute("submitElement",submitElement);
         request.setAttribute("deleteElement",deleteElement);
@@ -125,7 +125,7 @@ public class ArticleServlet extends HttpServlet {
         String tag = request.getParameter("tag");
 
         if (content==null||content.isEmpty()) {
-            String submitElement = "<input type='submit' name='action' value='create'/>";
+            String submitElement = "<input class=\"btn btn-primary\" type='submit' name='action' value='Create'/>";
             request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
             return;

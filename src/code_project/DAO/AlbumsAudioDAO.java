@@ -37,13 +37,13 @@ public class AlbumsAudioDAO {
         return AlbumsAudioInfoList;
     }
 
-    public static void createAlbumsAudioInfo(AbstractDB db, String username,String address,String id) throws SQLException {
+    public static void createAlbumsAudioInfo(AbstractDB db, String username,String address,String fileName) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsAudio(username,address,postTime,id) VALUES (?,?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsAudio(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
                 p.setString(1, username);
                 p.setString(2, address);
                 p.setString(3, getCurrentTimeStamp());
-                p.setString(4,id);
+                p.setString(4,fileName);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -51,11 +51,11 @@ public class AlbumsAudioDAO {
         }
     }
 
-    public static void deleteAlbumsAudioInfo(AbstractDB db, String username,String id) throws SQLException {
+    public static void deleteAlbumsAudioInfo(AbstractDB db, String username,int id) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsAudio WHERE username = ? AND id=?")) {
                 p.setString(1, username);
-                p.setString(2, id);
+                p.setInt(2, id);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -90,7 +90,8 @@ public class AlbumsAudioDAO {
 
     private static AlbumsAudioInfo AlbumsAudioInfoFromResultSet(ResultSet r) throws SQLException {
         return new AlbumsAudioInfo(
-                r.getString("id"),
+                r.getInt("id"),
+                r.getString("fileName"),
                 r.getString("username"),
                 r.getString("address"),
                 r.getDate("postTime").toString()+" "+r.getTime("postTime").toString()

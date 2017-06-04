@@ -30,7 +30,6 @@ public class AlbumsServlet extends HttpServlet {
             List<AlbumsAudioInfo> albumsAudioInfoList=AlbumsAudioDAO.getAlbumsAudioList(DB,username);
 
             request.setAttribute("albumsImageInfoList",albumsImageInfoList);
-
             request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
             request.setAttribute("albumsAudioInfoList",albumsAudioInfoList);
 

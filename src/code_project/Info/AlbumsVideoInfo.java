@@ -9,16 +9,29 @@ public class AlbumsVideoInfo {
     private int id;
     private String username;
     private String address;
+    private String fileName;
     private String postTime;
 
-
-
-    public AlbumsVideoInfo(int id, String username, String address, String postTime) {
-        this.id = id;
+    public AlbumsVideoInfo( int id,String fileName, String username,String address, String postTime) {
+     this.fileName=fileName;
         this.username = username;
         this.address = address;
         this.postTime = postTime;
+        this.id=id;
     }
+
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+
+
+
 
     public int getId() {
         return id;
