@@ -6,3 +6,7 @@
 #profile_content {
     padding: 0px;
 }
+
+#loadArticleButton{
+    border: 5px red solid;
+}

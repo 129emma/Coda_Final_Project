@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Blog</title>
@@ -20,54 +21,35 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+
+
+    <script src="Pages/BlogPage/Blog.js"></script>
+    <script>
+        var page = '${page}';
+    </script>
+    <link rel="stylesheet" href="Pages/BlogPage/Blog.css" type="text/css">
+
 </head>
-<script src="Pages/BlogPage/Blog.js"></script>
+
 <body>
+
 
 <jsp:include page="/Pages/NavBar/title.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
 
-<div class="container" id="containerProfile">
-
-
-    <div class="col-xs-12 col-md-9 panel panel-default" id="ContentContainer">
-        <div class="panel panel-default">
-            <div class="panel-heading">Article View</div>
-            <div class="panel-body ArticleContainer" id="ArticleContainer">
-
-                <div class="panel panel-default Article" id="original">
-                    <div class="panel-heading">An article title</div>
-                    <div class="panel-body">
-                        <p>Author name</p>
-                        <p>An article summary</p>
-                        <div class="text-center bg-info">Show full content</div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="text-center bg-primary" id="loadArticleButton">Load more articles</div>
-        </div>
-
-        <%--<c:forEach var="article" items="${articleInfoList}">--%>
-        <%--<div class="panel panel-default">--%>
-        <%--<div class="panel-heading"><a href="${article.retrieveAddress}">${article.title}</a>${article.postTime}</div>--%>
-        <%--<div class="panel-body">${article.content} </p></div>--%>
-        <%--&lt;%&ndash;<c:forEach var="commentInfo" items="${commentInfoListOFAllArticle.get(article.articleID)}">&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<div class="panel panel-default">&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<div class="panel-heading"><a href="Article?articleID=${article.articleID}" >${commentInfo.username} </a>${commentInfo.postTime}</div>&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<div class="panel-body">${commentInfo.content}</div>&ndash;%&gt;--%>
-        <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-        <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-        <%--</div>--%>
-        <%--</c:forEach>--%>
+<div class="container" id="container">
+    <div class="col-xs-12 col-md-9 panel panel-default" >
+        <div id="ContentContainer"></div>
+        <i class="fa fa-circle-o-notch fa-spin" style="margin: auto; font-size:24px" id="Loader"></i>
     </div>
 </div>
+
 </body>
 </html>

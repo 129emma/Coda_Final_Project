@@ -41,7 +41,7 @@ public class ArticleInfoDAO {
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username=? LIMIT ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username=? ORDER BY postTime DESC LIMIT ?")) {
                 p.setString(1,username);
                 p.setInt(2,number);
                 try (ResultSet r = p.executeQuery()) {
@@ -74,12 +74,30 @@ public class ArticleInfoDAO {
         return totalArticleNumber;
     }
 
+    public static int getTotalArticleNumber(AbstractDB db, String username){
+        int totalArticleNumber = 0;
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT COUNT(*) FROM Article WHERE username=?")){
+                p.setString(1,username);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        totalArticleNumber = r.getInt(1);
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return totalArticleNumber;
+    }
+
     public static List<ArticleInfo> getSpotlightArticleInfoList(AbstractDB db ,int pageNumber) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article ORDER BY articleID ASC LIMIT 10 OFFSET ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article ORDER BY postTime DESC LIMIT ? OFFSET 0")) {
                 p.setInt(1,pageNumber);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {

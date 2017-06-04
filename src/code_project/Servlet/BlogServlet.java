@@ -47,11 +47,10 @@ public class BlogServlet extends HttpServlet {
 
     private void retrieveSpotlightPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = (String) session.getAttribute("username");
-        List<ArticleInfo> articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, 0);
         // Map<Integer,CommentInfoList> commentInfoListOFAllArticle = CommentInfoDAO.getCommentInfoListOfAllArticle(mySQL,articleInfoList);
         UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
-        request.setAttribute("UserInfo", userInfo);
-        request.setAttribute("articleInfoList", articleInfoList);
+        request.setAttribute("userInfo", userInfo);
+        request.setAttribute("page","spotlight");
         //request.setAttribute("commentInfoListOFAllArticle",commentInfoListOFAllArticle);
         request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
     }
@@ -59,7 +58,8 @@ public class BlogServlet extends HttpServlet {
     private void retrieveHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = (String) session.getAttribute("username");
         UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
-        request.setAttribute("UserInfo", userInfo);
+        request.setAttribute("userInfo", userInfo);
+        request.setAttribute("page","home");
         request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
     }
 

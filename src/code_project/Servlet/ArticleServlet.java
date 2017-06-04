@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,18 +65,25 @@ public class ArticleServlet extends HttpServlet {
 
     private void previewArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = (String) session.getAttribute("username");
-        String loadMoreArticle;
+        List<ArticleInfo> articleInfoList = new ArrayList<>();
+        String page = (String) request.getParameter("page");
         int articleNumber = Integer.parseInt(request.getParameter("articleNumber"));
-        int totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL)-1;
-        if(articleNumber>=totalArticleNumber){
-            articleNumber = totalArticleNumber;
-            loadMoreArticle  = "<div class=\"text-center bg-danger\" id=\"loadArticleButton\">Load more articles</div>";
-        }else{
-            loadMoreArticle  = "<div class=\"text-center bg-primary\" id=\"loadArticleButton\">Load more articles</div>";
+        int totalArticleNumber = 0;
+        if(page!=null){
+            switch(page){
+                case "home":
+                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL,username);
+                    articleNumber = Math.min(totalArticleNumber,articleNumber);
+                    articleInfoList = ArticleInfoDAO.getArticleInfoList(mySQL, username, articleNumber);
+                    break;
+                case "spotlight":
+                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL);
+                    articleNumber = Math.min(totalArticleNumber,articleNumber);
+                    articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, articleNumber);
+                    break;
+            }
         }
-        List<ArticleInfo> articleInfoList = ArticleInfoDAO.getArticleInfoList(mySQL, username, articleNumber);
         request.setAttribute("articleInfoList", articleInfoList);
-        request.setAttribute("loadMoreArticle",loadMoreArticle);
         request.getRequestDispatcher("Pages/ArticleRetrieving/ArticlePreview.jsp").forward(request, response);
     }
 
