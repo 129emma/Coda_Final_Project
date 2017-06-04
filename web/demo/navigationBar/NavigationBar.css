@@ -1,98 +1,62 @@
-.ui.small.image {
-    margin-left: 200px;
-    margin-top: 5px;
-}
-.ui.vertical.animated.button { /*change animated button's background color*/
-    background-color: white;
+body.pushable > .pusher {
+     background: silver;
 }
 
+.ui.menu{
+    background-color: transparent;
+}
 
+.ui.inverted.button {
+ box-shadow: none !important;
+}
 
-
-
-
-
-.hidden.menu {
+.toc.item { /*invisible sidebar icon*/
     display: none;
 }
 
-.masthead.segment {
-    min-height: 700px;
-    padding: 1em 0em;
-}
-.masthead .logo.item img {
-    margin-right: 1em;
-}
-.masthead .ui.menu .ui.button {
-    margin-left: 0.5em;
-}
-.masthead h1.ui.header {
-    margin-top: 3em;
-    margin-bottom: 0em;
-    font-size: 4em;
-    font-weight: normal;
-}
-.masthead h2 {
-    font-size: 1.7em;
-    font-weight: normal;
+img.teamIcon {
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 800px;
 }
 
-.ui.vertical.stripe {
-    padding: 8em 0em;
-}
-.ui.vertical.stripe h3 {
-    font-size: 2em;
-}
-.ui.vertical.stripe .button + h3,
-.ui.vertical.stripe p + h3 {
-    margin-top: 3em;
-}
-.ui.vertical.stripe .floated.image {
-    clear: both;
-}
-.ui.vertical.stripe p {
-    font-size: 1.33em;
-}
-.ui.vertical.stripe .horizontal.divider {
-    margin: 3em 0em;
+.ui.vertical.masthead.center.aligned {
+    border-bottom: solid 2px gainsboro;
+    height: 50px;
 }
 
-.quote.stripe.segment {
-    padding: 0em;
-}
-.quote.stripe.segment .grid .column {
-    padding-top: 5em;
-    padding-bottom: 5em;
+img.sideBarIcon {
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
-.footer.segment {
-    padding: 5em 0em;
+a.toc.item {
+    display: none !important;
 }
 
-.secondary.pointing.menu .toc.item {
-    display: none;
+.ui.search{
+    display: none !important;
+}
+
+/*Side Bar Color*/
+.ui.sidebar.vertical.menu.left.uncover.visible {
+    background-color: #6FC5D3;
 }
 
 @media only screen and (max-width: 700px) {
-    .ui.fixed.menu {
+
+    a.item{
         display: none !important;
     }
-    .secondary.pointing.menu .item,
-    .secondary.pointing.menu .menu {
-        display: none;
+
+    a.toc.item {
+        display: block !important;
     }
-    .secondary.pointing.menu .toc.item {
-        display: block;
+
+    .ui.search{
+        display: block !important;
     }
-    .masthead.segment {
-        min-height: 350px;
-    }
-    .masthead h1.ui.header {
-        font-size: 2em;
-        margin-top: 1.5em;
-    }
-    .masthead h2 {
-        margin-top: 0.5em;
-        font-size: 1.5em;
-    }
+ 
+
 }

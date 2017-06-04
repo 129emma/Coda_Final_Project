@@ -3,110 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Navigation Bar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <link rel="stylesheet" href="NavigationBar.css">
 
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/reset.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/site.css">
-
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/container.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/grid.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/header.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/image.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/menu.css">
-
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/divider.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/dropdown.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/segment.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/button.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/list.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/icon.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/sidebar.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/components/transition.css">
-
-    <link rel="stylesheet" type="text/css" href="NavigationBar.css">
-    <link rel="stylesheet" type="text/css" href="../../BootstrapUI/semantic.css">
-    <script src="../../BootstrapUI/semantic.js"></script>
 
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
-    <script src="../../BootstrapUI/components/visibility.js"></script>
-    <script src="../../BootstrapUI/components/sidebar.js"></script>
-    <script src="../../BootstrapUI/components/transition.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
     <script src="NavagationBar.js"></script>
 
-
 </head>
-<body>
+<body class="full">
 
-<!-- Following Menu -->
-<div class="ui large top fixed hidden menu">
-    <div class="ui container grid">
-        <div class="row">
-            <a href="#">
-                <div class="ui vertical animated button " tabindex="0">
-                    <div class="hidden content">Shop</div>
-                    <div class="visible content">
-                        <i class="big shop icon"></i>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="ui vertical animated button " tabindex="0">
-                    <div class="hidden content">Shop</div>
-                    <div class="visible content">
-                        <i class="big shop icon"></i>
-                    </div>
-                </div>
-            </a>
-            <a href="#">
-                <div class="ui vertical animated button " tabindex="0">
-                    <div class="hidden content">Shop</div>
-                    <div class="visible content">
-                        <i class="big shop icon"></i>
-                    </div>
-                </div>
-            </a>
-            <div class="ui small image">
-                <img src="../../testImage/icon_black.png">
-            </div>
-
-            <div class="right menu">
-                <div class="item">
-                    <a class="ui button">Log in</a>
-                </div>
-                <div class="item">
-                    <a class="ui button">Sign Up</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--SideBar Menu-->
+<div class="ui sidebar vertical menu">
+    <img class="sideBarIcon" src="../../testImage/icon_white.png">
+    <a class="item">
+        option1
+    </a>
+    <a class="item">
+        option2
+    </a>
+    <a class="item">
+        option3
+    </a>
 </div>
 
+<!-- Page Content !-->
+<div class="pusher">
 
-<!--sideBar-->
-<div class="ui vertical inverted sidebar menu">
-    <a class="active item">Home</a>
-    <a class="item">Work</a>
-    <a class="item">Company</a>
-    <a class="item">Careers</a>
-    <a class="item">Login</a>
-    <a class="item">Signup</a>
-</div>
-
-
-<!--page content-->
-<div class="ui inverted vertical masthead center aligned segment">
-
-
-    <div class="ui container">
-        <div class="ui large secondary inverted pointing menu">
+    <div class="ui masthead borderless menu">
+        <div class="ui container">
             <a class="toc item">
                 <i class="sidebar icon"></i>
             </a>
+            <div class="ui search">
+                <div class="ui icon input">
+                    <input class="prompt" type="text" placeholder="Searching friends">
+                    <i class="search icon"></i>
+                </div>
+                <div class="results"></div>
+            </div>
+            <a class="item"><i class="large umbrella icon"></i></a>
+            <a class="item"><i class="large world icon"></i></a>
+            <a class="item"><i class="large cocktail icon"></i></a>
+            <img class="teamIcon" src="../../testImage/icon_black.png">
         </div>
-    </div>
 
+    </div>
 
 </div>
 
