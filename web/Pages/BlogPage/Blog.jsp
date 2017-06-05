@@ -62,36 +62,8 @@
     </div>
 </div>
 
-
 <script>
 
-//$('#Albums').click(function(){
-//    $.ajax({
-//        url:"Albums",
-//        method:"post",
-//        success:function (result) {
-//            $("#containerProfile").html(result)
-//        }
-//    });
-//});
-//$('#Profile').click(function(){
-//    $.ajax({
-//        url:"Profile",
-//        method:"post",
-//        success:function (result) {
-//            $("#containerProfile").html(result)
-//        }
-//    });
-//});
-//$('#Article').click(function(){
-//    $.ajax({
-//        url:"Article?action=create",
-//        method:"post",
-//        success:function (result) {
-//            $("#containerProfile").html(result)
-//        }
-//    });
-//});
 </script>
 </body>
 </html>

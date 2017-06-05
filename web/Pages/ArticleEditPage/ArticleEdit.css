@@ -3,8 +3,8 @@
  */
 
 #editor {
-	max-height: 250px;
-	height: 250px;
+	max-height: 600px;
+	height: 500px;
 	background-color: white;
 	border-collapse: separate; 
 	border: 1px solid rgb(204, 204, 204); 
@@ -17,6 +17,7 @@
 	overflow: scroll;
 	outline: none;
 }
+
 #voiceBtn {
   width: 20px;
   color: transparent;
@@ -39,4 +40,20 @@ div[data-role="editor-toolbar"] {
 
 .dropdown-menu a {
   cursor: pointer;
+}
+
+
+.content {
+    border: solid black 1px;
+    width: 800px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.image {
+    cursor: pointer;
+    width:40px;
+    height:40px
 }

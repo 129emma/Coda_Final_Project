@@ -36,7 +36,23 @@ public class AlbumsImageDAO {
         return allAlbumsImageList;
     }
 
+    public static Boolean checkAlbumsImage(AbstractDB db,String fileName,String username){
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsImage WHERE username=? AND fileName=?")) {
+                p.setString(1,username);
+                p.setString(2,fileName);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        return  true;
+                    }
+                }
+            }
 
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
     public static List<AlbumsImageInfo> getAlbumsImageList(AbstractDB db , String username) {

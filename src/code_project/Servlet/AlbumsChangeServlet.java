@@ -89,17 +89,18 @@ public class AlbumsChangeServlet extends HttpServlet {
         }
     }
 
+
+
     private void deleteAlbumsAudio(HttpServletRequest request, HttpServletResponse response, String username) {
         try {
             String audioFileName = request.getParameter("audioFileName");
             int id=Integer.valueOf(request.getParameter("audioID"));
             AlbumsAudioDAO.deleteAlbumsAudioInfo(mySQL, username, id);
-            //deleteFile(username, audioFileName);
+            deleteFile(username, audioFileName);
             response.sendRedirect("Albums");
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private void deleteAlbumsImage(HttpServletRequest request, HttpServletResponse response, String username) {
@@ -107,7 +108,7 @@ public class AlbumsChangeServlet extends HttpServlet {
             String imageFileName = request.getParameter("imageFileName");
             int id=Integer.valueOf(request.getParameter("imageID"));
             AlbumsImageDAO.deleteAlbumsImageInfo(mySQL, username, id);
-            //deleteFile(username, imageFileName);
+            deleteFile(username, imageFileName);
             response.sendRedirect("Albums");
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +120,7 @@ public class AlbumsChangeServlet extends HttpServlet {
             String videoFileName = request.getParameter("videoFileName");
             int id=Integer.valueOf(request.getParameter("videoID"));
             AlbumsVideoDAO.deleteAlbumsVideoInfo(mySQL, username, id);
-            //deleteFile(username, videoFileName);
+            deleteFile(username, videoFileName);
             response.sendRedirect("Albums");
         } catch (Exception e) {
             e.printStackTrace();
@@ -204,86 +205,99 @@ public class AlbumsChangeServlet extends HttpServlet {
 
     private String createImage(FileItem fileItem, String filePath, String username, String fileName) {
 
-
-        file = new File(filePath + fileName);
-        try {
-            fileItem.write(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        BufferedImage AlbumImage = null;
-        try {
-            AlbumImage = ImageIO.read(new File(filePath + fileName));
-
-            File outputfile = new File(filePath + fileName);
-            //check the size of the image
-            if ((AlbumImage.getWidth() > 400) || (AlbumImage.getHeight() > 400)) {
-
-                Double width = (double) AlbumImage.getWidth();
-                Double height = (double) AlbumImage.getHeight();
-                double r = (height / width) * 200;
-                BufferedImage image = new BufferedImage(200, (int) r, BufferedImage.TYPE_INT_RGB);
-                image.createGraphics().drawImage(ImageIO.read(new File(filePath + fileName)).getScaledInstance(200, (int) r, Image.SCALE_SMOOTH), 0, 0, null);
-                //write the thumbnail
-                ImageIO.write(image, "jpg", outputfile);
+        String fileAddress = "<img style='margin:auto' src='User-Info/" + username + "/" + fileName + "'>";
+        if(!AlbumsImageDAO.checkAlbumsImage(mySQL,fileName,username)){
+            file = new File(filePath + fileName);
+            try {
+                fileItem.write(file);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            String fileAddress = "<img style='margin:auto' src='User-Info/" + username + "/" + fileName + "'>";
-            AlbumsImageDAO.createAlbumsImageInfo(mySQL, username, "User-Info/" + username + "/" + fileName, fileName);
-            return fileAddress;
-        } catch (Exception e) {
-            return "Fail to upload the image!";
-        }
+            BufferedImage AlbumImage = null;
+            try {
+                AlbumImage = ImageIO.read(new File(filePath + fileName));
 
+                File outputfile = new File(filePath + fileName);
+                //check the size of the image
+                if ((AlbumImage.getWidth() > 400) || (AlbumImage.getHeight() > 400)) {
+
+                    Double width = (double) AlbumImage.getWidth();
+                    Double height = (double) AlbumImage.getHeight();
+                    double r = (height / width) * 200;
+                    BufferedImage image = new BufferedImage(200, (int) r, BufferedImage.TYPE_INT_RGB);
+                    image.createGraphics().drawImage(ImageIO.read(new File(filePath + fileName)).getScaledInstance(200, (int) r, Image.SCALE_SMOOTH), 0, 0, null);
+                    //write the thumbnail
+                    ImageIO.write(image, "jpg", outputfile);
+                }
+
+
+                AlbumsImageDAO.createAlbumsImageInfo(mySQL, username, "User-Info/" + username + "/" + fileName, fileName);
+
+            } catch (Exception e) {
+                return "Fail to upload the image!";
+            }
+        }
+        return fileAddress;
     }
 
     private String createVideo(FileItem fileItem, String fileName, String filePath, String username) {
-        try {
-            File file = new File(filePath + fileName);
-            fileItem.write(file);
-            String address = "<video width='400px' height='200px' controls >\n" +
-                    "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"video/mp4\">\n" +
-                    "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"video/ogg\">\n" +
-                    "  Your browser does not support the video tag.\n" +
-                    "</video>";
-            AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, "User-Info/" + username + "/" + fileName, fileName);
-            return address;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+
+        String address = "<video width='400px' height='200px' controls >\n" +
+                "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"video/mp4\">\n" +
+                "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"video/ogg\">\n" +
+                "  Your browser does not support the video tag.\n" +
+                "</video>";
+
+       if(!AlbumsVideoDAO.checkAlbumsVideo(mySQL,fileName,username)){
+           try {
+               File file = new File(filePath + fileName);
+               fileItem.write(file);
+               AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, "User-Info/" + username + "/" + fileName, fileName);
+               return address;
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
+        return address;
     }
 
 
-    private void createYoutube(HttpServletRequest request,HttpServletResponse response,String username) {
+    private void createYoutube(HttpServletRequest request,HttpServletResponse response,String username) throws IOException{
 
       String address=request.getParameter("youtubeAddress");
-      try {
-          AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, address,"No file");
-          response.setContentType("text/plain");
-          response.getWriter().write(address);
-      }catch (SQLException|IOException e){
-         e.printStackTrace();
+
+      if(!AlbumsVideoDAO.checkAlbumsYoutube(mySQL,address,username)){
+          try {
+              AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, address,"No file");
+
+          }catch (SQLException e){
+              e.printStackTrace();
+          }
       }
-
-
+        response.setContentType("text/plain");
+        response.getWriter().write(address);
     }
 
 
     private String createAudio(FileItem fileItem, String fileName, String filePath, String username) {
-        try {
-            File file = new File(filePath + fileName);
-            fileItem.write(file);
-            String address = "<div><audio controls width='200px'>\n" +
-                    "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"audio/ogg\">\n" +
-                    "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"audio/mpeg\">\n" +
-                    "  Your browser does not support the audio tag.\n" +
-                    "</audio><div>";
-            AlbumsAudioDAO.createAlbumsAudioInfo(mySQL, username,"User-Info/" + username + "/" + fileName , fileName);
-            return address;
-        } catch (Exception e) {
-            return "Fail to upload the audio!";
+
+        String address = "<div><audio controls width='200px'>\n" +
+                "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"audio/ogg\">\n" +
+                "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"audio/mpeg\">\n" +
+                "  Your browser does not support the audio tag.\n" +
+                "</audio><div>";
+        if (!AlbumsAudioDAO.checkAlbumsAudio(mySQL, fileName, username)) {
+
+            try {
+                File file = new File(filePath + fileName);
+                fileItem.write(file);
+                AlbumsAudioDAO.createAlbumsAudioInfo(mySQL, username, "User-Info/" + username + "/" + fileName, fileName);
+                return address;
+            } catch (Exception e) {
+                return "Fail to upload the audio!";
+            }
         }
+        return address;
     }
 }

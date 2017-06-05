@@ -55,6 +55,42 @@ public class AlbumsVideoDAO {
         return AlbumsVideoInfoList;
     }
 
+    public static Boolean checkAlbumsVideo(AbstractDB db,String fileName,String username){
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=? AND fileName=?")) {
+                p.setString(1,username);
+                p.setString(2,fileName);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        return  true;
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public static Boolean checkAlbumsYoutube(AbstractDB db,String address,String username){
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=? AND address=?")) {
+                p.setString(1,username);
+                p.setString(2,address);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        return  true;
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 
     public static void createAlbumsVideoInfo(AbstractDB db, String username,String address,String fileName) throws SQLException {
