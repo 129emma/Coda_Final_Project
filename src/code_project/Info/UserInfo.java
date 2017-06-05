@@ -35,8 +35,8 @@ public class UserInfo {
 		this.email = email;
 	}
 
-	public void setBirthDate(String date_birth) {
-		this.birthDate = date_birth;
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public void setGender(String tags) {

@@ -1,32 +1,32 @@
 package code_project.Info;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by txie936 on 25/05/2017.
  */
 public class ArticleInfo {
+    public int articleID;
+    public String content, postTime, tags, username, title, editArticle, deleteArticle, retrieveAddress;
 
-    private String articleID;
-    private String content;
-    private String postTime;
-    private String tags;
-    private String username;
-    private String title;
-
-  
-
-  
-
-
-    public ArticleInfo(String article_ID,String title,String content,String post_time,String tags,String username){
-        this.articleID=article_ID;
+    public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username) {
+        this.articleID = articleID;
+        this.title = title;
+        this.content = content;
+        this.postTime = post_time;
+        this.tags = tags;
+        this.username = username;
+        editArticle = "";
+        deleteArticle = "";
+        retrieveAddress = "Article?action=retrieve&articleID="+articleID;
+    }
+public ArticleInfo(String title,String content,String tags){
         this.title=title;
         this.content=content;
-        this.postTime=post_time;
         this.tags=tags;
-        this.username=username;
-    }
-
-    public String getArticleID() {
+}
+    public int getArticleID() {
         return articleID;
     }
 
@@ -46,8 +46,22 @@ public class ArticleInfo {
         return username;
     }
 
-    public void setArticleID(String article_ID) {
-        this.articleID = article_ID;
+    public String getTitle() {
+        return title;
+    }
+
+    public String getRetrieveAddress() { return retrieveAddress; }
+
+    public String getEditArticle() {
+        return editArticle;
+    }
+
+    public String getDeleteArticle() {
+        return deleteArticle;
+    }
+
+    public void setArticleID(int articleID) {
+        this.articleID = articleID;
     }
 
     public void setContent(String content) {
@@ -66,12 +80,25 @@ public class ArticleInfo {
         this.username = username;
     }
 
-
-    public String getTitle() {
-        return title;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void setEditArticle(String username) {
+        if (this.username.equals(username)) {
+            editArticle = "<a href=\"Article?action=edit&articleID=" + articleID + "&commentID=" + articleID + "\">Edit</a>";
+        }
+    }
+
+    public void setDeleteArticle(String username) {
+        if (this.username.equals(username)) {
+            deleteArticle = "<a href=\"Article?action=delete&articleID=" + articleID + "&commentID=" + articleID + "\">delete</a>";
+        }
+    }
+
+    public void setRetrieveArticle(String retrieveArticle) {
+        this.retrieveAddress = retrieveArticle;
+    }
+
+
 }

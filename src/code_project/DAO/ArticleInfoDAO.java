@@ -14,9 +14,6 @@ import java.util.Date;
  */
 public class ArticleInfoDAO {
 
-
-
-
     public static List<ArticleInfo> getArticleInfoList(AbstractDB db ,String username) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
@@ -34,7 +31,27 @@ public class ArticleInfoDAO {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-         return articleInfoList;
+        return articleInfoList;
+    }
+
+    public static List<ArticleInfo> getSpotlightArticleInfoList(AbstractDB db ,int pageNumber) {
+
+        List<ArticleInfo> articleInfoList = new ArrayList<>();
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article ORDER BY articleID ASC LIMIT 10 OFFSET ?")) {
+                p.setInt(1,pageNumber);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        articleInfoList.add(ArticleInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return articleInfoList;
     }
 
 
@@ -54,15 +71,13 @@ public class ArticleInfoDAO {
         }
     }
 
-
-    public static ArticleInfo getArticleInfo(AbstractDB db, String username,String articleID) {
+    public static ArticleInfo getArticleInfo(AbstractDB db,String articleID) {
 
         ArticleInfo articleInfo = null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username = ?AND articleID=?")) {
-                p.setString(1, username);
-                p.setString(2, articleID);
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE articleID=?")) {
+                p.setString(1, articleID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         articleInfo = ArticleInfoFromResultSet(r);
@@ -76,7 +91,7 @@ public class ArticleInfoDAO {
         return articleInfo;
     }
 
-    public static void updateArticleInfo(AbstractDB db,String article_ID,String content,String title, String postTime, String tags,String username) throws SQLException {
+    public static void updateArticleInfo(AbstractDB db,String articleID,String content,String title, String postTime, String tags,String username) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("UPDATE Article set content =?, title=?,postTime=?, tags=? WHERE username = ? AND articleID=?;")) {
                 p.setString(1, content);
@@ -84,7 +99,7 @@ public class ArticleInfoDAO {
                 p.setString(3, postTime);
                 p.setString(5, username);
                 p.setString(4, tags);
-                p.setString(6, article_ID);
+                p.setString(6, articleID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -92,30 +107,28 @@ public class ArticleInfoDAO {
         }
     }
 
-
-    public static void deleteArticleInfo(AbstractDB db, String username,String article_ID) throws SQLException {
+    public static void deleteArticleInfo(AbstractDB db, String username,String articleID) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM Article WHERE username = ? AND articleID=?;")) {
                 p.setString(1, username);
-                p.setString(2, article_ID);
+                p.setString(2, articleID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
+
     private static ArticleInfo ArticleInfoFromResultSet(ResultSet r) throws SQLException {
         return new ArticleInfo(
-                r.getString("articleID"),
+                r.getInt("articleID"),
                 r.getString("title"),
                 r.getString("content"),
                 r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
                 r.getString("tags"),
                 r.getString("username")
-                );
+        );
     }
-
-
 
     public static String getCurrentTimeStamp() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());

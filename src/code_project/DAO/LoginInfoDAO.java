@@ -10,9 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Allows us to get articles from elsewhere in the code without worrying about SQL statements.
- */
+
 public class LoginInfoDAO {
 
     public static List<String> getUsernameList(AbstractDB db) {
@@ -50,7 +48,7 @@ public class LoginInfoDAO {
 
     public static void createLoginInfo(AbstractDB db, String username, byte[] password , byte[] salt,String icon) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo (username, password, salt,icon) VALUE (?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo (username, password, salt,icon) VALUE (?,?,?,?);")) {
                 p.setString(1, username);
                 p.setBytes(2, password);
                 p.setBytes(3, salt);

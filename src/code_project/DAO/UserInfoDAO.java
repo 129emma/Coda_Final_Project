@@ -8,17 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
-/**
- * Allows us to get articles from elsewhere in the code without worrying about SQL statements.
- */
 public class UserInfoDAO {
 
-    /**
-     * Gets all {@link UserInfo}s from the given {@link AbstractDB}.
-     *
-     * @param db
-     * @return
-     */
     public static List<UserInfo> getUserInfoList(AbstractDB db) {
 
         List<UserInfo> userInfoList = new ArrayList<>();
@@ -65,13 +56,13 @@ public class UserInfoDAO {
         return userInfo;
     }
 
-    public static void updateUserInfo(AbstractDB db, String username,String firstName, String lastName, String email, String birth_date, String gender) throws SQLException {
+    public static void updateUserInfo(AbstractDB db, String username,String firstName, String lastName, String email, String birthDate, String gender) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo set firstName = ?, lastName=?, email=?, birthDate=?, gender = ? WHERE username = ?;")) {
                 p.setString(1, firstName);
                 p.setString(2, lastName);
                 p.setString(3, email);
-                p.setString(4, birth_date);
+                p.setString(4, birthDate);
                 p.setString(5, gender);
                  p.setString(6, username);
                 p.executeUpdate();
@@ -95,7 +86,7 @@ public class UserInfoDAO {
 
     public static void deleteUserInfo(AbstractDB db, String username) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE * FROM UserInfo WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM UserInfo WHERE username = ?;")) {
                 p.setString(1, username);
                 p.executeUpdate();
             }
@@ -105,14 +96,6 @@ public class UserInfoDAO {
     }
 
 
-    /**
-     * 
-     * Extract a {@link UserInfo} object from a given {@link ResultSet}
-     *
-     * @param r The {@link ResultSet} to extract a {@link UserInfo} from
-     * @return A valid {@link UserInfo} object, representing a row from the {@link ResultSet}
-     * @throws SQLException Generated in the case of an out-of-bounds column index, or for an invalid {@link ResultSet}
-     */
     private static UserInfo userInfoFromResultSet(ResultSet r) throws SQLException {
         return new UserInfo(
                 r.getString("username"),
