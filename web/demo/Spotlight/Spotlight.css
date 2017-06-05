@@ -1,0 +1,24 @@
+
+ul.userChoice {
+    list-style: none;
+}
+li {
+    display: inline;
+    padding: 30px;
+}
+
+.ui.basic.button {
+    box-shadow: none;
+}
+
+.ui.basic.button:hover{
+    box-shadow: none !important;
+}
+
+.ui.text.container {
+    padding-top: 50px;
+}
+
+img.userAvatar {
+    height: 100px;
+}

@@ -1,5 +1,5 @@
-body.pushable > .pusher {
-     background: silver;
+body.pushable > .pusher { /*Background Color*/
+     background: #e2dcd6;
 }
 
 .ui.menu{
@@ -14,24 +14,24 @@ body.pushable > .pusher {
     display: none;
 }
 
-img.teamIcon {
+img.teamIcon { /*Team Icon in Menu*/
     height: 30px;
     margin-top: 10px;
     margin-left: 800px;
 }
 
-.ui.vertical.masthead.center.aligned {
+.ui.vertical.masthead.center.aligned { /*Menu bottom border*/
     border-bottom: solid 2px gainsboro;
     height: 50px;
 }
 
-img.sideBarIcon {
+img.sideBarIcon {/*Team Icon in Side Bar*/
     height: 30px;
     margin-top: 10px;
     margin-left: 10px;
 }
 
-a.toc.item {
+a.toc.item { /*Side Bar Icon invisible*/
     display: none !important;
 }
 
@@ -41,12 +41,12 @@ a.toc.item {
 
 /*Side Bar Color*/
 .ui.sidebar.vertical.menu.left.uncover.visible {
-    background-color: #6FC5D3;
+    background-color: #DCD6D2;
 }
 
 @media only screen and (max-width: 700px) {
 
-    a.item{
+    .iconClass{
         display: none !important;
     }
 
