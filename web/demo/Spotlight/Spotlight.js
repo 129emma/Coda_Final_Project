@@ -4,7 +4,7 @@
 $(document).ready(function () {
     $('.ui.sticky').each(function () {
         $(this).sticky({
-            context: '.example2',
+            context: '.keepContent',
             pushing: true
         });
     });
