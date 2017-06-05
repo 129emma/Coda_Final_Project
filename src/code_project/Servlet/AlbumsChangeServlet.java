@@ -96,8 +96,7 @@ public class AlbumsChangeServlet extends HttpServlet {
             String audioFileName = request.getParameter("audioFileName");
             int id=Integer.valueOf(request.getParameter("audioID"));
             AlbumsAudioDAO.deleteAlbumsAudioInfo(mySQL, username, id);
-            deleteFile(username, audioFileName);
-            response.sendRedirect("Albums");
+            deleteFile(username, audioFileName,response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,8 +107,7 @@ public class AlbumsChangeServlet extends HttpServlet {
             String imageFileName = request.getParameter("imageFileName");
             int id=Integer.valueOf(request.getParameter("imageID"));
             AlbumsImageDAO.deleteAlbumsImageInfo(mySQL, username, id);
-            deleteFile(username, imageFileName);
-            response.sendRedirect("Albums");
+            deleteFile(username, imageFileName,response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -120,18 +118,23 @@ public class AlbumsChangeServlet extends HttpServlet {
             String videoFileName = request.getParameter("videoFileName");
             int id=Integer.valueOf(request.getParameter("videoID"));
             AlbumsVideoDAO.deleteAlbumsVideoInfo(mySQL, username, id);
-            deleteFile(username, videoFileName);
-            response.sendRedirect("Albums");
+            deleteFile(username, videoFileName,response);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void deleteFile(String username, String fileName) {
+    private void deleteFile(String username, String fileName,HttpServletResponse response) {
         ServletContext servletContext = getServletContext();
         String imagePath = servletContext.getRealPath("/User-Info/" + username + "/");
         File file = new File(imagePath + fileName);
         file.delete();
+        try {
+            response.sendRedirect("Albums?action=load");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -206,7 +209,7 @@ public class AlbumsChangeServlet extends HttpServlet {
     private String createImage(FileItem fileItem, String filePath, String username, String fileName) {
 
         String fileAddress = "<img style='margin:auto' src='User-Info/" + username + "/" + fileName + "'>";
-        if(!AlbumsImageDAO.checkAlbumsImage(mySQL,fileName,username)){
+        if(!checkFile(filePath,fileName)){
             file = new File(filePath + fileName);
             try {
                 fileItem.write(file);
@@ -230,10 +233,7 @@ public class AlbumsChangeServlet extends HttpServlet {
                     //write the thumbnail
                     ImageIO.write(image, "jpg", outputfile);
                 }
-
-
                 AlbumsImageDAO.createAlbumsImageInfo(mySQL, username, "User-Info/" + username + "/" + fileName, fileName);
-
             } catch (Exception e) {
                 return "Fail to upload the image!";
             }
@@ -249,7 +249,7 @@ public class AlbumsChangeServlet extends HttpServlet {
                 "  Your browser does not support the video tag.\n" +
                 "</video>";
 
-       if(!AlbumsVideoDAO.checkAlbumsVideo(mySQL,fileName,username)){
+       if(!checkFile(filePath,fileName)){
            try {
                File file = new File(filePath + fileName);
                fileItem.write(file);
@@ -287,8 +287,7 @@ public class AlbumsChangeServlet extends HttpServlet {
                 "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"audio/mpeg\">\n" +
                 "  Your browser does not support the audio tag.\n" +
                 "</audio><div>";
-        if (!AlbumsAudioDAO.checkAlbumsAudio(mySQL, fileName, username)) {
-
+        if (!checkFile(filePath,fileName)){
             try {
                 File file = new File(filePath + fileName);
                 fileItem.write(file);
@@ -300,4 +299,20 @@ public class AlbumsChangeServlet extends HttpServlet {
         }
         return address;
     }
+
+    private boolean checkFile(String filePath,String fileName){
+        File folder = new File(filePath);
+        if(folder.listFiles()!=null){
+            File[] listOfFiles = folder.listFiles();
+            for (File file : listOfFiles) {
+                if (file.isFile()) {
+                    if(file.getName().equals(fileName)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }

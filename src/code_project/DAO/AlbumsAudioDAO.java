@@ -18,25 +18,6 @@ import java.util.List;
 public class AlbumsAudioDAO {
 
 
-    public static Boolean checkAlbumsAudio(AbstractDB db,String fileName,String username){
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio WHERE username=? AND fileName=?")) {
-                p.setString(1,username);
-                p.setString(2,fileName);
-                try (ResultSet r = p.executeQuery()) {
-                    while (r.next()) {
-                       return  true;
-                    }
-                }
-            }
-
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        return false;
-
-    }
 
     public static List<AlbumsAudioInfo> getAllAlbumsAudioList(AbstractDB db,String sort){
 

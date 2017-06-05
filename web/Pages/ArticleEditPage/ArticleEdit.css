@@ -54,6 +54,12 @@ div[data-role="editor-toolbar"] {
 
 .image {
     cursor: pointer;
-    width:40px;
-    height:40px
+    width:18px;
+    height:18px;
+}
+.myLabel{
+    margin: 0;
+}
+.input{
+    display: none;
 }

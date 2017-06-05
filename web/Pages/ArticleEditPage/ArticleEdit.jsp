@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <title>Article Edit</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" href="//mindmup.s3.amazonaws.com/lib/img/apple-touch-icon.png" />
     <link href="${pageContext.request.contextPath}/Pages/ArticleEditPage/google-code-prettify/prettify.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -17,15 +16,8 @@
     <script src="${pageContext.request.contextPath}/Pages/ArticleEditPage/google-code-prettify/run_prettify.js"></script>
     <link href="${pageContext.request.contextPath}/Pages/ArticleEditPage/ArticleEdit.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/Pages/ArticleEditPage/bootstrap-wysiwyg.js"></script>
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-
   </head>
   <body>
-
-
 
     <form action="/Article" method="post" onsubmit="prepareContent()">
 
@@ -36,26 +28,6 @@
             <div id="alerts"></div>
             <p>Title: <input required type="text" id="title" name="title" placeholder="Please Enter Your Title"
                              value="${articleInfo.title}" style="width: 300px;"/></P>
-
-            <label for="image-input">
-              <img class="image" title="add image" src="http://www.hugorc.es/static/images/galeria2.png" >
-            </label>
-            <input style=" display: none; " id="image-input" class="input" type="file" accept=".jpg, .gif,.png">
-
-            <label for="audio-input">
-              <img class="image" title="add video" src="http://www.iconsfind.com/wp-content/uploads/2016/04/20160405_57033268db0ea.png" />
-            </label>
-            <input id="audio-input" style=" display: none; " class="input" type="file" accept=".mp3,.wav">
-
-            <label for="video-input">
-              <img class="image" title="add video" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Circle-icons-videocameracompact.svg/1000px-Circle-icons-videocameracompact.svg.png"/>
-            </label>
-            <input id="video-input" style=" display: none; " class="input" type="file" accept=".ogg,.mp4">
-
-
-            <img class="image" title="add youtube video" src="https://cdn3.iconfinder.com/data/icons/social-icons-5/606/YouTube.png"  onclick="readLink()"/>
-
-
             <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
               <div class="btn-group">
                 <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
@@ -95,18 +67,31 @@
                   <button class="btn" type="button">Add</button>
                 </div>
                 <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
-
               </div>
 
-              <div class="btn-group">
-                <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
-                <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+              <div class="btn-group" onclick="readLink()">
+                <a class="btn" title="Insert Youtube video"><img class="image" src="http://internetvi.ru/wp-content/uploads/2012/06/e33c1de5c8bd4c4c0bdaba9cd3657a6d.png"/></a>
               </div>
 
+              <div class="btn-group" >
+                <a class="btn" title="Insert image"><label for="image-input" class="myLabel">
+                  <img class="image" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" >
+                </label>
+                  <input  id="image-input"  class="input" type="file" accept=".jpg, .gif,.png"></a>
+              </div>
 
-
-
-
+              <div class="btn-group" >
+                <a class="btn" title="Insert audio"><label for="audio-input" class="myLabel">
+                  <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/1024px-Speaker_Icon.svg.png" >
+                </label>
+                  <input id="audio-input"  class="input" type="file" accept=".mp3,.wav"></a>
+              </div>
+              <div class="btn-group" >
+                <a class="btn" title="Insert video"><label for="video-input" class="myLabel">
+                  <img class="image" src="http://simpleicon.com/wp-content/uploads/video.png" >
+                </label>
+                  <input id="video-input"  class="input" type="file" accept=".ogg,.mp4"></a>
+              </div>
 
               <div class="btn-group">
                 <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
@@ -119,19 +104,19 @@
               ${articleInfo.content}
             </div>
 
-            Tag:<select class="selectpicker" data-width="150px" name="tag">
-            <option data-icon="glyphicon-film" value="Movie">Movie</option>
-            <option data-icon="glyphicon-cutlery" value="Food">Food</option>
-            <option data-icon="glyphicon-globe" value="Science">Science</option>
-            <option data-icon="glyphicon-phone" value="Technology">Technology</option>
-            <option data-icon="glyphicon-piggy-bank" value="Business">Business</option>
-            <option data-icon="glyphicon-heart" value="Heaish">Health</option>
-            <option data-icon="glyphicon-music" value="Music">Music</option>
-            <option data-icon="glyphicon-education" value="Education">Education</option>
-            <option data-icon="glyphicon-option-horizontal" value="Other">Other</option>
+            Tag:<select  width="150px" name="tag">
+            <option  value="Movie">Movie</option>
+            <option  value="Food">Food</option>
+            <option  value="Science">Science</option>
+            <option value="Technology">Technology</option>
+            <option  value="Business">Business</option>
+            <option  value="Heaish">Health</option>
+            <option  value="Music">Music</option>
+            <option  value="Education">Education</option>
+            <option  value="Other">Other</option>
           </select>
             ${hiddenElement}
-            ${submitElement}
+            <div style="float: right" >${submitElement}</div>
             ${deleteElement}
           </div>
         </div>
