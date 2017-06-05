@@ -52,7 +52,7 @@ public class BlogServlet extends HttpServlet {
         request.setAttribute("UserInfo", userInfo);
         request.setAttribute("articleInfoList", articleInfoList);
         //request.setAttribute("commentInfoListOFAllArticle",commentInfoListOFAllArticle);
-        request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
+        request.getRequestDispatcher("Pages/BlogPage/BlogOld.jsp").forward(request, response);
     }
 
     private void retrieveHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -63,7 +63,7 @@ public class BlogServlet extends HttpServlet {
         request.setAttribute("UserInfo", userInfo);
         request.setAttribute("articleInfoList", articleInfoList);
         //request.setAttribute("commentInfoListOFAllArticle",commentInfoListOFAllArticle);
-        request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
+        request.getRequestDispatcher("Pages/BlogPage/BlogOld.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

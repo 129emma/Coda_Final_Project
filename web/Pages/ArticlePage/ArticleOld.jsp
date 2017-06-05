@@ -11,7 +11,7 @@
 <head>
     <title>Blog Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
-    <link rel="stylesheet" href="Article.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Article.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
     <script src="Article.js"></script>
