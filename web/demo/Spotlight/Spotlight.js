@@ -7,5 +7,12 @@ $(document).ready(function () {
             context: '.example2',
             pushing: true
         });
-    })
+    });
+
+    $('.userAvatarToHover').popup({
+            popup : $('.custom.popup'),
+            on    : 'click'
+
+    });
+
 });
