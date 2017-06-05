@@ -11,6 +11,7 @@
     <title>Update Page</title>
 </head>
 <body>
+<jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
 <form id="form" action="ChangePassword" method="post">
     <fieldset>
         <legend>Your details</legend>

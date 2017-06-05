@@ -12,10 +12,10 @@
     <title>UserAlbums</title>
 </head>
 <body>
-
+<jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
 <h2>Your Albums</h2>
     <c:forEach var="albumsImage" items="${albumsImageInfoList}">
-            <div >${albumsImage.address}</div>|
+            <div>${albumsImage.address}</div>|
             <a href="AlbumsChange?albumsImageId=${albumsImage.id}&action=deleteImage"> Click to delete the image</a>|
     </c:forEach>
 <br><br>

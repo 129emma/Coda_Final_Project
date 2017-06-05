@@ -119,16 +119,19 @@ public class ArticleServlet extends HttpServlet {
     }
 
     private void createArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (((String) request.getHeader("referer")).contains("Blog")) {
+
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+        String tag = request.getParameter("tag");
+
+        if (content==null||content.isEmpty()) {
             String submitElement = "<input type='submit' name='action' value='create'/>";
             request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
             return;
         }
 
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        String tag = request.getParameter("tag");
+
         try {
             ArticleInfoDAO.createArticleInfo(mySQL, title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, (String) session.getAttribute("username"));
             response.sendRedirect("Blog");

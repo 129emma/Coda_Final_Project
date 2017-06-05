@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <link rel="stylesheet" type="text/css" href="testPage.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
+    <script src="testPage.js"></script>
+</head>
+<body class="full">
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        <div class="ui text container">
+            <h1 class="ui inverted header">
+                Coda Team
+            </h1>
+            <h2>Do whatever you want when you want to.</h2>
+
+            <div class="twoButtons">
+                <div id="loginBtn" class="huge ui animated  inverted button" tabindex="0">
+                    <a class="visible content">Login</a>
+                    <div class="hidden content">
+                        <i class="right arrow icon"></i>
+                    </div>
+                </div>
+                <div id="registerBtn" class="huge ui animated  inverted button" tabindex="0">
+                    <a class="visible content">Sign Up</a>
+                    <div class="hidden content">
+                        <i class="right arrow icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui small modal" id="login">
+    <form action="Login" method="post">
+        <div class="login-block">
+            <h1>Login</h1>
+            <div>
+                <input type="text" name="username" id="username" placeholder="Username"/>
+                <input type="password" name="password" id="password" placeholder="Password"/>
+            </div>
+            <input id="button" type="submit" value="login" name="action"/>
+            <p>No account yet? Register <a href="Pages/RegisterPage/Register.jsp">HERE</a></p>
+            <!--<p style="color: #ff7c60;">${sessionScope.loginMessage}</p>-->
+            <!--<p style="color: #68ff61;">${sessionScope.logoutMessage}</p>-->
+        </div>
+    </form>
+</div>
+<div class="ui small modal" id="register">
+    <form action="Login" method="post">
+        <div class="login-block">
+            <h1>Your Details</h1>
+            <p>Don't panic:) We do respect your privacy! Read Terms&Conditions <a href="Terms&Conditions.html">HERE</a>
+            </p>
+            <div>
+                <input type="text" name="username" id="username" placeholder="Username"/>
+                <input type="password" name="password" id="password" placeholder="Password"/>
+            </div>
+            <input id="button" type="submit" value="register" name="action"/>
+            <p>Already registered? Login <a href="Pages/LoginPage/Login.jsp">HERE</a></p>
+            <!--<p style="color: #ff4758;">${sessionScope.RegisterMessage}</p>-->
+        </div>
+    </form>
+</div>
+</body>
+</html>
