@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,8 +48,22 @@ public class LoginServlet extends HttpServlet {
             case "register":
                 registerProcess(request, response);
                 break;
+            case "verify":
+                verifyProcess(request,response);
+                break;
             default:
                 request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
+        }
+    }
+
+    private void verifyProcess(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/plain");
+        Writer out = response.getWriter();
+        String username = request.getParameter("username");
+        if(LoginInfoDAO.verifyUsernameExistence(mySQL,username)){
+            out.write("Username already existed, please pick another one");
+        }else{
+            out.write("Username is available");
         }
     }
 
@@ -73,8 +88,7 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("message", "Success to create account");
                     request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
                 } catch (SQLException e) {
-                    request.setAttribute("message", "Username already exist, please pick another one");
-                    request.getRequestDispatcher("Pages/RegisterPage/Register.jsp").forward(request, response);
+                    response.sendError(500,e.getMessage());
                 }
                 break;
         }

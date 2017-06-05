@@ -21,16 +21,21 @@ public class ArticleInfo {
         this.postTime = post_time;
         this.tags = tags;
         this.username = username;
+
+        this.preview = content;
+        this.editArticle = "";
+
+        this.deleteArticle = "";
+        this.retrieveAddress = "Article?action=retrieve&articleID=" + articleID;
+    }
+
+    public void setPreview(String content) {
         int defaultEndIndex;
         if((defaultEndIndex=content.indexOf(" ",200))!= -1){
             defaultEndIndex = 200;
         }
         int endIndex = Math.min(content.length()-1,defaultEndIndex);
-        preview = content;
-        editArticle = "";
-
-        deleteArticle = "";
-        retrieveAddress = "Article?action=retrieve&articleID=" + articleID;
+        this.preview = preview;
     }
 
     public ArticleInfo(String title, String content, String tags) {
