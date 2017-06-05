@@ -29,18 +29,18 @@
             crossorigin="anonymous"></script>
 
 
-    <script src="Pages/BlogPage/Blog.js"></script>
+    <script src="${pageContext.request.contextPath}/Pages/BlogPage/Blog.js"></script>
     <script>
         var page = '${page}';
     </script>
-    <link rel="stylesheet" href="Pages/BlogPage/Blog.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/BlogPage/Blog.jsp" type="text/css">
 
 </head>
 
 <body>
 
 
-<jsp:include page="/Pages/NavBar/title.jsp">
+<jsp:include page="${pageContext.request.contextPath}/Pages/NavBar/title.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
 

@@ -3,31 +3,28 @@
  */
 
 $(document).ready(function () {
-    console.log("1");
     $("#UsernameInput").blur(function () {
-        console.log($(this).val());
-        verifyUsername($(this).val());
-        console.log("2");
+        if ($('#UsernameInput').val() != "") {
+            verifyUsername($(this).val());
+        }
     })
 });
 
 function verifyUsername(username) {
-    console.log("3");
     $.ajax({
-        url: 'Login',
+        url: '/Login',
         type: 'post',
         data: {action: 'verify', username: username},
         success: function (message) {
-            console.log("4");
-            if(message!="Username is available"){
-                console.log("5");
-                $("#RegisterButton").attr('disabled', 'disabled');
-                $("#Message").css("color", "red").text(message);
-            }else{
-                $("#RegisterButton").removeAttr('disabled');
+            var message = message;
+            if (message.includes("available")) {
+                $("#button").removeAttr('disabled');
                 $("#Message").css("color", "green").text(message);
+            } else {
+                $("#button").attr('disabled', 'disabled');
+                $("#Message").css("color", "red").text(message);
             }
-            console.log("6");
+            $("#Message").text(message);
         }
     });
 }

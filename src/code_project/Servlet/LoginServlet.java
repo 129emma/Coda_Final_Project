@@ -60,10 +60,11 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/plain");
         Writer out = response.getWriter();
         String username = request.getParameter("username");
+
         if(LoginInfoDAO.verifyUsernameExistence(mySQL,username)){
-            out.write("Username already existed, please pick another one");
+            out.write("Username: "+username+" already existed, please pick another one");
         }else{
-            out.write("Username is available");
+            out.write("Username: "+username+" is available");
         }
     }
 

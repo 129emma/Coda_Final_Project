@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 function loadArticles() {
     $.ajax({
-        url: 'Article',
+        url: '/Article',
         type: 'post',
         data: {action: 'preview', articleNumber: articlesNum, page: page},
         success: function (articlesPreview) {
