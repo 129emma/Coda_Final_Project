@@ -23,6 +23,8 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
+    <script src="Pages/ArticleEditPage/bootstrap-wysiwyg.js"></script>
+
 
     <style>
         .content {
@@ -50,16 +52,18 @@
     </style>
 
 </head>
-<body>
+<body onload="wyi()">
 
 <jsp:include page="/Pages/NavBar/title.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
 <div class="center">
+
+
     <form action="Article" method="post" onsubmit="prepareContent()">
 
             <h2>Your article</h2>
-            <p>Title: <input type="text" id="title" name="title" placeholder="Please Enter Your Title"
+            <p>Title: <input required type="text" id="title" name="title" placeholder="Please Enter Your Title"
                              value="${articleInfo.title}" style="width: 300px;"/></P>
 
             <label for="image-input">
@@ -84,7 +88,8 @@
             <div id="content" class="content" contenteditable="true">${articleInfo.content}
             </div>
             <input type="hidden" name="content" id="articleContentSubmit">
-            Tag:<select class="selectpicker" data-style="btn-primary" data-width="100px" name="tag">
+
+            Tag:<select class="selectpicker" data-style="btn-primary" data-width="150px" name="tag">
             <option data-icon="glyphicon-film" value="Movie">Movie</option>
             <option data-icon="glyphicon-cutlery" value="Food">Food</option>
             <option data-icon="glyphicon-globe" value="Science">Science</option>
@@ -106,7 +111,9 @@
 </div>
 
 <script>
-
+function wyi() {
+    $('#content').wysiwyg();
+}
     $('.input').each(function () {
         $(this).change(function () {
             var data = new FormData();

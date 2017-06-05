@@ -23,5 +23,7 @@
     <orderEntry type="library" name="lib (4)" level="project" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="bootstrap-select" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>

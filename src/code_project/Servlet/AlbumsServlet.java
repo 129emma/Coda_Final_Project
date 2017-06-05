@@ -26,12 +26,14 @@ public class AlbumsServlet extends HttpServlet {
         response.setContentType("text/html");
 
             List<AlbumsImageInfo> albumsImageInfoList= AlbumsImageDAO.getAlbumsImageList(DB,username);
-            List<AlbumsVideoInfo> albumsVideoInfoList= AlbumsVideoDAO.getAlbumsImageList(DB,username);
+            List<AlbumsVideoInfo> albumsVideoInfoList= AlbumsVideoDAO.getAlbumsVideoList(DB,username);
+            List<AlbumsVideoInfo> albumsYoutubeList=AlbumsVideoDAO.getYoutubeList(DB,username);
             List<AlbumsAudioInfo> albumsAudioInfoList=AlbumsAudioDAO.getAlbumsAudioList(DB,username);
 
             request.setAttribute("albumsImageInfoList",albumsImageInfoList);
             request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
             request.setAttribute("albumsAudioInfoList",albumsAudioInfoList);
+            request.setAttribute("albumsYoutubeList",albumsYoutubeList);
 
             request.getRequestDispatcher("Pages/AlbumsPage/Albums.jsp").forward(request, response);
 

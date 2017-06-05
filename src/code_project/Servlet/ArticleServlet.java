@@ -125,7 +125,7 @@ public class ArticleServlet extends HttpServlet {
         String tag = request.getParameter("tag");
 
         if (content==null||content.isEmpty()) {
-            String submitElement = "<input class=\"btn btn-primary\" type='submit' name='action' value='Create'/>";
+            String submitElement = "<input class=\"btn btn-primary\" type='submit' name='action' value='create'/>";
             request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
             return;

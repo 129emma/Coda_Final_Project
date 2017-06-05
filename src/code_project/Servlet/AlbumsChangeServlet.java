@@ -94,7 +94,7 @@ public class AlbumsChangeServlet extends HttpServlet {
             String audioFileName = request.getParameter("audioFileName");
             int id=Integer.valueOf(request.getParameter("audioID"));
             AlbumsAudioDAO.deleteAlbumsAudioInfo(mySQL, username, id);
-            deleteFile(username, audioFileName);
+            //deleteFile(username, audioFileName);
             response.sendRedirect("Albums");
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,7 +107,7 @@ public class AlbumsChangeServlet extends HttpServlet {
             String imageFileName = request.getParameter("imageFileName");
             int id=Integer.valueOf(request.getParameter("imageID"));
             AlbumsImageDAO.deleteAlbumsImageInfo(mySQL, username, id);
-            deleteFile(username, imageFileName);
+            //deleteFile(username, imageFileName);
             response.sendRedirect("Albums");
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +119,7 @@ public class AlbumsChangeServlet extends HttpServlet {
             String videoFileName = request.getParameter("videoFileName");
             int id=Integer.valueOf(request.getParameter("videoID"));
             AlbumsVideoDAO.deleteAlbumsVideoInfo(mySQL, username, id);
-            deleteFile(username, videoFileName);
+            //deleteFile(username, videoFileName);
             response.sendRedirect("Albums");
         } catch (Exception e) {
             e.printStackTrace();
@@ -230,7 +230,7 @@ public class AlbumsChangeServlet extends HttpServlet {
             }
 
             String fileAddress = "<img style='margin:auto' src='User-Info/" + username + "/" + fileName + "'>";
-            AlbumsImageDAO.createAlbumsImageInfo(mySQL, username, fileAddress, fileName);
+            AlbumsImageDAO.createAlbumsImageInfo(mySQL, username, "User-Info/" + username + "/" + fileName, fileName);
             return fileAddress;
         } catch (Exception e) {
             return "Fail to upload the image!";
@@ -247,7 +247,7 @@ public class AlbumsChangeServlet extends HttpServlet {
                     "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"video/ogg\">\n" +
                     "  Your browser does not support the video tag.\n" +
                     "</video>";
-            AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, address, fileName);
+            AlbumsVideoDAO.createAlbumsVideoInfo(mySQL, username, "User-Info/" + username + "/" + fileName, fileName);
             return address;
         } catch (Exception e) {
             e.printStackTrace();
@@ -280,7 +280,7 @@ public class AlbumsChangeServlet extends HttpServlet {
                     "  <source src=\"User-Info/" + username + "/" + fileName + "\" type=\"audio/mpeg\">\n" +
                     "  Your browser does not support the audio tag.\n" +
                     "</audio><div>";
-            AlbumsAudioDAO.createAlbumsAudioInfo(mySQL, username, address, fileName);
+            AlbumsAudioDAO.createAlbumsAudioInfo(mySQL, username,"User-Info/" + username + "/" + fileName , fileName);
             return address;
         } catch (Exception e) {
             return "Fail to upload the audio!";

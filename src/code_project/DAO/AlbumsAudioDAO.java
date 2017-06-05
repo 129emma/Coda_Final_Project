@@ -17,6 +17,25 @@ import java.util.List;
  */
 public class AlbumsAudioDAO {
 
+    public static List<AlbumsAudioInfo> getAllAlbumsAudioList(AbstractDB db,String sort){
+
+        List<AlbumsAudioInfo> allAlbumsAudioList = new ArrayList<>();
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio ORDER BY ?")) {
+                p.setString(1,sort);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        allAlbumsAudioList.add(AlbumsAudioInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return allAlbumsAudioList;
+    }
+
     public static List<AlbumsAudioInfo> getAlbumsAudioList(AbstractDB db , String username) {
 
         List<AlbumsAudioInfo> AlbumsAudioInfoList = new ArrayList<>();
@@ -97,6 +116,8 @@ public class AlbumsAudioDAO {
                 r.getDate("postTime").toString()+" "+r.getTime("postTime").toString()
         );
     }
+
+
     private static String getCurrentTimeStamp() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }

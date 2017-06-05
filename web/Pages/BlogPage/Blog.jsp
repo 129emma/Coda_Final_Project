@@ -33,13 +33,13 @@
 <div class="container" id="containerProfile">
 
     <div class="col-xs-12 col-md-3 panel panel-default">
-        <img class="img-circle img-responsive" src="" alt="avatar" id="image">
+        <img class="img-circle img-responsive" src='${UserInfo.icon}' alt="avatar" id="image">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Profile</h3>
             </div>
             <div class="panel-body" id="profile_content">
-                <p><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Full Name</p>
+                <p><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ${UserInfo.username}</p>
                 <p><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Location</p>
             </div>
         </div>

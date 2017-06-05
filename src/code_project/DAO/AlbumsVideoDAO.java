@@ -17,13 +17,30 @@ import java.util.List;
  */
 public class AlbumsVideoDAO {
 
+    public static List<AlbumsVideoInfo> getAllAlbumsVideoList(AbstractDB db,String sort){
 
-    public static List<AlbumsVideoInfo> getAlbumsImageList(AbstractDB db , String username) {
+        List<AlbumsVideoInfo> allAlbumsVideoList = new ArrayList<>();
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo ORDER BY ?")) {
+                p.setString(1,sort);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        allAlbumsVideoList.add(AlbumsVideoInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return allAlbumsVideoList;
+    }
+    public static List<AlbumsVideoInfo> getAlbumsVideoList(AbstractDB db , String username) {
 
         List<AlbumsVideoInfo> AlbumsVideoInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=? AND fileName!='No file'")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -66,7 +83,25 @@ public class AlbumsVideoDAO {
         }
     }
 
+public static List<AlbumsVideoInfo> getYoutubeList(AbstractDB db,String username){
 
+    List<AlbumsVideoInfo> AlbumsYoutubeList = new ArrayList<>();
+
+    try (Connection c = db.connection()) {
+        try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=? AND fileName='No file'")) {
+            p.setString(1,username);
+            try (ResultSet r = p.executeQuery()) {
+                while (r.next()) {
+                    AlbumsYoutubeList.add(AlbumsVideoInfoFromResultSet(r));
+                }
+            }
+        }
+    } catch (SQLException | ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+    return AlbumsYoutubeList;
+
+}
 
     public static AlbumsVideoInfo getAlbumsVideoInfo(AbstractDB db, String username,String id) {
 

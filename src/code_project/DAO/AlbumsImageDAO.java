@@ -17,6 +17,27 @@ import java.util.List;
  */
 public class AlbumsImageDAO {
 
+    public static List<AlbumsImageInfo> getAllAlbumsImageList(AbstractDB db,String sort){
+
+        List<AlbumsImageInfo> allAlbumsImageList = new ArrayList<>();
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsImage ORDER BY ?")) {
+                p.setString(1,sort);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        allAlbumsImageList.add(AlbumsImageInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return allAlbumsImageList;
+    }
+
+
+
 
     public static List<AlbumsImageInfo> getAlbumsImageList(AbstractDB db , String username) {
 
