@@ -2,59 +2,106 @@
  * Created by qpen546 on 5/06/2017.
  */
 
-jq(document).ready(function () {
+$(document).ready(function () {
 
-    jq('#loginBtn').click(function () {
-        getPage("login");
-        jq('#login').modal('show');
+    $('#loginBtn').click(function () {
+        checkLoginStatus("login");
     });
 
-    jq('#registerBtn').click(function () {
-        getPage("register");
-        jq('#login').modal('show');
+    $('#registerBtn').click(function () {
+        checkLoginStatus("register");
     });
 
-
-    jq('#login').on('blur', '#UsernameInput', function () {
-        if (jq('#UsernameInput').val() != "") {
-            verifyUsername(jq(this).val());
+    $('#login').on('blur', '#UsernameInput', function () {
+        if ($('#UsernameInput').val() != "") {
+            verifyUsername($(this).val());
         }
 
     });
-    // jq("#UsernameInput").blur(function () {
-    //     console.log(jq(this).val());
-    //     verifyUsername(jq(this).val());
-    //     console.log("2");
-    // })
+
+    $('#login').on('click', '.loginButton', function () {
+        console.log("1");
+
+        var username = $('#username').val();
+        var password = $('#password').val();
+
+        console.log(username);
+        console.log(password);
+
+        if (username!= ""&& password!= "") {
+            console.log("2");
+            login(username,password);
+        }else if(username == ""){
+            console.log("2.1");
+            $("#message").css("color", "red").text("Please enter your username");
+        }else if(password == ""){
+            console.log("2.2");
+            $("#message").css("color", "red").text("Please enter your password");
+        }
+    });
 });
 
-function getPage(page) {
-    jq.ajax({
+function getPage(action) {
+    $.ajax({
         url: '/Login',
         type: 'post',
-        data: {action: page},
+        data: {action: action},
         success: function (results) {
-            jq('#login').html(results);
+            var form = results.substring(results.indexOf('\<body\>')+6,results.indexOf("\</body\>"));
+            $('#login').html(form).modal('show');
+        }
+    });
+}
+
+function checkLoginStatus(action) {
+    $.ajax({
+        url: '/Login',
+        type: 'post',
+        data: {action: 'check'},
+        success: function (status) {
+            console.log(status);
+            if(status=="login"){
+                location.href = "/Blog?page=home";
+            }else{
+                getPage(action);
+            }
         }
     });
 }
 
 function verifyUsername(username) {
-
-    jq.ajax({
+    $.ajax({
         url: '/Login',
         type: 'post',
         data: {action: 'verify', username: username},
         success: function (message) {
             var message = message;
+            console.log(message);
             if (message.includes("available")) {
-                jq("#button").removeAttr('disabled');
-                jq("#Message").css("color", "green").text(message);
+                $("#button").removeAttr('disabled');
+                $("#message").css("color", "green").text(message);
             } else {
-                jq("#button").attr('disabled', 'disabled');
-                jq("#Message").css("color", "red").text(message);
+                $("#button").attr('disabled', 'disabled');
+                $("#message").css("color", "red").text(message);
             }
-            jq("#Message").text(message);
+        }
+    });
+}
+
+function login(username,passowrd) {
+    $.ajax({
+        url: '/Login',
+        type: 'post',
+        data: {action: 'login', username: username, password:passowrd},
+        success: function (message) {
+            console.log("4");
+            if(message=="login"){
+                console.log("5");
+                location.href = "/Blog?page=home";
+            }else{
+                console.log("6");
+                $("#message").css("color", "red").text(message);
+            }
         }
     });
 }

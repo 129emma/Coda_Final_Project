@@ -3,7 +3,10 @@
 <html class="full">
 <head>
     <title>Login Page</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <script src="${pageContext.request.contextPath}/Pages/LoginPage/Login.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/LoginPage/Login.css" type="text/css">
 </head>
 <body>
 
@@ -11,12 +14,13 @@
     <div class="login-block">
         <h1>Login</h1>
         <div>
-            <input type="text" name="username" id="username" placeholder="Username"/>
-            <input type="password" name="password" id="password" placeholder="Password"/>
+            <input type="text" required name="username" id="username" placeholder="Username"/>
+            <input type="password" required name="password" id="password" placeholder="Password"/>
         </div>
-        <input id="button" type="submit" value="login" name="action"/>
+        <input type="hidden" value="login" name="action"/>
+        <button class="loginButton" id="button" type="button">Login</button>
         <p>No account yet? Register <a href="${pageContext.request.contextPath}/Pages/RegisterPage/Register.jsp">HERE</a></p>
-        <p style="color: red">${message}</p>
+        <p id="message">${message}</p>
     </div>
 </form>
 </body>

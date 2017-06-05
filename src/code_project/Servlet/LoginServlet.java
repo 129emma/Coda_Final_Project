@@ -49,11 +49,19 @@ public class LoginServlet extends HttpServlet {
                 registerProcess(request, response);
                 break;
             case "verify":
-                verifyProcess(request,response);
+                verifyProcess(request, response);
+                break;
+            case "check":
+                checkProcess(request, response);
                 break;
             default:
                 request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
         }
+    }
+
+    private void checkProcess(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/plain");
+        response.getWriter().write(status);
     }
 
     private void verifyProcess(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -61,10 +69,10 @@ public class LoginServlet extends HttpServlet {
         Writer out = response.getWriter();
         String username = request.getParameter("username");
 
-        if(LoginInfoDAO.verifyUsernameExistence(mySQL,username)){
-            out.write("Username: "+username+" already existed, please pick another one");
-        }else{
-            out.write("Username: "+username+" is available");
+        if (LoginInfoDAO.verifyUsernameExistence(mySQL, username)) {
+            out.write("Username: " + username + " already existed, please pick another one");
+        } else {
+            out.write("Username: " + username + " is available");
         }
     }
 
@@ -87,9 +95,9 @@ public class LoginServlet extends HttpServlet {
                 try {
                     LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, "default_icon.jpg");
                     request.setAttribute("message", "Success to create account");
-                    request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
+                    request.getRequestDispatcher("Pages/WelcomePage/Welcome.jsp").forward(request, response);
                 } catch (SQLException e) {
-                    response.sendError(500,e.getMessage());
+                    response.sendError(500, e.getMessage());
                 }
                 break;
         }
@@ -114,6 +122,9 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void loginProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean ajaxRequest = request.getHeader("x-requested-with")!=null;
+        response.setContentType("text/plain");
+        Writer out = response.getWriter();
         switch (status) {
             case "login":
                 response.sendRedirect("Blog?page=home");
@@ -121,7 +132,7 @@ public class LoginServlet extends HttpServlet {
             default:
                 String username = request.getParameter("username");
 
-                if(username== null){
+                if (username == null) {
                     request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
                     return;
                 }
@@ -131,18 +142,30 @@ public class LoginServlet extends HttpServlet {
                 LoginInfo loginInfo = LoginInfoDAO.getLoginInfo(mySQL, username);
 
                 if (loginInfo == null) {
-                    request.setAttribute("message", "Fail to login: username not exist");
-                    request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
+                    if(ajaxRequest){
+                        out.write("Fail to login: username not exist");
+                    }else {
+                        request.setAttribute("message", "Fail to login: username not exist");
+                        request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
+                    }
                     return;
                 }
 
                 if (Passwords.isExpectedPassword(password.toCharArray(), loginInfo.getSalt(), 5, loginInfo.getPassword())) {
                     session.setAttribute("status", "login");
                     session.setAttribute("username", username);
-                    response.sendRedirect("Blog?page=home");
+                    if(ajaxRequest){
+                        out.write("login");
+                    }else {
+                        response.sendRedirect("Blog?page=home");
+                    }
                 } else {
-                    request.setAttribute("message", "Fail to login: wrong password");
-                    request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
+                    if(ajaxRequest){
+                        out.write("Fail to login: wrong password");
+                    }else {
+                        request.setAttribute("message", "Fail to login: wrong password");
+                        request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
+                    }
                 }
                 break;
         }

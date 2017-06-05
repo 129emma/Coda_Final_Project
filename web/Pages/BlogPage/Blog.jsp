@@ -33,7 +33,7 @@
     <script>
         var page = '${page}';
     </script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/BlogPage/Blog.jsp" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/BlogPage/Blog.css" type="text/css">
 
 </head>
 
