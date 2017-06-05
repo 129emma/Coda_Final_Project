@@ -20,22 +20,15 @@ $(document).ready(function () {
     });
 
     $('#login').on('click', '.loginButton', function () {
-        console.log("1");
 
         var username = $('#username').val();
         var password = $('#password').val();
 
-        console.log(username);
-        console.log(password);
-
         if (username!= ""&& password!= "") {
-            console.log("2");
             login(username,password);
         }else if(username == ""){
-            console.log("2.1");
             $("#message").css("color", "red").text("Please enter your username");
         }else if(password == ""){
-            console.log("2.2");
             $("#message").css("color", "red").text("Please enter your password");
         }
     });
@@ -59,7 +52,6 @@ function checkLoginStatus(action) {
         type: 'post',
         data: {action: 'check'},
         success: function (status) {
-            console.log(status);
             if(status=="login"){
                 location.href = "/Blog?page=home";
             }else{
@@ -76,7 +68,6 @@ function verifyUsername(username) {
         data: {action: 'verify', username: username},
         success: function (message) {
             var message = message;
-            console.log(message);
             if (message.includes("available")) {
                 $("#button").removeAttr('disabled');
                 $("#message").css("color", "green").text(message);
@@ -94,12 +85,9 @@ function login(username,passowrd) {
         type: 'post',
         data: {action: 'login', username: username, password:passowrd},
         success: function (message) {
-            console.log("4");
             if(message=="login"){
-                console.log("5");
                 location.href = "/Blog?page=home";
             }else{
-                console.log("6");
                 $("#message").css("color", "red").text(message);
             }
         }
