@@ -84,7 +84,7 @@ public class ArticleServlet extends HttpServlet {
             }
         }
         request.setAttribute("articleInfoList", articleInfoList);
-        request.getRequestDispatcher("Pages/ArticleRetrieving/ArticlePreview.jsp").forward(request, response);
+        request.getRequestDispatcher("Pages/ArticlePreviewPage/ArticlePreview.jsp").forward(request, response);
     }
 
     private void retrieveArticle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
