@@ -6,6 +6,9 @@ li {
     display: inline;
     padding: 30px;
 }
+.left.ui.rail {
+    padding-left: 20%;
+}
 
 .ui.basic.button {
     box-shadow: none;
