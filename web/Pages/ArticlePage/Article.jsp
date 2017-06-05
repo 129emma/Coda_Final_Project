@@ -17,9 +17,9 @@
     <script src="${pageContext.request.contextPath}/Pages/ArticlePage/Article.js"></script>
 </head>
 <body>
-<jsp:include page="/Pages/NavBar/title.jsp">
-    <jsp:param name="title" value=""/>
-</jsp:include>
+<%--<jsp:include page="/Pages/NavBar/title.jsp">--%>
+    <%--<jsp:param name="title" value=""/>--%>
+<%--</jsp:include>--%>
 <div class="ui main text container">
     <h1 class="ui header">${articleInfo.title}</h1>
 </div>
@@ -174,10 +174,20 @@
                 <input type="hidden" name="articleID" value="${articleInfo.articleID}">
             </div>
             <div class="ui blue labeled submit icon button">
-                <i class="icon edit"></i>
-                <button type="submit" name="action" value="create">Comment</button>
+                <button class="ui blue submit icon button" type="submit" name="action" value="create">Comment</button>
             </div>
         </form>
+    </div>
+</div>
+<div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+        <img src="" class="ui centered mini image">
+        <div class="ui horizontal inverted small divided link list">
+            <a class="item" href="#">Site Map</a>
+            <a class="item" href="#">Contact Us</a>
+            <a class="item" href="#">Terms and Conditions</a>
+            <a class="item" href="#">Privacy Policy</a>
+        </div>
     </div>
 </div>
 ${articleInfo.editArticle}<span>  <span>${articleInfo.deleteArticle}
