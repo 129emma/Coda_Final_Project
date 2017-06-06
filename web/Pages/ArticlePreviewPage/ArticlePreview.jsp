@@ -13,18 +13,18 @@
     <title>ArticlePreview</title>
 </head>
 <body>
-<div class="panel panel-default">
-    <c:forEach var="article" items="${articleInfoList}">
+
+<c:forEach var="article" items="${articleInfoList}">
         <div class="ui raised segment keepContent">
-            <div class="left ui rail">
+            <div class="ui left rail">
                 <div class="ui sticky">
-                    <h3 class="ui header">${article.username}</h3>
-                    <img class="userAvatar userAvatarToHover" src="User-Info/${article.username}/avatar.jpg">
+                    <h3 class="ui user">${article.username}</h3>
+                    <img class="ui tiny circular image userAvatar userAvatarToHover" src="User-Info/${article.username}/avatar.jpg">
                 </div>
                 <div class="ui custom popup top transition hidden">
                     <div class="ui raised link card">
                         <div class="content">
-                            <div class="header">Cute Dog</div>
+                            <div class="header">Username</div>
                             <div class="meta">
                                 <span class="category">Animals</span>
                             </div>
@@ -41,12 +41,12 @@
                 </div>
             </div>
             <h5 class="ui top attached segment">
-                <a href="${article.retrieveAddress}">${article.title}</a>   ${article.postTime}
+                <a href="${article.retrieveAddress}">${article.title}</a> ${article.postTime}
             </h5>
             <div class="ui attached segment">
                 <p>${article.preview}</p>
             </div>
-            <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
+                <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
             <div class="ui attached segment">
                 <div class="ui left labeled button" tabindex="0">
                     <a class="ui basic right pointing label">
@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-    </c:forEach>
-</div>
+</c:forEach>
+
 </body>
 </html>

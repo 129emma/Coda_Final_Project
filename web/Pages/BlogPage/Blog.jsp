@@ -22,7 +22,13 @@
     <script src="${pageContext.request.contextPath}/Pages/BlogPage/Blog.js"></script>
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/BlogPage/Blog.css" type="text/css">
+
+    <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
+    <script>
+        var page = '${page}';
+    </script>
+
 </head>
 <body>
 
@@ -34,40 +40,38 @@
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
-    <script>
-        var page = '${page}';
-    </script>
+
     <!-- Page Content !-->
 
-    <div class="ui text container">
+    <div class="ui text justified container">
         <div class="ui raised segment">
             <div class="left ui rail">
-                <img class="userAvatar" src='${userInfo.avatar}'>
+                <img class="userAvatar userAvatarToHover" src='${userInfo.avatar}'>
             </div>
             <ul class="userChoice">
                 <li>
                     <div class="ui icon basic button" data-tooltip="Post">
-                        <i class="large talk outline icon"></i>
+                        <i class="grey big talk outline icon"></i>
                     </div>
                 </li>
                 <li>
                     <div class="ui icon basic button" data-tooltip="Photo">
-                        <i class="large image icon"></i>
+                        <i class="orange big image icon"></i>
                     </div>
                 </li>
                 <li>
                     <div class="ui icon basic button" data-tooltip="Music">
-                        <i class="large music icon"></i>
+                        <i class="yellow big music icon"></i>
                     </div>
                 </li>
                 <li>
                     <div class="ui icon basic button" data-tooltip="Video">
-                        <i class="large record icon"></i>
+                        <i class="green big record icon"></i>
                     </div>
                 </li>
                 <li>
-                    <div class="ui icon basic button" data-tooltip="Create article">
-                        <a href="Article?action=create"> <i class="large newspaper icon"></i></a>
+                    <div class="ui icon basic button" data-tooltip="Article">
+                        <a href="Article?action=create"> <i class="blue big newspaper icon"></i></a>
                     </div>
                 </li>
             </ul>
@@ -75,7 +79,7 @@
         </div>
     </div>
 
-    <div id="ArticleContainer" class="ui text container">
+    <div id="ArticleContainer" class="ui text justified container">
     </div>
 
 </div>

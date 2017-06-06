@@ -104,6 +104,8 @@ public class ArticleServlet extends HttpServlet {
         List<CommentInfo> commentInfoList = CommentInfoDAO.getCommentInfoListByArticle(mySQL, Integer.parseInt(articleID));
         if (commentInfoList != null) {
             for (CommentInfo commentInfo : commentInfoList) {
+                commentInfo.setReplyComment(username);
+                commentInfo.setEditComment(username);
                 commentInfo.setDeleteComment(username);
             }
         }
