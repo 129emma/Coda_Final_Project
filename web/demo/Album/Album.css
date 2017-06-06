@@ -1,0 +1,33 @@
+ul.userChoice {
+    list-style: none;
+}
+
+.ui.basic.button {
+    box-shadow: none;
+}
+
+li {
+    display: inline;
+}
+
+.ui.basic.button:hover{
+    box-shadow: none !important;
+}
+
+.ui.text.container {
+    padding-top: 50px;
+}
+
+.ui.small.image {
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.ui.labeled.icon.borderless.menu.secondMenu {
+    border: none;
+    box-shadow: none;
+}
+
+
+
+
