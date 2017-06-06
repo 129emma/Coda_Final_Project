@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
                 byte[] salt = Passwords.getNextSalt();
                 byte[] hashPassword = Passwords.hash(password.toCharArray(), salt, 5);
                 try {
-                    LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, "default_icon.jpg");
+                    LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, "Pages/AvatarEditPage/DefaultAvatar/pig.png");
                     request.setAttribute("message", "Success to create account");
                     request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
                 } catch (SQLException e) {

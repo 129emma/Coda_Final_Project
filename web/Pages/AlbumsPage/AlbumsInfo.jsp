@@ -10,51 +10,6 @@
 <html >
 <head>
     <title>AlbumsInfo</title>
-    <style>
-        div.gallery {
-            margin: 5px;
-            border: 1px solid #ccc;
-            float: left;
-            width: 200px;
-            height: 280px;
-        }
-
-        div.videoGallery{
-            margin: 5px;
-            border: 1px solid #ccc;
-            float: left;
-            width: 400px;
-            height: 300px;
-        }
-        div.audioGallery{
-            margin: 5px;
-            border: 1px solid #ccc;
-            float: left;
-            width: 250px;
-            height: 100px;
-
-        }
-        div.gallery:hover div.videoGallery:hover div.audioGallery:hover{
-            border: 1px solid #777;
-        }
-
-        div.gallery img {
-            width: 100%;
-            height: 200px;
-        }
-        div.videoGallery video {
-            width: 100%;
-            height: 220px;
-        }
-
-        div.audioGallery audio {
-            width: 100%;
-        }
-        div.desc {
-            padding: 15px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
 <c:forEach var="albumsImage" items="${albumsImageInfoList}">
@@ -100,6 +55,20 @@
         </div>
     </div>
 </c:forEach>
+
+<c:forEach var="albumsYoutube" items="${albumsYoutubeList}">
+    <div class="youtubeGallery">
+        <a target="_blank" href="${albumsVideo.address}">
+          <div>${albumsYoutube.address}</div>
+        </a>
+        <div class="desc">${albumsYoutube.postTime} <a href="AlbumsChange?videoFileName=${albumsYoutube.fileName}&videoID=${albumsYoutube.id}&action=deleteYoutube" class="btn btn-info btn-sm">
+            <span class="glyphicon glyphicon-trash"></span> Delete
+        </a>
+        </div>
+    </div>
+</c:forEach>
+
+
 <br><br>
 </body>
 </html>

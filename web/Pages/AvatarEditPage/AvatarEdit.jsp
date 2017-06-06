@@ -33,7 +33,6 @@
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         $('#icon').attr('src', e.target.result);
-
                     };
                     reader.readAsDataURL(input.files[0]);
                 }

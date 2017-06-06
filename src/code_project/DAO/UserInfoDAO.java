@@ -72,10 +72,10 @@ public class UserInfoDAO {
         }
     }
 
-    public static void updateUserIcon(AbstractDB db, String icon,String username) throws SQLException {
+    public static void updateUserIcon(AbstractDB db, String avatar,String username) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo set icon=? WHERE username = ?;")) {
-                p.setString(1, icon);
+            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo set avatar=? WHERE username = ?;")) {
+                p.setString(1, avatar);
                 p.setString(2, username);
                 p.executeUpdate();
             }
@@ -104,7 +104,7 @@ public class UserInfoDAO {
                 r.getString("email"),
                 r.getString("birthDate"),
                 r.getString("gender"),
-                r.getString("icon"));
+                r.getString("avatar"));
 
     }
 

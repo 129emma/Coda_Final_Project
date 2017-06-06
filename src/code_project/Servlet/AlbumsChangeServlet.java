@@ -130,12 +130,10 @@ public class AlbumsChangeServlet extends HttpServlet {
         File file = new File(imagePath + fileName);
         file.delete();
         try {
-            response.sendRedirect("Albums?action=load");
+            response.sendRedirect("Albums");
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
     }
 
     private void addNewThingsToAlbums(HttpServletRequest request, HttpServletResponse response, String username) throws IOException, ServletException {
