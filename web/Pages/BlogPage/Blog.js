@@ -9,6 +9,7 @@ $(document).ready(function () {
     loadArticles();
 
     $('.ui.sticky').sticky({
+
         context: '.keepContent',
         pushing: true
     });

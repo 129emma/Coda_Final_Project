@@ -82,7 +82,6 @@ public class AvatarEditServlet extends HttpServlet {
 
             createUserIcon(upload,request,filePath,localIconFilePath);
 
-
             try {
                 UserInfoDAO.updateUserIcon(DB,"User-Info/" + username+"/avatar.jpg",username);
             }catch (Exception e){
@@ -91,10 +90,7 @@ public class AvatarEditServlet extends HttpServlet {
             UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
             request.setAttribute("userInfo",userInfo);
             request.getRequestDispatcher("Pages/UpdateProfilePage/UpdateProfile.jsp").forward(request,response);
-
     }
-
-
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -153,7 +149,7 @@ private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,
                     }
                     File outputfile=new File(filePath+"/avatar.jpg");
                     ImageIO.write(icon,"jpg",outputfile);
-                    scaleImage(icon,outputfile);
+                    scaleImage(outputfile);
                     //write the image to the user's icon
                     break;
                 }
@@ -165,16 +161,12 @@ private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,
                 fi.write(file);
                 BufferedImage icon=null;
                 try {
-                    icon= ImageIO.read(new File(filePath+"/avatar.jpg"));
                     File outputfile=new File(filePath+"/avatar.jpg");
-                    scaleImage(icon,outputfile);
+                    scaleImage(outputfile);
                 } catch (IOException e) {
                     e.printStackTrace();
                     return;
                 }
-
-                //check the size of the image
-
             }
         }
 
@@ -183,20 +175,15 @@ private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,
     }
 }
 
-private void scaleImage(BufferedImage icon,File outputFile) throws IOException{
-    if((icon.getWidth()>400)||(icon.getHeight()>400)){
-        Double width=(double)icon.getWidth();
-        Double height=(double)icon.getHeight();
-        double r=(height/width)*200;
+private void scaleImage(File outputFile) throws IOException{
         try {
-            BufferedImage image = new BufferedImage(200, (int)r, BufferedImage.TYPE_INT_RGB);
-            image.createGraphics().drawImage(ImageIO.read(new File(filePath+"/avatar.jpg")).getScaledInstance(200, (int)r, Image.SCALE_SMOOTH),0,0,null);
+            BufferedImage image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
+            image.createGraphics().drawImage(ImageIO.read(new File(filePath+"/avatar.jpg")).getScaledInstance(200, 200, Image.SCALE_SMOOTH),0,0,null);
             //write the thumbnail
             ImageIO.write(image,"jpg",outputFile);
         }catch (IOException e){
             e.printStackTrace();
         }
-    }
 
 
 }
