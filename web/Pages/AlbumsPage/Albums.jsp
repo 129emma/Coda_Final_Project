@@ -12,69 +12,65 @@
 <head>
     <title>UserAlbums</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <style>
-        div.gallery {
-            margin: 5px;
-            border: 1px solid #ccc;
-            float: left;
-            width: 200px;
-            height: 280px;
-        }
-div.youtubeGallery{
-    margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-}
-        div.videoGallery{
-            margin: 5px;
-            border: 1px solid #ccc;
-            float: left;
-            width: 400px;
-            height: 300px;
-        }
-        div.audioGallery{
-            margin: 5px;
-            border: 1px solid #ccc;
-            float: left;
-            width: 250px;
-            height: 100px;
-
-        }
-        div.gallery:hover div.videoGallery:hover div.audioGallery:hover{
-            border: 1px solid #777;
-        }
-
-        div.gallery img {
-            width: 100%;
-            height: 200px;
-        }
-        div.videoGallery video {
-            width: 100%;
-            height: 220px;
-        }
-
-        div.audioGallery audio {
-            width: 100%;
-        }
-        div.desc {
-            padding: 15px;
-            text-align: center;
-        }
-    </style>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
+    <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/AlbumsPage/Albums.css">
+    <script src="${pageContext.request.contextPath}/Pages/AlbumsPage/Albums.js"></script>
 
 </head>
 <body onload="loadUserImage()">
-<jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
-<button onclick="loadUserImage()">User Image</button>|<button onclick="loadUserVideo()">User video</button>|<button onclick="loadUserAudio()">User audio</button>|<button onclick="loadUserYoutube()">User youtube</button>
-<div id="content">
-</div>
-<div style="width: 100px" id="loading">
-    <img src="http://www.belmont.gov/Project/Contents/Main/_gfx/home/ajax-loader.gif" alt="Loading">
-</div>
+<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
+    <jsp:param name="SideBar" value=""/>
+</jsp:include>
+<div class="pusher full">
+    <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
+        <jsp:param name="NavigationBar" value=""/>
+    </jsp:include>
+
+    <div class="ui my container" id="imageGallery">
+        <div class="ui dividing header">
+            <h1>Gallery</h1>
+        </div>
+        <div class="ui segment"> <!--this div for show up all the image/video/audio-->
+            <!-- all images should be resized for fitting container , and size for small images is 150px-->
+            <div class="ui right close rail">
+                <div class="ui vertical labeled icon menu">
+                    <a class="item" onclick="loadUserImage()" >
+                        <i class="photo icon" ></i>
+                        Photos
+                    </a>
+                    <a class="item" onclick="loadUserAudio()">
+                        <i class="video camera icon " ></i>
+                        Music
+                    </a>
+                    <a class="item" onclick="loadUserVideo()">
+                        <i class="video play icon" ></i>
+                        Videos
+                    </a>
+                    <a class="item" onclick="loadUserYoutube()">
+                        <i class="youtube play icon" ></i>
+                        Youtube
+                    </a>
+                </div>
+            </div>
+
+            <div id="content">
+            </div>
+            <div class="ui center aligned vertical segment" id="loading">
+                <div>
+                    <img src="http://cdn7.evimed.net/wp-content/uploads/2017/02/loading.gif" style="width:100px" alt="Loading">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
 
 <script>
-
     function loadUserImage() {
         $('#loading').show();
         $('#content').html("");

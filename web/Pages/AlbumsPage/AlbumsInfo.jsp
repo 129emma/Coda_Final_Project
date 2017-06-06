@@ -7,22 +7,29 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html >
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>AlbumsInfo</title>
 </head>
 <body>
-<c:forEach var="albumsImage" items="${albumsImageInfoList}">
-    <div class="gallery">
-        <a target="_blank" href="${albumsImage.address}">
-            <img src=" ${albumsImage.address}" alt="${albumsImage.fileName}">
-        </a>
-        <div class="desc">${albumsImage.postTime} <a href="AlbumsChange?imageFileName=${albumsImage.fileName}&imageID=${albumsImage.id}&action=deleteImage" class="btn btn-info btn-sm">
-            <span class="glyphicon glyphicon-trash"></span> Delete
-        </a>
+
+            <c:forEach var="albumsImage" items="${albumsImageInfoList}">
+        <div class="ui rounded small image">
+                <div class="gallery">
+                    <a target="_blank" href="${albumsImage.address}">
+                        <img src=" ${albumsImage.address}" alt="${albumsImage.fileName}">
+                    </a>
+                    <div class="desc">${albumsImage.postTime} <a href="AlbumsChange?imageFileName=${albumsImage.fileName}&imageID=${albumsImage.id}&action=deleteImage" class="btn btn-info btn-sm">
+                        <span class="glyphicon glyphicon-trash"></span> Delete
+                    </a>
+                    </div>
+                </div>
         </div>
-    </div>
-</c:forEach>
+            </c:forEach>
+
+
 
 <c:forEach var="albumsVideo" items="${albumsVideoInfoList}">
     <div class="videoGallery">
