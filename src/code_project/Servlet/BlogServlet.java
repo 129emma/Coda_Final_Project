@@ -6,6 +6,7 @@ import code_project.Info.ArticleInfo;
 import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
+import org.json.simple.JSONArray;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,24 +47,20 @@ public class BlogServlet extends HttpServlet {
 
     private void retrieveSpotlightPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = (String) session.getAttribute("username");
-        List<ArticleInfo> articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, 0);
         // Map<Integer,CommentInfoList> commentInfoListOFAllArticle = CommentInfoDAO.getCommentInfoListOfAllArticle(mySQL,articleInfoList);
         UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
-        request.setAttribute("UserInfo", userInfo);
-        request.setAttribute("articleInfoList", articleInfoList);
+        request.setAttribute("userInfo", userInfo);
+        request.setAttribute("page","spotlight");
         //request.setAttribute("commentInfoListOFAllArticle",commentInfoListOFAllArticle);
-        request.getRequestDispatcher("Pages/BlogPage/BlogOld.jsp").forward(request, response);
+        request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
     }
 
     private void retrieveHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = (String) session.getAttribute("username");
-        List<ArticleInfo> articleInfoList = ArticleInfoDAO.getArticleInfoList(mySQL, username);
-        // Map<Integer,CommentInfoList> commentInfoListOFAllArticle = CommentInfoDAO.getCommentInfoListOfAllArticle(mySQL,articleInfoList);
         UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
-        request.setAttribute("UserInfo", userInfo);
-        request.setAttribute("articleInfoList", articleInfoList);
-        //request.setAttribute("commentInfoListOFAllArticle",commentInfoListOFAllArticle);
-        request.getRequestDispatcher("Pages/BlogPage/BlogOld.jsp").forward(request, response);
+        request.setAttribute("userInfo", userInfo);
+        request.setAttribute("page","home");
+        request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

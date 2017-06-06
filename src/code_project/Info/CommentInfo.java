@@ -4,15 +4,19 @@ package code_project.Info;
  * Created by qpen546 on 29/05/2017.
  */
 public class CommentInfo {
-    public int commentID;
-    public String content;
-    public String postTime;
-    public String username;
-    public int articleID;
-    public String editComment;
-    public String deleteComment;
+    public int commentID, articleID;
+    public String content, postTime, username, editComment, deleteComment, replyComment;
 
-    public void setEditComment(int articleID) {
+    public void setReplyComment(String username) {
+        if(this.username.equals(username)){
+            replyComment = "<a href=\"Comment?action=reply&articleID="+articleID+"&commentID="+commentID+"\">delete</a>";
+        }
+    }
+
+    public void setEditComment(String username) {
+        if(this.username.equals(username)){
+            deleteComment = "<a href=\"Comment?action=edit&articleID="+articleID+"&commentID="+commentID+"\">delete</a>";
+        }
     }
 
     public void setDeleteComment(String username) {

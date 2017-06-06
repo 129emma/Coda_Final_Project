@@ -1,32 +1,26 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: xingjianche
-  Date: 01/06/2017
-  Time: 1:04 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html class="full">
 <head>
     <title>Login Page</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="Login.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <script src="${pageContext.request.contextPath}/Pages/LoginPage/Login.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/LoginPage/Login.css" type="text/css">
 </head>
 <body>
 
-<form id="form" action="Login" method="post">
+<form id="form" action="${pageContext.request.contextPath}/Login" method="post">
     <div class="login-block">
         <h1>Login</h1>
         <div>
-            <input type="text" name="username" id="username" placeholder="Username"/>
-            <input type="password" name="password" id="password" placeholder="Password"/>
+            <input type="text" required name="username" id="username" placeholder="Username"/>
+            <input type="password" required name="password" id="password" placeholder="Password"/>
         </div>
-        <input id="button" type="submit" value="login" name="action"/>
-        <p>No account yet? Register <a href="Pages/RegisterPage/Register.jsp">HERE</a></p>
-        <p style="color: #ff7c60;">${sessionScope.loginMessage}</p>
-        <p style="color: #68ff61;">${sessionScope.logoutMessage}</p>
+        <input type="hidden" value="login" name="action"/>
+        <button class="loginButton" id="button" type="button">Login</button>
+        <p>No account yet? Register <a href="${pageContext.request.contextPath}/Pages/RegisterPage/Register.jsp">HERE</a></p>
+        <p id="message">${message}</p>
     </div>
 </form>
 </body>

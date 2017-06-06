@@ -19,3 +19,5 @@ CREATE TABLE IF NOT EXISTS AlbumsVideo(
 
   PRIMARY KEY(id)
 );
+
+SELECT * FROM Article WHERE username='qian' LIMIT 3

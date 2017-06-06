@@ -1,17 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:500i,600');
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-body {
-    background: url("../bgimages/page3.jpg") no-repeat fixed center center;
-    background-size: cover;
-    font-family: Montserrat,sans-serif;
+
+.full{
+    background-color: #71c7d6;
 }
+
+.ui.text.container {
+    margin-top: 300px;
+}
+h2,a{
+    font-family: 'Raleway', sans-serif;
+}
+h2{
+    color: aliceblue;
+}
+
+h1.ui.inverted.header {
+    font-size: 40px;
+    font-family: 'Raleway', sans-serif;
+}
+
+.twoButtons {
+    margin-top: 80px;
+}
+
+
+/*for login&register page*/
 
 .login-block {
     width: 320px;
     padding: 20px;
     background: #fff;
     border-radius: 5px;
-    border-top: 5px solid #56dbff;
+    border-top: 5px solid #ffffff;
     margin: 0 auto;
 }
 
@@ -79,7 +101,4 @@ body {
 
 .login-block #button:hover {
     background: #d3ffff;
-
-#message {
-    color: red;
 }
