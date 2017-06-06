@@ -8,21 +8,8 @@ $(document).ready(function () {
 
     loadArticles();
 
-    $('.ui.sticky').each(function () {
-        $(this).sticky({
-            context: '.keepContent',
-            pushing: true
-        });
-    });
-
-    $('.userAvatarToHover').popup({
-        popup : $('.custom.popup'),
-        on    : 'click'
-
-    });
-
     $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height()== $(document).height()&&process == false) {
+        if ($(window).scrollTop() + $(window).height() == $(document).height() && process == false) {
             process = true;
             $("#Loader").show();
             articlesNum += 1;
@@ -31,16 +18,34 @@ $(document).ready(function () {
     });
 });
 
+
+function refresh() {
+    $('.ui.sticky').each(function () {
+        $(this).sticky({
+            context: '.keepContent',
+            pushing: true
+        });
+    });
+
+    $('.userAvatarToHover').each(function () {
+        $(this).popup({
+            popup: $('.custom.popup'),
+            on: 'click'
+        });
+    });
+}
+
 function loadArticles() {
     $.ajax({
         url: '/Article',
         type: 'post',
         data: {action: 'preview', articleNumber: articlesNum, page: page},
         success: function (articlesPreview) {
-            var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>')+6,articlesPreview.indexOf("\</body\>"));
+            var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
             $("#ArticleContainer").html(preview);
             $("#Loader").hide();
-            process=false;
+            refresh();
+            process = false;
         }
     });
 }
