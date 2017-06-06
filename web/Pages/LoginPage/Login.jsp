@@ -1,30 +1,27 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: qpen546
-  Date: 23/05/2017
-  Time: 1:43 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html class="full">
 <head>
     <title>Login Page</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <script src="${pageContext.request.contextPath}/Pages/LoginPage/Login.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/LoginPage/Login.css" type="text/css">
 </head>
 <body>
-<form id="form" action="Login" method="post">
-    <fieldset>
-        <legend>Your details</legend>
-        <p>Username: <input type="text" name="username" placeholder="Please Enter Your Username" style="width: 300px;"/></P>
-        <p>Password: <input type="password" name="password" placeholder="Please Enter Your Password" style="width: 300px;"/></p>
-        <input type="submit" name="action" value="login"/>
-    </fieldset>
-</form>
-<div>
-    <p style="color: red">${message}</p>
-</div>
 
-<a href="Login?action=login"><p>Login</p></a>
-<a href="Login?action=register"><p>Registration</p></a>
-<a href="Login?action=logout"><p>Logout</p></a>
+<form id="form" action="${pageContext.request.contextPath}/Login" method="post">
+    <div class="login-block">
+        <h1>Login</h1>
+        <div>
+            <input type="text" required name="username" id="username" placeholder="Username"/>
+            <input type="password" required name="password" id="password" placeholder="Password"/>
+        </div>
+        <input type="hidden" value="login" name="action"/>
+        <button class="loginButton" id="button" type="button">Login</button>
+        <p>No account yet? Register <a href="${pageContext.request.contextPath}/Pages/RegisterPage/Register.jsp">HERE</a></p>
+        <p id="message">${message}</p>
+    </div>
+</form>
 </body>
 </html>

@@ -31,3 +31,5 @@ CREATE TABLE IF NOT EXISTS AlbumsAudio(
   postTime DATETIME,
   PRIMARY KEY(id)
 );
+
+SELECT * FROM Article WHERE username='qian' LIMIT 3

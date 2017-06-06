@@ -6,24 +6,32 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Register</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <script src="${pageContext.request.contextPath}/Pages/RegisterPage/Register.js"></script>
 </head>
 
 <body>
-<form id="form" action="Login" method="post">
-    <fieldset>
-        <legend>Your details</legend>
-        <p>Username: <input type="text" name="username" placeholder="Please Enter Your Username" style="width: 300px;"/></P>
-        <p>Password: <input type="password" name="password" placeholder="Please Enter Your Password" style="width: 300px;"/></p>
-        <input type="submit" name="action" value="register"/>
-    </fieldset>
+<form action="${pageContext.request.contextPath}/Login" method="post">
+    <div class="login-block">
+        <h1>Your Details</h1>
+        <p>Don't panic:) We do respect your privacy! Read Terms&Conditions <a href="${pageContext.request.contextPath}/Pages/TermsConditionsPage/Terms&Conditions.html">HERE</a>
+        </p>
+        <div>
+            <input id="UsernameInput" required type="text" name="username" id="username" placeholder="Username"/>
+            <input id="PasswordInput" required type="password" name="password" id="password" placeholder="Password"/>
+        </div>
+        <input id="button" type="submit" value="register" name="action"/>
+        <p>Already registered? Login <a href="${pageContext.request.contextPath}/Pages/LoginPage/Login.jsp">HERE</a></p>
+        <p id="message">${message}</p>
+    </div>
 </form>
-<div>
-    <p style="color: red">${message}</p>
-</div>
-<a href="/Login?action=login"><p>Login</p></a>
+
 </body>
 
 </html>

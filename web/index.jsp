@@ -5,4 +5,4 @@
   Time: 9:21 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%response.sendRedirect("Pages/WelcomePage/Welcome.html");%>
+<%response.sendRedirect("Pages/WelcomePage/Welcome.jsp");%>

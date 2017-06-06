@@ -8,9 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
     <title>UserAlbums</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <style>
@@ -89,7 +88,7 @@ div.youtubeGallery{
             }
         });
     }
-    
+
     function loadUserVideo() {
         $('#loading').show();
         $('#content').html("");
