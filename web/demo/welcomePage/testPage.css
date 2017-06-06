@@ -1,13 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:500i,600');
 
 
-.full{
-    background-color: #466675;
-}
-
-.ui.text.container {
-    margin-top: 300px;
-}
 h2,a{
     font-family: 'Raleway', sans-serif;
 }
@@ -24,6 +17,28 @@ h1.ui.inverted.header {
     margin-top: 80px;
 }
 
+#section0{
+    background: -webkit-gradient(linear, top left, bottom left, from(#4bbfc3), to(#7baabe));
+    background: -webkit-linear-gradient(#4BBFC3, #7BAABE);
+    background: linear-gradient(#4BBFC3,#7BAABE);
+}
+
+#section1{
+    background: -webkit-gradient(linear, top left, bottom left, from(#7baabe), to(#636F8F));
+    background: -webkit-linear-gradient(#7baabe, #636F8F);
+    background: linear-gradient(#7baabe,#636F8F);
+}
+#section2{
+    background: -webkit-gradient(linear, top left, bottom left, from(#636F8F), to(#83628d));
+    background: -webkit-linear-gradient(#636F8F, #83628d);
+    background: linear-gradient(#636F8F,#83628d);
+}
+
+#section3{
+    background: -webkit-gradient(linear, top left, bottom left, from(#83628d), to(#c5b4cb));
+    background: -webkit-linear-gradient(#83628d, #c5b4cb);
+    background: linear-gradient(#83628d,#c5b4cb);
+}
 
 
 
