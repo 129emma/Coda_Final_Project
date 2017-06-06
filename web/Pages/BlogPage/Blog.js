@@ -1,18 +1,23 @@
 /**
  * Created by qpen546 on 31/05/2017.
  */
-var articlesNum = 1;
+var articlesNum = 3;
 var process = false;
 
 $(document).ready(function () {
 
     loadArticles();
 
+    $('.ui.sticky').sticky({
+        context: '.keepContent',
+        pushing: true
+    });
+
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() == $(document).height() && process == false) {
             process = true;
             $("#Loader").show();
-            articlesNum += 1;
+            articlesNum += 3;
             loadArticles();
         }
     });
@@ -20,18 +25,11 @@ $(document).ready(function () {
 
 
 function refresh() {
-    $('.ui.sticky').each(function () {
-        $(this).sticky({
-            context: '.keepContent',
-            pushing: true
-        });
-    });
+    $('.ui.sticky').sticky('refresh');
 
-    $('.userAvatarToHover').each(function () {
-        $(this).popup({
-            popup: $('.custom.popup'),
-            on: 'click'
-        });
+    $('.userAvatarToHover').popup({
+        popup: $('.custom.popup'),
+        position: 'bottom right'
     });
 }
 

@@ -11,12 +11,16 @@
 <html>
 <head>
     <title>UserProfile</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/components/modal.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/components/modal.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/components/modal.min.js"></script>
+    <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
     <style>
-       .rounded { border-radius: 50%;
-       width: 100px;
-       height: 100px;}
+        .rounded {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
     </style>
     <script>
         $('#changeProfile').click(function () {
@@ -28,19 +32,30 @@
 
 </head>
 <body>
-<jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
-<img src="${userProfile.avatar}" class="rounded" />
-<p>Username:${userProfile.username}</p>
-<p>Firstname:${userProfile.firstName}</p>
-<p>Lastname:${userProfile.lastName}</p>
-<p>Email:${userProfile.email}</p>
-<p>Birthday:${userProfile.birthDate}</p>
-<p>Gender:${userProfile.gender}</p>
-<div class="ui modal">
-    <jsp:include page="/Pages/LoginPage/Login.jsp"> <jsp:param name="title" value=""/> </jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
+    <jsp:param name="SideBar" value=""/>
+</jsp:include>
+
+<div class="pusher full">
+    <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
+        <jsp:param name="NavigationBar" value=""/>
+    </jsp:include>
+
+    <img src="${userProfile.avatar}" class="rounded"/>
+    <p>Username:${userProfile.username}</p>
+    <p>Firstname:${userProfile.firstName}</p>
+    <p>Lastname:${userProfile.lastName}</p>
+    <p>Email:${userProfile.email}</p>
+    <p>Birthday:${userProfile.birthDate}</p>
+    <p>Gender:${userProfile.gender}</p>
+    <div class="ui modal">
+        <jsp:include page="/Pages/LoginPage/Login.jsp">
+            <jsp:param name="title" value=""/>
+        </jsp:include>
+    </div>
+    <button id="changeProfile"></button>
+    <a href="ChangeProfile"><p>Change your profile</p></a>
+    <li><a href="ChangePassword">Change your password</a></li>
 </div>
-<button id="changeProfile"></button>
-<a href="ChangeProfile"><p>Change your profile</p></a>
-<li><a href="ChangePassword">Change your password</a></li>
 </body>
 </html>
