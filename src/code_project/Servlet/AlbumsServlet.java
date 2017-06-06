@@ -1,13 +1,7 @@
 package code_project.Servlet;
 
-import code_project.DAO.AlbumsImageDAO;
-import code_project.DAO.AlbumsVideoDAO;
-import code_project.DAO.ArticleInfoDAO;
-import code_project.DAO.UserInfoDAO;
-import code_project.Info.AlbumsImageInfo;
-import code_project.Info.AlbumsVideoInfo;
-import code_project.Info.ArticleInfo;
-import code_project.Info.UserInfo;
+import code_project.DAO.*;
+import code_project.Info.*;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 
@@ -30,15 +24,41 @@ public class AlbumsServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         String username=(String)session.getAttribute("username");
         response.setContentType("text/html");
+        String action="";
+        if(request.getParameter("action")!=null){
+            action=request.getParameter("action");
+            switch (action){
+                case "loadUserImage":
+                    List<AlbumsImageInfo> albumsImageInfoList= AlbumsImageDAO.getAlbumsImageList(DB,username);
+                    request.setAttribute("albumsImageInfoList",albumsImageInfoList);
+                    break;
+                case "loadUserVideo":
+                    List<AlbumsVideoInfo> albumsVideoInfoList= AlbumsVideoDAO.getAlbumsVideoList(DB,username);
+                    request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
+                    break;
+                case "loadUserAudio":
+                    List<AlbumsAudioInfo> albumsAudioInfoList=AlbumsAudioDAO.getAlbumsAudioList(DB,username);
+                    request.setAttribute("albumsAudioInfoList",albumsAudioInfoList);
+                    break;
+                case "loadUserYoutube":
+                    List<AlbumsVideoInfo> albumsYoutubeList=AlbumsVideoDAO.getYoutubeList(DB,username);
+                    request.setAttribute("albumsYoutubeList",albumsYoutubeList);
+                    break;
+                case "loadOtherUserImage":
+                    break;
+                case "loadOtherUserVideo":
+                    break;
+                case "loadOtherUserAudio":
+                    break;
+                case "loadOtherUserYoutube":
+                    break;
+            }
+            request.getRequestDispatcher("Pages/AlbumsPage/AlbumsInfo.jsp").forward(request, response);
 
-            List<AlbumsImageInfo> albumsImageInfoList= AlbumsImageDAO.getAlbumsImageList(DB,username);
-            List<AlbumsVideoInfo> albumsVideoInfoList= AlbumsVideoDAO.getAlbumsImageList(DB,username);
-
-            request.setAttribute("albumsImageInfoList",albumsImageInfoList);
-
-            request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
-
+        }else {
             request.getRequestDispatcher("Pages/AlbumsPage/Albums.jsp").forward(request, response);
+        }
+
 
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

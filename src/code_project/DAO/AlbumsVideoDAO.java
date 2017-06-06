@@ -17,13 +17,30 @@ import java.util.List;
  */
 public class AlbumsVideoDAO {
 
+    public static List<AlbumsVideoInfo> getAllAlbumsVideoList(AbstractDB db,String sort){
 
-    public static List<AlbumsVideoInfo> getAlbumsImageList(AbstractDB db , String username) {
+        List<AlbumsVideoInfo> allAlbumsVideoList = new ArrayList<>();
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo ORDER BY ?")) {
+                p.setString(1,sort);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        allAlbumsVideoList.add(AlbumsVideoInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return allAlbumsVideoList;
+    }
+    public static List<AlbumsVideoInfo> getAlbumsVideoList(AbstractDB db , String username) {
 
         List<AlbumsVideoInfo> AlbumsVideoInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=? AND fileName!='No file'")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -38,12 +55,30 @@ public class AlbumsVideoDAO {
         return AlbumsVideoInfoList;
     }
 
-
-
-    public static void createAlbumsVideoInfo(AbstractDB db, String username,String address) throws SQLException {
+    public static Boolean checkAlbumsYoutube(AbstractDB db,String address,String username){
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsVideo(username,address,postTime) VALUES (?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=? AND address=?")) {
+                p.setString(1,username);
+                p.setString(2,address);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        return  true;
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public static void createAlbumsVideoInfo(AbstractDB db, String username,String address,String fileName) throws SQLException {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsVideo(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
                 p.setString(1, username);
+                p.setString(4,fileName);
                 p.setString(2, address);
                 p.setString(3, getCurrentTimeStamp());
                 p.executeUpdate();
@@ -53,11 +88,11 @@ public class AlbumsVideoDAO {
         }
     }
 
-    public static void deleteAlbumsVideoInfo(AbstractDB db, String username,String id) throws SQLException {
+    public static void deleteAlbumsVideoInfo(AbstractDB db, String username,int id) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsVideo WHERE username = ? AND id=?")) {
                 p.setString(1, username);
-                p.setString(2, id);
+                p.setInt(2, id);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -65,7 +100,25 @@ public class AlbumsVideoDAO {
         }
     }
 
+public static List<AlbumsVideoInfo> getYoutubeList(AbstractDB db,String username){
 
+    List<AlbumsVideoInfo> AlbumsYoutubeList = new ArrayList<>();
+
+    try (Connection c = db.connection()) {
+        try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=? AND fileName='No file'")) {
+            p.setString(1,username);
+            try (ResultSet r = p.executeQuery()) {
+                while (r.next()) {
+                    AlbumsYoutubeList.add(AlbumsVideoInfoFromResultSet(r));
+                }
+            }
+        }
+    } catch (SQLException | ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+    return AlbumsYoutubeList;
+
+}
 
     public static AlbumsVideoInfo getAlbumsVideoInfo(AbstractDB db, String username,String id) {
 
@@ -93,6 +146,7 @@ public class AlbumsVideoDAO {
     private static AlbumsVideoInfo  AlbumsVideoInfoFromResultSet(ResultSet r) throws SQLException {
         return new AlbumsVideoInfo(
                 r.getInt("id"),
+                r.getString("fileName"),
                 r.getString("username"),
                 r.getString("address"),
                 r.getDate("postTime").toString()+" "+r.getTime("postTime").toString()

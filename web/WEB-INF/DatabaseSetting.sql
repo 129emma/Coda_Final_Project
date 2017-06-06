@@ -11,7 +11,7 @@ CREATE TABLE UserInfo (
   email      VARCHAR(99),
   birthDate DATE,
   gender     VARCHAR(99),
-  icon        VARCHAR(99)
+  avatar     VARCHAR(999)
 );
 
 DROP TABLE IF EXISTS Article;
@@ -22,7 +22,8 @@ CREATE TABLE Article (
   content    VARCHAR(5000),
   postTime  DATETIME,
   tags       VARCHAR(99),
-  username   VARCHAR(99)
+  username   VARCHAR(99),
+  userAvatar VARCHAR(999)
 );
 
 DROP TABLE IF EXISTS Comment;
