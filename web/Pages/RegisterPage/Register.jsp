@@ -13,6 +13,7 @@
     <title>Register</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/RegisterPage/Register.css" type="text/css">
     <script src="${pageContext.request.contextPath}/Pages/RegisterPage/Register.js"></script>
 </head>
 
@@ -23,8 +24,8 @@
         <p>Don't panic:) We do respect your privacy! Read Terms&Conditions <a href="${pageContext.request.contextPath}/Pages/TermsConditionsPage/Terms&Conditions.html">HERE</a>
         </p>
         <div>
-            <input id="UsernameInput" required type="text" name="username" id="username" placeholder="Username"/>
-            <input id="PasswordInput" required type="password" name="password" id="password" placeholder="Password"/>
+            <input id="UsernameInput" required type="text" name="username" class="username" placeholder="Username"/>
+            <input id="PasswordInput" required type="password" name="password" class="password" placeholder="Password"/>
         </div>
         <input id="button" type="submit" value="register" name="action"/>
         <p>Already registered? Login <a href="${pageContext.request.contextPath}/Pages/LoginPage/Login.jsp">HERE</a></p>
