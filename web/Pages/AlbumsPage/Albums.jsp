@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/AlbumsPage/Albums.css">
     <script src="${pageContext.request.contextPath}/Pages/AlbumsPage/Albums.js"></script>
-
 </head>
 <body onload="loadUserImage()">
 <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
@@ -29,7 +28,7 @@
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
 
-    <div class="ui my container" id="imageGallery">
+    <div class="ui container my" id="imageGallery">
         <div class="ui dividing header">
             <h1>Gallery</h1>
         </div>

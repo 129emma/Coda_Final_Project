@@ -19,12 +19,12 @@
                 </div>
                 <div class="results"></div>
             </div>
-            <a href="Blog?page=home" class="item iconClass"><i class="large home icon"></i></a>
+            <a href="Blog?page=home" class="item iconClass" ><i class="large home icon"></i></a>
             <a href="Blog?page=spotlight" class="item iconClass"><i class="large world icon"></i></a>
-            <a href="Profile" class="item iconClass"><i class="large user icon"></i></a>
-            <a href="Albums" class="item iconClass"><i class="large camera retro icon"></i></a>
-            <a href="Login?action=logout" class="item iconClass"><i class="large sign out icon"></i></a>
-            <img class="teamIcon" src="../../testImage/icon_black.png">
+            <a href="Profile" class="item iconClass" ><i class="large user icon"></i></a>
+            <a href="Albums" class="item iconClass" ><i class="large camera retro icon"></i></a>
+            <a href="Login?action=logout" class="item iconClass" ><i class="large sign out icon"></i></a>
+            <img class="teamIcon" src="../../testImage/icon_black.png" align="right">
         </div>
     </div>
 </body>

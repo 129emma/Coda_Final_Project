@@ -61,12 +61,12 @@
                     </div>
                 </li>
                 <li>
-                    <div class="ui icon basic button" data-tooltip="Music">
+                    <div class="ui icon basic button" data-tooltip="Video">
                         <i class="large record icon"></i>
                     </div>
                 </li>
                 <li>
-                    <div class="ui icon basic button" data-tooltip="Music">
+                    <div class="ui icon basic button" data-tooltip="Create article">
                         <a href="Article?action=create"> <i class="large newspaper icon"></i></a>
                     </div>
                 </li>

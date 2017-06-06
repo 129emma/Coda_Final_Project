@@ -5,11 +5,9 @@ body.pushable > .pusher { /*Background Color*/
 .ui.menu{
     background-color: transparent;
 }
-
 .ui.inverted.button {
  box-shadow: none !important;
 }
-
 .toc.item { /*invisible sidebar icon*/
     display: none;
 }
@@ -17,7 +15,6 @@ body.pushable > .pusher { /*Background Color*/
 img.teamIcon { /*Team Icon in Menu*/
     height: 30px;
     margin-top: 10px;
-    margin-left: 800px;
 }
 
 .ui.vertical.masthead.center.aligned { /*Menu bottom border*/
