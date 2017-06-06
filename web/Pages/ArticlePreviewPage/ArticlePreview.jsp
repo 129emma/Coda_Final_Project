@@ -46,7 +46,7 @@
             <div class="ui attached segment">
                 <p>${article.preview}</p>
             </div>
-            //<img class="ui attached segment" src="../../testImage/icon.jpg">
+            <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
             <div class="ui attached segment">
                 <div class="ui left labeled button" tabindex="0">
                     <a class="ui basic right pointing label">
@@ -57,7 +57,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </c:forEach>
 </div>

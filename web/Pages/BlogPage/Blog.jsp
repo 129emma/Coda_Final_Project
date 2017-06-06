@@ -13,7 +13,6 @@
 <head>
     <meta charset="UTF-8">
     <title>userProfilePage</title>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
