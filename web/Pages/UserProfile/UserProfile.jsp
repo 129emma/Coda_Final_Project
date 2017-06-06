@@ -29,7 +29,7 @@
 </head>
 <body>
 <jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
-<img src="${userProfile.icon}" class="rounded" />
+<img src="${userProfile.avatar}" class="rounded" />
 <p>Username:${userProfile.username}</p>
 <p>Firstname:${userProfile.firstName}</p>
 <p>Lastname:${userProfile.lastName}</p>

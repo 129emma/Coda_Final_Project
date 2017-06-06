@@ -6,17 +6,17 @@ package code_project.Info;
  */
 public class UserInfo {
 
-	private String username,firstName,lastName,email,birthDate,gender,icon;
+	private String username,firstName,lastName,email,birthDate,gender,avatar;
 
 
-	public UserInfo(String username, String firstName, String lastName, String email, String date_birth, String gender, String icon) {
+	public UserInfo(String username, String firstName, String lastName, String email, String date_birth, String gender, String avatar) {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.birthDate = date_birth;
 		this.gender = gender;
-		this.icon = icon;
+		this.avatar = avatar;
 	}
 
 	public void setUsername(String username) {
@@ -43,8 +43,8 @@ public class UserInfo {
 		this.gender = tags;
 	}
 
-	public void setIcon(String friends) {
-		this.icon = friends;
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 	public String getUsername() {
@@ -71,7 +71,7 @@ public class UserInfo {
 		return gender;
 	}
 
-	public String getIcon() {
-		return icon;
+	public String getAvatar() {
+		return avatar;
 	}
 }
