@@ -64,7 +64,7 @@ public class UserInfoDAO {
                 p.setString(3, email);
                 p.setString(4, birthDate);
                 p.setString(5, gender);
-                 p.setString(6, username);
+                p.setString(6, username);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {

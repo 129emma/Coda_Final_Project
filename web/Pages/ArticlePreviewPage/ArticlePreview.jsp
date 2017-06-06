@@ -11,33 +11,53 @@
 <html>
 <head>
     <title>ArticlePreview</title>
-    <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.0.js"
-            integrity="sha256-wPFJNIFlVY49B+CuAIrDr932XSb6Jk3J1M22M3E2ylQ=" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-
-    <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="panel panel-default">
     <c:forEach var="article" items="${articleInfoList}">
-        <div class="panel-heading">Preview</div>
-        <div class="panel-body  ArticleContainer" id="ArticleContainer">
-            <div class="panel panel-default Article" id="original">
-                <div class="panel-heading"><a href="${article.retrieveAddress}">${article.title}</a>${article.postTime}
+        <div class="ui raised segment keepContent">
+            <div class="left ui rail">
+                <div class="ui sticky">
+                    <h3 class="ui header">${article.username}</h3>
+                    <img class="userAvatar userAvatarToHover" src="User-Info/${article.username}/avatar.jpg">
                 </div>
-                <div class="panel-body">
-                    <p>${article.username}</p>
-                    <p>${article.preview}</p>
+                <div class="ui custom popup top transition hidden">
+                    <div class="ui raised link card">
+                        <div class="content">
+                            <div class="header">Cute Dog</div>
+                            <div class="meta">
+                                <span class="category">Animals</span>
+                            </div>
+                            <div class="description">
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <div class="right floated author">
+                                <i class="record icon"></i> Matt
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <h5 class="ui top attached segment">
+                <a href="${article.retrieveAddress}">${article.title}</a>   ${article.postTime}
+            </h5>
+            <div class="ui attached segment">
+                <p>${article.preview}</p>
+            </div>
+            //<img class="ui attached segment" src="../../testImage/icon.jpg">
+            <div class="ui attached segment">
+                <div class="ui left labeled button" tabindex="0">
+                    <a class="ui basic right pointing label">
+                        999
+                    </a>
+                    <div class="ui button">
+                        <i class="heart icon"></i> Like
+                    </div>
+                </div>
+            </div>
+
         </div>
     </c:forEach>
 </div>

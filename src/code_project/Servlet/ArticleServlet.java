@@ -154,6 +154,7 @@ public class ArticleServlet extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         String tag = request.getParameter("tag");
+        String username = (String)session.getAttribute("username");
 
         if (content == null || content.isEmpty()) {
             String submitElement = "<input type='submit' name='action' value='create'/>";
@@ -164,7 +165,9 @@ public class ArticleServlet extends HttpServlet {
 
 
         try {
-            ArticleInfoDAO.createArticleInfo(mySQL, title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, (String) session.getAttribute("username"));
+            UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL,username);
+            String userAvatar = userInfo.getAvatar();
+            ArticleInfoDAO.createArticleInfo(mySQL, title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, username,userAvatar);
             response.sendRedirect("Blog");
         } catch (Exception e) {
             e.printStackTrace();

@@ -29,7 +29,7 @@
 <body>
 
 
-<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NaviationBar.jsp">
+<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
     <jsp:param name="title" value=""/>
 </jsp:include>
 

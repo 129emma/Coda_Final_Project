@@ -49,7 +49,7 @@
 </head>
 <body>
 <jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
-<img src="${userInfo.icon}" id="icon" name="userIcon" class="rounded" />
+<img src="${userInfo.avatar}" id="icon" name="userIcon" class="rounded" />
 <form action="AvatarEdit" method="post" enctype="multipart/form-data">
     <input type="hidden" name="result" id="result">
     <label for="imageFile">Choose one image:</label><input type="file" id="imageFile" accept=".jpg, .gif,.png" name="icon"/><br><br>

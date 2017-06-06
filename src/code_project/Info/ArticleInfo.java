@@ -11,16 +11,27 @@ import java.util.Date;
  */
 public class ArticleInfo {
     public int articleID;
-    public String content, postTime, tags, username, title, editArticle, deleteArticle, retrieveAddress,preview;
+    public String content;
+    public String postTime;
+    public String tags;
+    public String username;
+    public String title;
+    public String editArticle;
+    public String deleteArticle;
+    public String retrieveAddress;
+    public String preview;
+
+    public String userAvatar;
 
 
-    public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username) {
+    public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username, String userAvatar) {
         this.articleID = articleID;
         this.title = title;
         this.content = content;
         this.postTime = post_time;
         this.tags = tags;
         this.username = username;
+        this.userAvatar = userAvatar;
 
         this.preview = content;
         this.editArticle = "";
@@ -28,7 +39,9 @@ public class ArticleInfo {
         this.deleteArticle = "";
         this.retrieveAddress = "Article?action=retrieve&articleID=" + articleID;
     }
-
+    public String getUserAvatar() {
+        return userAvatar;
+    }
     public void setPreview(String content) {
         int defaultEndIndex;
         if((defaultEndIndex=content.indexOf(" ",200))!= -1){
