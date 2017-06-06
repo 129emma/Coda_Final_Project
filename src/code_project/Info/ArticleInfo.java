@@ -1,5 +1,8 @@
 package code_project.Info;
 
+import jdk.nashorn.api.scripting.JSObject;
+import org.json.simple.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -8,24 +11,73 @@ import java.util.Date;
  */
 public class ArticleInfo {
     public int articleID;
-    public String content, postTime, tags, username, title, editArticle, deleteArticle, retrieveAddress;
+    public String content;
+    public String postTime;
+    public String tags;
+    public String username;
+    public String title;
+    public String editArticle;
+    public String deleteArticle;
+    public String retrieveAddress;
+    public String preview;
 
-    public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username) {
+    public String userAvatar;
+
+
+    public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username, String userAvatar) {
         this.articleID = articleID;
         this.title = title;
         this.content = content;
         this.postTime = post_time;
         this.tags = tags;
         this.username = username;
-        editArticle = "";
-        deleteArticle = "";
-        retrieveAddress = "Article?action=retrieve&articleID="+articleID;
+        this.userAvatar = userAvatar;
+
+        this.preview = content;
+        this.editArticle = "";
+
+        this.deleteArticle = "";
+        this.retrieveAddress = "Article?action=retrieve&articleID=" + articleID;
     }
-public ArticleInfo(String title,String content,String tags){
-        this.title=title;
-        this.content=content;
-        this.tags=tags;
-}
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+    public void setPreview(String content) {
+        int defaultEndIndex;
+        if((defaultEndIndex=content.indexOf(" ",200))!= -1){
+            defaultEndIndex = 200;
+        }
+        int endIndex = Math.min(content.length()-1,defaultEndIndex);
+        this.preview = preview;
+    }
+
+    public ArticleInfo(String title, String content, String tags) {
+        this.title = title;
+        this.content = content;
+        this.tags = tags;
+    }
+
+    public String getPreview() {
+        return preview;
+    }
+
+    public JSONObject getArticlePreviewJSON() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("articleID",articleID);
+        jsonObject.put("title",title);
+        jsonObject.put("username",username);
+        jsonObject.put("content",preview);
+        return jsonObject;
+    }
+
+    public JSONObject getArticleContentJSON() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("articleID",articleID);
+        jsonObject.put("title",title);
+        jsonObject.put("content",content);
+        return jsonObject;
+    }
+
     public int getArticleID() {
         return articleID;
     }
@@ -50,7 +102,9 @@ public ArticleInfo(String title,String content,String tags){
         return title;
     }
 
-    public String getRetrieveAddress() { return retrieveAddress; }
+    public String getRetrieveAddress() {
+        return retrieveAddress;
+    }
 
     public String getEditArticle() {
         return editArticle;

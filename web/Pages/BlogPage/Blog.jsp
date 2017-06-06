@@ -7,91 +7,78 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Blog</title>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.0.js"
-            integrity="sha256-wPFJNIFlVY49B+CuAIrDr932XSb6Jk3J1M22M3E2ylQ=" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>userProfilePage</title>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-
-    <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
+    <script src="${pageContext.request.contextPath}/Pages/BlogPage/Blog.js"></script>
+    <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/BlogPage/Blog.css" type="text/css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
 </head>
-
 <body>
 
-<jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
+<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
+    <jsp:param name="SideBar" value=""/>
+</jsp:include>
 
-<div class="container" id="containerProfile">
+<div class="pusher full">
+    <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
+        <jsp:param name="NavigationBar" value=""/>
+    </jsp:include>
+    <script>
+        var page = '${page}';
+    </script>
+    <!-- Page Content !-->
 
-    <div class="col-xs-12 col-md-3 panel panel-default">
-        <img class="img-circle img-responsive" src='${UserInfo.icon}' alt="avatar" id="image">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Profile</h3>
+    <div class="ui text container">
+        <div class="ui raised segment">
+            <div class="left ui rail">
+                <img class="userAvatar" src='${userInfo.avatar}'>
             </div>
-            <div class="panel-body" id="profile_content">
-                <p><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ${UserInfo.username}</p>
-                <p><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Location</p>
-            </div>
+            <ul class="userChoice">
+                <li>
+                    <div class="ui icon basic button" data-tooltip="Post">
+                        <i class="large talk outline icon"></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui icon basic button" data-tooltip="Photo">
+                        <i class="large image icon"></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui icon basic button" data-tooltip="Music">
+                        <i class="large music icon"></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui icon basic button" data-tooltip="Music">
+                        <i class="large record icon"></i>
+                    </div>
+                </li>
+                <li>
+                    <div class="ui icon basic button" data-tooltip="Music">
+                        <a href="Article?action=create"> <i class="large newspaper icon"></i></a>
+                    </div>
+                </li>
+            </ul>
+
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-9 panel panel-default" id="containerContent">
-        <div style="margin-bottom: 20px"></div>
-        <c:forEach var="article" items="${articleInfoList}">
-            <div class="panel panel-default">
-                <div class="panel-heading"><a href="${article.retrieveAddress}">${article.title}</a>${article.postTime}</div>
-                <div class="panel-body">${article.content} </p></div>
-                    <%--<c:forEach var="commentInfo" items="${commentInfoListOFAllArticle.get(article.articleID)}">--%>
-                    <%--<div class="panel panel-default">--%>
-                    <%--<div class="panel-heading"><a href="Article?articleID=${article.articleID}" >${commentInfo.username} </a>${commentInfo.postTime}</div>--%>
-                    <%--<div class="panel-body">${commentInfo.content}</div>--%>
-                    <%--</div>--%>
-                    <%--</c:forEach>--%>
-            </div>
-        </c:forEach>
+    <div id="ArticleContainer" class="ui text container">
     </div>
+
 </div>
-
-
-<script>
-
-//$('#Albums').click(function(){
-//    $.ajax({
-//        url:"Albums",
-//        method:"post",
-//        success:function (result) {
-//            $("#containerProfile").html(result)
-//        }
-//    });
-//});
-//$('#Profile').click(function(){
-//    $.ajax({
-//        url:"Profile",
-//        method:"post",
-//        success:function (result) {
-//            $("#containerProfile").html(result)
-//        }
-//    });
-//});
-//$('#Article').click(function(){
-//    $.ajax({
-//        url:"Article?action=create",
-//        method:"post",
-//        success:function (result) {
-//            $("#containerProfile").html(result)
-//        }
-//    });
-//});
-</script>
 </body>
 </html>

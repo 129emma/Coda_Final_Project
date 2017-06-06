@@ -7,9 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>UserAlbums</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <style>
         div.gallery {
             margin: 5px;
@@ -18,7 +20,11 @@
             width: 200px;
             height: 280px;
         }
-
+div.youtubeGallery{
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+}
         div.videoGallery{
             margin: 5px;
             border: 1px solid #ccc;
@@ -54,55 +60,74 @@
             padding: 15px;
             text-align: center;
         }
-
     </style>
+
+
 </head>
-<body>
+<body onload="loadUserImage()">
 <jsp:include page="/Pages/NavBar/title.jsp"> <jsp:param name="title" value=""/> </jsp:include>
-    <c:forEach var="albumsImage" items="${albumsImageInfoList}">
-        <div class="gallery">
-            <a target="_blank" href="${albumsImage.address}">
-               <img src=" ${albumsImage.address}" alt="${albumsImage.fileName}">
-            </a>
-            <div class="desc">${albumsImage.postTime} <a href="AlbumsChange?imageFileName=${albumsImage.fileName}&imageID=${albumsImage.id}&action=deleteImage" class="btn btn-info btn-sm">
-                <span class="glyphicon glyphicon-trash"></span> Delete
-            </a>
-            </div>
-        </div>
-    </c:forEach>
+<button onclick="loadUserImage()">User Image</button>|<button onclick="loadUserVideo()">User video</button>|<button onclick="loadUserAudio()">User audio</button>|<button onclick="loadUserYoutube()">User youtube</button>
+<div id="content">
+</div>
+<div style="width: 100px" id="loading">
+    <img src="http://www.belmont.gov/Project/Contents/Main/_gfx/home/ajax-loader.gif" alt="Loading">
+</div>
 
-    <c:forEach var="albumsVideo" items="${albumsVideoInfoList}">
-        <div class="videoGallery">
-            <a target="_blank" href="${albumsVideo.address}">
-                <video width="400" controls>
-                    <source src="${albumsVideo.address}" type="video/mp4">
-                    <source src="${albumsVideo.address}" type="video/ogg">
-                    Your browser does not support HTML5 video.
-                </video>
-            </a>
-            <div class="desc">${albumsVideo.postTime} <a href="AlbumsChange?videoFileName=${albumsVideo.fileName}&videoID=${albumsVideo.id}&action=deleteVideo" class="btn btn-info btn-sm">
-                <span class="glyphicon glyphicon-trash"></span> Delete
-            </a>
-            </div>
-        </div>
-    </c:forEach>
+<script>
 
-<c:forEach var="albumsAudio" items="${albumsAudioInfoList}">
-    <div class="audioGallery">
-        <a target="_blank" href="${albumsAudio.address}">
-            <audio controls>
-                <source src="${albumsAudio.address}" type="audio/ogg">
-                <source src="${albumsAudio.address}" type="audio/mpeg">
-                Your browser does not support the audio tag.
-            </audio>
-        </a>
-        <div class="desc">${albumsAudio.postTime} <a href="AlbumsChange?audioFileName=${albumsAudio.fileName}&audioID=${albumsAudio.id}&action=deleteAudio" class="btn btn-info btn-sm">
-            <span class="glyphicon glyphicon-trash"></span> Delete
-        </a>
-        </div>
-    </div>
-</c:forEach>
-<br><br>
+    function loadUserImage() {
+        $('#loading').show();
+        $('#content').html("");
+        $.ajax({
+            url: '/Albums',
+            type: 'POST',
+            data: {action:'loadUserImage'},
+            success: function (data) {
+                $('#loading').hide();
+                $('#content').html(data);
+            }
+        });
+    }
 
+    function loadUserVideo() {
+        $('#loading').show();
+        $('#content').html("");
+        $.ajax({
+            url: '/Albums',
+            type: 'POST',
+            data: {action:'loadUserVideo'},
+            success: function (data) {
+                $('#loading').hide();
+                $('#content').html(data);
+            }
+        });
+    }
+    function loadUserAudio() {
+        $('#loading').show();
+        $('#content').html("");
+        $.ajax({
+            url: '/Albums',
+            type: 'POST',
+            data: {action:'loadUserAudio'},
+            success: function (data) {
+                $('#loading').hide();
+                $('#content').html(data);
+            }
+        });
+    }
+    function loadUserYoutube() {
+        $('#loading').show();
+        $('#content').html("");
+        $.ajax({
+            url: '/Albums',
+            type: 'POST',
+            data: {action:'loadUserYoutube'},
+            success: function (data) {
+                $('#loading').hide();
+                $('#content').html(data);
+            }
+        });
+    }
+</script>
 </body>
 </html>

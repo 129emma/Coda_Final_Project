@@ -87,7 +87,7 @@
         <servlet-name>AvatarEdit</servlet-name>
         <url-pattern>/AvatarEdit</url-pattern>
     </servlet-mapping>
-
+    https://medium.com/
 
     <servlet>
         <servlet-name>Albums</servlet-name>

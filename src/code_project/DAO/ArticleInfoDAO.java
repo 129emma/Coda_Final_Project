@@ -34,12 +34,70 @@ public class ArticleInfoDAO {
         return articleInfoList;
     }
 
+
+
+    public static List<ArticleInfo> getArticleInfoList(AbstractDB db ,String username,int number) {
+
+        List<ArticleInfo> articleInfoList = new ArrayList<>();
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username=? ORDER BY postTime DESC LIMIT ?")) {
+                p.setString(1,username);
+                p.setInt(2,number);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        articleInfoList.add(ArticleInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return articleInfoList;
+    }
+
+    public static int getTotalArticleNumber(AbstractDB db){
+        int totalArticleNumber = 0;
+        try (Connection c = db.connection()) {
+            try (Statement stmt = c.createStatement()) {
+                try (ResultSet r = stmt.executeQuery("SELECT COUNT(*) FROM Article")) {
+                    while (r.next()) {
+                        totalArticleNumber = r.getInt(1);
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return totalArticleNumber;
+    }
+
+    public static int getTotalArticleNumber(AbstractDB db, String username){
+        int totalArticleNumber = 0;
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT COUNT(*) FROM Article WHERE username=?")){
+                p.setString(1,username);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        totalArticleNumber = r.getInt(1);
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return totalArticleNumber;
+    }
+
     public static List<ArticleInfo> getSpotlightArticleInfoList(AbstractDB db ,int pageNumber) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article ORDER BY articleID ASC LIMIT 10 OFFSET ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article ORDER BY postTime DESC LIMIT ? OFFSET 0")) {
                 p.setInt(1,pageNumber);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -56,13 +114,14 @@ public class ArticleInfoDAO {
 
 
 
-    public static void createArticleInfo(AbstractDB db, String title,String content, String postTime, String tags,String username ) throws SQLException {
+    public static void createArticleInfo(AbstractDB db, String title,String content, String postTime, String tags,String username, String userAvatar ) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO Article(title,content,postTime,tags,username) VALUES (?,?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO Article(title,content,postTime,tags,username,userAvatar) VALUES (?,?,?,?,?,?);")) {
                 p.setString(1, title);
                 p.setString(2, content);
                 p.setString(3, postTime);
                 p.setString(4, tags);
+                p.setString(6, userAvatar);
                 p.setString(5, username);
                 p.executeUpdate();
             }
@@ -126,7 +185,8 @@ public class ArticleInfoDAO {
                 r.getString("content"),
                 r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
                 r.getString("tags"),
-                r.getString("username")
+                r.getString("username"),
+                r.getString("userAvatar")
         );
     }
 
