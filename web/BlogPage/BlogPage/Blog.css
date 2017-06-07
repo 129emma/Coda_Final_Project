@@ -1,30 +1,3 @@
-
-ul.userChoice {
-    list-style: none;
-}
-li {
-    display: inline;
-    padding: 30px;
-}
-.left.ui.rail {
-    padding-left: 20%;
-}
-
-.ui.basic.button {
-    box-shadow: none;
-}
-
-.ui.basic.button:hover{
-    box-shadow: none !important;
-}
-
-.ui.text.container {
-    padding-top: 50px;
-}
-
-img.userAvatar {
-    height: 100px;
-}
 /*fixed background image's height*/
 .ui.image.backGround {
     overflow: hidden;
@@ -65,3 +38,4 @@ img.userAvatar {
 .content {
     text-align: center;
 }
+

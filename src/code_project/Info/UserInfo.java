@@ -6,7 +6,7 @@ package code_project.Info;
  */
 public class UserInfo {
 
-	private String username,firstName,lastName,email,birthDate,gender,avatar;
+	public String username,firstName,lastName,email,birthDate,gender,avatar;
 
 
 	public UserInfo(String username, String firstName, String lastName, String email, String date_birth, String gender, String avatar) {
