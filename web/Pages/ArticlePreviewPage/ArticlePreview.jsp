@@ -15,11 +15,10 @@
 <body>
 
 <c:forEach var="article" items="${articleInfoList}">
-        <div class="ui raised segment keepContent">
-            <div class="ui left rail">
-                <div class="ui sticky">
-                    <h3 class="ui user">${article.username}</h3>
-                    <img class="ui tiny circular image userAvatar userAvatarToHover" src="User-Info/${article.username}/avatar.jpg">
+        <div class="ui segment keepContent">
+            <div class="ui left close rail" style="width: 80px !important;">
+                <div class="ui sticky" style="width: 80px !important;">
+                    <img class="ui raised tiny top aligned rounded image userAvatar userAvatarToHover" src="User-Info/${article.username}/avatar.jpg">
                 </div>
                 <div class="ui custom popup top transition hidden">
                     <div class="ui raised link card">

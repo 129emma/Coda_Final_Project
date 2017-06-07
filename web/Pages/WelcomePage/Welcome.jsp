@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 </head>
 <body>
 <div id="fullpage">
-    <div class="section" id="section0">
+    <div class="section active" id="section0">
         <div class="ui middle aligned center aligned grid">
             <div class="column">
                 <div class="ui text container">
@@ -48,7 +49,7 @@
         </div>
         <div class="ui small modal" id="login"></div>
     </div>
-    <div class="section active" id="section1">
+    <div class="section" id="section1">
         <div class="ui middle aligned center aligned grid">
             <h1>Our team</h1>
             <div class="ui small sequenced images">

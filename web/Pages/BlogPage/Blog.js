@@ -11,7 +11,6 @@ $(document).ready(function () {
     $('.ui.sticky').each(function () {
         $(this).sticky({
             context: '.keepContent',
-            pushing: true
         });
     });
 
