@@ -4,6 +4,17 @@
 
 $(document).ready(function () {
 
+    $('#fullpage').fullpage({
+        loopTop: true,
+        loopBottom: true
+    });
+
+    $('.sequenced.images .image').transition({
+        animation: 'jiggle',
+        duration: 500,
+        interval: 200
+    });
+
     $('#loginBtn').click(function () {
         checkLoginStatus("login");
     });
@@ -12,17 +23,17 @@ $(document).ready(function () {
         checkLoginStatus("register");
     });
 
-    $('#login').on('blur', '#UsernameInput', function () {
-        if ($('#UsernameInput').val() != "") {
+    $('#login').on('blur', '#registerUsername', function () {
+        if ($('#registerUsername').val() != "") {
             verifyUsername($(this).val());
         }
 
     });
 
-    $('#login').on('click', '.loginButton', function () {
+    $('#login').on('click', '#loginButton', function () {
 
-        var username = $('#username').val();
-        var password = $('#password').val();
+        var username = $('#loginUsername').val();
+        var password = $('#loginPassword').val();
 
         if (username!= ""&& password!= "") {
             login(username,password);

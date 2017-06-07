@@ -1,37 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:500i,600');
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-
-
-#section0{
-    background: linear-gradient(#4BBFC3 ,#7BAABE );
+body {
+    background-color: #71c7d6;
 }
 
-#section1{
-    background: linear-gradient(#7baabe ,#636F8F );
+form {
+    margin-top: 15em;
 }
-#section2{
-    background: linear-gradient(#636F8F ,#83628d );
-}
-
-h2,a{
-    font-family: 'Raleway', sans-serif;
-}
-h2{
-    color: aliceblue;
-}
-
-h1.ui.inverted.header {
-    font-size: 40px;
-    font-family: 'Raleway', sans-serif;
-}
-
-.twoButtons {
-    margin-top: 80px;
-}
-
-
-/*for login&register page*/
 
 .login-block {
     width: 320px;
@@ -88,7 +63,7 @@ h1.ui.inverted.header {
     border: 1px solid #ff656c;
 }
 
-#registerButton {
+.login-block #registerButton {
     width: 100%;
     height: 40px;
     background: #71e1ff;
@@ -104,27 +79,10 @@ h1.ui.inverted.header {
     cursor: pointer;
 }
 
-#loginButton {
-    width: 100%;
-    height: 40px;
-    background: #71e1ff;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #3cc0e1;
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-family: Montserrat,sans-serif;
-    outline: none;
-    cursor: pointer;
-}
-
-#registerButton:hover {
+.login-block #registerButton:hover {
     background: #d3ffff;
 }
 
-
-#loginButton:hover {
-    background: #d3ffff;
+#message {
+    color: red;
 }
