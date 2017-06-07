@@ -20,6 +20,7 @@
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
     <script src="${pageContext.request.contextPath}/Pages/BlogPage/Blog.js"></script>
+    <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/BlogPage/Blog.css" type="text/css">
 
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
@@ -41,12 +42,9 @@
     </jsp:include>
 
     <!-- Page Content !-->
-
+<div class="ui container">
     <div class="ui text justified container">
-        <div class="ui raised segment">
-            <div class="left ui rail">
-                <img class="userAvatar userAvatarToHover" src='${userInfo.avatar}'>
-            </div>
+        <div class="ui segment">
             <ul class="userChoice">
                 <li>
                     <div class="ui icon basic button" data-tooltip="Post">
@@ -80,7 +78,7 @@
 
     <div id="ArticleContainer" class="ui text justified container">
     </div>
-
+</div>
 </div>
 </body>
 </html>

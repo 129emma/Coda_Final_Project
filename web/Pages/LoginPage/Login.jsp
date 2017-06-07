@@ -14,8 +14,8 @@
     <div class="login-block">
         <h1>Login</h1>
         <div>
-            <input type="text" required name="username" class="username" placeholder="Username"/>
-            <input type="password" required name="password" class="password" placeholder="Password"/>
+            <input id="loginUsername" type="text" required name="username" class="username" placeholder="Username"/>
+            <input id="loginPassword" type="password" required name="password" class="password" placeholder="Password"/>
         </div>
         <input type="hidden" value="login" name="action"/>
         <button id="loginButton" type="button">Login</button>

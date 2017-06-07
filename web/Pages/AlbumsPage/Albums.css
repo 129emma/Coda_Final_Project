@@ -1,7 +1,12 @@
 ul.userChoice {
     list-style: none;
 }
-
+.ui.segment{
+    max-width: 800px;
+}
+.ui.container.my{
+    padding-top: 50px;
+}
 .ui.basic.button {
     box-shadow: none;
 }
@@ -14,8 +19,8 @@ li {
     box-shadow: none !important;
 }
 
-.ui.my.container {
-    padding-top: 50px;
+.ui.dividing.header {
+    max-width: 800px;
 }
 
 .ui.small.image {
