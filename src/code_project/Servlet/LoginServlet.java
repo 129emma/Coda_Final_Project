@@ -119,7 +119,7 @@ public class LoginServlet extends HttpServlet {
                         }
                         //get the user's folder path
                         String filePath = servletContext.getRealPath("/User-Info/" + username+"/");
-                        String defaultAvatar=servletContext.getRealPath("/Pages/AvatarEditPage/DefaultAvatar/qq.png");
+                        String defaultAvatar=servletContext.getRealPath("/DefaultAvatar/elyse.png");
                         icon= ImageIO.read(new File(defaultAvatar));
                         File outputfile=new File(filePath+"/avatar.jpg");
                         ImageIO.write(icon,"jpg",outputfile);

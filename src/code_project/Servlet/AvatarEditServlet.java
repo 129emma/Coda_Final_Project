@@ -100,10 +100,11 @@ public class AvatarEditServlet extends HttpServlet {
 
 public static List<String> iconList(){
         List<String> iconList=new ArrayList<>();
-        iconList.add("DefaultAvatar/Desert.jpg");
-        iconList.add("DefaultAvatar/Kiwi.png");
-        iconList.add("DefaultAvatar/Mouse.png");
-        iconList.add("DefaultAvatar/qq.png");
+        iconList.add("DefaultAvatar/elyse.png");
+        iconList.add("DefaultAvatar/helen.jpg");
+        iconList.add("DefaultAvatar/jenny.jpg");
+        iconList.add("DefaultAvatar/matthew.png");
+        iconList.add("DefaultAvatar/molly.png");
         return iconList;
     }
 private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,String filePath,String localIconFilePath){

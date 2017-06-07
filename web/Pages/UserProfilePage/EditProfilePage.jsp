@@ -46,16 +46,10 @@
             margin-top: 10px;
         }
 
-
-
-        .myForm{
-            float: right;
-        }
-
-
         .ui.medium.image{
             width: 200px;
             height: 200px;
+            margin-top: 50px;
         }
         .avatarInfo{
             margin-left: 30px;
@@ -157,6 +151,8 @@
                 </c:forEach>
                 <br><br>
                 </div>
+                <div class="ui header" >Choose from local:</div>
+
     <div class="myForm" >
     <form action="AvatarEdit" id="avatarForm" method="post" style="margin: 0" enctype="multipart/form-data">
         <div>
@@ -180,12 +176,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
 
 //old one
     <%--<div class="ui basic modal">--%>
