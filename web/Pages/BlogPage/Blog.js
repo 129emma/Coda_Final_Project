@@ -8,9 +8,11 @@ $(document).ready(function () {
 
     loadArticles();
 
-    $('.ui.sticky').sticky({
-        context: '.keepContent',
-        pushing: true
+    $('.ui.sticky').each(function () {
+        $(this).sticky({
+            context: '.keepContent',
+            pushing: true
+        });
     });
 
     $(window).scroll(function () {
@@ -27,9 +29,10 @@ $(document).ready(function () {
 function refresh() {
     $('.ui.sticky').sticky('refresh');
 
-    $('.userAvatarToHover').popup({
-        popup: $('.custom.popup'),
-        position: 'bottom right'
+    $('.userAvatarToHover').each(function () {
+        $(this).popup({
+            popup: $('.custom.popup'),
+        });
     });
 }
 
