@@ -5,14 +5,22 @@
 $(document).ready(function () {
 
     $('#fullpage').fullpage({
-        loopTop: true,
-        loopBottom: true,
+        continuousVertical: true,
+        navigationPosition: 'left',
+        navigation: true,
 
         afterLoad: function(anchorLink, index){
 
             if(index == 2){
                 $('.sequenced.images .image').transition({
                     animation: 'jiggle',
+                    duration: 500,
+                    interval: 200
+                });
+            }
+            if(index == 3){
+                $('.sequenced.icons .icon').transition({
+                    animation: 'bounce',
                     duration: 500,
                     interval: 200
                 });

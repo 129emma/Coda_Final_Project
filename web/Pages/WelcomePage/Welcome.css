@@ -1,23 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:500i,600');
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-
-
-#section0{
-    background: linear-gradient(#4BBFC3 ,#7BAABE );
+#section0 {
+    background: linear-gradient(#4BBFC3, #7BAABE);
 }
 
-#section1{
-    background: linear-gradient(#7baabe ,#636F8F );
-}
-#section2{
-    background: linear-gradient(#636F8F ,#83628d );
+#section1 {
+    background: linear-gradient(#7baabe, #636F8F);
 }
 
-h2,a{
+#section2 {
+    background: linear-gradient(#636F8F, #83628d);
+}
+
+#fp-nav ul li a span, .fp-slidesNav ul li a span {
+    background-color: lightcyan;
+}
+
+h2, a {
     font-family: 'Raleway', sans-serif;
 }
-h2{
+
+h2 {
     color: aliceblue;
 }
 
@@ -29,7 +33,6 @@ h1.ui.inverted.header {
 .twoButtons {
     margin-top: 80px;
 }
-
 
 /*for login&register page*/
 
@@ -59,7 +62,7 @@ h1.ui.inverted.header {
     border: 1px solid #ccc;
     margin-bottom: 20px;
     font-size: 14px;
-    font-family: Montserrat,sans-serif;
+    font-family: Montserrat, sans-serif;
     padding: 0 20px 0 50px;
     outline: none;
 }
@@ -99,7 +102,7 @@ h1.ui.inverted.header {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 14px;
-    font-family: Montserrat,sans-serif;
+    font-family: Montserrat, sans-serif;
     outline: none;
     cursor: pointer;
 }
@@ -115,7 +118,7 @@ h1.ui.inverted.header {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 14px;
-    font-family: Montserrat,sans-serif;
+    font-family: Montserrat, sans-serif;
     outline: none;
     cursor: pointer;
 }
@@ -123,7 +126,6 @@ h1.ui.inverted.header {
 #registerButton:hover {
     background: #d3ffff;
 }
-
 
 #loginButton:hover {
     background: #d3ffff;
