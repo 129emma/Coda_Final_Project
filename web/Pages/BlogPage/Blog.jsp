@@ -42,38 +42,108 @@
     </jsp:include>
 
     <!-- Page Content !-->
-<div class="ui container">
-    <div class="ui text justified container">
-        <div class="ui segment">
-            <ul class="userChoice">
-                <li>
-                    <div class="ui icon basic button" data-tooltip="Post">
-                        <i class="grey big talk outline icon"></i>
-                    </div>
-                </li>
-                <li>
-                    <div class="ui icon basic button" data-tooltip="Photo">
-                        <i class="orange big image icon"></i>
-                    </div>
-                </li>
-                <li>
-                    <div class="ui icon basic button" data-tooltip="Music">
-                        <i class="yellow big music icon"></i>
-                    </div>
-                </li>
-                <li>
-                    <div class="ui icon basic button" data-tooltip="Video">
-                        <i class="green big record icon"></i>
-                    </div>
-                </li>
-                <li>
-                    <div class="ui icon basic button" data-tooltip="Article">
-                        <a href="Article?action=create"> <i class="blue big newspaper icon"></i></a>
-                    </div>
-                </li>
-            </ul>
 
+    <div class="ui text container">
+        <div class="ui shape">
+            <div class="sides">
+                <div class="active side">
+                    <div class="ui card">
+                        <div class="image">
+                            <!--Background Image-->
+                            <div class="ui image backGround">
+                                <!--fixed size for this background,maximum height is 270px-->
+                                <img src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
+                            </div>
+                            <!--User Icon-->
+                            <div class="ui small image iconImage">
+                                <img src="User-Info/${userInfo.username}/avatar.jpg">
+                            </div>
+                        </div>
+                        <!--User Name-->
+                        <div class="content">
+                            <div class="header">${userInfo.username}</div>
+                            <div class="description">
+                                More coffee please!
+                            </div>
+                        </div>
+
+                        <div class="ui fitted divider"></div>
+
+                        <div class="ui labeled icon borderless four item menu">
+                            <a class="item">
+                                <div class="ui icon" data-tooltip="Post">
+                                    <i class="grey talk outline icon"></i>
+                                </div>
+                            </a>
+                            <a class="item">
+                                <div class="ui icon " data-tooltip="Photo">
+                                    <i class="orange image icon"></i>
+                                </div>
+
+                            </a>
+                            <a class="item">
+                                <div class="ui icon " data-tooltip="Music">
+                                    <i class="yellow  music icon"></i>
+                                </div>
+                            </a>
+                            <a class="item">
+                                <div class="ui icon" data-tooltip="Video">
+                                    <i class="green record icon"></i>
+                                </div>
+                            </a>
+
+
+                        </div>
+                        <div class="extra content">
+                            <div id="flipright" class="ui icon right floated button">
+                                View Details
+                                <i class="right long arrow icon"></i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div> <!--End of First Side-->
+
+
+                <!--Another Side-->
+
+                <div class="side">
+
+                    <div class="ui card">
+
+                        <div class="image">
+                            <!--Background Image-->
+                            <div class="ui image backGround">
+                                <!--fixed size for this background,maximum height is 270px-->
+                                <img  src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
+                                <!--User Icon-->
+                                <div class="ui small image iconImage">
+                                    <img src="User-Info/${userInfo.username}/avatar.jpg">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="description">
+                                <p>First Name: ${userInfo.firstName}</p>
+                                <p>Last Name: ${userInfo.lastName}</p>
+                                <p>Gender: ${userInfo.gender}</p>
+                                <p>Birthday: ${userInfo.birthDate}</p>
+                                <p>Email: ${userInfo.email}</p>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <div id="flipleft" class="ui right floated icon button">
+                                Back
+                                <i class="left long arrow icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <div id="ArticleContainer" class="ui text justified container">
