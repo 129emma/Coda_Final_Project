@@ -40,7 +40,7 @@ private void getUserProfile(HttpServletRequest request, HttpServletResponse resp
 
     UserInfo userProfile= UserInfoDAO.getUserInfo(DB,(String)session.getAttribute("username"));
     request.setAttribute("userProfile",userProfile);
-    request.getRequestDispatcher("Pages/UserProfile/UserProfile.jsp").forward(request, response);
+    request.getRequestDispatcher("Pages/ProfilePage/Profile.jsp").forward(request, response);
 
 }
 }

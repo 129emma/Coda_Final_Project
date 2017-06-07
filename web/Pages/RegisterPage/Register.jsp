@@ -24,10 +24,10 @@
         <p>Don't panic:) We do respect your privacy! Read Terms&Conditions <a href="${pageContext.request.contextPath}/Pages/TermsConditionsPage/Terms&Conditions.html">HERE</a>
         </p>
         <div>
-            <input id="UsernameInput" required type="text" name="username" class="username" placeholder="Username"/>
-            <input id="PasswordInput" required type="password" name="password" class="password" placeholder="Password"/>
+            <input id="registerUsername" required type="text" name="username" class="username" placeholder="Username"/>
+            <input id="registerPassword" required type="password" name="password" class="password" placeholder="Password"/>
         </div>
-        <input id="button" type="submit" value="register" name="action"/>
+        <input id="registerButton" type="submit" value="register" name="action"/>
         <p>Already registered? Login <a href="${pageContext.request.contextPath}/Pages/LoginPage/Login.jsp">HERE</a></p>
         <p id="message">${message}</p>
     </div>

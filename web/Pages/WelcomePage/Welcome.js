@@ -4,6 +4,17 @@
 
 $(document).ready(function () {
 
+    $('#fullpage').fullpage({
+        loopTop: true,
+        loopBottom: true
+    });
+
+    $('.sequenced.images .image').transition({
+        animation: 'jiggle',
+        duration: 500,
+        interval: 200
+    });
+
     $('#loginBtn').click(function () {
         checkLoginStatus("login");
     });

@@ -18,7 +18,7 @@
             <input type="password" required name="password" class="password" placeholder="Password"/>
         </div>
         <input type="hidden" value="login" name="action"/>
-        <button class="loginButton" id="button" type="button">Login</button>
+        <button id="loginButton" type="button">Login</button>
         <p>No account yet? Register <a href="${pageContext.request.contextPath}/Pages/RegisterPage/Register.jsp">HERE</a></p>
         <p id="message">${message}</p>
     </div>
