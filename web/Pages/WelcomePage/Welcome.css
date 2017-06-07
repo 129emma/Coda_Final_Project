@@ -59,22 +59,22 @@ h1.ui.inverted.header {
     outline: none;
 }
 
-.login-block input#username {
+.login-block input.username {
     background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
     background-size: 16px 80px;
 }
 
-.login-block input#username:focus {
+.login-block input.username:focus {
     background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
     background-size: 16px 80px;
 }
 
-.login-block input#password {
+.login-block input.password {
     background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px top no-repeat;
     background-size: 16px 80px;
 }
 
-.login-block input#password:focus {
+.login-block input.password:focus {
     background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
     background-size: 16px 80px;
 }
