@@ -132,7 +132,7 @@
                             </div>
                         </div>
                         <div class="extra content">
-                            <a href="ChangeProfile" class="ui left floated icon button">
+                            <a href="Profile" class="ui left floated icon button">
                                 <i class="left setting icon"></i> Update
                             </a>
 

@@ -99,7 +99,7 @@
             </div>
 
             <!--id for update profile form should be changed-->
-            <form class="ui form" id="#" action="ChangeProfile" method="post">
+            <form class="ui form" id="#" action="Profile" method="post">
                 <img src="${userProfile.avatar}" title="Click to change" id="userIcon" class="rounded" onclick="showWindow2()"/>
                 <div class="field">
                     <label>Firstname:</label><input type="text" name="firstname" value="${userProfile.firstName}"
