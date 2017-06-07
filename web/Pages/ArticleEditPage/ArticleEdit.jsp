@@ -36,10 +36,7 @@
     <jsp:param name="SideBar" value=""/>
   </jsp:include>
 
-
   <div class="pusher full">
-
-
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
       <jsp:param name="NavigationBar" value=""/>
     </jsp:include>

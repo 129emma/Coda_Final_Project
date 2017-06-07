@@ -1,35 +1,37 @@
 /**
  * Created by qpen546 on 31/05/2017.
  */
-var articlesNum = 1;
+var articlesNum = 3;
 var process = false;
 
 $(document).ready(function () {
 
     loadArticles();
 
-    $('.ui.sticky').each(function () {
-        $(this).sticky({
-            context: '.keepContent',
-            pushing: true
-        });
-    });
-
-    $('.userAvatarToHover').popup({
-        popup : $('.custom.popup'),
-        on    : 'click'
-
+    $('.ui.sticky').sticky({
+        context: '.keepContent',
+        pushing: true
     });
 
     $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height()== $(document).height()&&process == false) {
+        if ($(window).scrollTop() + $(window).height() == $(document).height() && process == false) {
             process = true;
             $("#Loader").show();
-            articlesNum += 1;
+            articlesNum += 3;
             loadArticles();
         }
     });
 });
+
+
+function refresh() {
+    $('.ui.sticky').sticky('refresh');
+
+    $('.userAvatarToHover').popup({
+        popup: $('.custom.popup'),
+        position: 'bottom right'
+    });
+}
 
 function loadArticles() {
     $.ajax({
@@ -37,10 +39,11 @@ function loadArticles() {
         type: 'post',
         data: {action: 'preview', articleNumber: articlesNum, page: page},
         success: function (articlesPreview) {
-            var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>')+6,articlesPreview.indexOf("\</body\>"));
+            var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
             $("#ArticleContainer").html(preview);
             $("#Loader").hide();
-            process=false;
+            refresh();
+            process = false;
         }
     });
 }

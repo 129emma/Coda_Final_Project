@@ -8,21 +8,23 @@ public class CommentInfo {
     public String content, postTime, username, editComment, deleteComment, replyComment;
 
     public void setReplyComment(String username) {
-        if(this.username.equals(username)){
-            replyComment = "<a href=\"Comment?action=reply&articleID="+articleID+"&commentID="+commentID+"\">delete</a>";
-        }
+        replyComment = "<a class='reply' href=\"Comment?action=reply&articleID=" + articleID + "&commentID=" + commentID + "\">Reply</a>";
     }
 
     public void setEditComment(String username) {
-        if(this.username.equals(username)){
-            deleteComment = "<a href=\"Comment?action=edit&articleID="+articleID+"&commentID="+commentID+"\">delete</a>";
+        if (this.username.equals(username)) {
+            editComment = "<a class='reply' href=\"Comment?action=edit&articleID=" + articleID + "&commentID=" + commentID + "\">Edit</a>";
         }
     }
 
     public void setDeleteComment(String username) {
-        if(this.username.equals(username)){
-            deleteComment = "<a href=\"Comment?action=delete&articleID="+articleID+"&commentID="+commentID+"\">delete</a>";
+        if (this.username.equals(username)) {
+            deleteComment = "<a class='reply' href=\"Comment?action=delete&articleID=" + articleID + "&commentID=" + commentID + "\">Delete</a>";
         }
+    }
+
+    public String getReplyComment() {
+        return replyComment;
     }
 
     public String getEditComment() {
@@ -39,8 +41,9 @@ public class CommentInfo {
         this.postTime = postTime;
         this.username = username;
         this.articleID = articleID;
-        editComment ="";
+        editComment = "";
         deleteComment = "";
+        replyComment ="";
     }
 
     public int getCommentID() {
