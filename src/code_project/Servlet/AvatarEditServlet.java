@@ -89,7 +89,7 @@ public class AvatarEditServlet extends HttpServlet {
             }
             UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
             request.setAttribute("userInfo",userInfo);
-            request.getRequestDispatcher("Pages/UpdateProfilePage/UpdateProfile.jsp").forward(request,response);
+            request.getRequestDispatcher("Pages/UserProfilePage/EditProfilePage.jsp").forward(request,response);
     }
 
 
@@ -120,7 +120,7 @@ protected List<String> iconList(){
         iconList.add("Pages/AvatarEditPage/DefaultAvatar/Desert.jpg");
         iconList.add("Pages/AvatarEditPage/DefaultAvatar/Kiwi.png");
         iconList.add("Pages/AvatarEditPage/DefaultAvatar/Mouse.png");
-        iconList.add("Pages/AvatarEditPage/DefaultAvatar/pig.png");
+        iconList.add("Pages/AvatarEditPage/DefaultAvatar/qq.png");
         return iconList;
     }
 private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,String filePath,String localIconFilePath){
@@ -184,7 +184,7 @@ private void scaleImage(File outputFile) throws IOException{
         }catch (IOException e){
             e.printStackTrace();
         }
-
-
 }
+
+
 }

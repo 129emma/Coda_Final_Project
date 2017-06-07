@@ -7,11 +7,13 @@ import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -31,11 +33,7 @@ public class ChangeUserProfileServlet extends HttpServlet{
 
         LoginStatus.verifyStatus(request,response);
 
-        if(request.getParameter("profileAction")==null){
-
-           getUserProfile(request,response,session);
-
-        } else if(request.getParameter("profileAction").equals("update")){
+      if(request.getParameter("profileAction").equals("update")){
 
                  updateUserProfile(request,response,session);
 
@@ -55,7 +53,6 @@ public class ChangeUserProfileServlet extends HttpServlet{
         String email=request.getParameter("email");
         String birthday=request.getParameter("birthday");
         String gender=request.getParameter("gender");
-        request.removeAttribute("profile");
 
         try{
             UserInfoDAO.updateUserInfo(DB,(String)session.getAttribute("username"),firstname,lastname,email,birthday,gender);
@@ -63,6 +60,7 @@ public class ChangeUserProfileServlet extends HttpServlet{
         }catch(Exception e){
             e.printStackTrace();
         }
+
         response.sendRedirect("Profile");
 
     }
@@ -70,7 +68,12 @@ public class ChangeUserProfileServlet extends HttpServlet{
     private void deleteUserProfile( HttpServletResponse response,HttpSession session) throws IOException, ServletException{
 
         try {
-            UserInfoDAO.deleteUserInfo(DB,(String)session.getAttribute("articleID"));
+            String username=(String)session.getAttribute("username");
+            UserInfoDAO.deleteUserInfo(DB,username);
+            ServletContext servletContext = getServletContext();
+            String userFile = servletContext.getRealPath("/User-Info/" + username );
+            File file = new File(userFile );
+            deleteUserFile(file);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -81,9 +84,21 @@ public class ChangeUserProfileServlet extends HttpServlet{
     }
 
 
-    private void getUserProfile(HttpServletRequest request, HttpServletResponse response,HttpSession session)throws IOException, ServletException{
-        UserInfo userInfo=UserInfoDAO.getUserInfo(DB,(String)session.getAttribute("username"));
-        request.setAttribute("userInfo",userInfo);
-        request.getRequestDispatcher("Pages/UpdateProfilePage/UpdateProfile.jsp").forward(request, response);
+    private   void deleteUserFile(File myFile){
+        if(myFile.exists()){
+            File[] files = myFile.listFiles();
+            if(null!=files){
+                for(int i=0; i<files.length; i++) {
+                    if(files[i].isDirectory()) {
+                       deleteUserFile(files[i]);
+                    }
+                    else {
+                        files[i].delete();
+                    }
+                }
+            }
+        }
+        myFile.delete();
     }
+
 }

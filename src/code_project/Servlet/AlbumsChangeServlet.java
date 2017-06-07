@@ -139,20 +139,6 @@ public class AlbumsChangeServlet extends HttpServlet {
     private void addNewThingsToAlbums(HttpServletRequest request, HttpServletResponse response, String username) throws IOException, ServletException {
 
         ServletContext servletContext = getServletContext();
-        String fullFilePath = servletContext.getRealPath("/User-Info");
-
-        //create User-Info folder
-        File userInfoFolder = new File(fullFilePath);
-        if (!userInfoFolder.exists()) {
-            userInfoFolder.mkdir();
-        }
-        //create the user's own folder under User-Info folder
-        File Userfolder = new File(fullFilePath + "/" + username);
-
-        if (!Userfolder.exists()) {
-            Userfolder.mkdir();
-        }
-
         //get the user's folder path
         filePath = servletContext.getRealPath("/User-Info/" + username + "/");
 
