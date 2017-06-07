@@ -23,6 +23,9 @@ $(document).ready(function () {
     });
 
     $(window).scroll(function () {
+        console.log($(window).scrollTop());
+        console.log($(window).height());
+        console.log($(document).height());
         if ($(window).scrollTop() + $(window).height() == $(document).height() && process == false) {
             process = true;
             $("#Loader").show();
@@ -38,7 +41,7 @@ function refresh() {
 
     $('.userAvatarToHover').each(function () {
         $(this).popup({
-            popup: $('.custom.popup'),
+            popup: $('.custom.popup')
         });
     });
 }
@@ -52,8 +55,8 @@ function loadArticles() {
             var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
             $("#ArticleContainer").html(preview);
             $("#Loader").hide();
-            refresh();
             process = false;
+            refresh();
         }
     });
 }
