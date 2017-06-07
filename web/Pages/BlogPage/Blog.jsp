@@ -65,28 +65,28 @@
                             </div>
                         </div>
 
-                        <div class="ui fitted divider"></div>
+                        <div class="ui fitted divider header"></div>
 
                         <div class="ui labeled icon borderless four item menu">
-                            <a class="item">
-                                <div class="ui icon" data-tooltip="Post">
-                                    <i class="grey talk outline icon"></i>
+                            <a href="Blog?page=home" class="item">
+                                <div class="ui icon" data-tooltip="My Article">
+                                    <i class="grey file text outline icon"></i>
                                 </div>
                             </a>
-                            <a class="item">
-                                <div class="ui icon " data-tooltip="Photo">
-                                    <i class="orange image icon"></i>
+                            <a href="Blog?page=spotlight" class="item">
+                                <div class="ui icon " data-tooltip="Spotlight">
+                                    <i class="blue world icon"></i>
                                 </div>
 
                             </a>
-                            <a class="item">
-                                <div class="ui icon " data-tooltip="Music">
-                                    <i class="yellow  music icon"></i>
+                            <a href="Albums" class="item">
+                                <div class="ui icon " data-tooltip="Albums">
+                                    <i class="red image icon"></i>
                                 </div>
                             </a>
-                            <a class="item">
-                                <div class="ui icon" data-tooltip="Video">
-                                    <i class="green record icon"></i>
+                            <a href="Article?action=create" class="item">
+                                <div class="ui icon" data-tooltip="Create">
+                                    <i class="purple write icon"></i>
                                 </div>
                             </a>
 
@@ -94,7 +94,7 @@
                         </div>
                         <div class="extra content">
                             <div id="flipright" class="ui icon right floated button">
-                                View Details
+                                Profile
                                 <i class="right long arrow icon"></i>
                             </div>
                         </div>
@@ -132,6 +132,10 @@
                             </div>
                         </div>
                         <div class="extra content">
+                            <a href="ChangeProfile" class="ui left floated icon button">
+                                <i class="left setting icon"></i> Update
+                            </a>
+
                             <div id="flipleft" class="ui right floated icon button">
                                 Back
                                 <i class="left long arrow icon"></i>
