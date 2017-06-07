@@ -45,11 +45,11 @@
 
       <div class="container">
         <div class="hero-unit">
-          <h1>Your article</h1>
+          <h2>New article</h2>
           <hr/>
           <div id="alerts"></div>
-          <p>Title: <input required type="text" id="title" name="title" placeholder="Please Enter Your Title"
-                           value="${articleInfo.title}" style="width: 300px;"/></P>
+          <p style="font-size: large">Title: <input required type="text" id="title" name="title" placeholder="Please Enter Your Title"
+                           value="${articleInfo.title}" style="width: 500px;height: 38px;margin-bottom: 5px"/></P>
           <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
             <div class="btn-group">
               <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>

@@ -56,7 +56,6 @@ public class ChangeUserProfileServlet extends HttpServlet{
 
         try{
             UserInfoDAO.updateUserInfo(DB,(String)session.getAttribute("username"),firstname,lastname,email,birthday,gender);
-
         }catch(Exception e){
             e.printStackTrace();
         }

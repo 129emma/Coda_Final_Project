@@ -20,6 +20,50 @@
 
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
+    <style>
+        .rounded:hover{
+
+            cursor:pointer
+        }
+
+        .rounded{
+            width:100px;
+            height:100px;
+        }
+        .img{
+            display: inline-block;
+            margin: 5px;
+
+        }
+        .options{
+            width: 620px;
+        }
+
+        .label{
+            width: 26px;
+            height: 23px;
+            cursor: hand;
+            margin-top: 10px;
+        }
+
+
+
+        .myForm{
+            float: right;
+        }
+
+
+        .ui.medium.image{
+            width: 200px;
+            height: 200px;
+        }
+        .avatarInfo{
+            margin-left: 30px;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
@@ -62,9 +106,7 @@
 
             <!--id for update profile form should be changed-->
             <form class="ui form" id="#" action="ChangeProfile" method="post">
-
-                <img src="${userProfile.avatar}" class="rounded" width="200px" height="200px"/><a href="AvatarEdit?ChangeIcon=true">click to change your
-                icon</a>
+                <img src="${userProfile.avatar}" title="Click to change" id="userIcon" class="rounded" onclick="showWindow2()"/>
                 <div class="field">
                     <label>Firstname:</label><input type="text" name="firstname" value="${userProfile.firstName}"
                                                     style="width: 300px;"/></div>
@@ -88,16 +130,140 @@
                        value="delete"/>
             </form>
         </div><!--end of edit segment-->
-
         <br>
         <div class="ui divider">
         </div>
-
-
     </div>
 
-</div>
 
+
+//new one
+    <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Profile Picture
+        </div>
+        <div class="image content">
+            <div class="ui medium image">
+                <img id="icon" src="${userProfile.avatar}">
+            </div>
+            <div class="avatarInfo">
+                <div class="ui header">Icon gallery</div>
+                <div class="options">
+                <c:forEach var="localIcon" items="${iconList}">
+                <div class="img">
+                <img src="${localIcon}" class="rounded" id="${localIcon}" />
+                </div>
+                </c:forEach>
+                <br><br>
+                </div>
+    <div class="myForm" >
+    <form action="AvatarEdit" id="avatarForm" method="post" style="margin: 0" enctype="multipart/form-data">
+        <div>
+            <input type="hidden" name="result" id="result">
+            <a title="Choose local file"><label for="imageFile" class="myLabel">
+                <img class="label" src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Documents_files_pictogram_symbol_icon_folder.png" >
+            </label>
+                <input style="display: none" type="file" id="imageFile" accept=".jpg, .gif,.png" name="icon"/></a>
+        </div>
+       </form>
+      </div>
+              </div>
+        </div>
+        <div class="actions">
+            <div class="ui red deny button">
+                Cancel
+            </div>
+            <div id="submitAvatarChange" class="ui positive right icon button">
+                Confirm
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+//old one
+    <%--<div class="ui basic modal">--%>
+        <%--<div class="myHeader">--%>
+            <%--Your avatar--%>
+        <%--</div>--%>
+        <%--<div class="content">--%>
+            <%--<div  class="center" >--%>
+                <%--<img src="${userProfile.avatar}" id="icon" name="userIcon" class="rounded" />--%>
+            <%--</div>--%>
+            <%--<div class="center">--%>
+                <%--<p>Default options</p>--%>
+            <%--</div>--%>
+
+            <%--<div class="options">--%>
+                    <%--<c:forEach var="localIcon" items="${iconList}">--%>
+                        <%--<div class="img">--%>
+                            <%--<img src="${localIcon}" class="rounded" id="${localIcon}" />--%>
+                        <%--</div>--%>
+                    <%--</c:forEach>--%>
+                    <%--<br><br>--%>
+            <%--</div>--%>
+
+            <%--<form action="AvatarEdit" id="avatarForm" method="post" enctype="multipart/form-data">--%>
+                <%--<div style="margin: auto;width: 100px">--%>
+                    <%--<input type="hidden" name="result" id="result">--%>
+                    <%--<a title="Choose local file"><label for="imageFile" class="myLabel">--%>
+                        <%--<img class="label" src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Documents_files_pictogram_symbol_icon_folder.png" >--%>
+                    <%--</label>--%>
+                        <%--<input style="display: none" type="file" id="imageFile" accept=".jpg, .gif,.png" name="icon"/></a>--%>
+                <%--</div>--%>
+
+            <%--</form>--%>
+        <%--</div>--%>
+        <%--<div class="actions">--%>
+            <%--<div class="ui red basic cancel inverted button"><i class="remove icon"></i>Cancel</div>--%>
+            <%--<div class="ui green ok inverted button" id="submitAvatarChange"><i class="checkmark icon"></i>Confirm</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+</div>
+<script>
+
+function showWindow() {
+    $('.ui.basic.modal')
+        .modal('show')
+    ;
+}
+function showWindow2() {
+    $('.ui.modal')
+        .modal('show')
+    ;
+}
+$("#submitAvatarChange").click(function () {
+    $("#avatarForm").submit();
+});
+    $( ".rounded" ).each(function() {
+        $(this).click( function(){
+            $("#icon").attr('src',$(this).attr('src'));
+            $('input[type=hidden]').val($(this).attr('src'));
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#icon').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('input[type=file]').change(function () {
+        readURL(this);
+        $('input[type=hidden]').val("");
+    })
+
+</script>
 
 </body>
 </html>

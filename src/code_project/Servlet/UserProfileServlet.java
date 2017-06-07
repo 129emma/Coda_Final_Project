@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +40,8 @@ public class UserProfileServlet extends HttpServlet {
 private void getUserProfile(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException, ServletException {
 
     UserInfo userProfile= UserInfoDAO.getUserInfo(DB,(String)session.getAttribute("username"));
+    List<String> iconList=AvatarEditServlet.iconList();
+    request.setAttribute("iconList",iconList);
     request.setAttribute("userProfile",userProfile);
     request.getRequestDispatcher("Pages/UserProfilePage/EditProfilePage.jsp").forward(request, response);
 
