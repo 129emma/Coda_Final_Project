@@ -20,7 +20,7 @@
 </head>
 <body>
 <div id="fullpage">
-    <div class="section" id="section0">
+    <div class="section active" id="section0">
         <div class="ui middle aligned center aligned grid">
             <div class="column">
                 <div class="ui text container">
@@ -48,7 +48,7 @@
         </div>
         <div class="ui small modal" id="login"></div>
     </div>
-    <div class="section active" id="section1">
+    <div class="section" id="section1">
         <div class="ui middle aligned center aligned grid">
             <h1>Our team</h1>
             <div class="ui small sequenced images">
