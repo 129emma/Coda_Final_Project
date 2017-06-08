@@ -87,40 +87,24 @@ public class AvatarEditServlet extends HttpServlet {
             }catch (Exception e){
                 e.printStackTrace();
             }
-            UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
-            request.setAttribute("userInfo",userInfo);
-            request.getRequestDispatcher("Pages/UpdateProfilePage/UpdateProfile.jsp").forward(request,response);
+            response.sendRedirect("Profile");
     }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        HttpSession session = request.getSession(true);
         response.setContentType("text/html");
-        String username=(String)session.getAttribute("username");
-        if (((String) session.getAttribute("status")) == null) {
-            session.setAttribute("status","logout");
-            request.getRequestDispatcher("Login").forward(request, response);
-        }else if(((String) session.getAttribute("status")) .equals("logout")){
-            session.setAttribute("logoutMessage","You already logout!");
-            request.getRequestDispatcher("Login").forward(request, response);
-        }else if(((String) session.getAttribute("status")) .equals("login")){
-            if(request.getParameter("ChangeIcon")!=null){
-                UserInfo userInfo=UserInfoDAO.getUserInfo(DB,username);
-                List<String> iconList=iconList();
-                request.setAttribute("iconList",iconList);
-                request.setAttribute("userInfo",userInfo);
-                request.getRequestDispatcher("Pages/AvatarEditPage/AvatarEdit.jsp").forward(request,response);
-            }
-        }
+        LoginStatus.verifyStatus(request, response);
+        doPost(request,response);
     }
 
-protected List<String> iconList(){
+public static List<String> iconList(){
         List<String> iconList=new ArrayList<>();
-        iconList.add("Pages/AvatarEditPage/DefaultAvatar/Desert.jpg");
-        iconList.add("Pages/AvatarEditPage/DefaultAvatar/Kiwi.png");
-        iconList.add("Pages/AvatarEditPage/DefaultAvatar/Mouse.png");
-        iconList.add("Pages/AvatarEditPage/DefaultAvatar/pig.png");
+        iconList.add("DefaultAvatar/elyse.png");
+        iconList.add("DefaultAvatar/helen.jpg");
+        iconList.add("DefaultAvatar/jenny.jpg");
+        iconList.add("DefaultAvatar/matthew.png");
+        iconList.add("DefaultAvatar/molly.png");
         return iconList;
     }
 private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,String filePath,String localIconFilePath){
@@ -184,7 +168,7 @@ private void scaleImage(File outputFile) throws IOException{
         }catch (IOException e){
             e.printStackTrace();
         }
-
-
 }
+
+
 }

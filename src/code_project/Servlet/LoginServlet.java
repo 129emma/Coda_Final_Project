@@ -7,12 +7,15 @@ import code_project.Security.Passwords;
 import code_project.Info.LoginInfo;
 import code_project.db.MySQL;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -55,7 +58,7 @@ public class LoginServlet extends HttpServlet {
                 checkProcess(request, response);
                 break;
             default:
-                request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
+                request.getRequestDispatcher("Pages/WelcomePage/Welcome.jsp").forward(request, response);
         }
     }
 
@@ -93,7 +96,37 @@ public class LoginServlet extends HttpServlet {
                 byte[] salt = Passwords.getNextSalt();
                 byte[] hashPassword = Passwords.hash(password.toCharArray(), salt, 5);
                 try {
-                    LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, "Pages/AvatarEditPage/DefaultAvatar/pig.png");
+
+                    BufferedImage icon=null;
+                    try {
+                        //read the local image
+                        ServletContext servletContext=getServletContext();
+                        String fullFilePath=servletContext.getRealPath("/User-Info");
+
+                        response.setContentType("text/html");
+
+                        //create User-Info folder
+                        File Iconfolder = new File(fullFilePath);
+
+                        if (!Iconfolder.exists()) {
+                            Iconfolder.mkdir();
+                        }
+                        //create the user's own folder under User-Info folder
+                        File Userfolder = new File(fullFilePath + "/" + username);
+
+                        if (!Userfolder.exists()) {
+                            Userfolder.mkdir();
+                        }
+                        //get the user's folder path
+                        String filePath = servletContext.getRealPath("/User-Info/" + username+"/");
+                        String defaultAvatar=servletContext.getRealPath("/DefaultAvatar/elyse.png");
+                        icon= ImageIO.read(new File(defaultAvatar));
+                        File outputfile=new File(filePath+"/avatar.jpg");
+                        ImageIO.write(icon,"jpg",outputfile);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, "/User-Info/" + username+"/avatar.jpg");
                     request.setAttribute("message", "Success to create account");
                     request.getRequestDispatcher("Pages/WelcomePage/Welcome.jsp").forward(request, response);
                 } catch (SQLException e) {

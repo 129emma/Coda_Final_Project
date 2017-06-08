@@ -12,12 +12,13 @@
 <head>
     <title>Welcome</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/Pages/WelcomePage/Welcome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.4/jquery.fullpage.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/Pages/WelcomePage/Welcome.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.4/jquery.fullpage.js"></script>
     <script src="${pageContext.request.contextPath}/Pages/WelcomePage/Welcome.js"></script>
+
 </head>
 <body>
 <div id="fullpage">
@@ -56,13 +57,21 @@
                 <img src="https://semantic-ui.com/images/avatar2/large/elyse.png" class="ui circular image">
                 <img src="https://semantic-ui.com/images/avatar2/large/matthew.png" class="ui circular image">
                 <img src="https://semantic-ui.com/images/avatar2/large/kristy.png" class="ui circular image">
-                <img src="https://semantic-ui.com/images/avatar/large/steve.jpg" class="ui circular image">
+                <img src="https://semantic-ui.com/images/avatar/large/jenny.jpg" class="ui circular image">
             </div>
         </div>
     </div>
     <div class="section" id="section2">
         <div class="ui middle aligned center aligned grid">
-            <h1>Feel free!</h1>
+            <h1>Seriously, put anything you want here.</h1>
+        </div>
+        <div class="ui middle aligned center aligned grid">
+            <div class="ui small sequenced icons">
+                <i class="grey massive talk outline icon"></i>
+                <i class="orange massive image icon"></i>
+                <i class="yellow massive music icon"></i>
+                <i class="green massive record icon"></i>
+            </div>
         </div>
     </div>
 </div>
