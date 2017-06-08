@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -17,47 +18,55 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
-
+    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>--%>
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
     <style>
-        .rounded:hover{
-
-            cursor:pointer
+        .rounded:hover {
+            cursor: pointer
         }
-
-        .rounded{
-            width:100px;
-            height:100px;
+        .rounded {
+            width: 100px;
+            height: 100px;
         }
-        .img{
+        .img {
             display: inline-block;
             margin: 5px;
 
         }
-        .options{
-            width: 620px;
+
+        .center,.header{
+            text-align: center;
         }
 
-        .label{
-            width: 26px;
-            height: 23px;
-            cursor: hand;
-            margin-top: 10px;
-        }
+    .avatarInfo{
+        width: 100%;
+        height: 100%;
+    }
 
-        .ui.medium.image{
+        .avatar {
             width: 200px;
             height: 200px;
-            margin-top: 50px;
+            margin: auto;
         }
-        .avatarInfo{
-            margin-left: 30px;
-            width: 100%;
-            height: 100%;
+.u     i.header{
+          margin: 0;!important;
+}
+        #avatarForm {
+            display: inline-block;
+        !important;
         }
     </style>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url:"/User-Info/gin/avatar.jpg",
+            success: function (data) {
+            }
+        });
+    });
 
+</script>
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
@@ -79,7 +88,8 @@
             </div>
             <form class="ui form" id="form" action="ChangePassword" method="post">
                 <div class="field">
-                    <label>Password: </label><input type="password" name="password" placeholder="Please Enter Your Password" style="width: 300px;"/>
+                    <label>Password: </label><input type="password" name="password"
+                                                    placeholder="Please Enter Your Password" style="width: 300px;"/>
                 </div>
                 <div class="field">
                     <label>New Password:</label> <input type="password" name="newPassword"
@@ -100,7 +110,8 @@
 
             <!--id for update profile form should be changed-->
             <form class="ui form" id="#" action="Profile" method="post">
-                <img src="${userProfile.avatar}" title="Click to change" id="userIcon" class="rounded" onclick="showWindow2()"/>
+                <img src="${userProfile.avatar}" title="Click to change" id="userIcon" class="rounded"
+                     onclick="showWindow2()"/>
                 <div class="field">
                     <label>Firstname:</label><input type="text" name="firstname" value="${userProfile.firstName}"
                                                     style="width: 300px;"/></div>
@@ -129,42 +140,44 @@
         </div>
     </div>
 
-
-
-//new one
     <div class="ui modal">
         <i class="close icon"></i>
         <div class="header">
-            Profile Picture
+            Avatar
         </div>
         <div class="image content">
-            <div class="ui medium image">
-                <img id="icon" src="${userProfile.avatar}">
-            </div>
-            <div class="avatarInfo">
-                <div class="ui header">Icon gallery</div>
-                <div class="options">
-                <c:forEach var="localIcon" items="${iconList}">
-                <div class="img">
-                <img src="${localIcon}" class="rounded" id="${localIcon}" />
-                </div>
-                </c:forEach>
-                <br><br>
-                </div>
-                <div class="ui header" >Choose from local:</div>
 
-    <div class="myForm" >
-    <form action="AvatarEdit" id="avatarForm" method="post" style="margin: 0" enctype="multipart/form-data">
-        <div>
-            <input type="hidden" name="result" id="result">
-            <a title="Choose local file"><label for="imageFile" class="myLabel">
-                <img class="label" src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Documents_files_pictogram_symbol_icon_folder.png" >
-            </label>
-                <input style="display: none" type="file" id="imageFile" accept=".jpg, .gif,.png" name="icon"/></a>
-        </div>
-       </form>
-      </div>
-              </div>
+            <div class="avatarInfo">
+                <div>
+                    <div class="center">
+                        <img class="avatar" id="icon" src="${userProfile.avatar}">
+                    </div>
+
+                    <br>
+                    <div class="center">
+                        <div class="ui fitted horizontal divider">Options</div>
+                        <c:forEach var="localIcon" items="${iconList}">
+                            <div class="img">
+                                <img src="${localIcon}" class="rounded" id="${localIcon}"/>
+                            </div>
+                        </c:forEach>
+                        <br>
+                        <p></p>
+                        <%--<div class="ui button" >--%>
+                                <%--<i class="folder open icon"></i>Choose file--%>
+                        <%--</div>--%>
+                        <button class="ui blue labeled icon small button" id="fileButton">
+                            <i class="inverted upload icon"></i>
+                           Upload
+                        </button>
+                        <form action="AvatarEdit" id="avatarForm" method="post" style="margin: 0" enctype="multipart/form-data">
+                            <input type="hidden" name="result" id="result" value="${userProfile.avatar}">
+                                <input style="display: none" type="file" id="imageFile" accept=".jpg, .gif,.png"
+                                       name="icon"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="actions">
             <div class="ui red deny button">
@@ -177,64 +190,26 @@
         </div>
     </div>
 
-//old one
-    <%--<div class="ui basic modal">--%>
-        <%--<div class="myHeader">--%>
-            <%--Your avatar--%>
-        <%--</div>--%>
-        <%--<div class="content">--%>
-            <%--<div  class="center" >--%>
-                <%--<img src="${userProfile.avatar}" id="icon" name="userIcon" class="rounded" />--%>
-            <%--</div>--%>
-            <%--<div class="center">--%>
-                <%--<p>Default options</p>--%>
-            <%--</div>--%>
-
-            <%--<div class="options">--%>
-                    <%--<c:forEach var="localIcon" items="${iconList}">--%>
-                        <%--<div class="img">--%>
-                            <%--<img src="${localIcon}" class="rounded" id="${localIcon}" />--%>
-                        <%--</div>--%>
-                    <%--</c:forEach>--%>
-                    <%--<br><br>--%>
-            <%--</div>--%>
-
-            <%--<form action="AvatarEdit" id="avatarForm" method="post" enctype="multipart/form-data">--%>
-                <%--<div style="margin: auto;width: 100px">--%>
-                    <%--<input type="hidden" name="result" id="result">--%>
-                    <%--<a title="Choose local file"><label for="imageFile" class="myLabel">--%>
-                        <%--<img class="label" src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Documents_files_pictogram_symbol_icon_folder.png" >--%>
-                    <%--</label>--%>
-                        <%--<input style="display: none" type="file" id="imageFile" accept=".jpg, .gif,.png" name="icon"/></a>--%>
-                <%--</div>--%>
-
-            <%--</form>--%>
-        <%--</div>--%>
-        <%--<div class="actions">--%>
-            <%--<div class="ui red basic cancel inverted button"><i class="remove icon"></i>Cancel</div>--%>
-            <%--<div class="ui green ok inverted button" id="submitAvatarChange"><i class="checkmark icon"></i>Confirm</div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
 </div>
 <script>
 
-function showWindow() {
-    $('.ui.basic.modal')
-        .modal('show')
-    ;
-}
-function showWindow2() {
-    $('.ui.modal')
-        .modal('show')
-    ;
-}
-$("#submitAvatarChange").click(function () {
-    $("#avatarForm").submit();
+$('#fileButton').click(function () {
+    $('#imageFile').click();
 });
-    $( ".rounded" ).each(function() {
-        $(this).click( function(){
-            $("#icon").attr('src',$(this).attr('src'));
-            $('input[type=hidden]').val($(this).attr('src'));
+    function showWindow2() {
+        $('.ui.modal')
+            .modal('show')
+        ;
+    }
+    $("#submitAvatarChange").click(function () {
+                $("#avatarForm").submit();
+
+    });
+    $(".rounded").each(function () {
+        $(this).click(function () {
+            var src = $(this).attr('src');
+            $("#icon").attr('src', src);
+            $('input[type=hidden]').val(src);
         });
     });
 
@@ -248,9 +223,9 @@ $("#submitAvatarChange").click(function () {
         }
     }
 
-    $('input[type=file]').change(function () {
+    $('#imageFile').change(function () {
         readURL(this);
-        $('input[type=hidden]').val("");
+        $(this).val("");
     })
 
 </script>

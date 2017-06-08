@@ -119,7 +119,7 @@ public class UserInfoDAO {
     }
 
 
-    private static UserInfo userInfoFromResultSet(ResultSet r) throws SQLException {
+    public static UserInfo userInfoFromResultSet(ResultSet r) throws SQLException {
         return new UserInfo(
                 r.getString("username"),
                 r.getString("firstName"),

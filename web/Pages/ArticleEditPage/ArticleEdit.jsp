@@ -23,7 +23,6 @@
     <script src="${pageContext.request.contextPath}/Pages/ArticleEditPage/google-code-prettify/run_prettify.js"></script>
     <link href="${pageContext.request.contextPath}/Pages/ArticleEditPage/ArticleEdit.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/Pages/ArticleEditPage/bootstrap-wysiwyg.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
@@ -41,12 +40,10 @@
       <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
 
-    <form action="/Article" method="post" onsubmit="prepareContent()">
+    <form action="Article" method="post" onsubmit="prepareContent()">
 
-      <div class="container">
+      <div class="ui text container">
         <div class="hero-unit">
-          <h2>New article</h2>
-          <hr/>
           <div id="alerts"></div>
           <p style="font-size: large">Title: <input required type="text" id="title" name="title" placeholder="Please Enter Your Title"
                            value="${articleInfo.title}" style="width: 500px;height: 38px;margin-bottom: 5px"/></P>
