@@ -24,4 +24,8 @@ $(document)
             on: 'hover'
         });
 
+        //edit comment
+        $('#editBtn').click(function () {
+            $('#editComment').modal('setting', 'transition', 'vertical flip').modal('show');
+        })
     });

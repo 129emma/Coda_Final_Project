@@ -36,7 +36,7 @@ public class CommentServlet extends HttpServlet {
                 break;
             case "update":
                 updateCommentInfo(request, response);
-                break;
+                return;
             case "reply":
                 replyCommentInfo(request, response);
                 break;
@@ -79,8 +79,18 @@ public class CommentServlet extends HttpServlet {
 
     }
 
-    private void updateCommentInfo(HttpServletRequest request, HttpServletResponse response) {
-
+    private void updateCommentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        String commentID = request.getParameter("commentID");
+        String content = request.getParameter("comment");
+        String postTime = CommentInfoDAO.getCurrentTimeStamp();
+        try {
+            CommentInfoDAO.createCommentInfo(mySQL, content, postTime, username, commentID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        response.getWriter().write("success");
     }
 
     private void replyCommentInfo(HttpServletRequest request, HttpServletResponse response) {

@@ -26,7 +26,7 @@ $(document).ready(function () {
         console.log($(window).scrollTop());
         console.log($(window).height());
         console.log($(document).height());
-        if ($(window).scrollTop() + $(window).height() == $(document).height() && process == false) {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() && process == false) {
             process = true;
             $("#Loader").show();
             articlesNum += 3;

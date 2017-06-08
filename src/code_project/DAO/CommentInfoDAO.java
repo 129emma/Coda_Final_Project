@@ -99,12 +99,13 @@ public class CommentInfoDAO {
         return CommentInfo;
     }
 
-    public static void updateCommentInfo(AbstractDB db,int commentID,String content, String postTime) throws SQLException {
+    public static void updateCommentInfo(AbstractDB db,int commentID,String content, String username, String postTime) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE Comment set content =?,postTime=? AND commentID=?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE Comment set content =?,postTime=? WHERE username=? and commentID=?;")) {
                 p.setString(1, content);
                 p.setString(2, postTime);
-                p.setInt(3, commentID);
+                p.setString(3, username);
+                p.setInt(4, commentID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {

@@ -75,9 +75,9 @@
                                     ${comment.content}
                             </div>
                             <div class="actions">
-                                    ${comment.replyComment}
-                                    ${comment.editComment}
-                                    ${comment.deleteComment}
+                                <a id="replyBtn" class='reply'><i class="reply icon" ></i></a>
+                                ${comment.editBtn}
+                                ${comment.deleteBtn}
                             </div>
                         </div>
                     </div>
@@ -94,6 +94,16 @@
             </div>
         </div>
     </div>
+
+        <div class="ui segment modal" id="editComment">
+            <form action="Comment" method="POST">
+                <fieldset>
+                    <legend>Edit Comment</legend>
+                    <p><label for="editor">content: </label><textarea id="editor" name="content" rows="10" cols="100"></textarea></p>
+                    <input type="submit" name="action" value="update"/>
+                </fieldset>
+            </form>
+        </div>
 </body>
 </html>
 
