@@ -30,7 +30,7 @@
 
     <div class="ui container my" id="imageGallery">
         <div class="ui dividing header">
-            <h1>Gallery</h1>
+            <h1>Albums</h1>
         </div>
 
         <div class="ui segment" id="gallery" style="display: none"> <!--this div for show up all the image/video/audio-->

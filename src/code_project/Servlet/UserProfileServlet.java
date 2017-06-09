@@ -33,10 +33,10 @@ public class UserProfileServlet extends HttpServlet {
            getUserProfile(request,response,session);
            }else {
              switch (action){
-                 case "update":
+                 case "Update":
                      updateUserProfile(request,response,session);
                      break;
-                 case "delete":
+                 case "Delete":
                      deleteUserProfile(response,session);
 
 

@@ -25,37 +25,43 @@
         .rounded:hover {
             cursor: pointer
         }
-        .rounded {
+
+        .rounded{
             width: 100px;
             height: 100px;
         }
+
         .img {
             display: inline-block;
             margin: 5px;
 
         }
 
-        .center,.header{
+        .center, .header, .avatar {
             text-align: center;
         }
 
-    .avatarInfo{
-        width: 100%;
-        height: 100%;
-    }
+        .avatarInfo {
+            width: 100%;
+            height: 100%;
+        }
 
         .avatar {
             width: 200px;
             height: 200px;
             margin: auto;
         }
-.u     i.header{
-          margin: 0;!important;
-}
+
+        .ui.header {
+            margin: 0;
+        !important;
+        }
+
         #avatarForm {
             display: inline-block;
         !important;
         }
+
     </style>
 <script>
     $(document).ready(function () {
@@ -79,39 +85,15 @@
     <%--Edit Profile--%>
     <div class="ui text container">
         <div class="ui raised segment">
-            <div class="ui dividing header">
-                <h2>Account Editing</h2>
-            </div>
-
-            <div class="ui dividing header">
-                <h3>Change Password</h3>
-            </div>
-            <form class="ui form" id="form" action="ChangePassword" method="post">
-                <div class="field">
-                    <label>Password: </label><input type="password" name="password"
-                                                    placeholder="Please Enter Your Password" style="width: 300px;"/>
-                </div>
-                <div class="field">
-                    <label>New Password:</label> <input type="password" name="newPassword"
-                                                        placeholder="Please Enter Your New Password"
-                                                        style="width: 300px;"/></div>
-                <div class="field">
-                    <label>Re-enter New Password:</label> <input type="password" name="reNewPassword"
-                                                                 placeholder="Please Re-Enter Your New Password"
-                                                                 style="width: 300px;"/>
-                </div>
-                <input class="ui submit button" type="submit" value="Update"/>
-            </form>
-            <br>
-
-            <div class="ui dividing header">
-                <h3>Change Details</h3>
-            </div>
 
             <!--id for update profile form should be changed-->
+            <div class="ui fitted horizontal divider">Change Details</div>
+            <div >
+                <img src="${userProfile.avatar}" class="rounded" onclick="showWindow2()"/>
+            </div>
+            <%--<button class="ui button"  id="userIcon"  onclick="showWindow2()">change</button>--%>
+
             <form class="ui form" id="#" action="Profile" method="post">
-                <img src="${userProfile.avatar}" title="Click to change" id="userIcon" class="rounded"
-                     onclick="showWindow2()"/>
                 <div class="field">
                     <label>Firstname:</label><input type="text" name="firstname" value="${userProfile.firstName}"
                                                     style="width: 300px;"/></div>
@@ -130,10 +112,36 @@
                     <option value="Male">Male</option>
                 </select>
                 </div>
-                <input class="ui submit button" type="submit" name="profileAction" value="update"/>
+                <input class="ui submit button" type="submit" name="profileAction" value="Update"/>
                 <input class="ui submit button" type="submit" name="profileAction"
-                       value="delete"/>
+                       value="Delete"/>
             </form>
+            <%--<div class="ui dividing header">--%>
+                <%--<h3>Change Password</h3>--%>
+            <%--</div>--%>
+            <div class="ui fitted horizontal divider">Change Password</div>
+            <form class="ui form" id="form" action="ChangePassword" method="post">
+                <div class="field">
+                    <label>Password: </label><input type="password" name="password"
+                                                    placeholder="Please Enter Your Password" style="width: 300px;"/>
+                </div>
+                <div class="field">
+                    <label>New Password:</label> <input type="password" name="newPassword"
+                                                        placeholder="Please Enter Your New Password"
+                                                        style="width: 300px;"/></div>
+                <div class="field">
+                    <label>Re-enter New Password:</label> <input type="password" name="reNewPassword"
+                                                                 placeholder="Please Re-Enter Your New Password"
+                                                                 style="width: 300px;"/>
+                </div>
+                <input class="ui submit button" type="submit" value="Update"/>
+            </form>
+            <br>
+
+            <%--<div class="ui dividing header">--%>
+                <%--<h3>Change Details</h3>--%>
+            <%--</div>--%>
+
         </div><!--end of edit segment-->
         <br>
         <div class="ui divider">

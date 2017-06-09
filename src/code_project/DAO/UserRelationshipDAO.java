@@ -16,7 +16,7 @@ import java.util.List;
 public class UserRelationshipDAO {
 
 
-    public void follow(AbstractDB db,String followerUsername,String followUsername){
+    public static void follow(AbstractDB db,String followerUsername,String followUsername) throws SQLException{
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO UserRelationship (follower, follow) VALUE (?,?);")) {
@@ -24,13 +24,13 @@ public class UserRelationshipDAO {
                 p.setString(2, followUsername);
                 p.executeUpdate();
             }
-        } catch (ClassNotFoundException |SQLException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
 
-    public void unfollow(AbstractDB db,String followerUsername,String followUsername){
+    public static void unfollow(AbstractDB db,String followerUsername,String followUsername) throws SQLException {
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM UserRelationship WHERE follower=? AND follow=?")) {
@@ -38,7 +38,7 @@ public class UserRelationshipDAO {
                 p.setString(2, followUsername);
                 p.executeUpdate();
             }
-        } catch (ClassNotFoundException |SQLException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -49,13 +49,13 @@ public class UserRelationshipDAO {
         List<UserInfo> followsList = new ArrayList<>();
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship WHERE follower=?")) {
+                p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         followsList.add(UserInfoDAO.userInfoFromResultSet(r));
                     }
                 }
             }
-
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -63,11 +63,27 @@ public class UserRelationshipDAO {
     }
 
 
+    public static Boolean checkFollowStatus(AbstractDB db, String username,String followUsername){
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship WHERE follower=? AND follow=?")) {
+                p.setString(1,username);
+                p.setString(2,followUsername);
+                try (ResultSet r = p.executeQuery()) {
+                   return true;
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static List<UserInfo> getFollowers(AbstractDB db, String username){
 
         List<UserInfo> followersList = new ArrayList<>();
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship WHERE follow=?")) {
+                p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                        followersList.add(UserInfoDAO.userInfoFromResultSet(r));

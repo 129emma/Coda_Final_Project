@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     $('.ui.sticky').each(function () {
         $(this).sticky({
-            context: '.keepContent'
+            context: $(this).parent().parent()
         });
     });
 
@@ -38,10 +38,9 @@ $(document).ready(function () {
 
 function refresh() {
     $('.ui.sticky').sticky('refresh');
-
-    $('.userAvatarToHover').each(function () {
+    $('.ui.sticky').each(function () {
         $(this).popup({
-            popup: $('.custom.popup')
+            popup: $(this).next('.custom.popup'),
         });
     });
 }
