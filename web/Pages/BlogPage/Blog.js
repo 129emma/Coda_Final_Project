@@ -53,28 +53,31 @@ function loadArticles() {
 
 
 function followFunction() {
-    $('.ui.flowing.popup.top.left.transition.hidden').each(function () {
-        var username=$(this).parent().siblings(".header").html();
-        $(this).find('.ui.blue.button').click(function () {
+    $('.ui.flowing.popup').each(function () {
+        var username=$(this).find(".header").text();
+        var followBtn= $(this).find('.ui.blue.button');
+       followBtn.click(function () {
             console.log(username);
             $.ajax({
                 url: '/Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
-                    $(this).removeClass( "blue" ).addClass( "red" ).html('Unfollow');
+                    console.log(1+$(this).text());
+                    followBtn.removeClass( "blue" ).addClass( "red" ).text('Unfollow');
                         followFunction();
                 }
             })
         });
-        $(this).find('.ui.red.button').click(function () {
+        var unfollowBtn= $(this).find('.ui.red.button');
+       unfollowBtn.click(function () {
             console.log(username);
             $.ajax({
                 url: '/Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
-                    $(this).removeClass( "red" ).addClass( "blue" ).html('Follow');
+                    unfollowBtn.removeClass( "red" ).addClass( "blue" ).text('Follow');
                     followFunction();
                 }
             })
@@ -94,7 +97,7 @@ function refresh() {
             data: {action: 'checkFollowStatus',followUsername:followUsername},
             success: function (result) {
                if(result=='follow'){
-                   $(this).next().find('button').removeClass( "blue" ).addClass( "red" ).html('Unfollow')
+                   $(this).next().find('button').removeClass( 'blue' ).addClass( 'red' ).text('Unfollow')
                }
             }
         });

@@ -25,7 +25,6 @@
                     <img class="ui raised tiny top aligned rounded image userAvatar " src="User-Info/${article.username}/avatar.jpg">
                 </div>
                 <div class="ui flowing popup top left transition hidden">
-                    <div class="ui raised link card">
                         <div class="content">
                             <div class="header">${article.username}</div>
                             <div class="meta">
