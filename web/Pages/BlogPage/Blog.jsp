@@ -122,7 +122,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="content">
                             <div class="description">
                                 <p>First Name: ${userInfo.firstName}</p>

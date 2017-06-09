@@ -19,9 +19,12 @@
             <div class="ui left close rail" style="width: 80px !important;">
 
                 <div class="ui sticky" style="width: 80px !important;">
-                    <img class="ui raised tiny top aligned rounded image userAvatar userAvatarToHover" src="User-Info/${article.username}/avatar.jpg">
+                    <div class="ui blue ribbon label">
+                        <i class="spoon icon"></i> Food
+                    </div>
+                    <img class="ui raised tiny top aligned rounded image userAvatar " src="User-Info/${article.username}/avatar.jpg">
                 </div>
-                <div class="ui custom popup top transition hidden">
+                <div class="ui flowing popup top left transition hidden">
                     <div class="ui raised link card">
                         <div class="content">
                             <div class="header">${article.username}</div>
@@ -29,7 +32,7 @@
                                 <span class="category">Animals</span>
                             </div>
                             <div class="description">
-                                <button class="ui blue button" onclick="follow()">Follow<i style="display: none">${article.username}</i></button>
+                                <button class="ui blue button">Follow</button>
                             </div>
                         </div>
                     </div>
@@ -56,19 +59,5 @@
             </div>
         </div>
 </c:forEach>
-<script>
-    function follow() {
-
-        $.ajax({
-            url: '/Article',
-            type: 'post',
-            data: {action: 'preview', articleNumber: articlesNum, page: page},
-            success: function (articlesPreview) {
-
-            }
-        });
-
-    }
-</script>
 </body>
 </html>

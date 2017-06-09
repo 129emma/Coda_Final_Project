@@ -89,7 +89,7 @@
             <!--id for update profile form should be changed-->
             <div class="ui fitted horizontal divider">Change Details</div>
             <div >
-                <img src="${userProfile.avatar}" class="rounded" onclick="showWindow2()"/>
+                <img src="${userProfile.avatar}" class="rounded" title="click to change avatar" onclick="showWindow2()"/>
             </div>
             <%--<button class="ui button"  id="userIcon"  onclick="showWindow2()">change</button>--%>
 

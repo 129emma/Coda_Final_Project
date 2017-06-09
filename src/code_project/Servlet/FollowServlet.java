@@ -31,9 +31,8 @@ public class FollowServlet extends HttpServlet {
        followUsername=request.getParameter("followUsername");
         switch (action){
             case "checkFollowStatus":
-                checkFollowStatus();
+                checkFollowStatus(response);
                 break;
-
             case "follow":
                 follow(response);
                 break;
@@ -47,8 +46,16 @@ public class FollowServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doPost(request, response);
     }
-private void checkFollowStatus(){
-        UserRelationshipDAO.checkFollowStatus(mySQL,username,followUsername);
+private void checkFollowStatus(HttpServletResponse response) throws IOException{
+    response.setContentType("text/plain");
+        if(UserRelationshipDAO.checkFollowStatus(mySQL,username,followUsername)){
+        response.getWriter().write("followed");
+        }else {
+            response.getWriter().write("unfollowed");
+        }
+
+
+
 
 }
     private void follow(HttpServletResponse response) throws IOException {
