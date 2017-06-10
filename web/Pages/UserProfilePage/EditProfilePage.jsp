@@ -188,12 +188,12 @@
             </div>
         </div>
         <div class="actions">
-            <div class="ui red deny button">
+            <div class="ui deny button">
                 Cancel
             </div>
             <div id="submitAvatarChange" class="ui positive right icon button">
-                Confirm
-                <i class="checkmark icon"></i>
+                <i class="list icon"></i>
+                Save
             </div>
         </div>
     </div>

@@ -19,9 +19,6 @@
             <div class="ui left close rail" style="width: 80px !important;">
 
                 <div class="ui sticky" style="width: 80px !important;">
-                    <div class="ui blue ribbon label">
-                        <i class="spoon icon"></i> Food
-                    </div>
                     <img class="ui raised tiny top aligned rounded image userAvatar " src="User-Info/${article.username}/avatar.jpg">
                 </div>
                 <div class="ui flowing popup top left transition hidden">
@@ -31,12 +28,11 @@
                                 <span class="category">Animals</span>
                             </div>
                             <div class="description">
-                                <button class="ui blue button">Follow</button>
+                                <button class="ui button"></button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
             <h5 class="ui top attached segment">
                 <a href="${article.retrieveAddress}">${article.title}</a> ${article.postTime}

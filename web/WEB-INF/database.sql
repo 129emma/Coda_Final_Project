@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS AlbumsAudio(
 DROP TABLE IF EXISTS UserRelationship;
 
 CREATE TABLE IF NOT EXISTS UserRelationship(
-  follower VARCHAR(99),
-  follow VARCHAR(99)
+  follower VARCHAR(99) NOT NULL ,
+  follow VARCHAR(99) NOT NULL ,
+  PRIMARY KEY (follow,follower)
 );

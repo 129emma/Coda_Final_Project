@@ -21,16 +21,14 @@ $(document).ready(function () {
             context: $(this).parent().parent()
         });
     });
-
     $(window).scroll(function () {
-        // console.log($(window).scrollTop());
-        // console.log($(window).height());
-        // console.log($(document).height());
+
         if ($(window).scrollTop() + $(window).height() == $(document).height() && process == false) {
             process = true;
             $("#Loader").show();
             articlesNum += 3;
             loadArticles();
+
         }
     });
 });
@@ -46,64 +44,79 @@ function loadArticles() {
             $("#Loader").hide();
             process = false;
             refresh();
-            followFunction();
         }
     });
 }
 
 
 function followFunction() {
-    $('.ui.flowing.popup').each(function () {
-        var username=$(this).find(".header").text();
-        var followBtn= $(this).find('.ui.blue.button');
-       followBtn.click(function () {
-            console.log(username);
+
+    $('.ui.button.blue').off().each(function (i, obj) {
+        // console.log("blueButton");
+        $(obj).click(function () {
+            var username = $(obj).parent().siblings('.header').text();
+            // console.log("followClick");
+            $(obj).prop("disabled", true);
             $.ajax({
                 url: '/Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
-                    console.log(1+$(this).text());
-                    followBtn.removeClass( "blue" ).addClass( "red" ).text('Unfollow');
-                        followFunction();
+                    // console.log("follow");
+                    $(".header:contains(" + username + ")").siblings(".description").find('.ui.button.blue').removeClass("blue").addClass("red").text('Unfollow');
+                    // $(obj).removeClass("blue").addClass("red").text('Unfollow');
+                    $(obj).prop("disabled", false);
+                    followFunction();
                 }
             })
-        });
-        var unfollowBtn= $(this).find('.ui.red.button');
-       unfollowBtn.click(function () {
-            console.log(username);
+        })
+    });
+    $('.ui.button.red').off().each(function (i, obj) {
+        // console.log("redButton");
+        $(obj).click(function () {
+            var username = $(obj).parent().siblings('.header').text();
+            // console.log("unfollowClick");
+            $(obj).prop("disabled", true);
             $.ajax({
                 url: '/Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
-                    unfollowBtn.removeClass( "red" ).addClass( "blue" ).text('Follow');
+                    // console.log("unfollow");
+                    $(".header:contains(" + username + ")").siblings('.description').find(".ui.button.red").removeClass("red").addClass("blue").text('Follow');
+                    // $(obj).removeClass("red").addClass("blue").text('Follow');
+                    $(obj).prop("disabled", false);
                     followFunction();
                 }
             })
         })
-    })
+    });
 }
-
 
 
 function refresh() {
     $('.ui.sticky').sticky('refresh');
     $('.ui.sticky').each(function () {
-        var followUsername=$(this).next().find('.header').text();
+        var followUsername = $(this).next().find('.header').text();
+        var button = $(this).next().find('.ui.button');
         $.ajax({
             url: '/Follow',
             type: 'post',
-            data: {action: 'checkFollowStatus',followUsername:followUsername},
+            data: {action: 'checkFollowStatus', followUsername: followUsername},
             success: function (result) {
-               if(result=='follow'){
-                   $(this).next().find('button').removeClass( 'blue' ).addClass( 'red' ).text('Unfollow')
-               }
+                if (result == 'user') {
+                    button.remove();
+                } else if (result == 'followed') {
+                    button.addClass('red').text('Unfollow')
+                } else {
+                    button.addClass('blue').text('Follow')
+                }
+                followFunction();
             }
         });
         $(this).popup({
             popup: $(this).next('.custom.popup'),
-            hoverable  : true
+            hoverable: true
         });
     });
 }

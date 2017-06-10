@@ -19,7 +19,7 @@ public class UserRelationshipDAO {
     public static void follow(AbstractDB db,String followerUsername,String followUsername) throws SQLException{
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserRelationship (follower, follow) VALUE (?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT IGNORE INTO UserRelationship (follower, follow) VALUE (?,?);")) {
                 p.setString(1, followerUsername);
                 p.setString(2, followUsername);
                 p.executeUpdate();
@@ -69,7 +69,9 @@ public class UserRelationshipDAO {
                 p.setString(1,username);
                 p.setString(2,followUsername);
                 try (ResultSet r = p.executeQuery()) {
-                   return true;
+                   if(r.next()){
+                        return true;
+                    }
                 }
             }
         } catch (SQLException | ClassNotFoundException e) {

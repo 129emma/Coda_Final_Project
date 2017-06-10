@@ -40,23 +40,21 @@ public class FollowServlet extends HttpServlet {
                 unfollow(response);
                 break;
         }
-
-
 }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doPost(request, response);
     }
 private void checkFollowStatus(HttpServletResponse response) throws IOException{
     response.setContentType("text/plain");
-        if(UserRelationshipDAO.checkFollowStatus(mySQL,username,followUsername)){
+    if (username.equals(followUsername)) {
+
+        response.getWriter().write("user");
+
+    } else if (UserRelationshipDAO.checkFollowStatus(mySQL, username, followUsername)) {
         response.getWriter().write("followed");
-        }else {
-            response.getWriter().write("unfollowed");
-        }
-
-
-
-
+    } else {
+        response.getWriter().write("unfollowed");
+    }
 }
     private void follow(HttpServletResponse response) throws IOException {
 
@@ -68,6 +66,7 @@ private void checkFollowStatus(HttpServletResponse response) throws IOException{
         }
     }
     private void unfollow(HttpServletResponse response)throws IOException {
+
         try {
             UserRelationshipDAO.unfollow(mySQL,username,followUsername);
         } catch (SQLException e) {
