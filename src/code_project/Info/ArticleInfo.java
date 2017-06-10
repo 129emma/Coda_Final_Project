@@ -20,9 +20,7 @@ public class ArticleInfo {
     public String deleteArticle;
     public String retrieveAddress;
     public String preview;
-
     public String userAvatar;
-
 
     public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username, String userAvatar) {
         this.articleID = articleID;
@@ -32,10 +30,8 @@ public class ArticleInfo {
         this.tags = tags;
         this.username = username;
         this.userAvatar = userAvatar;
-
         this.preview = content;
         this.editArticle = "";
-
         this.deleteArticle = "";
         this.retrieveAddress = "Article?action=retrieve&articleID=" + articleID;
     }
@@ -140,13 +136,13 @@ public class ArticleInfo {
 
     public void setEditArticle(String username) {
         if (this.username.equals(username)) {
-            editArticle = "<a href=\"Article?action=edit&articleID=" + articleID + "&commentID=" + articleID + "\">Edit</a>";
+            editArticle = "<a class='ui green labeled icon button' href=\"Article?action=edit&articleID=" + articleID + "\"><i class=\"edit icon\"></i>Edit</a>";
         }
     }
 
     public void setDeleteArticle(String username) {
         if (this.username.equals(username)) {
-            deleteArticle = "<a href=\"Article?action=delete&articleID=" + articleID + "&commentID=" + articleID + "\">delete</a>";
+            deleteArticle = "<a class='ui red labeled icon button' href=\"Article?action=delete&articleID=" + articleID + "\"><i class=\"erase icon\"></i>delete</a>";
         }
     }
 

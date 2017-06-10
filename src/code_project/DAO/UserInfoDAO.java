@@ -86,17 +86,40 @@ public class UserInfoDAO {
 
     public static void deleteUserInfo(AbstractDB db, String username) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM UserInfo WHERE username = ?;")) {
-                p.setString(1, username);
-                p.executeUpdate();
+                try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsVideo WHERE username = ?") ){
+                    p.setString(1,username);
+                    p.executeUpdate();
+                }
+                try(PreparedStatement a=c.prepareStatement("DELETE FROM AlbumsAudio WHERE username = ?")){
+                    a.setString(1,username);
+                    a.executeUpdate();
+                }
+            try(PreparedStatement a=c.prepareStatement("DELETE FROM AlbumsImage WHERE username = ?")){
+                a.setString(1,username);
+                a.executeUpdate();
             }
+            try(PreparedStatement a=c.prepareStatement("DELETE FROM Article WHERE username = ?")){
+                a.setString(1,username);
+                a.executeUpdate();
+            }
+            try(PreparedStatement a=c.prepareStatement("DELETE FROM Comment WHERE username = ?")){
+                a.setString(1,username);
+                a.executeUpdate();
+            }
+            try(PreparedStatement a=c.prepareStatement("DELETE FROM UserInfo WHERE username = ?")){
+                a.setString(1,username);
+                a.executeUpdate();
+            }
+
+
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
 
-    private static UserInfo userInfoFromResultSet(ResultSet r) throws SQLException {
+    public static UserInfo userInfoFromResultSet(ResultSet r) throws SQLException {
         return new UserInfo(
                 r.getString("username"),
                 r.getString("firstName"),

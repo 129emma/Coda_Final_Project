@@ -5,8 +5,8 @@
     <title>Login Page</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
-    <script src="${pageContext.request.contextPath}/Pages/LoginPage/Login.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/LoginPage/Login.css" type="text/css">
+    <script src="${pageContext.request.contextPath}/Pages/LoginPage/Login.js"></script>
 </head>
 <body>
 
@@ -14,11 +14,11 @@
     <div class="login-block">
         <h1>Login</h1>
         <div>
-            <input type="text" required name="username" id="username" placeholder="Username"/>
-            <input type="password" required name="password" id="password" placeholder="Password"/>
+            <input id="loginUsername" type="text" required name="username" class="username" placeholder="Username"/>
+            <input id="loginPassword" type="password" required name="password" class="password" placeholder="Password"/>
         </div>
         <input type="hidden" value="login" name="action"/>
-        <button class="loginButton" id="button" type="button">Login</button>
+        <button id="loginButton" type="button">Login</button>
         <p>No account yet? Register <a href="${pageContext.request.contextPath}/Pages/RegisterPage/Register.jsp">HERE</a></p>
         <p id="message">${message}</p>
     </div>

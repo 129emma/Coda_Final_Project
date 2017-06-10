@@ -3,8 +3,8 @@
  */
 
 $(document).ready(function () {
-    $("#UsernameInput").blur(function () {
-        if ($('#UsernameInput').val() != "") {
+    $("#registerUsername").blur(function () {
+        if ($('#registerUsername').val() != "") {
             verifyUsername($(this).val());
         }
     })
@@ -18,13 +18,13 @@ function verifyUsername(username) {
         success: function (message) {
             var message = message;
             if (message.includes("available")) {
-                $("#button").removeAttr('disabled');
-                $("#Message").css("color", "green").text(message);
+                $("#registerButton").removeAttr('disabled');
+                $("#message").css("color", "green").text(message);
             } else {
-                $("#button").attr('disabled', 'disabled');
-                $("#Message").css("color", "red").text(message);
+                $("#registerButton").attr('disabled', 'disabled');
+                $("#message").css("color", "red").text(message);
             }
-            $("#Message").text(message);
+            $("#message").text(message);
         }
     });
 }

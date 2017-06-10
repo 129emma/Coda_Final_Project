@@ -23,116 +23,128 @@
     <script src="${pageContext.request.contextPath}/Pages/ArticleEditPage/google-code-prettify/run_prettify.js"></script>
     <link href="${pageContext.request.contextPath}/Pages/ArticleEditPage/ArticleEdit.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/Pages/ArticleEditPage/bootstrap-wysiwyg.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
+    <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
+
   </head>
   <body>
 
-    <form action="/Article" method="post" onsubmit="prepareContent()">
+  <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
+    <jsp:param name="SideBar" value=""/>
+  </jsp:include>
 
-        <div class="container">
-          <div class="hero-unit">
-            <h1>Your article</h1>
-            <hr/>
-            <div id="alerts"></div>
-            <p>Title: <input required type="text" id="title" name="title" placeholder="Please Enter Your Title"
-                             value="${articleInfo.title}" style="width: 300px;"/></P>
-            <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-              <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                </ul>
-              </div>
-              <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
-                  <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
-                  <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
-                </ul>
-              </div>
-              <div class="btn-group">
-                <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
-                <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
-                <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
-                <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
-              </div>
-              <div class="btn-group">
-                <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
-                <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
-                <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
-                <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
-              </div>
-              <div class="btn-group">
-                <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
-                <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
-                <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
-                <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
-              </div>
-              <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
-                <div class="dropdown-menu input-append">
-                  <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
-                  <button class="btn" type="button">Add</button>
-                </div>
-                <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
-              </div>
+  <div class="pusher full">
+    <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
+      <jsp:param name="NavigationBar" value=""/>
+    </jsp:include>
 
-              <div class="btn-group" onclick="readLink()">
-                <a class="btn" title="Insert Youtube video"><img class="image" src="http://internetvi.ru/wp-content/uploads/2012/06/e33c1de5c8bd4c4c0bdaba9cd3657a6d.png"/></a>
-              </div>
+    <form action="Article" method="post" onsubmit="prepareContent()">
 
-              <div class="btn-group" >
-                <a class="btn" title="Insert image"><label for="image-input" class="myLabel">
-                  <img class="image" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" >
-                </label>
-                  <input  id="image-input"  class="input" type="file" accept=".jpg, .gif,.png"></a>
+      <div class="ui text container">
+        <div class="hero-unit">
+          <div id="alerts"></div>
+          <p style="font-size: large">Title: <input required type="text" id="title" name="title" placeholder="Please Enter Your Title"
+                           value="${articleInfo.title}" style="width: 500px;height: 38px;margin-bottom: 5px"/></P>
+          <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+            <div class="btn-group">
+              <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+              </ul>
+            </div>
+            <div class="btn-group">
+              <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+                <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+                <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+              <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+              <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
+              <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+            </div>
+            <div class="btn-group">
+              <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
+              <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
+              <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
+              <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
+            </div>
+            <div class="btn-group">
+              <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+              <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+              <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+              <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
+            </div>
+            <div class="btn-group">
+              <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
+              <div class="dropdown-menu input-append">
+                <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
+                <button class="btn" type="button">Add</button>
               </div>
-
-              <div class="btn-group" >
-                <a class="btn" title="Insert audio"><label for="audio-input" class="myLabel">
-                  <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/1024px-Speaker_Icon.svg.png" >
-                </label>
-                  <input id="audio-input"  class="input" type="file" accept=".mp3,.wav"></a>
-              </div>
-              <div class="btn-group" >
-                <a class="btn" title="Insert video"><label for="video-input" class="myLabel">
-                  <img class="image" src="http://simpleicon.com/wp-content/uploads/video.png" >
-                </label>
-                  <input id="video-input"  class="input" type="file" accept=".ogg,.mp4"></a>
-              </div>
-
-              <div class="btn-group">
-                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
-                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
-              </div>
-              <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
+              <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
             </div>
 
-            <div id="editor">
-              ${articleInfo.content}
+            <div class="btn-group" onclick="readLink()">
+              <a class="btn" title="Insert Youtube video"><img class="image" src="http://internetvi.ru/wp-content/uploads/2012/06/e33c1de5c8bd4c4c0bdaba9cd3657a6d.png"/></a>
             </div>
 
-            Tag:<select  width="150px" name="tag">
-            <option  value="Movie">Movie</option>
-            <option  value="Food">Food</option>
-            <option  value="Science">Science</option>
-            <option value="Technology">Technology</option>
-            <option  value="Business">Business</option>
-            <option  value="Heaish">Health</option>
-            <option  value="Music">Music</option>
-            <option  value="Education">Education</option>
-            <option  value="Other">Other</option>
-          </select>
-            ${hiddenElement}
-            <div style="float: right" >${submitElement}</div>
-            ${deleteElement}
+            <div class="btn-group" >
+              <a class="btn" title="Insert image"><label for="image-input" class="myLabel">
+                <img class="image" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" >
+              </label>
+                <input  id="image-input"  class="input" type="file" accept=".jpg, .gif,.png"></a>
+            </div>
+
+            <div class="btn-group" >
+              <a class="btn" title="Insert audio"><label for="audio-input" class="myLabel">
+                <img class="image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/1024px-Speaker_Icon.svg.png" >
+              </label>
+                <input id="audio-input"  class="input" type="file" accept=".mp3,.wav"></a>
+            </div>
+            <div class="btn-group" >
+              <a class="btn" title="Insert video"><label for="video-input" class="myLabel">
+                <img class="image" src="http://simpleicon.com/wp-content/uploads/video.png" >
+              </label>
+                <input id="video-input"  class="input" type="file" accept=".ogg,.mp4"></a>
+            </div>
+
+            <div class="btn-group">
+              <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
+              <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+            </div>
+            <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
           </div>
+
+          <div id="editor">
+            ${articleInfo.content}
+          </div>
+
+          Tag:<select  width="150px" name="tag">
+          <option  value="Movie">Movie</option>
+          <option  value="Food">Food</option>
+          <option  value="Science">Science</option>
+          <option value="Technology">Technology</option>
+          <option  value="Business">Business</option>
+          <option  value="Heaish">Health</option>
+          <option  value="Music">Music</option>
+          <option  value="Education">Education</option>
+          <option  value="Other">Other</option>
+        </select>
+          ${hiddenElement}
+          <div style="float: right" >${submitElement}</div>
+          ${deleteElement}
         </div>
-        <input type="hidden" name="content" id="articleContentSubmit">
+      </div>
+      <input type="hidden" name="content" id="articleContentSubmit">
     </form>
     <c:if test="${information != null}">
       <p style="color: red">${information}</p>
     </c:if>
-
+  </div>
 <script>
 
     $('.input').each(function () {
