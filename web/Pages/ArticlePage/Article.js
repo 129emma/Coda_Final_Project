@@ -25,7 +25,16 @@ $(document)
         });
 
         //edit comment
-        $('#editBtn').click(function () {
-            $('#editComment').modal('setting', 'transition', 'vertical flip').modal('show');
+        $('.editBtn').each(function(i,obj){
+            console.log("1");
+            console.log(obj);
+            $(obj).click(function () {
+                console.log("2");
+                console.log($(obj).parent().parent().parent().next());
+                $(obj).parent().parent().parent().next()
+                    .modal('setting', 'transition', 'vertical flip')
+                    .modal('show')
+                ;
+            })
         })
     });

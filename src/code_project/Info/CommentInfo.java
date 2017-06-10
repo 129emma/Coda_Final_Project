@@ -13,8 +13,8 @@ public class CommentInfo {
 
     public void setEditComment(String username) {
         if (this.username.equals(username)) {
-            editBtn = "<a id='editBtn' class='reply'><i class='write icon'></i></a>";
-            editComment = "<a href=\"Comment?action=edit&articleID=" + articleID + "&commentID=" + commentID + "\">Edit</a>";
+            editBtn = "<a class='reply editBtn'><i class='write icon'></i></a>";
+            editComment = "<a href=\"Comment?action=update&articleID=" + articleID + "&commentID=" + commentID + "\">Update</a>";
         }
     }
 

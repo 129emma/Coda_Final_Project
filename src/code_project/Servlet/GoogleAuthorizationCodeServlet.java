@@ -36,10 +36,10 @@ public class GoogleAuthorizationCodeServlet extends AbstractAuthorizationCodeSer
     protected AuthorizationCodeFlow initializeFlow() throws IOException {
         return null;
 //        new GoogleAuthorizationCodeFlow.Builder(
-//                new NetHttpTransport(), JacksonFactory.getDefaultInstance(),
-//                "[[ENTER YOUR CLIENT ID]]", "[[ENTER YOUR CLIENT SECRET]]",
-//                Collections.singleton(CalendarScopes.CALENDAR)).setDataStoreFactory(
-//                DATA_STORE_FACTORY).setAccessType("offline").build();
+//        new NetHttpTransport(), JacksonFactory.getDefaultInstance(),
+//        "[[ENTER YOUR CLIENT ID]]", "[[ENTER YOUR CLIENT SECRET]]",
+//         Collections.singleton(CalendarScopes.CALENDAR)).setDataStoreFactory(
+//       DATA_STORE_FACTORY).setAccessType("offline").build();
     }
 
     @Override
