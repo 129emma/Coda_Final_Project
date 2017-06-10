@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html class="full">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>Login Page</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>

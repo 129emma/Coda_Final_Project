@@ -34,7 +34,7 @@ img.userAvatar {
 /*change position of icon image*/
 .ui.small.image.iconImage {
     position: absolute;
-    left: 40%;
+    /*left: 40%;*/
     bottom: 20%;
     border: 5px solid white;
     border-radius: 3px;
