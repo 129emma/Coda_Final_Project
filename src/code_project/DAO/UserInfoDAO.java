@@ -118,6 +118,26 @@ public class UserInfoDAO {
         }
     }
 
+ public static List<UserInfo> getUsersList(AbstractDB db,List<String> usernameList)throws SQLException{
+List<UserInfo> userList=new ArrayList<>();
+     try (Connection c = db.connection()) {
+         for(String name:usernameList){
+             try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo WHERE username = ?")) {
+                 p.setString(1, name);
+                 try (ResultSet r = p.executeQuery()) {
+                     while (r.next()) {
+                         UserInfo userInfo = userInfoFromResultSet(r);
+                         userList.add(userInfo);
+                     }
+                 }
+             }
+         }
+         } catch (ClassNotFoundException e) {
+         e.printStackTrace();
+     }
+
+        return userList;
+ }
 
     public static UserInfo userInfoFromResultSet(ResultSet r) throws SQLException {
         return new UserInfo(
@@ -128,7 +148,6 @@ public class UserInfoDAO {
                 r.getString("birthDate"),
                 r.getString("gender"),
                 r.getString("avatar"));
-
     }
 
 }

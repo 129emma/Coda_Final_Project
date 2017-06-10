@@ -45,14 +45,14 @@ public class UserRelationshipDAO {
     }
 
 
-    public static List<UserInfo> getFollows(AbstractDB db, String username){
-        List<UserInfo> followsList = new ArrayList<>();
+    public static List<String> getFollows(AbstractDB db, String username){
+        List<String> followsList = new ArrayList<>();
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship WHERE follower=?")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        followsList.add(UserInfoDAO.userInfoFromResultSet(r));
+                        followsList.add(r.getString("follow"));
                     }
                 }
             }
@@ -80,15 +80,15 @@ public class UserRelationshipDAO {
         return false;
     }
 
-    public static List<UserInfo> getFollowers(AbstractDB db, String username){
+    public static List<String> getFollowers(AbstractDB db, String username){
 
-        List<UserInfo> followersList = new ArrayList<>();
+        List<String> followersList = new ArrayList<>();
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship WHERE follow=?")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                       followersList.add(UserInfoDAO.userInfoFromResultSet(r));
+                       followersList.add(r.getString("follow"));
                     }
                 }
             }
