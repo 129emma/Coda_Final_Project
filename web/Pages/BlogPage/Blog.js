@@ -18,8 +18,11 @@ $(document).ready(function () {
 
     $('.ui.sticky').each(function () {
         $(this).sticky({
-            context: '.keepContent'
+            offset:50,
+            context: $(this).parent().parent(),
+
         });
+
     });
 
     $(window).scroll(function () {
@@ -32,9 +35,23 @@ $(document).ready(function () {
             articlesNum += 3;
             loadArticles();
         }
-    });
-});
 
+        if($(window).scrollTop()==0){
+            $('.topButton').hide();
+        }
+
+        if($(window).scrollTop()>100){
+            $('.topButton').fadeIn();
+        }else {
+            $('.topButton').fadeOut();
+        }
+
+
+
+    });
+
+
+});
 
 function refresh() {
     $('.ui.sticky').sticky('refresh');

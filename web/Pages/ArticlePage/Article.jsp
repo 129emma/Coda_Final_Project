@@ -25,12 +25,13 @@
     <jsp:param name="SideBar" value=""/>
 </jsp:include>
 
-<div class="pusher full">
+<div class="pusher ">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
     <div id="ArticleContainer" class="ui text justified container">
         <div class="ui raised segment keepContent">
+
             <h5 class="ui top attached segment">
                 ${articleInfo.title}<span class="ui right">${articleInfo.postTime}</span>
             </h5>

@@ -14,6 +14,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>userProfilePage</title>
+
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -31,18 +33,18 @@
 </head>
 <body>
 
-<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
+<%--<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
     <jsp:param name="SideBar" value=""/>
-</jsp:include>
+</jsp:include>--%>
 
-<div class="pusher full">
+<div class="pusher">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
 
     <!-- Page Content !-->
 
-    <div class="ui text container">
+    <div class="ui text container article">
         <div class="ui shape">
             <div class="sides">
                 <div class="active side">
@@ -71,23 +73,23 @@
                         <div class="ui labeled icon borderless four item menu">
                             <a href="Blog?page=home" class="item">
                                 <div class="ui icon" data-tooltip="My Article">
-                                    <i class="grey file text outline icon"></i>
+                                    <i class="ion-ios-paper-outline"></i>
                                 </div>
                             </a>
                             <a href="Blog?page=spotlight" class="item">
                                 <div class="ui icon " data-tooltip="Spotlight">
-                                    <i class="blue world icon"></i>
+                                    <i class="ion-ios-navigate-outline"></i>
                                 </div>
 
                             </a>
                             <a href="Albums" class="item">
                                 <div class="ui icon " data-tooltip="Albums">
-                                    <i class="red image icon"></i>
+                                    <i class="ion-ios-camera-outline"></i>
                                 </div>
                             </a>
                             <a href="Article?action=create" class="item">
                                 <div class="ui icon" data-tooltip="Create">
-                                    <i class="purple write icon"></i>
+                                    <i class="ion-ios-compose-outline"></i>
                                 </div>
                             </a>
 
@@ -151,6 +153,13 @@
 
     <div id="ArticleContainer" class="ui text justified container">
     </div>
+
+    <a href="#topMenu" >
+    <div class="ui button topButton" >
+         top
+    </div>
+    </a>
+
 </div>
 </div>
 </body>

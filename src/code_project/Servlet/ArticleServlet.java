@@ -129,7 +129,7 @@ public class ArticleServlet extends HttpServlet {
         ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL, articleID);
         request.setAttribute("articleInfo", articleInfo);
         String hiddenElement = "<input type='hidden' name='articleID' value='" + articleID + "'>";
-        String submitElement = "<input type='submit' name='action' value='update'/> ";
+        String submitElement = "<button class='ui right floated button' type='submit' name='action' value='update'>Submit</button> ";
         String deleteElement = "<input type='submit' name='action' value='delete'/>";
         request.setAttribute("hiddenElement", hiddenElement);
         request.setAttribute("submitElement", submitElement);
@@ -159,7 +159,7 @@ public class ArticleServlet extends HttpServlet {
         String username = (String)session.getAttribute("username");
 
         if (content == null || content.isEmpty()) {
-            String submitElement = "<input type='submit' name='action' value='create'/>";
+            String submitElement = "<button class='ui right floated button' type='submit' name='action' value='create'>Submit</button>";
             request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
             return;
