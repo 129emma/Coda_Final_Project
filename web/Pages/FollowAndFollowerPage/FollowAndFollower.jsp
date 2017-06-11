@@ -13,37 +13,53 @@
 </head>
 <body>
 
-<div class="ui segment">
 
-<c:forEach var="follow" items="${followsList}">
-    <div class="ui cards">
-        <div class="card">
-            <div class="content">
-                <img class="right floated mini ui image" src="${follow.avatar}">
-                <div class="header">
+<div class="ui top attached tabular menu">
+    <a class="item active" id="getFollows">
+        Follows
+    </a>
+    <a class="item" id="getFollowers">
+        Followers
+    </a>
+</div>
+<div class="ui bottom attached segment">
+
+    <div class="ui large aligned divided list" id="follows">
+
+        <c:forEach var="follow" items="${followsList}">
+
+            <div class="item">
+                <div class="right floated content">
+                    <div class="ui button">Unfollow</div>
+                </div>
+                <img class="ui avatar image" src="${follow.avatar}">
+                <div class="content">
                         ${follow.username}
                 </div>
-                <div class="meta">
-                        ${follow.bithDate}
-                </div>
-                <div class="description">
-                   ${follow.avatar}
-                </div>
             </div>
-            <div class="extra content">
-                <div class="ui two buttons">
-                    <div class="ui basic red button">Unfollow</div>
-                </div>
-            </div>
-        </div>
-    </div>
         </c:forEach>
+
+    </div>
+
+    <div class="ui large aligned divided list" id="followers">
+
+        <c:forEach var="follower" items="${followersList}">
+
+            <div class="item">
+                <div class="right floated content">
+                    <div class="ui button">Follow</div>
+                </div>
+                <img class="ui avatar image" src="${follower.avatar}">
+                <div class="content">
+                        ${follower.username}
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+
 
 </div>
 
-<%--<div class="ui left floated segment">--%>
-    <%--This segment will appear to the left--%>
-<%--</div>--%>
 
 </body>
 </html>

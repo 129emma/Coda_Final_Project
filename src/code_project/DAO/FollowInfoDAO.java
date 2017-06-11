@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by txie936 on 8/06/2017.
  */
-public class UserRelationshipDAO {
+public class FollowInfoDAO {
 
 
     public static void follow(AbstractDB db,String followerUsername,String followUsername) throws SQLException{
@@ -88,7 +88,7 @@ public class UserRelationshipDAO {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                       followersList.add(r.getString("follow"));
+                       followersList.add(r.getString("follower"));
                     }
                 }
             }

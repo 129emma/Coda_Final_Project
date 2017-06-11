@@ -1,10 +1,9 @@
 package code_project.Servlet;
 
 import code_project.DAO.UserInfoDAO;
-import code_project.DAO.UserRelationshipDAO;
+import code_project.DAO.FollowInfoDAO;
 import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
-import code_project.db.AbstractDB;
 import code_project.db.MySQL;
 
 import javax.servlet.ServletException;
@@ -42,12 +41,14 @@ public class FollowServlet extends HttpServlet {
             case "unfollow":
                 unfollow(response);
                 break;
-            case "getFollows":
+            case "getFollowInfo":
               getFollows(request,response);
+              getFollowers(request,response);
+                request.getRequestDispatcher("Pages/FollowAndFollowerPage/FollowAndFollower.jsp").forward(request,response);
                 break;
-            case "getFollowers":
-           getFollowers(request,response);
-                break;
+//            case "getFollowers":
+//           getFollowers(request,response);
+//                break;
         }
     }
 
@@ -61,7 +62,7 @@ public class FollowServlet extends HttpServlet {
 
             response.getWriter().write("user");
 
-        } else if (UserRelationshipDAO.checkFollowStatus(mySQL, username, followUsername)) {
+        } else if (FollowInfoDAO.checkFollowStatus(mySQL, username, followUsername)) {
             response.getWriter().write("followed");
         } else {
             response.getWriter().write("unfollowed");
@@ -71,7 +72,7 @@ public class FollowServlet extends HttpServlet {
     private void follow(HttpServletResponse response) throws IOException {
 
         try {
-            UserRelationshipDAO.follow(mySQL, username, followUsername);
+            FollowInfoDAO.follow(mySQL, username, followUsername);
 
         } catch (SQLException e) {
             response.sendError(500, "Fail to talk to the database");
@@ -82,30 +83,29 @@ public class FollowServlet extends HttpServlet {
     private void unfollow(HttpServletResponse response) throws IOException {
 
         try {
-            UserRelationshipDAO.unfollow(mySQL, username, followUsername);
+            FollowInfoDAO.unfollow(mySQL, username, followUsername);
         } catch (SQLException e) {
             response.sendError(500, "Fail to talk to the database");
         }
     }
 
-    private void getFollows(HttpServletRequest request,HttpServletResponse response) throws IOException{
-
+    private void getFollows(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
             try {
-                List<String> followsNameList=UserRelationshipDAO.getFollows(mySQL,username);
+                List<String> followsNameList= FollowInfoDAO.getFollows(mySQL,username);
                 List<UserInfo> followsList= UserInfoDAO.getUsersList(mySQL,followsNameList);
                 request.setAttribute("followsList",followsList);
-                request.getRequestDispatcher("Pages/FollowAndFollowerPage/FollowAndFollower.jsp");
+                request.setAttribute("followsNumber",followsList.size());
+
             }catch (SQLException e){
                 e.printStackTrace();
             }
-
     }
-    private void getFollowers(HttpServletRequest request,HttpServletResponse response) throws IOException{
+    private void getFollowers(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
         try {
-            List<String> followersNameList=UserRelationshipDAO.getFollowers(mySQL,username);
+            List<String> followersNameList= FollowInfoDAO.getFollowers(mySQL,username);
             List<UserInfo> followersList= UserInfoDAO.getUsersList(mySQL,followersNameList);
             request.setAttribute("followersList",followersList);
-            request.getRequestDispatcher("Pages/FollowAndFollowerPage/FollowAndFollower.jsp");
+            request.setAttribute("followersNumber",followersList.size());
         }catch (SQLException e){
            e.printStackTrace();
         }
