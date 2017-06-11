@@ -21,6 +21,10 @@ public class ArticleInfo {
     public String retrieveAddress;
     public String preview;
     public String userAvatar;
+    public String followButton;
+
+
+
 
     public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username, String userAvatar) {
         this.articleID = articleID;
@@ -33,8 +37,18 @@ public class ArticleInfo {
         this.preview = content;
         this.editArticle = "";
         this.deleteArticle = "";
+        this.followButton="";
         this.retrieveAddress = "Article?action=retrieve&articleID=" + articleID;
     }
+
+    public String getFollowButton() {
+        return followButton;
+    }
+
+    public void setFollowButton(String followButton) {
+        this.followButton = followButton;
+    }
+
     public String getUserAvatar() {
         return userAvatar;
     }
@@ -133,6 +147,7 @@ public class ArticleInfo {
     public void setTitle(String title) {
         this.title = title;
     }
+
 
     public void setEditArticle(String username) {
         if (this.username.equals(username)) {

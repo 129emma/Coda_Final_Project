@@ -79,7 +79,7 @@ public class ArticleServlet extends HttpServlet {
                 case "spotlight":
                     totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL);
                     articleNumber = Math.min(totalArticleNumber,articleNumber);
-                    articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, articleNumber);
+                    articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, articleNumber,username);
                     break;
             }
         }

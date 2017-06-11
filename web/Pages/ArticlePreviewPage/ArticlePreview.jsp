@@ -28,7 +28,7 @@
                                 <span class="category">Animals</span>
                             </div>
                             <div class="description">
-                                <button class="ui button"></button>
+                                    ${article.followButton}
                             </div>
                         </div>
                     </div>
