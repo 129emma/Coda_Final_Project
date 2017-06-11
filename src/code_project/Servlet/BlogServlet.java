@@ -22,6 +22,7 @@ import java.util.List;
 public class BlogServlet extends HttpServlet {
     MySQL mySQL = new MySQL();
     HttpSession session;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LoginStatus.verifyStatus(request, response);
 
