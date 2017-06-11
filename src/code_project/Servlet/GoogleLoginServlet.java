@@ -43,12 +43,14 @@ public class GoogleLoginServlet extends HttpServlet {
                 out.write("success");
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
-                out.write("fail");
+                out.write("fail code 1");
             } catch (SQLException e) {
-                out.write("fail");
+                session.setAttribute("status","login");
+                session.setAttribute("username",username);
+                out.write("success");
             }
         }else{
-            out.write("fail");
+            out.write("fail code 3");
         }
     }
 

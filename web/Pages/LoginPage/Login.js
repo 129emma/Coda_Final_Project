@@ -34,12 +34,51 @@ function onSignIn(googleUser) {
         type: 'post',
         data: {idToken: idToken},
         success: function (result) {
-           if(result=="success"){
-               location.href = "/Blog?page=home";
-           }else{
-               $("#message").css("color", "red").text(result);
-           }
+            if (result == "success") {
+                location.href = "/Blog?page=home";
+            } else {
+                $("#message").css("color", "red").text(result);
+            }
         }
     });
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    FB.getLoginStatus(function (response) {
+        statusChangeCallback(response);
+    });
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9&appId=466254077053335";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+        });
+    }
 }
 
+window.fbAsyncInit = function () {
+    FB.init({
+        appId: '466254077053335',
+        cookie: true,
+        xfbml: true,
+        version: 'v2.8'
+    });
+    FB.AppEvents.logPageView();
+};
