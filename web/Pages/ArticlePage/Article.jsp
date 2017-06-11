@@ -42,7 +42,7 @@
             <div class="ui attached segment">
                 ${articleInfo.editArticle}
                 ${articleInfo.deleteArticle}
-                <div class="ui right labeled button" tabindex="0">
+                <div class="ui floated right labeled button" tabindex="0">
                     <a class="ui basic right pointing label">
                         999
                     </a>
@@ -76,10 +76,30 @@
                                     ${comment.content}
                             </div>
                             <div class="actions">
-                                    ${comment.replyComment}
-                                    ${comment.editComment}
-                                    ${comment.deleteComment}
+                                <a class='reply replyBtn'><i class="reply icon"></i></a>
+                                    ${comment.editBtn}
+                                    ${comment.deleteBtn}
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="ui standard modal reply form">
+                        <div class="ui basic segment">
+                            <form action="Comment" method="POST">
+                                <div class="field">
+                                    <label for="editor">Edit Your Comment</label>
+                                    <textarea id="editor" name="commentContent" rows="10"
+                                              cols="100">${comment.content}</textarea>
+                                </div>
+                                <input type="hidden" name="commentID" value="${comment.commentID}">
+                                <input type="hidden" name="articleID" value="${comment.articleID}">
+
+                                <div class="content">
+                                    <button class="ui positive right button" type="submit" name="action"
+                                            value="update">Update</button>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </c:forEach>
@@ -95,6 +115,8 @@
             </div>
         </div>
     </div>
+
+
 </body>
 </html>
 

@@ -79,8 +79,18 @@ public class CommentServlet extends HttpServlet {
 
     }
 
-    private void updateCommentInfo(HttpServletRequest request, HttpServletResponse response) {
-
+    private void updateCommentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        int commentID = Integer.parseInt(request.getParameter("commentID"));
+        String content = request.getParameter("commentContent");
+        String postTime = CommentInfoDAO.getCurrentTimeStamp();
+        try {
+            CommentInfoDAO.updateCommentInfo(mySQL,commentID, content, username, postTime);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        response.getWriter().write("success");
     }
 
     private void replyCommentInfo(HttpServletRequest request, HttpServletResponse response) {

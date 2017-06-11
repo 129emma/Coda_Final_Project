@@ -3,6 +3,9 @@
 <html class="full">
 <head>
     <title>Login Page</title>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="782826346139-b034vt93v6m8483o8m4jf2d94hdsbhq6.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/LoginPage/Login.css" type="text/css">
@@ -23,5 +26,8 @@
         <p id="message">${message}</p>
     </div>
 </form>
+<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+<a href="#" onclick="signOut();">Sign out</a>
+
 </body>
 </html>

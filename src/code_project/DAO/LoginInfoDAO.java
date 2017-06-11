@@ -77,6 +77,21 @@ public class LoginInfoDAO {
         }
     }
 
+    public static void createLoginInfo(AbstractDB db, String username, String avatar, String firstName, String lastName, String email) throws SQLException {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo (username, firstName, lastName, email,avatar) VALUE (?,?,?,?,?);")) {
+                p.setString(1, username);
+                p.setString(2, firstName);
+                p.setString(3, lastName);
+                p.setString(4, email);
+                p.setString(5, avatar);
+                p.executeUpdate();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void updateLoginInfo(AbstractDB db, String username, byte[] password, byte[] salt) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo SET password = ?, salt = ? WHERE username = ?;")) {

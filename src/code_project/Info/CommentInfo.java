@@ -5,21 +5,30 @@ package code_project.Info;
  */
 public class CommentInfo {
     public int commentID, articleID;
-    public String content, postTime, username, editComment, deleteComment, replyComment;
+    public String content, postTime, username, editBtn, editComment, deleteBtn, deleteComment, replyComment;
 
     public void setReplyComment(String username) {
-        replyComment = "<a class='reply' href=\"Comment?action=reply&articleID=" + articleID + "&commentID=" + commentID + "\">Reply</a>";
+        replyComment = "<a href=\"Comment?action=reply&articleID=" + articleID + "&commentID=" + commentID + "\">Reply</a>";
     }
 
     public void setEditComment(String username) {
         if (this.username.equals(username)) {
-            editComment = "<a class='reply' href=\"Comment?action=edit&articleID=" + articleID + "&commentID=" + commentID + "\">Edit</a>";
+            editBtn = "<a class='reply editBtn'><i class='write icon'></i></a>";
+            editComment = "<a href=\"Comment?action=update&articleID=" + articleID + "&commentID=" + commentID + "\">Update</a>";
         }
+    }
+
+    public String getEditBtn() {
+        return editBtn;
+    }
+
+    public String getDeleteBtn() {
+        return deleteBtn;
     }
 
     public void setDeleteComment(String username) {
         if (this.username.equals(username)) {
-            deleteComment = "<a class='reply' href=\"Comment?action=delete&articleID=" + articleID + "&commentID=" + commentID + "\">Delete</a>";
+            deleteBtn = "<a href=\"Comment?action=delete&articleID=" + articleID + "&commentID=" + commentID + "\"><i class='trash icon'></i></a>";
         }
     }
 
