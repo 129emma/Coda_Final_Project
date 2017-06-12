@@ -79,13 +79,14 @@ public class LoginInfoDAO {
         return username;
     }
 
-    public static void createLoginInfo(AbstractDB db, String username, byte[] password, byte[] salt, String avatar) throws SQLException {
+    public static void createLoginInfo(AbstractDB db, String username, byte[] password, byte[] salt,int iterations, String avatar) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo_beta_1 (username, password, salt, avatar) VALUE (?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo_beta_1 (username, password, salt,iterations, avatar) VALUE (?,?,?,?,?);")) {
                 p.setString(1, username);
                 p.setBytes(2, password);
                 p.setBytes(3, salt);
-                p.setString(4, avatar);
+                p.setInt(4, iterations);
+                p.setString(5, avatar);
 
                 p.executeUpdate();
             }
@@ -111,12 +112,13 @@ public class LoginInfoDAO {
         }
     }
 
-    public static void updateLoginInfo(AbstractDB db, String username, byte[] password, byte[] salt) throws SQLException {
+    public static void updateLoginInfo(AbstractDB db, String username, byte[] password, byte[] salt, int iterations) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo_beta_1 SET password = ?, salt = ? WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo_beta_1 SET password = ?, salt = ?, iterations=? WHERE username = ?;")) {
                 p.setBytes(1, password);
                 p.setBytes(2, salt);
-                p.setString(3, username);
+                p.setInt(3, iterations);
+                p.setString(4, username);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -128,7 +130,8 @@ public class LoginInfoDAO {
         return new LoginInfo(
                 r.getString("username"),
                 r.getBlob("password"),
-                r.getBlob("salt"));
+                r.getBlob("salt"),
+                r.getInt("iterations"));
     }
 
 }

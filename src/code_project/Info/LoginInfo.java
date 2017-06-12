@@ -10,12 +10,17 @@ public class LoginInfo {
 
     private String username;
     private byte[] password,salt;
+    private int iterations;
 
-    public LoginInfo(String username, Blob password, Blob salt) throws SQLException {
+    public LoginInfo(String username, Blob password, Blob salt, int iterations) throws SQLException {
         this.username = username;
         this.password = password.getBytes(1,(int) password.length());
         this.salt = salt.getBytes(1, (int) salt.length());
+        this.iterations = iterations;
+    }
 
+    public int getIterations() {
+        return iterations;
     }
 
     public String getUsername() {

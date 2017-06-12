@@ -1,28 +1,20 @@
 package code_project.Servlet;
 
-import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.LoginInfoDAO;
-import code_project.Info.ArticleInfo;
-import code_project.Security.Passwords;
 import code_project.Info.LoginInfo;
+import code_project.Security.Passwords;
 import code_project.db.MySQL;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.Random;
 
 /**
  * Created by qpen546 on 23/05/2017.
@@ -94,39 +86,10 @@ public class LoginServlet extends HttpServlet {
 
                 String password = request.getParameter("password");
                 byte[] salt = Passwords.getNextSalt();
-                byte[] hashPassword = Passwords.hash(password.toCharArray(), salt, 5);
+                int iterations = new Random().nextInt(1000) + 100_000;
+                byte[] hashPassword = Passwords.hash(password.toCharArray(), salt, iterations);
                 try {
-
-                    BufferedImage icon=null;
-                    try {
-                        //read the local image
-                        ServletContext servletContext=getServletContext();
-                        String fullFilePath=servletContext.getRealPath("/User-Info");
-
-                        response.setContentType("text/html");
-
-                        //create User-Info folder
-                        File Iconfolder = new File(fullFilePath);
-
-                        if (!Iconfolder.exists()) {
-                            Iconfolder.mkdir();
-                        }
-                        //create the user's own folder under User-Info folder
-                        File Userfolder = new File(fullFilePath + "/" + username);
-
-                        if (!Userfolder.exists()) {
-                            Userfolder.mkdir();
-                        }
-                        //get the user's folder path
-                        String filePath = servletContext.getRealPath("/User-Info/" + username+"/");
-                        String defaultAvatar=servletContext.getRealPath("/DefaultAvatar/elyse.png");
-                        icon= ImageIO.read(new File(defaultAvatar));
-                        File outputfile=new File(filePath+"/avatar.jpg");
-                        ImageIO.write(icon,"jpg",outputfile);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, "/User-Info/" + username+"/avatar.jpg");
+                    LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, iterations, "/DefaultAvatar/elyse.png");
                     request.setAttribute("message", "Success to create account");
                     request.getRequestDispatcher("Pages/WelcomePage/Welcome.jsp").forward(request, response);
                 } catch (SQLException e) {
@@ -155,7 +118,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void loginProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean ajaxRequest = request.getHeader("x-requested-with")!=null;
+        boolean ajaxRequest = request.getHeader("x-requested-with") != null;
         response.setContentType("text/plain");
         Writer out = response.getWriter();
         switch (status) {
@@ -175,27 +138,27 @@ public class LoginServlet extends HttpServlet {
                 LoginInfo loginInfo = LoginInfoDAO.getLoginInfo(mySQL, username);
 
                 if (loginInfo == null) {
-                    if(ajaxRequest){
+                    if (ajaxRequest) {
                         out.write("Fail to login: username not exist");
-                    }else {
+                    } else {
                         request.setAttribute("message", "Fail to login: username not exist");
                         request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
                     }
                     return;
                 }
 
-                if (Passwords.isExpectedPassword(password.toCharArray(), loginInfo.getSalt(), 5, loginInfo.getPassword())) {
+                if (Passwords.isExpectedPassword(password.toCharArray(), loginInfo.getSalt(), loginInfo.getIterations(), loginInfo.getPassword())) {
                     session.setAttribute("status", "login");
                     session.setAttribute("username", username);
-                    if(ajaxRequest){
+                    if (ajaxRequest) {
                         out.write("login");
-                    }else {
+                    } else {
                         response.sendRedirect("Blog?page=home");
                     }
                 } else {
-                    if(ajaxRequest){
+                    if (ajaxRequest) {
                         out.write("Fail to login: wrong password");
-                    }else {
+                    } else {
                         request.setAttribute("message", "Fail to login: wrong password");
                         request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
                     }
