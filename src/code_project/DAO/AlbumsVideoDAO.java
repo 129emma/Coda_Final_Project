@@ -17,12 +17,11 @@ import java.util.List;
  */
 public class AlbumsVideoDAO {
 
-    public static List<AlbumsVideoInfo> getAllAlbumsVideoList(AbstractDB db,String sort){
+    public static List<AlbumsVideoInfo> getAllAlbumsVideoList(AbstractDB db){
 
         List<AlbumsVideoInfo> allAlbumsVideoList = new ArrayList<>();
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo ORDER BY ?")) {
-                p.setString(1,sort);
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE fileName!='No file' ORDER BY postTime ")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         allAlbumsVideoList.add(AlbumsVideoInfoFromResultSet(r));
@@ -35,6 +34,29 @@ public class AlbumsVideoDAO {
         }
         return allAlbumsVideoList;
     }
+
+
+
+    public static List<AlbumsVideoInfo> getAllAlbumsYoutubeList(AbstractDB db){
+
+        List<AlbumsVideoInfo> allAlbumsYoutubeList = new ArrayList<>();
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE fileName='No file' ORDER BY postTime ")) {
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        allAlbumsYoutubeList.add(AlbumsVideoInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return allAlbumsYoutubeList;
+    }
+
+
+
     public static List<AlbumsVideoInfo> getAlbumsVideoList(AbstractDB db , String username) {
 
         List<AlbumsVideoInfo> AlbumsVideoInfoList = new ArrayList<>();

@@ -13,7 +13,6 @@
     <title>ArticlePreview</title>
 </head>
 <body>
-
 <c:forEach var="article" items="${articleInfoList}">
         <div class="ui segment keepContent">
             <div class="ui left close rail" style="width: 80px !important;">
@@ -39,7 +38,7 @@
             </h5>
 
             <div class="ui attached segment">
-                <p>${article.preview}</p>
+                ${article.preview}
             </div>
                 <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
             <div class="ui attached segment">

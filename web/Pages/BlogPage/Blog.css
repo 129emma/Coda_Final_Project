@@ -60,8 +60,15 @@ img.userAvatar {
 .ui.cards > .card, .ui.card{
     width: auto;
 }
-
+div{
+    word-wrap: break-word;         /* All browsers since IE 5.5+ */
+    overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+}
 /*position in card*/
 .content {
     text-align: center;
+}
+
+.ui.pointing.menu{
+    background-color:#FFFFFF;!important;
 }

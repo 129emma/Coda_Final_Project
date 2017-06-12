@@ -52,3 +52,8 @@ body {
     margin: 5em 0em 0em;
     padding: 5em 0em;
 }
+
+div{
+    word-wrap: break-word;         /* All browsers since IE 5.5+ */
+    overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+}

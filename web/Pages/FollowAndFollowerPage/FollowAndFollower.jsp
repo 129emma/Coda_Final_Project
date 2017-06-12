@@ -14,16 +14,16 @@
 <body>
 
 
-<div class="ui top attached tabular menu">
+<div class="ui pointing menu">
     <a class="item active" id="getFollows">
         Follows<div class="floating ui label">${followsNumber}</div>
     </a>
     <a class="item" id="getFollowers">
-        Followers
-        <div class="floating ui label">${followersNumber}</div>
+       Followers<div class="floating ui label">${followersNumber}</div>
     </a>
+
 </div>
-<div class="ui bottom attached segment">
+<div class="ui segment">
 
     <div class="ui large aligned divided list" id="follows">
         <c:forEach var="follow" items="${followsList}">
@@ -42,13 +42,16 @@
         <c:forEach var="follower" items="${followersList}">
             <div class="item">
                 <div class="right floated content">
-                    <div class="ui button follow">Follow</div>
+                    <div class="ui button follow"> <i class="add user icon"></i></div>
                 </div>
                 <img class="ui avatar image" src="${follower.avatar}">
                 <div class="content">${follower.username}</div>
             </div>
         </c:forEach>
     </div>
+
 </div>
+
+
 </body>
 </html>

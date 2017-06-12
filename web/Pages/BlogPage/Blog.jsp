@@ -29,6 +29,7 @@
     </script>
 
 </head>
+
 <body>
 
 <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
@@ -151,6 +152,8 @@
     <div id="ArticleContainer" >
 
     </div>
+
+
     <div class="ui center aligned vertical segment" id="Loader">
         <div class="ui icon message">
             <i class="notched circle loading icon"></i>

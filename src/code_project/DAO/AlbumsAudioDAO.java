@@ -19,12 +19,12 @@ public class AlbumsAudioDAO {
 
 
 
-    public static List<AlbumsAudioInfo> getAllAlbumsAudioList(AbstractDB db,String sort){
+    public static List<AlbumsAudioInfo> getAllAlbumsAudioList(AbstractDB db){
 
         List<AlbumsAudioInfo> allAlbumsAudioList = new ArrayList<>();
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio ORDER BY ?")) {
-                p.setString(1,sort);
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio ORDER BY postTime")) {
+
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         allAlbumsAudioList.add(AlbumsAudioInfoFromResultSet(r));

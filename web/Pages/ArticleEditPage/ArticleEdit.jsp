@@ -27,7 +27,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
-
+    <script src="${pageContext.request.contextPath}/Pages/ArticleEditPage/ArticleEdit.js"></script>
   </head>
   <body>
 
@@ -39,9 +39,7 @@
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
       <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
-
     <form action="Article" method="post" onsubmit="prepareContent()">
-
       <div class="ui text container">
         <div class="hero-unit">
           <div id="alerts"></div>
@@ -123,108 +121,39 @@
             ${articleInfo.content}
           </div>
 
-          Tag:<select  width="150px" name="tag">
-          <option  value="Movie">Movie</option>
-          <option  value="Food">Food</option>
-          <option  value="Science">Science</option>
-          <option value="Technology">Technology</option>
-          <option  value="Business">Business</option>
-          <option  value="Heaish">Health</option>
-          <option  value="Music">Music</option>
-          <option  value="Education">Education</option>
-          <option  value="Other">Other</option>
-        </select>
+
+          <div class="ui form">
+            <div class="inline fields">
+              <label>Tag</label>
+              <select class="ui fluid normal dropdown" multiple="" width="150px" name="tag">
+                <option value="">tags</option>
+                <option value="Movie">Movie</option>
+                <option value="Food">Food</option>
+                <option value="Science">Science</option>
+                <option value="Technology">Technology</option>
+                <option value="Business">Business</option>
+                <option value="Heaish">Health</option>
+                <option value="Music">Music</option>
+                <option value="Education">Education</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
           ${hiddenElement}
-          <div style="float: right" >${submitElement}</div>
+          <div class="submitBtn"> ${submitElement}</div>
           ${deleteElement}
         </div>
       </div>
+      <input type="hidden" name="action" value="create">
       <input type="hidden" name="content" id="articleContentSubmit">
     </form>
     <c:if test="${information != null}">
       <p style="color: red">${information}</p>
     </c:if>
-  </div>
+  </body>
 <script>
-
-    $('.input').each(function () {
-        $(this).change(function () {
-            var data = new FormData();
-            data.append('file', $(this).prop('files')[0]);
-            $.ajax({
-                url: '/AlbumsChange',
-                type: 'POST',
-                data: data,
-                processData: false,  // tell jQuery not to process the data
-                contentType: false,  // tell jQuery not to set contentType
-                success: function (data) {
-                    $('#editor').append(data + '<div><br></div>');
-                }
-            });
-            $(this).val('');
-        });
-    });
-
-    function readLink() {
-        var input = prompt("Please put your video link", "link here");
-        if (input != null) {
-            var data = {'action': 'createYoutube', 'youtubeAddress': input};
-            $.ajax({
-                url: '/AlbumsChange',
-                type: 'POST',
-                data: data,
-                success: function (data) {
-                    $('#editor').append(input + '<div><br></div>');
-                }
-            });
-        }
-    }
-
     function prepareContent() {
         document.getElementById("articleContentSubmit").value = document.getElementById("editor").innerHTML;
     }
-
-
-
-  $(function(){
-    function initToolbarBootstrapBindings() {
-      var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
-            'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
-            'Times New Roman', 'Verdana'],
-            fontTarget = $('[title=Font]').siblings('.dropdown-menu');
-      $.each(fonts, function (idx, fontName) {
-          fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
-      });
-      $('a[title]').tooltip({container:'body'});
-    	$('.dropdown-menu input').click(function() {return false;})
-		    .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
-        .keydown('esc', function () {this.value='';$(this).change();});
-
-      $('[data-role=magic-overlay]').each(function () {
-        var overlay = $(this), target = $(overlay.data('target'));
-        overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
-      });
-      if ("onwebkitspeechchange"  in document.createElement("input")) {
-        var editorOffset = $('#editor').offset();
-        $('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('#editor').innerWidth()-35});
-      } else {
-        $('#voiceBtn').hide();
-      }
-	};
-
-	function showErrorAlert (reason, detail) {
-		var msg='';
-		if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
-		else {
-			console.log("error uploading file", reason, detail);
-		}
-		$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+
-		 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
-	};
-    initToolbarBootstrapBindings();
-	$('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
-    window.prettyPrint && prettyPrint();
-  });
 </script>
-  </body>
 </html>

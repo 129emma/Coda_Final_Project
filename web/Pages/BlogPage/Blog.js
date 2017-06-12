@@ -58,10 +58,28 @@ function loadArticles(){
         });
 }
 
+function barFunction() {
+    handler = {
+        activate: function() {
+            if(!$(this).hasClass('dropdown browse')) {
+                $(this)
+                    .addClass('active')
+                    .closest('.ui.menu')
+                    .find('.item')
+                    .not($(this))
+                    .removeClass('active')
+                ;
+            }
+        }
+
+    };
+    $('.menu .item').on('click', handler.activate)
+    ;
+
+
+}
 function getFollowers() {
     $("#getFollowers").off().click(function () {
-        $("#getFollows").removeClass('active');
-        $(this).addClass('active');
         $("#follows").hide();
         $("#followers").show();
     })
@@ -69,8 +87,6 @@ function getFollowers() {
 
 function getFollows() {
     $("#getFollows").off().click(function () {
-        $("#getFollowers").removeClass('active');
-        $(this).addClass('active');
         $("#follows").show();
         $("#followers").hide();
     })
@@ -113,7 +129,6 @@ function freshButtonList() {
 
 
 function  getFollowInfo(){
-
     $("#ArticleContainer").html("");
     $("#Loader").show();
     $.ajax({
@@ -126,6 +141,7 @@ function  getFollowInfo(){
             getFollows();
             getFollowers();
             freshButtonList();
+            barFunction();
             $("#followers").hide();
             $("#follows").show();
             $("#Loader").hide();
