@@ -65,7 +65,7 @@
     </column>
     <column id="31" parent="7" name="username">
       <Position>3</Position>
-      <DataType>char(10)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="32" parent="7" name="address">
       <Position>4</Position>
@@ -130,7 +130,7 @@
     </column>
     <column id="45" parent="9" name="username">
       <Position>3</Position>
-      <DataType>char(10)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="46" parent="9" name="address">
       <Position>4</Position>
@@ -195,7 +195,7 @@
     </column>
     <column id="59" parent="11" name="username">
       <Position>3</Position>
-      <DataType>char(10)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="60" parent="11" name="address">
       <Position>4</Position>
@@ -280,11 +280,11 @@
     </column>
     <column id="78" parent="13" name="tags">
       <Position>5</Position>
-      <DataType>varchar(32)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="79" parent="13" name="username">
       <Position>6</Position>
-      <DataType>varchar(32)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="80" parent="13" name="userAvatar">
       <Position>7</Position>
@@ -380,7 +380,7 @@ avatar</RefColNames>
     </column>
     <column id="100" parent="16" name="username">
       <Position>4</Position>
-      <DataType>varchar(32)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="101" parent="16" name="userAvatar">
       <Position>5</Position>
@@ -450,7 +450,7 @@ avatar</RefColNames>
     </column>
     <column id="114" parent="17" name="username">
       <Position>4</Position>
-      <DataType>varchar(32)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="115" parent="17" name="userAvatar">
       <Position>5</Position>
@@ -489,52 +489,52 @@ avatar</RefColNames>
       <OnUpdate>update</OnUpdate>
       <OnDelete>delete</OnDelete>
     </foreign-key>
-    <column id="122" parent="18" name="username">
-      <Position>9</Position>
-      <DataType>varchar(99)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="123" parent="18" name="password">
-      <Position>10</Position>
-      <DataType>blob|0</DataType>
-    </column>
-    <column id="124" parent="18" name="salt">
+    <column id="122" parent="18" name="salt">
       <Position>1</Position>
       <DataType>blob|0</DataType>
     </column>
-    <column id="125" parent="18" name="firstName">
-      <Position>11</Position>
-      <DataType>varchar(99)|0</DataType>
+    <column id="123" parent="18" name="iterations">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="126" parent="18" name="lastName">
+    <column id="124" parent="18" name="nickName">
+      <Position>3</Position>
+      <DataType>varchar(99)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="125" parent="18" name="lastName">
       <Position>4</Position>
       <DataType>varchar(99)|0</DataType>
     </column>
-    <column id="127" parent="18" name="email">
-      <Position>7</Position>
-      <DataType>varchar(99)|0</DataType>
-    </column>
-    <column id="128" parent="18" name="birthDate">
-      <Position>6</Position>
-      <DataType>date|0</DataType>
-    </column>
-    <column id="129" parent="18" name="gender">
+    <column id="126" parent="18" name="gender">
       <Position>5</Position>
       <DataType>varchar(99)|0</DataType>
     </column>
-    <column id="130" parent="18" name="avatar">
+    <column id="127" parent="18" name="birthDate">
+      <Position>6</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="128" parent="18" name="email">
+      <Position>7</Position>
+      <DataType>varchar(99)|0</DataType>
+    </column>
+    <column id="129" parent="18" name="avatar">
       <Position>8</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="131" parent="18" name="iterations">
-      <Position>2</Position>
-      <DataType>bigint(20)|0</DataType>
-    </column>
-    <column id="132" parent="18" name="nickName">
-      <Position>3</Position>
+    <column id="130" parent="18" name="username">
+      <Position>9</Position>
       <DataType>varchar(99)|0</DataType>
       <NotNull>1</NotNull>
+    </column>
+    <column id="131" parent="18" name="password">
+      <Position>10</Position>
+      <DataType>blob|0</DataType>
+    </column>
+    <column id="132" parent="18" name="firstName">
+      <Position>11</Position>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="133" parent="18" name="serialNum">
       <Position>12</Position>
@@ -579,7 +579,7 @@ nickName</ColNames>
     </column>
     <column id="142" parent="19" name="username">
       <Position>2</Position>
-      <DataType>varchar(32)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="143" parent="19" name="password">
@@ -596,15 +596,15 @@ nickName</ColNames>
     </column>
     <column id="146" parent="19" name="firstName">
       <Position>6</Position>
-      <DataType>varchar(32)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="147" parent="19" name="lastName">
       <Position>7</Position>
-      <DataType>varchar(32)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="148" parent="19" name="email">
       <Position>8</Position>
-      <DataType>varchar(32)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="149" parent="19" name="birthDate">
       <Position>9</Position>
@@ -612,7 +612,7 @@ nickName</ColNames>
     </column>
     <column id="150" parent="19" name="gender">
       <Position>10</Position>
-      <DataType>varchar(32)|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
     <column id="151" parent="19" name="avatar">
       <Position>11</Position>

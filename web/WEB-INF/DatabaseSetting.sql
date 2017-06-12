@@ -9,15 +9,15 @@ DROP TABLE IF EXISTS UserInfo_beta_1;
 
 CREATE TABLE UserInfo_beta_1 (
   userID     BIGINT AUTO_INCREMENT NOT NULL UNIQUE,
-  username   VARCHAR(32) UNIQUE,
+  username   VARCHAR(99) UNIQUE,
   password   BLOB,
   salt       BLOB,
   iterations BIGINT,
-  firstName  VARCHAR(32),
-  lastName   VARCHAR(32),
-  email      VARCHAR(32),
+  firstName  VARCHAR(99),
+  lastName   VARCHAR(99),
+  email      VARCHAR(99),
   birthDate  DATE,
-  gender     VARCHAR(32),
+  gender     VARCHAR(99),
   avatar     VARCHAR(256),
   googleID   VARCHAR(99) UNIQUE,
   PRIMARY KEY (username, avatar)
@@ -30,8 +30,8 @@ CREATE TABLE Article_beta_1 (
   title      VARCHAR(99),
   content    LONGTEXT,
   postTime   DATETIME,
-  tags       VARCHAR(32),
-  username   VARCHAR(32),
+  tags       VARCHAR(99),
+  username   VARCHAR(99),
   userAvatar VARCHAR(256),
   FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
     ON UPDATE CASCADE
@@ -44,7 +44,7 @@ CREATE TABLE Comment_beta_1 (
   commentID  BIGINT PRIMARY KEY AUTO_INCREMENT,
   content    TINYTEXT,
   postTime   DATETIME,
-  username   VARCHAR(32),
+  username   VARCHAR(99),
   userAvatar VARCHAR(256),
   articleID  BIGINT,
   FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
@@ -62,7 +62,7 @@ CREATE TABLE CommentReply_beta_1 (
   commentReplyID BIGINT PRIMARY KEY AUTO_INCREMENT,
   content        VARCHAR(500),
   postTime       DATETIME,
-  username       VARCHAR(32),
+  username       VARCHAR(99),
   userAvatar     VARCHAR(256),
   articleID      BIGINT,
   commentID      BIGINT,
@@ -83,7 +83,7 @@ DROP TABLE IF EXISTS AlbumsImage_beta_1;
 CREATE TABLE IF NOT EXISTS AlbumsImage_beta_1 (
   id       INT AUTO_INCREMENT,
   fileName VARCHAR(50),
-  username CHAR(10),
+  username VARCHAR(99),
   address  VARCHAR(1000) NOT NULL,
   postTime DATETIME,
   PRIMARY KEY (id),
@@ -97,7 +97,7 @@ DROP TABLE IF EXISTS AlbumsVideo_beta_1;
 CREATE TABLE IF NOT EXISTS AlbumsVideo_beta_1 (
   id       INT AUTO_INCREMENT,
   fileName VARCHAR(50),
-  username CHAR(10),
+  username VARCHAR(99),
   address  VARCHAR(1000) NOT NULL,
   postTime DATETIME,
   PRIMARY KEY (id),
@@ -111,7 +111,7 @@ DROP TABLE IF EXISTS AlbumsAudio_beta_1;
 CREATE TABLE IF NOT EXISTS AlbumsAudio_beta_1 (
   id       INT AUTO_INCREMENT,
   fileName VARCHAR(50),
-  username CHAR(10),
+  username VARCHAR(99),
   address  VARCHAR(1000) NOT NULL,
   postTime DATETIME,
   PRIMARY KEY (id),
