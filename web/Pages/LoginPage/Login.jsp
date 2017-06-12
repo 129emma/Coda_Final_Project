@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html class="full">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>Login Page</title>
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="782826346139-b034vt93v6m8483o8m4jf2d94hdsbhq6.apps.googleusercontent.com">

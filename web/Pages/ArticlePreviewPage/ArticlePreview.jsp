@@ -17,7 +17,7 @@
 <c:forEach var="article" items="${articleInfoList}">
         <div class="ui segment keepContent">
             <div class="ui left close rail" style="width: 80px !important;">
-                <div class="ui bound bottom sticky" style="width: 80px !important;">
+                <div class="ui sticky" style="width: 80px !important;">
                     <img class="ui raised tiny top aligned rounded image userAvatar userAvatarToHover" src="User-Info/${article.username}/avatar.jpg">
                 </div>
                 <div class="ui custom popup top transition hidden">
@@ -39,10 +39,9 @@
                     </div>
                 </div>
             </div>
-            <div class="ui top attached segment">
-               <h4 class="ui header"> <a href="${article.retrieveAddress}">${article.title}</a>
-                <div class="sub header">${article.postTime}</div> </h4>
-            </div>
+            <h5 class="ui top attached segment">
+                <a href="${article.retrieveAddress}">${article.title}</a> ${article.postTime}
+            </h5>
             <div class="ui attached segment">
                 <p>${article.preview}</p>
             </div>

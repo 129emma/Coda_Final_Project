@@ -32,4 +32,18 @@ CREATE TABLE IF NOT EXISTS AlbumsAudio(
   PRIMARY KEY(id)
 );
 
-SELECT * FROM Article WHERE username='qian' LIMIT 3
+DROP TABLE IF EXISTS UserRelationship;
+
+CREATE TABLE IF NOT EXISTS UserRelationship(
+  follower VARCHAR(99) NOT NULL ,
+  follow VARCHAR(99) NOT NULL ,
+  PRIMARY KEY (follow,follower)
+);
+
+DROP TABLE IF EXISTS likeInfo;
+
+CREATE TABLE IF NOT EXISTS likeInfo (
+  articleID INT NOT NULL ,
+  likedBy VARCHAR(99) NOT NULL ,
+  PRIMARY KEY (articleID, likedBy)
+);

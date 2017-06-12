@@ -23,42 +23,45 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
 </head>
 <body>
-
-<div>
-<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
-    <jsp:param name="NavigationBar" value=""/>
+<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
+    <jsp:param name="SideBar" value=""/>
 </jsp:include>
-<div id="ArticleContainer" class="ui text justified container">
-<div class="ui segment keepContent">
 
-<div class="ui top attached segment">
-    <h3 class="ui header">${articleInfo.title}
-    <div class="sub header">${articleInfo.postTime}</div></h3>
-</div>
-<div class="ui attached segment">
-    <p>${articleInfo.content}</p>
-</div>
-<%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
-<div class="ui attached segment">
-    ${articleInfo.editArticle}
-    ${articleInfo.deleteArticle}
-    <div class="ui right floated labeled button" tabindex="0">
-        <a class="ui basic right pointing label">
-            999
-        </a>
-        <div class="ui button">
-            <i class="heart icon"></i> Like
-        </div>
-    </div>
-</div>
+<div class="pusher full">
+    <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
+        <jsp:param name="NavigationBar" value=""/>
+    </jsp:include>
+    <div id="ArticleContainer" class="ui text justified container">
+        <div class="ui raised segment keepContent">
+            <h5 class="ui top attached segment">
+                ${articleInfo.title}<span class="ui right">${articleInfo.postTime}</span>
+            </h5>
+            <div class="ui attached segment">
+                <p>${articleInfo.content}</p>
+            </div>
+            <div id="id" style="display: none">${articleInfo.articleID}</div>
+            <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
+            <div class="ui attached segment">
+                ${articleInfo.editArticle}
+                ${articleInfo.deleteArticle}
+                <div class="ui right labeled button" tabindex="0">
+                    <a class="ui basic right pointing label">
 
-<%--<div class="overlay">--%>
-<%--<div class="ui labeled icon vertical menu">--%>
-<%--<a class="item"><i class="twitter icon"></i> Tweet</a>--%>
-<%--<a class="item"><i class="facebook icon"></i> Share</a>--%>
-<%--<a class="item"><i class="mail icon"></i> E-mail</a>--%>
-<%--</div>--%>
-<%--</div>--%>
+                    </a>
+                    <div id="likeButton" class="ui button">
+                        <i class="heart icon"></i>
+                        <span id="ifLiked"></span>
+                    </div>
+                </div>
+            </div>
+
+            <%--<div class="overlay">--%>
+            <%--<div class="ui labeled icon vertical menu">--%>
+            <%--<a class="item"><i class="twitter icon"></i> Tweet</a>--%>
+            <%--<a class="item"><i class="facebook icon"></i> Share</a>--%>
+            <%--<a class="item"><i class="mail icon"></i> E-mail</a>--%>
+            <%--</div>--%>
+            <%--</div>--%>
 
 <div class="ui comments">
 <h3 class="ui dividing header">Comments</h3>
@@ -170,7 +173,6 @@
     </div>
     </div>
     </div>
-
-    </body>
-    </html>
+</body>
+</html>
 
