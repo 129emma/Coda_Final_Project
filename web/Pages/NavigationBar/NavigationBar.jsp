@@ -16,9 +16,9 @@
 <div class="ui vertical center aligned segment" id="topMenu">
     <div class="ui container">
         <div class="ui icon borderless menu">
-            <a href="Blog?page=home" class="item iconClass"><li class="ion-ios-home-outline iconClass"></li></a>
-            <a href="Albums" class="item"><li class="ion-ios-analytics-outline iconClass"></li></a>
-            <a href="Albums" class="item"><li class="ion-ios-redo-outline iconClass"></li></a>
+            <a href="Blog?page=home" class="item iconClass"><i class="ion-ios-home-outline iconClass"></i></a>
+            <a href="Albums" class="item"><i class="ion-ios-analytics-outline iconClass"></i></a>
+            <a href="Albums" class="item"><i class="ion-ios-redo-outline iconClass"></i></a>
         </div>
     </div>
 

@@ -44,5 +44,6 @@ CREATE TABLE CommentReply (
   content        VARCHAR(500),
   postTime       DATETIME,
   username       VARCHAR(99),
-  commentID      INT
+  commentID      INT,
+  articleID      INT
 );

@@ -39,22 +39,16 @@
                     </div>
                 </div>
             </div>
-            <h5 class="ui top attached segment">
-                <a href="${article.retrieveAddress}">${article.title}</a> ${article.postTime}
-            </h5>
+            <div class="ui top attached segment">
+               <h4 class="ui header"> <a href="${article.retrieveAddress}">${article.title}</a>
+                <div class="sub header">${article.postTime}</div> </h4>
+            </div>
             <div class="ui attached segment">
                 <p>${article.preview}</p>
             </div>
                 <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
             <div class="ui attached segment">
-                <div class="ui left labeled button" tabindex="0">
-                    <a class="ui basic right pointing label">
-                        999
-                    </a>
-                    <div class="ui button">
-                        <i class="heart icon"></i> Like
-                    </div>
-                </div>
+                        <a href="${article.retrieveAddress}"> Read More</a>
             </div>
         </div>
 </c:forEach>

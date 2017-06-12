@@ -71,23 +71,23 @@
                         <div class="ui fitted divider header"></div>
 
                         <div class="ui labeled icon borderless four item menu">
-                            <a href="Blog?page=home" class="item">
+                            <a href="Blog?page=home" class="item cardChoice">
                                 <div class="ui icon" data-tooltip="My Article">
                                     <i class="ion-ios-paper-outline"></i>
                                 </div>
                             </a>
-                            <a href="Blog?page=spotlight" class="item">
+                            <a href="Blog?page=spotlight" class="item cardChoice">
                                 <div class="ui icon " data-tooltip="Spotlight">
                                     <i class="ion-ios-navigate-outline"></i>
                                 </div>
 
                             </a>
-                            <a href="Albums" class="item">
+                            <a href="Albums" class="item cardChoice">
                                 <div class="ui icon " data-tooltip="Albums">
                                     <i class="ion-ios-camera-outline"></i>
                                 </div>
                             </a>
-                            <a href="Article?action=create" class="item">
+                            <a href="Article?action=create" class="item cardChoice">
                                 <div class="ui icon" data-tooltip="Create">
                                     <i class="ion-ios-compose-outline"></i>
                                 </div>

@@ -72,16 +72,16 @@ public class ArticleServlet extends HttpServlet {
         String page = (String) request.getParameter("page");
         int articleNumber = Integer.parseInt(request.getParameter("articleNumber"));
         int totalArticleNumber = 0;
-        if(page!=null){
-            switch(page){
+        if (page != null) {
+            switch (page) {
                 case "home":
-                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL,username);
-                    articleNumber = Math.min(totalArticleNumber,articleNumber);
+                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL, username);
+                    articleNumber = Math.min(totalArticleNumber, articleNumber);
                     articleInfoList = ArticleInfoDAO.getArticleInfoList(mySQL, username, articleNumber);
                     break;
                 case "spotlight":
                     totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL);
-                    articleNumber = Math.min(totalArticleNumber,articleNumber);
+                    articleNumber = Math.min(totalArticleNumber, articleNumber);
                     articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, articleNumber);
                     break;
             }
@@ -101,7 +101,7 @@ public class ArticleServlet extends HttpServlet {
         request.getRequestDispatcher("Pages/ArticlePage/Article.jsp").forward(request, response);
     }
 
-    private void retrieveComments(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
+    private void retrieveComments(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String articleID = request.getParameter("articleID");
         String username = (String) session.getAttribute("username");
         List<CommentInfo> commentInfoList = CommentInfoDAO.getCommentInfoListByArticle(mySQL, Integer.parseInt(articleID));
@@ -110,10 +110,23 @@ public class ArticleServlet extends HttpServlet {
                 commentInfo.setReplyComment(username);
                 commentInfo.setEditComment(username);
                 commentInfo.setDeleteComment(username);
+               commentInfo.setCommentReplyInfoList(retrieveRepliedComments(commentInfo.commentID));
             }
         }
+
         request.setAttribute("commentInfoList", commentInfoList);
 
+    }
+
+    private List<CommentReplyInfo> retrieveRepliedComments(int commentID) throws ServletException, IOException {
+        List<CommentReplyInfo> commentReplyInfoList = CommentInfoDAO.getCommentReplyInfobyCommentReplyID(mySQL, commentID);
+        if (commentReplyInfoList != null) {
+            for (CommentReplyInfo commentReply : commentReplyInfoList) {
+                commentReply.setDeleteCommentReply(commentReply.commentReplyID);
+
+            }
+        }
+        return commentReplyInfoList;
     }
 
     private void updateArticle(HttpServletRequest request, HttpServletResponse response) {
@@ -160,7 +173,7 @@ public class ArticleServlet extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         String tag = request.getParameter("tag");
-        String username = (String)session.getAttribute("username");
+        String username = (String) session.getAttribute("username");
 
         if (content == null || content.isEmpty()) {
             String submitElement = "<button class='ui floated button' type='submit' name='action' value='create'>Submit</button>";
@@ -171,9 +184,9 @@ public class ArticleServlet extends HttpServlet {
 
 
         try {
-            UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL,username);
+            UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, username);
             String userAvatar = userInfo.getAvatar();
-            ArticleInfoDAO.createArticleInfo(mySQL, title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, username,userAvatar);
+            ArticleInfoDAO.createArticleInfo(mySQL, title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, username, userAvatar);
             response.sendRedirect("Blog");
         } catch (Exception e) {
             e.printStackTrace();

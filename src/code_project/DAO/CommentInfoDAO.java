@@ -44,11 +44,11 @@ public class CommentInfoDAO {
         return CommentInfoList;
     }
 
-    public static List<CommentReplyInfo> getCommentReplybyCommentReplyID(AbstractDB db, int commentID) {
+    public static List<CommentReplyInfo> getCommentReplyInfobyCommentReplyID(AbstractDB db, int commentID) {
         List<CommentReplyInfo> commentReplyInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT content FROM CommentReply WHERE commentID=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM CommentReply WHERE commentID=?")) {
                 p.setInt(1, commentID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -144,14 +144,25 @@ public class CommentInfoDAO {
     }
 
 
-    public static void replyCommentInfo(AbstractDB db, int commentReplyID, String content, String username, String postTime, int commentID) throws SQLException {
+    public static void deleteCommentReplyInfo(AbstractDB db, int commentReplyID) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO CommentReply(commentReplyID, content, postTime, username, commentID) VALUES (?,?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM CommentReply WHERE commentReplyID=?;")) {
                 p.setInt(1, commentReplyID);
-                p.setString(2, content);
-                p.setString(3, postTime);
-                p.setString(4, username);
-                p.setInt(5, commentID);
+                p.executeUpdate();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void replyCommentInfo(AbstractDB db, String content, String username, String postTime, int commentID, int articleID) throws SQLException {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO CommentReply( content, postTime, username, commentID, articleID) VALUES (?,?,?,?,?);")) {
+                p.setString(1, content);
+                p.setString(2, postTime);
+                p.setString(3, username);
+                p.setInt(4, commentID);
+                p.setInt(5, articleID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -175,7 +186,8 @@ public class CommentInfoDAO {
                 r.getString("content"),
                 r.getDate("postTime").toString() + " " + r.getTime("postTime").toString(),
                 r.getString("username"),
-                r.getInt("commentID")
+                r.getInt("commentID"),
+                r.getInt("articleID")
         );
     }
 

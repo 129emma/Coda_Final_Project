@@ -31,6 +31,9 @@ public class CommentServlet extends HttpServlet {
             case "delete":
                 deleteCommentInfo(request, response);
                 break;
+            case "deleteCommentReply":
+                deleteCommentReplyInfo(request, response);
+                break;
             case "edit":
                 editCommentInfo(request, response);
                 break;
@@ -51,6 +54,8 @@ public class CommentServlet extends HttpServlet {
         String articleID = request.getParameter("articleID");
         response.sendRedirect("Article?action=retrieve&articleID=" + articleID);
     }
+
+
 
 
     private void createCommentInfo(HttpServletRequest request, HttpServletResponse response) {
@@ -77,6 +82,15 @@ public class CommentServlet extends HttpServlet {
         }
     }
 
+    private void deleteCommentReplyInfo(HttpServletRequest request, HttpServletResponse response) {
+        int commentReplyID = Integer.parseInt(request.getParameter("commentReplyID"));
+        try {
+            CommentInfoDAO.deleteCommentReplyInfo(mySQL, commentReplyID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void editCommentInfo(HttpServletRequest request, HttpServletResponse response) {
 
     }
@@ -88,7 +102,7 @@ public class CommentServlet extends HttpServlet {
         String content = request.getParameter("commentContent");
         String postTime = CommentInfoDAO.getCurrentTimeStamp();
         try {
-            CommentInfoDAO.updateCommentInfo(mySQL,commentID, content, username, postTime);
+            CommentInfoDAO.updateCommentInfo(mySQL, commentID, content, username, postTime);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,14 +111,14 @@ public class CommentServlet extends HttpServlet {
 
     private void replyCommentInfo(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        int replyCommentID = Integer.parseInt(request.getParameter("commentReplyID"));
         String content = request.getParameter("commentReplyContent");
-        String postTime = request.getParameter("postTime");
+        String postTime = CommentInfoDAO.getCurrentTimeStamp();
         String username = (String) session.getAttribute("username");
         int commentId = Integer.parseInt(request.getParameter("commentID"));
-        try{
-            CommentInfoDAO.replyCommentInfo(mySQL,replyCommentID,content,postTime,username,commentId);
-        }catch (SQLException e){
+        int articleID = Integer.parseInt(request.getParameter("articleID"));
+        try {
+            CommentInfoDAO.replyCommentInfo(mySQL, content, username, postTime, commentId, articleID);
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
