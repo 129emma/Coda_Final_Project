@@ -30,7 +30,7 @@ public class CommentInfoDAO {
         List<CommentInfo> CommentInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment WHERE articleID=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment_beta_1 WHERE articleID=?")) {
                 p.setInt(1,articleID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -50,7 +50,7 @@ public class CommentInfoDAO {
         List<CommentInfo> CommentInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment WHERE username=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment_beta_1 WHERE username=?")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -67,7 +67,7 @@ public class CommentInfoDAO {
 
     public static void createCommentInfo(AbstractDB db, String content, String postTime, String username, String articleID ) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO Comment(content, postTime, username, articleID) VALUES (?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO Comment_beta_1(content, postTime, username, articleID) VALUES (?,?,?,?);")) {
                 p.setString(1, content);
                 p.setString(2, postTime);
                 p.setString(3, username);
@@ -84,7 +84,7 @@ public class CommentInfoDAO {
         CommentInfo CommentInfo = null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment WHERE commentID = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment_beta_1 WHERE commentID = ?")) {
                 p.setString(1, commentID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -101,7 +101,7 @@ public class CommentInfoDAO {
 
     public static void updateCommentInfo(AbstractDB db,int commentID,String content, String username, String postTime) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE Comment set content =?,postTime=? WHERE username=? and commentID=?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE Comment_beta_1 set content =?,postTime=? WHERE username=? and commentID=?;")) {
                 p.setString(1, content);
                 p.setString(2, postTime);
                 p.setString(3, username);
@@ -115,7 +115,7 @@ public class CommentInfoDAO {
 
     public static void deleteCommentInfo(AbstractDB db, int commentID) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM Comment WHERE CommentID=?;")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM Comment_beta_1 WHERE CommentID=?;")) {
                 p.setInt(1, commentID);
                 p.executeUpdate();
             }

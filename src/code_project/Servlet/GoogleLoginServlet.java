@@ -28,7 +28,7 @@ import java.util.Collections;
 public class GoogleLoginServlet extends HttpServlet {
     private MySQL mySQL = new MySQL();
     private boolean emailVerified;
-    private String email, name, pictureUrl, locale, familyName, givenName, username;
+    private String email, name, avatar, locale, lastName, firstName, username, googleID;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Writer out = response.getWriter();
@@ -36,29 +36,37 @@ public class GoogleLoginServlet extends HttpServlet {
         String idTokenString = request.getParameter("idToken");
         if (idTokenString != null) {
             try {
-                verifyIdToken(idTokenString);
-                LoginInfoDAO.createLoginInfo(mySQL, username,pictureUrl,givenName,familyName,email);
-                session.setAttribute("status","login");
-                session.setAttribute("username",username);
-                out.write("success");
+                if (verifyIdToken(idTokenString)) {
+                    String UsernameOfGoogleID = LoginInfoDAO.getUsernameByGoogleID(mySQL, googleID);
+                    if (UsernameOfGoogleID != null) {
+                        session.setAttribute("status", "login");
+                        session.setAttribute("username", UsernameOfGoogleID);
+                        out.write("success");
+                    } else {
+                        LoginInfoDAO.createLoginInfo(mySQL, username, avatar, firstName, lastName, email, googleID);
+                        session.setAttribute("status", "login");
+                        session.setAttribute("username", this.username);
+                        out.write("success");
+                    }
+                } else {
+                    out.write("fail code 1");
+                }
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
-                out.write("fail code 1");
+                out.write("fail code 2");
             } catch (SQLException e) {
-                session.setAttribute("status","login");
-                session.setAttribute("username",username);
-                out.write("success");
+                out.write("fail code 3");
             }
-        }else{
-            out.write("fail code 3");
+        } else {
+            out.write("fail code 4");
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+        doPost(request, response);
     }
 
-    protected void verifyIdToken(String idTokenString) throws GeneralSecurityException, IOException {
+    private boolean verifyIdToken(String idTokenString) throws GeneralSecurityException, IOException {
 
         NetHttpTransport transport = new NetHttpTransport();
         JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
@@ -75,26 +83,23 @@ public class GoogleLoginServlet extends HttpServlet {
             GoogleIdToken.Payload payload = idToken.getPayload();
 
             // Print user identifier
-            String userId = payload.getSubject();
-            System.out.println("User ID: " + userId);
+            googleID = payload.getSubject();
 
             // Get profile information from payload
             email = payload.getEmail();
             emailVerified = Boolean.valueOf(payload.getEmailVerified());
             name = (String) payload.get("name");
-            pictureUrl = (String) payload.get("picture");
+            avatar = (String) payload.get("picture");
             locale = (String) payload.get("locale");
-            familyName = (String) payload.get("family_name");
-            givenName = (String) payload.get("given_name");
+            lastName = (String) payload.get("family_name");
+            firstName = (String) payload.get("given_name");
 
             // Use or store profile information
-            username = "!GoogleID" + userId;
+            username = name + "_" + googleID;
+            return true;
         } else {
-            System.out.println("Invalid ID token.");
+            return false;
         }
     }
 
-    protected void createAccount(String idTokenString) throws SQLException {
-        LoginInfoDAO.createLoginInfo(mySQL, username,pictureUrl,givenName,familyName,email);
-    }
 }

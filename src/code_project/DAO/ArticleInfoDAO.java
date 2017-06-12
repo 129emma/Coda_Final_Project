@@ -1,14 +1,13 @@
 package code_project.DAO;
 
 import code_project.Info.ArticleInfo;
-import code_project.Info.LoginInfo;
 import code_project.db.AbstractDB;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 /**
  * Created by txie936 on 25/05/2017.
  */
@@ -19,7 +18,7 @@ public class ArticleInfoDAO {
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 WHERE username=?")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -41,7 +40,7 @@ public class ArticleInfoDAO {
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE username=? ORDER BY postTime DESC LIMIT ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 WHERE username=? ORDER BY postTime DESC LIMIT ?")) {
                 p.setString(1,username);
                 p.setInt(2,number);
                 try (ResultSet r = p.executeQuery()) {
@@ -61,7 +60,7 @@ public class ArticleInfoDAO {
         int totalArticleNumber = 0;
         try (Connection c = db.connection()) {
             try (Statement stmt = c.createStatement()) {
-                try (ResultSet r = stmt.executeQuery("SELECT COUNT(*) FROM Article")) {
+                try (ResultSet r = stmt.executeQuery("SELECT COUNT(*) FROM Article_beta_1")) {
                     while (r.next()) {
                         totalArticleNumber = r.getInt(1);
                     }
@@ -77,7 +76,7 @@ public class ArticleInfoDAO {
     public static int getTotalArticleNumber(AbstractDB db, String username){
         int totalArticleNumber = 0;
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT COUNT(*) FROM Article WHERE username=?")){
+            try (PreparedStatement p = c.prepareStatement("SELECT COUNT(*) FROM Article_beta_1 WHERE username=?")){
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -97,7 +96,7 @@ public class ArticleInfoDAO {
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article ORDER BY postTime DESC LIMIT ? OFFSET 0")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 ORDER BY postTime DESC LIMIT ? OFFSET 0")) {
                 p.setInt(1,pageNumber);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -127,7 +126,7 @@ public class ArticleInfoDAO {
 
     public static void createArticleInfo(AbstractDB db, String title,String content, String postTime, String tags,String username, String userAvatar ) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO Article(title,content,postTime,tags,username,userAvatar) VALUES (?,?,?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO Article_beta_1(title,content,postTime,tags,username,userAvatar) VALUES (?,?,?,?,?,?);")) {
                 p.setString(1, title);
                 p.setString(2, content);
                 p.setString(3, postTime);
@@ -146,7 +145,7 @@ public class ArticleInfoDAO {
         ArticleInfo articleInfo = null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article WHERE articleID=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 WHERE articleID=?")) {
                 p.setString(1, articleID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -163,7 +162,7 @@ public class ArticleInfoDAO {
 
     public static void updateArticleInfo(AbstractDB db,String articleID,String content,String title, String postTime, String tags,String username) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE Article set content =?, title=?,postTime=?, tags=? WHERE username = ? AND articleID=?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE Article_beta_1 set content =?, title=?,postTime=?, tags=? WHERE username = ? AND articleID=?;")) {
                 p.setString(1, content);
                 p.setString(2, title);
                 p.setString(3, postTime);
@@ -179,7 +178,7 @@ public class ArticleInfoDAO {
 
     public static void deleteArticleInfo(AbstractDB db, String username,String articleID) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM Article WHERE username = ? AND articleID=?;")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM Article_beta_1 WHERE username = ? AND articleID=?;")) {
                 p.setString(1, username);
                 p.setString(2, articleID);
                 p.executeUpdate();

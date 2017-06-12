@@ -55,7 +55,7 @@
                             </div>
                             <!--User Icon-->
                             <div class="ui small image iconImage">
-                                <img src="User-Info/${userInfo.username}/avatar.jpg">
+                                <img src="${userInfo.avatar}">
                             </div>
                         </div>
                         <!--User Name-->
@@ -118,7 +118,7 @@
                                 <img  src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
                                 <!--User Icon-->
                                 <div class="ui small image iconImage">
-                                    <img src="User-Info/${userInfo.username}/avatar.jpg">
+                                    <img src="${userInfo.avatar}">
                                 </div>
                             </div>
                         </div>

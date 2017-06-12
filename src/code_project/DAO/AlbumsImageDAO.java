@@ -21,7 +21,7 @@ public class AlbumsImageDAO {
 
         List<AlbumsImageInfo> allAlbumsImageList = new ArrayList<>();
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsImage ORDER BY ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsImage_beta_1 ORDER BY ?")) {
                 p.setString(1,sort);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -44,7 +44,7 @@ public class AlbumsImageDAO {
         List<AlbumsImageInfo> AlbumsImageInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsImage WHERE username=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsImage_beta_1 WHERE username=?")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -61,7 +61,7 @@ public class AlbumsImageDAO {
 
     public static void createAlbumsImageInfo(AbstractDB db, String username,String address,String fileName) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsImage(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsImage_beta_1(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
                 p.setString(1, username);
                 p.setString(2, address);
                 p.setString(4,fileName);
@@ -75,7 +75,7 @@ public class AlbumsImageDAO {
 
     public static void deleteAlbumsImageInfo(AbstractDB db, String username,int id) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsImage WHERE username = ? AND id=?")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsImage_beta_1 WHERE username = ? AND id=?")) {
                 p.setString(1, username);
                 p.setInt(2, id);
                 p.executeUpdate();
@@ -92,7 +92,7 @@ public class AlbumsImageDAO {
         AlbumsImageInfo albumsImageInfo= null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsImage WHERE username = ?AND id=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsImage_beta_1 WHERE username = ?AND id=?")) {
                 p.setString(1, username);
                 p.setString(2, id);
                 try (ResultSet r = p.executeQuery()) {

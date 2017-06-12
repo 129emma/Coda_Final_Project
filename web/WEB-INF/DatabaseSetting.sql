@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS UserRelationship_beta_1;
+DROP TABLE IF EXISTS AlbumsAudio_beta_1;
+DROP TABLE IF EXISTS AlbumsVideo_beta_1;
+DROP TABLE IF EXISTS AlbumsImage_beta_1;
 DROP TABLE IF EXISTS CommentReply_beta_1;
 DROP TABLE IF EXISTS Comment_beta_1;
 DROP TABLE IF EXISTS Article_beta_1;
@@ -15,7 +19,7 @@ CREATE TABLE UserInfo_beta_1 (
   birthDate  DATE,
   gender     VARCHAR(32),
   avatar     VARCHAR(256),
-  googleID   BIGINT UNIQUE,
+  googleID   VARCHAR(99) UNIQUE,
   PRIMARY KEY (username, avatar)
 );
 

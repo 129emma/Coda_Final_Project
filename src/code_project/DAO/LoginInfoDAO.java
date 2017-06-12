@@ -16,7 +16,7 @@ public class LoginInfoDAO {
     public static List<String> getUsernameList(AbstractDB db) {
         List<String> usernameList = new ArrayList<>();
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT username FROM UserInfo")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT username FROM UserInfo_beta_1")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         usernameList.add(r.getString("username"));
@@ -31,7 +31,7 @@ public class LoginInfoDAO {
 
     public static Boolean verifyUsernameExistence(AbstractDB db, String username) {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo_beta_1 WHERE username = ?")) {
                 p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     if (r.next()) {
@@ -48,7 +48,7 @@ public class LoginInfoDAO {
     public static LoginInfo getLoginInfo(AbstractDB db, String username) {
         LoginInfo loginInfo = null;
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo_beta_1 WHERE username = ?")) {
                 p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -62,9 +62,26 @@ public class LoginInfoDAO {
         return loginInfo;
     }
 
+    public static String getUsernameByGoogleID(AbstractDB db, String googleID) {
+        String username = null;
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT username FROM UserInfo_beta_1 WHERE googleID = ?")) {
+                p.setString(1, googleID);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        username = r.getString("username");
+                    }
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return username;
+    }
+
     public static void createLoginInfo(AbstractDB db, String username, byte[] password, byte[] salt, String avatar) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo (username, password, salt, avatar) VALUE (?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo_beta_1 (username, password, salt, avatar) VALUE (?,?,?,?);")) {
                 p.setString(1, username);
                 p.setBytes(2, password);
                 p.setBytes(3, salt);
@@ -77,14 +94,16 @@ public class LoginInfoDAO {
         }
     }
 
-    public static void createLoginInfo(AbstractDB db, String username, String avatar, String firstName, String lastName, String email) throws SQLException {
+    public static void createLoginInfo(AbstractDB db, String username, String avatar, String firstName, String lastName, String email, String googleID) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo (username, firstName, lastName, email,avatar) VALUE (?,?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo_beta_1 (username, firstName, lastName, email,avatar,googleID) VALUE (?,?,?,?,?,?);")) {
                 p.setString(1, username);
                 p.setString(2, firstName);
                 p.setString(3, lastName);
                 p.setString(4, email);
                 p.setString(5, avatar);
+                p.setString(6, googleID);
+
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -94,7 +113,7 @@ public class LoginInfoDAO {
 
     public static void updateLoginInfo(AbstractDB db, String username, byte[] password, byte[] salt) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo SET password = ?, salt = ? WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo_beta_1 SET password = ?, salt = ? WHERE username = ?;")) {
                 p.setBytes(1, password);
                 p.setBytes(2, salt);
                 p.setString(3, username);
