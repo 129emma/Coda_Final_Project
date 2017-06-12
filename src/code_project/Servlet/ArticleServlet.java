@@ -5,9 +5,12 @@ import code_project.DAO.CommentInfoDAO;
 import code_project.DAO.UserInfoDAO;
 import code_project.Info.ArticleInfo;
 import code_project.Info.CommentInfo;
+import code_project.Info.CommentReplyInfo;
 import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
+import com.sun.deploy.net.HttpRequest;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.json.simple.JSONArray;
 
 import javax.servlet.ServletException;
@@ -98,7 +101,7 @@ public class ArticleServlet extends HttpServlet {
         request.getRequestDispatcher("Pages/ArticlePage/Article.jsp").forward(request, response);
     }
 
-    private void retrieveComments(HttpServletRequest request, HttpServletResponse response) {
+    private void retrieveComments(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
         String articleID = request.getParameter("articleID");
         String username = (String) session.getAttribute("username");
         List<CommentInfo> commentInfoList = CommentInfoDAO.getCommentInfoListByArticle(mySQL, Integer.parseInt(articleID));
@@ -110,6 +113,7 @@ public class ArticleServlet extends HttpServlet {
             }
         }
         request.setAttribute("commentInfoList", commentInfoList);
+
     }
 
     private void updateArticle(HttpServletRequest request, HttpServletResponse response) {
@@ -129,7 +133,7 @@ public class ArticleServlet extends HttpServlet {
         ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL, articleID);
         request.setAttribute("articleInfo", articleInfo);
         String hiddenElement = "<input type='hidden' name='articleID' value='" + articleID + "'>";
-        String submitElement = "<button class='ui right floated button' type='submit' name='action' value='update'>Submit</button> ";
+        String submitElement = "<button class='ui button' type='submit' name='action' value='update'>Submit</button> ";
         String deleteElement = "<input type='submit' name='action' value='delete'/>";
         request.setAttribute("hiddenElement", hiddenElement);
         request.setAttribute("submitElement", submitElement);
@@ -159,7 +163,7 @@ public class ArticleServlet extends HttpServlet {
         String username = (String)session.getAttribute("username");
 
         if (content == null || content.isEmpty()) {
-            String submitElement = "<button class='ui right floated button' type='submit' name='action' value='create'>Submit</button>";
+            String submitElement = "<button class='ui floated button' type='submit' name='action' value='create'>Submit</button>";
             request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
             return;

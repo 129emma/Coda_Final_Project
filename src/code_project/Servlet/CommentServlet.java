@@ -64,6 +64,8 @@ public class CommentServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
     }
 
     private void deleteCommentInfo(HttpServletRequest request, HttpServletResponse response) {
@@ -94,7 +96,17 @@ public class CommentServlet extends HttpServlet {
     }
 
     private void replyCommentInfo(HttpServletRequest request, HttpServletResponse response) {
-
+        HttpSession session = request.getSession();
+        int replyCommentID = Integer.parseInt(request.getParameter("commentReplyID"));
+        String content = request.getParameter("commentReplyContent");
+        String postTime = request.getParameter("postTime");
+        String username = (String) session.getAttribute("username");
+        int commentId = Integer.parseInt(request.getParameter("commentID"));
+        try{
+            CommentInfoDAO.replyCommentInfo(mySQL,replyCommentID,content,postTime,username,commentId);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
     }
 

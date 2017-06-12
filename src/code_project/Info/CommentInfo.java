@@ -1,20 +1,27 @@
 package code_project.Info;
 
+import java.util.List;
+
 /**
  * Created by qpen546 on 29/05/2017.
  */
 public class CommentInfo {
-    public int commentID, articleID;
-    public String content, postTime, username, editBtn, editComment, deleteBtn, deleteComment, replyComment;
+    public int commentID, articleID,commentReplyID;
+    public String content, postTime, username, editBtn,replyBtn, editComment, deleteBtn, deleteComment, replyComment;
+
 
     public void setReplyComment(String username) {
-        replyComment = "<a href=\"Comment?action=reply&articleID=" + articleID + "&commentID=" + commentID + "\">Reply</a>";
+        replyComment = "<a href=\"Comment?action=reply&commentID=" + commentID + "&commentID=" + commentID + "\">Reply</a>";
+        replyBtn = "<a class='reply replyBtn'><i class='reply icon'></i></a>";
+
+
+
     }
 
     public void setEditComment(String username) {
         if (this.username.equals(username)) {
             editBtn = "<a class='reply editBtn'><i class='write icon'></i></a>";
-            editComment = "<a href=\"Comment?action=update&articleID=" + articleID + "&commentID=" + commentID + "\">Update</a>";
+            editComment = "<a href=\"Comment?action=update&articleID=" + articleID + "&commentID=" + commentID + "\"></a>";
         }
     }
 
@@ -26,14 +33,13 @@ public class CommentInfo {
         return deleteBtn;
     }
 
+    public String getReplyBtn(){return replyBtn;}
+
+
     public void setDeleteComment(String username) {
         if (this.username.equals(username)) {
             deleteBtn = "<a href=\"Comment?action=delete&articleID=" + articleID + "&commentID=" + commentID + "\"><i class='trash icon'></i></a>";
         }
-    }
-
-    public String getReplyComment() {
-        return replyComment;
     }
 
     public String getEditComment() {
@@ -74,4 +80,17 @@ public class CommentInfo {
     public int getArticleID() {
         return articleID;
     }
+
+
+    private List<CommentReplyInfo> commentReplyInfoList;
+
+    public void setCommentReplyInfoList(List<CommentReplyInfo> commentReplyInfoList) {
+        this.commentReplyInfoList = commentReplyInfoList;
+    }
+
+    public List<CommentReplyInfo> getCommentReplyInfoList() {
+
+        return commentReplyInfoList;
+    }
+
 }

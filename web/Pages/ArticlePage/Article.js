@@ -37,4 +37,14 @@ $(document)
                 ;
             })
         })
+
+
+        //reply comment
+        $('.replyBtn').each(function () {
+          $(this).click(function () {
+                $('.replyComment').modal('show');
+          })
+        })
+
+
     });

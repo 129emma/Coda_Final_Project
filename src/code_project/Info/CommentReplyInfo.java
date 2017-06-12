@@ -5,16 +5,18 @@ package code_project.Info;
  */
 public class CommentReplyInfo {
     public int commentReplyID, commentID;
-    public String content, postTime, username, editBtn, editComment, deleteBtn, deleteComment, replyComment;
+    public String content, postTime, username, editBtn, replyBtn,editComment, deleteBtn, deleteComment, replyComment;
 
     public void setReplyComment(String username) {
-        replyComment = "<a href=\"Comment?action=reply&commentID=" + commentID + "&commentReplyID=" + commentReplyID + "\">Reply</a>";
+        replyBtn = "<a  class='reply replyBtn' href=\"Comment?action=reply&commentReplyID=" + commentReplyID + "&commentID=" + commentID + "\"><i class='reply icon'></i></a>";
+       /* replyComment = "<a href=\"Comment?action=reply&commentID=" + commentID + "&commentReplyID=" + commentReplyID + "\">Reply</a>";
+        replyBtn = "<a class='reply replyBtn'><i class='reply icon'></i></a>";*/
     }
 
     public void setEditComment(String username) {
         if (this.username.equals(username)) {
-            editBtn = "<a id='editBtn' class='reply'><i class='write icon'></i></a>";
-            editComment = "<a href=\"Comment?action=update&commentID=" + commentID + "&commentReplyID=" + commentReplyID + "\">Update</a>";
+           /* editBtn = "<a class='editBtn reply'><i class='write icon'></i></a>";*/
+            editBtn = "<a class='editBtn reply' href=\"Comment?action=update&commentReplyID=" + commentReplyID + "&commentID=" + commentID + "\"><i class='write icon'></i></a>";
         }
     }
 
@@ -26,9 +28,11 @@ public class CommentReplyInfo {
         return deleteBtn;
     }
 
+    public String getReplyBtn(){return replyBtn;}
+
     public void setDeleteComment(String username) {
         if (this.username.equals(username)) {
-            deleteBtn = "<a href=\"Comment?action=delete&commentID=" + commentID + "&commentReplyID=" + commentReplyID + "\"><i class='trash icon'></i></a>";
+            deleteBtn = "<a href=\"Comment?action=delete&commentReplyID=" + commentReplyID + "&commentID=" + commentID + "\"><i class='trash icon'></i></a>";
         }
     }
 
