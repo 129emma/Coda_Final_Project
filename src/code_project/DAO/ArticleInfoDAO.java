@@ -92,7 +92,7 @@ public class ArticleInfoDAO {
         return totalArticleNumber;
     }
 
-    public static List<ArticleInfo> getSpotlightArticleInfoList(AbstractDB db ,int pageNumber) {
+    public static List<ArticleInfo> getSpotlightArticleInfoList(AbstractDB db ,int pageNumber,String username) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
@@ -101,7 +101,18 @@ public class ArticleInfoDAO {
                 p.setInt(1,pageNumber);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        articleInfoList.add(ArticleInfoFromResultSet(r));
+                        ArticleInfo articleInfo=ArticleInfoFromResultSet(r);
+                        String otherUsername=articleInfo.getUsername();
+                      if(otherUsername.equals(username)){
+                          articleInfo.setFollowButton("");
+                      }else {
+                          if(FollowInfoDAO.checkFollowStatus(c,username,otherUsername)){
+                              articleInfo.setFollowButton("<button class=\"ui red button\">Unfollow</button>");
+                          }else {
+                              articleInfo.setFollowButton("<button class=\"ui blue button\">Follow</button>");
+                          }
+                      }
+                    articleInfoList.add(articleInfo);
                     }
                 }
             }

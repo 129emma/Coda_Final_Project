@@ -30,9 +30,10 @@
 
     <div class="ui container my" id="imageGallery">
         <div class="ui dividing header">
-            <h1>Gallery</h1>
+            <h1>Albums</h1>
         </div>
-        <div class="ui segment"> <!--this div for show up all the image/video/audio-->
+
+        <div class="ui segment" id="gallery" style="display: none"> <!--this div for show up all the image/video/audio-->
             <!-- all images should be resized for fitting container , and size for small images is 150px-->
             <div class="ui right close rail">
                 <div class="ui vertical labeled icon menu">
@@ -57,11 +58,18 @@
 
             <div id="content">
             </div>
-            <div class="ui center aligned vertical segment" id="loading">
-                <div>
-                    <img src="http://cdn7.evimed.net/wp-content/uploads/2017/02/loading.gif" style="width:100px" alt="Loading">
-                </div>
 
+        </div>
+
+        <div class="ui center aligned vertical segment" id="loading">
+            <div class="ui icon message">
+                <i class="notched circle loading icon"></i>
+                <div class="content">
+                    <div class="header">
+                        Just one second
+                    </div>
+                    <p>We're loading the content for you.</p>
+                </div>
             </div>
 
         </div>
@@ -71,58 +79,40 @@
 
 <script>
     function loadUserImage() {
+        loadInfo('loadUserImage');
+    }
+
+    function loadUserVideo() {
+        loadInfo('loadUserVideo');
+    }
+
+    function loadUserAudio() {
+        loadInfo('loadUserAudio');
+    }
+    function loadUserYoutube() {
+        loadInfo('loadUserYoutube');
+    }
+    function loadInfo(info) {
+        $('#gallery').hide();
         $('#loading').show();
-        $('#content').html("");
         $.ajax({
             url: '/Albums',
             type: 'POST',
-            data: {action:'loadUserImage'},
+            data: {action: info},
             success: function (data) {
+                var info=data.substring(data.indexOf('\<body\>') + 6, data.indexOf("\</body\>"));
+                if(info.length<=30){
+                    $('#content').html(" <div style='text-align: center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
+                }else {
+                    $('#content').html(info);
+                }
+                  console.log(info.length);
                 $('#loading').hide();
-                $('#content').html(data);
+                $('#gallery').show();
             }
         });
     }
 
-    function loadUserVideo() {
-        $('#loading').show();
-        $('#content').html("");
-        $.ajax({
-            url: '/Albums',
-            type: 'POST',
-            data: {action:'loadUserVideo'},
-            success: function (data) {
-                $('#loading').hide();
-                $('#content').html(data);
-            }
-        });
-    }
-    function loadUserAudio() {
-        $('#loading').show();
-        $('#content').html("");
-        $.ajax({
-            url: '/Albums',
-            type: 'POST',
-            data: {action:'loadUserAudio'},
-            success: function (data) {
-                $('#loading').hide();
-                $('#content').html(data);
-            }
-        });
-    }
-    function loadUserYoutube() {
-        $('#loading').show();
-        $('#content').html("");
-        $.ajax({
-            url: '/Albums',
-            type: 'POST',
-            data: {action:'loadUserYoutube'},
-            success: function (data) {
-                $('#loading').hide();
-                $('#content').html(data);
-            }
-        });
-    }
 </script>
 </body>
 </html>
