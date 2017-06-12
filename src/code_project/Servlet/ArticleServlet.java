@@ -2,6 +2,7 @@ package code_project.Servlet;
 
 import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.CommentInfoDAO;
+import code_project.DAO.LikeInfoDAO;
 import code_project.DAO.UserInfoDAO;
 import code_project.Info.ArticleInfo;
 import code_project.Info.CommentInfo;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +61,12 @@ public class ArticleServlet extends HttpServlet {
                 break;
             case "dislike":
                 dislikeArticle(request, response);
+                break;
+            case "checkLikeStatus":
+                checkLikeStatus(request, response);
+                break;
+            case "getLikeNum":
+                getLikeNum(request, response);
                 break;
         }
     }
@@ -176,12 +184,47 @@ public class ArticleServlet extends HttpServlet {
         }
     }
 
-    private void dislikeArticle(HttpServletRequest request, HttpServletResponse response) {
+    private void dislikeArticle (HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        try {
+            LikeInfoDAO.cancelLike(mySQL, request.getParameter("articleID"), (String) session.getAttribute("username"));
+
+        } catch (SQLException e) {
+            response.sendError(500, "Failed to connect to database");
+        }
+    }
+
+    private void likeArticle (HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        try {
+            LikeInfoDAO.like(mySQL, request.getParameter("articleID"), (String) session.getAttribute("username"));
+
+        } catch (SQLException e) {
+            response.sendError(500, "Failed to connect to database");
+        }
+    }
+
+    private void checkLikeStatus (HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/plain");
+        try {
+            if (LikeInfoDAO.checkLikeStatus(mySQL, request.getParameter("articleID"), (String) session.getAttribute("username"))) {
+                response.getWriter().write("liked");
+            } else {
+                response.getWriter().write("notLiked");
+            }
+        } catch (SQLException e) {
+            response.sendError(500, "Failed to connect to database");
+        }
 
     }
 
-    private void likeArticle(HttpServletRequest request, HttpServletResponse response) {
-
+    private void getLikeNum (HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            long numOfLikes = LikeInfoDAO.getLikeNum(mySQL, request.getParameter("articleID"));
+            response.getWriter().write(String.valueOf(numOfLikes));
+        } catch (SQLException e) {
+            response.sendError(500, "Failed to connect to database");
+        }
     }
 
     private void replyArticle(HttpServletRequest request, HttpServletResponse response) {
@@ -191,6 +234,4 @@ public class ArticleServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doPost(request, response);
     }
-
-
 }

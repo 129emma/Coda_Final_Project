@@ -47,7 +47,7 @@
             <div class="sides">
                 <div class="active side">
                     <div class="ui card">
-                        <%--<div class="image">--%>
+                        <div class="image">
                             <!--Background Image-->
                             <div class="ui image backGround">
                                 <!--fixed size for this background,maximum height is 270px-->
@@ -57,7 +57,7 @@
                             <span class="ui centered small image iconImage">
                                 <img src="User-Info/${userInfo.username}/avatar.jpg">
                             </span>
-                        <%--</div>--%>
+                        </div>
                         <!--User Name-->
                         <div class="content">
                             <div class="header">${userInfo.username}</div>
@@ -115,7 +115,7 @@
                             <!--Background Image-->
                             <div class="ui image backGround">
                                 <!--fixed size for this background,maximum height is 270px-->
-                                <img  src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
+                                <img src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
                                 <!--User Icon-->
                                 <div class="ui small image iconImage">
                                     <img src="User-Info/${userInfo.username}/avatar.jpg">

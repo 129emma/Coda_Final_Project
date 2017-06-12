@@ -37,16 +37,18 @@
             <div class="ui attached segment">
                 <p>${articleInfo.content}</p>
             </div>
+            <div id="id" style="display: none">${articleInfo.articleID}</div>
             <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
             <div class="ui attached segment">
                 ${articleInfo.editArticle}
                 ${articleInfo.deleteArticle}
                 <div class="ui right labeled button" tabindex="0">
                     <a class="ui basic right pointing label">
-                        999
+
                     </a>
-                    <div class="ui button">
-                        <i class="heart icon"></i> Like
+                    <div id="likeButton" class="ui button">
+                        <i class="heart icon"></i>
+                        <span id="ifLiked"></span>
                     </div>
                 </div>
             </div>

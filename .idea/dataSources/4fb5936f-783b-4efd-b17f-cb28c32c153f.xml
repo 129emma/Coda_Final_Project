@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="uoacoda@mysql1.sporadic.co.nz">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
     <root id="1"/>
     <schema id="2" parent="1" name="uoacoda">
       <Current>1</Current>
@@ -17,227 +17,267 @@
     <table id="11" parent="2" name="CommentReply"/>
     <table id="12" parent="2" name="UserInfo"/>
     <table id="13" parent="2" name="UserRelationship"/>
-    <column id="14" parent="6" name="id">
+    <table id="14" parent="2" name="likeInfo"/>
+    <column id="15" parent="6" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="15" parent="6" name="fileName">
+    <column id="16" parent="6" name="fileName">
       <Position>2</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="16" parent="6" name="username">
+    <column id="17" parent="6" name="username">
       <Position>3</Position>
       <DataType>char(10)|0</DataType>
     </column>
-    <column id="17" parent="6" name="address">
+    <column id="18" parent="6" name="address">
       <Position>4</Position>
       <DataType>varchar(1000)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="18" parent="6" name="postTime">
+    <column id="19" parent="6" name="postTime">
       <Position>5</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <key id="19" parent="6" name="PRIMARY">
+    <key id="20" parent="6" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="20" parent="7" name="id">
+    <column id="21" parent="7" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="21" parent="7" name="fileName">
+    <column id="22" parent="7" name="fileName">
       <Position>2</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="22" parent="7" name="username">
+    <column id="23" parent="7" name="username">
       <Position>3</Position>
       <DataType>char(10)|0</DataType>
     </column>
-    <column id="23" parent="7" name="address">
+    <column id="24" parent="7" name="address">
       <Position>4</Position>
       <DataType>varchar(1000)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="24" parent="7" name="postTime">
+    <column id="25" parent="7" name="postTime">
       <Position>5</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <key id="25" parent="7" name="PRIMARY">
+    <key id="26" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="26" parent="8" name="id">
+    <column id="27" parent="8" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="27" parent="8" name="fileName">
+    <column id="28" parent="8" name="fileName">
       <Position>2</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="28" parent="8" name="username">
+    <column id="29" parent="8" name="username">
       <Position>3</Position>
       <DataType>char(10)|0</DataType>
     </column>
-    <column id="29" parent="8" name="address">
+    <column id="30" parent="8" name="address">
       <Position>4</Position>
       <DataType>varchar(1000)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="30" parent="8" name="postTime">
+    <column id="31" parent="8" name="postTime">
       <Position>5</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <key id="31" parent="8" name="PRIMARY">
+    <key id="32" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="32" parent="9" name="articleID">
+    <column id="33" parent="9" name="articleID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="33" parent="9" name="title">
+    <column id="34" parent="9" name="title">
       <Position>2</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="34" parent="9" name="content">
+    <column id="35" parent="9" name="content">
       <Position>3</Position>
       <DataType>varchar(5000)|0</DataType>
     </column>
-    <column id="35" parent="9" name="postTime">
+    <column id="36" parent="9" name="postTime">
       <Position>4</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="36" parent="9" name="tags">
+    <column id="37" parent="9" name="tags">
       <Position>5</Position>
       <DataType>varchar(99)|0</DataType>
     </column>
-    <column id="37" parent="9" name="username">
+    <column id="38" parent="9" name="username">
       <Position>6</Position>
       <DataType>varchar(99)|0</DataType>
     </column>
-    <column id="38" parent="9" name="userAvatar">
+    <column id="39" parent="9" name="userAvatar">
       <Position>7</Position>
       <DataType>varchar(999)|0</DataType>
     </column>
-    <key id="39" parent="9" name="PRIMARY">
+    <key id="40" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>articleID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="40" parent="10" name="commentID">
+    <column id="41" parent="10" name="commentID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="41" parent="10" name="content">
+    <column id="42" parent="10" name="content">
       <Position>2</Position>
       <DataType>varchar(500)|0</DataType>
     </column>
-    <column id="42" parent="10" name="postTime">
+    <column id="43" parent="10" name="postTime">
       <Position>3</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="43" parent="10" name="username">
+    <column id="44" parent="10" name="username">
       <Position>4</Position>
       <DataType>varchar(99)|0</DataType>
     </column>
-    <column id="44" parent="10" name="articleID">
+    <column id="45" parent="10" name="articleID">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <key id="45" parent="10" name="PRIMARY">
+    <key id="46" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>commentID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="46" parent="11" name="commentReplyID">
+    <column id="47" parent="11" name="commentReplyID">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="47" parent="11" name="content">
+    <column id="48" parent="11" name="content">
       <Position>2</Position>
       <DataType>varchar(500)|0</DataType>
     </column>
-    <column id="48" parent="11" name="postTime">
+    <column id="49" parent="11" name="postTime">
       <Position>3</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="49" parent="11" name="username">
+    <column id="50" parent="11" name="username">
       <Position>4</Position>
       <DataType>varchar(99)|0</DataType>
     </column>
-    <column id="50" parent="11" name="commentID">
+    <column id="51" parent="11" name="commentID">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <key id="51" parent="11" name="PRIMARY">
+    <key id="52" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>commentReplyID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="52" parent="12" name="username">
+    <column id="53" parent="12" name="salt">
       <Position>1</Position>
-      <DataType>varchar(99)|0</DataType>
-      <NotNull>1</NotNull>
+      <DataType>blob|0</DataType>
     </column>
-    <column id="53" parent="12" name="password">
+    <column id="54" parent="12" name="nickName">
       <Position>2</Position>
-      <DataType>blob|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
-    <column id="54" parent="12" name="salt">
+    <column id="55" parent="12" name="lastName">
       <Position>3</Position>
-      <DataType>blob|0</DataType>
+      <DataType>varchar(99)|0</DataType>
     </column>
-    <column id="55" parent="12" name="firstName">
+    <column id="56" parent="12" name="gender">
       <Position>4</Position>
       <DataType>varchar(99)|0</DataType>
     </column>
-    <column id="56" parent="12" name="lastName">
+    <column id="57" parent="12" name="birthDate">
       <Position>5</Position>
-      <DataType>varchar(99)|0</DataType>
+      <DataType>date|0</DataType>
     </column>
-    <column id="57" parent="12" name="email">
+    <column id="58" parent="12" name="email">
       <Position>6</Position>
       <DataType>varchar(99)|0</DataType>
     </column>
-    <column id="58" parent="12" name="birthDate">
+    <column id="59" parent="12" name="avatar">
       <Position>7</Position>
-      <DataType>date|0</DataType>
-    </column>
-    <column id="59" parent="12" name="gender">
-      <Position>8</Position>
-      <DataType>varchar(99)|0</DataType>
-    </column>
-    <column id="60" parent="12" name="avatar">
-      <Position>9</Position>
       <DataType>varchar(999)|0</DataType>
     </column>
-    <key id="61" parent="12" name="PRIMARY">
+    <column id="60" parent="12" name="username">
+      <Position>8</Position>
+      <DataType>varchar(99)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="12" name="password">
+      <Position>9</Position>
+      <DataType>blob|0</DataType>
+    </column>
+    <column id="62" parent="12" name="firstName">
+      <Position>10</Position>
+      <DataType>varchar(99)|0</DataType>
+    </column>
+    <index id="63" parent="12" name="UserInfo_nickName_uindex">
+      <ColNames>nickName</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="64" parent="12" name="UserInfo_username_uindex">
       <ColNames>username</ColNames>
-      <Primary>1</Primary>
+      <Unique>1</Unique>
+    </index>
+    <key id="65" parent="12" name="UserInfo_nickName_uindex">
+      <ColNames>nickName</ColNames>
+      <UnderlyingIndexName>UserInfo_nickName_uindex</UnderlyingIndexName>
     </key>
-    <column id="62" parent="13" name="follower">
+    <key id="66" parent="12" name="UserInfo_username_uindex">
+      <ColNames>username</ColNames>
+      <UnderlyingIndexName>UserInfo_username_uindex</UnderlyingIndexName>
+    </key>
+    <column id="67" parent="13" name="follower">
       <Position>1</Position>
       <DataType>varchar(99)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="63" parent="13" name="follow">
+    <column id="68" parent="13" name="follow">
       <Position>2</Position>
       <DataType>varchar(99)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="64" parent="13" name="PRIMARY">
+    <key id="69" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
       <ColNames>follow
 follower</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="70" parent="14" name="articleID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="71" parent="14" name="likedBy">
+      <Position>2</Position>
+      <DataType>varchar(99)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="72" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>articleID
+likedBy</ColNames>
       <Primary>1</Primary>
     </key>
   </database-model>
