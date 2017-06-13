@@ -25,7 +25,9 @@ $(document).ready(function () {
                     interval: 200
                 });
             }
+
         }
+
     });
 
     $('#loginBtn').click(function () {
@@ -51,8 +53,10 @@ $(document).ready(function () {
         if (username!= ""&& password!= "") {
             login(username,password);
         }else if(username == ""){
+            $('#login').transition('shake');
             $("#message").css("color", "red").text("Please enter your username");
         }else if(password == ""){
+            $('#login').transition('shake');
             $("#message").css("color", "red").text("Please enter your password");
         }
     });
@@ -96,6 +100,7 @@ function verifyUsername(username) {
                 $("#button").removeAttr('disabled');
                 $("#message").css("color", "green").text(message);
             } else {
+                $('#login').transition('shake');
                 $("#button").attr('disabled', 'disabled');
                 $("#message").css("color", "red").text(message);
             }
@@ -112,6 +117,7 @@ function login(username,passowrd) {
             if(message=="login"){
                 location.href = "/Blog?page=home";
             }else{
+                $('#login').transition('shake');
                 $("#message").css("color", "red").text(message);
             }
         }

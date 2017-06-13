@@ -28,5 +28,6 @@
     <orderEntry type="library" name="jquery.fullpage" level="application" />
     <orderEntry type="library" name="semantic" level="application" />
     <orderEntry type="library" name="jquery-3.2.1" level="application" />
+    <orderEntry type="library" name="platform" level="application" />
   </component>
 </module>

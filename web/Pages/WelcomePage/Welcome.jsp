@@ -49,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui small modal" id="login"></div>
+        <div class="ui small modal segment" id="login"></div>
     </div>
     <div class="section" id="section1">
         <div class="ui middle aligned center aligned grid">
