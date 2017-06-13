@@ -1,63 +1,57 @@
 package code_project.Info;
 
+import java.util.List;
+
 /**
  * Created by qpen546 on 29/05/2017.
  */
 public class CommentReplyInfo {
-    public int commentReplyID, commentID;
-    public String content, postTime, username, editBtn, editComment, deleteBtn, deleteComment, replyComment;
+    public int commentReplyID,articleID, commentID;
+    public String content, postTime, deleteCommentBtn, username,editComment, deleteCommentReply, replyComment;
 
-    public void setReplyComment(String username) {
-        replyComment = "<a href=\"Comment?action=reply&commentID=" + commentID + "&commentReplyID=" + commentReplyID + "\">Reply</a>";
+
+    private List<CommentReplyInfo> commentReplyInfoList;
+
+    public void setCommentReplyInfoList(List<CommentReplyInfo> commentReplyInfoList) {
+        this.commentReplyInfoList = commentReplyInfoList;
     }
 
-    public void setEditComment(String username) {
-        if (this.username.equals(username)) {
-            editBtn = "<a id='editBtn' class='reply'><i class='write icon'></i></a>";
-            editComment = "<a href=\"Comment?action=update&commentID=" + commentID + "&commentReplyID=" + commentReplyID + "\">Update</a>";
-        }
+    public List<CommentReplyInfo> getCommentReplyInfoList() {
+
+        return commentReplyInfoList;
     }
 
-    public String getEditBtn() {
-        return editBtn;
-    }
 
-    public String getDeleteBtn() {
-        return deleteBtn;
-    }
 
-    public void setDeleteComment(String username) {
-        if (this.username.equals(username)) {
-            deleteBtn = "<a href=\"Comment?action=delete&commentID=" + commentID + "&commentReplyID=" + commentReplyID + "\"><i class='trash icon'></i></a>";
-        }
-    }
-
-    public String getReplyComment() {
-        return replyComment;
-    }
-
-    public String getEditComment() {
-        return editComment;
-    }
-
-    public String getDeleteComment() {
-        return deleteComment;
-    }
-
-    public CommentReplyInfo(int commentReplyID, String content, String postTime, String username, int commentID) {
+    public CommentReplyInfo(int commentReplyID, String content, String postTime, String username, int commentID, int articleID) {
         this.commentReplyID = commentReplyID;
         this.content = content;
         this.postTime = postTime;
         this.username = username;
         this.commentID = commentID;
+        this.articleID = articleID;
         editComment = "";
-        deleteComment = "";
+        deleteCommentReply = "";
         replyComment ="";
     }
 
-    public int getCommentReplyID() {
-        return commentReplyID;
+    public void setDeleteCommentReply(int commentReplyID) {
+        if (this.username.equals(username)) {
+            deleteCommentBtn = "<a href=\"Comment?action=deleteCommentReply&articleID=" + articleID + "&commentReplyID=" + commentReplyID + "\"><i class='trash icon'></i></a>";
+        }
     }
+
+    public String getDeleteCommentBtn(){
+        return deleteCommentBtn;
+    }
+
+    public int getCommentID() {
+        return commentID;
+    }
+
+    public int getCommentReplyID(){return commentReplyID;}
+
+    public int getArticleID(){return articleID;}
 
     public String getContent() {
         return content;
@@ -71,7 +65,5 @@ public class CommentReplyInfo {
         return username;
     }
 
-    public int getcommentID() {
-        return commentID;
-    }
+
 }

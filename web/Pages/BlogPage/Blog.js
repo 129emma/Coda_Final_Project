@@ -32,6 +32,19 @@ $(document).ready(function () {
             articlesNum += 3;
             loadArticles();
         }
+
+        if($(window).scrollTop()==0){
+            $('.topButton').hide();
+        }
+
+        if($(window).scrollTop()>100){
+            $('.topButton').fadeIn();
+        }else {
+            $('.topButton').fadeOut();
+        }
+
+
+
     });
 
     $("#followInfo").click(function (){
@@ -39,33 +52,19 @@ $(document).ready(function () {
         $(window).off('scroll');
     });
 
-
-function refresh() {
-    $('.ui.sticky').sticky('refresh');
-
-    $('.userAvatarToHover').each(function () {
-        $(this).popup({
-            popup: $('.custom.popup')
-        });
+function loadArticles() {
+    $.ajax({
+        url: '/Article',
+        type: 'post',
+        data: {action: 'preview', articleNumber: articlesNum, page: page},
+        success: function (articlesPreview) {
+            var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
+            $("#ArticleContainer").html(preview);
+            $("#Loader").hide();
+            process = false;
+            refresh();
+        }
     });
-}
-
-
-});
-function loadArticles(){
-        $.ajax({
-            url: '/Article',
-            type: 'post',
-            data: {action: 'preview', articleNumber: articlesNum, page: page},
-            success: function (articlesPreview) {
-                var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
-                $("#ArticleContainer").html(preview);
-                $("#Loader").hide();
-                process = false;
-                refresh();
-                followFunction();
-            }
-        });
 }
 
 function getFollowers() {

@@ -1,11 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:500i,600');
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+body{
+    background-color: #565D6B;
+}
+
+a,p,h1,h2,h3,h4,h5{
+    font-family: 'Raleway', sans-serif;
+}
+
+i.ui.icon.borderless.four.item.menu{
+    font-size: 60px;
+}
 
 ul.userChoice {
     list-style: none;
 }
-li {
-    display: inline;
-    padding: 30px;
-}
+
 .left.ui.rail {
     padding-left: 20%;
 }
@@ -18,8 +29,9 @@ li {
     box-shadow: none !important;
 }
 
-.ui.text.container {
-    margin-bottom: 40px;
+.ui.text.container.article {
+    padding-top: 100px;
+    padding-bottom: 4em;
 }
 
 img.userAvatar {
@@ -61,7 +73,26 @@ img.userAvatar {
     width: auto;
 }
 
+.ui.card {
+    box-shadow: none;
+}
+
+
 /*position in card*/
 .content {
     text-align: center;
+}
+
+.ui.button.topButton {
+    display: none;
+    bottom: 0px;
+    right: 1px !important;
+    line-height: 30px;
+    position: fixed;
+    background-color: rgba(123, 172, 172, 0.33);
+    color: white;
+}
+
+div#flipright {
+    background-color: transparent;
 }

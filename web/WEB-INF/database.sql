@@ -39,3 +39,11 @@ CREATE TABLE IF NOT EXISTS UserRelationship(
   follow VARCHAR(99) NOT NULL ,
   PRIMARY KEY (follow,follower)
 );
+
+DROP TABLE IF EXISTS likeInfo;
+
+CREATE TABLE IF NOT EXISTS likeInfo (
+  articleID INT NOT NULL ,
+  likedBy VARCHAR(99) NOT NULL ,
+  PRIMARY KEY (articleID, likedBy)
+);

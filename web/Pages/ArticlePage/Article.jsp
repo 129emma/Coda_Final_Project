@@ -13,6 +13,8 @@
     <title>Blog Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/ArticlePage/Article.css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
     <script src="${pageContext.request.contextPath}/Pages/ArticlePage/Article.js"></script>
@@ -37,16 +39,18 @@
             <div class="ui attached segment">
                 <p>${articleInfo.content}</p>
             </div>
+            <div id="id" style="display: none">${articleInfo.articleID}</div>
             <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
             <div class="ui attached segment">
                 ${articleInfo.editArticle}
                 ${articleInfo.deleteArticle}
-                <div class="ui floated right labeled button" tabindex="0">
+                <div class="ui right labeled button" tabindex="0">
                     <a class="ui basic right pointing label">
-                        999
+
                     </a>
-                    <div class="ui button">
-                        <i class="heart icon"></i> Like
+                    <div id="likeButton" class="ui button">
+                        <i class="heart icon"></i>
+                        <span id="ifLiked"></span>
                     </div>
                 </div>
             </div>
@@ -59,63 +63,116 @@
             <%--</div>--%>
             <%--</div>--%>
 
-            <div class="ui comments">
-                <h3 class="ui dividing header">Comments</h3>
-                <c:forEach var="comment" items="${commentInfoList}">
-                    <div class="comment">
-                        <a class="ui avatar">
-                            <img src="User-Info/${comment.username}/avatar.jpg">
-                        </a>
-                        <div class="content">
-                            <a class="author">${comment.username}</a>
-                            <div class="metadata">
-                                <span class="date">${comment.postTime}</span>
-                            </div>
-                            <div class="text">
-                                    ${comment.content}
-                            </div>
-                            <div class="actions">
-                                <a class='reply replyBtn'><i class="reply icon"></i></a>
-                                    ${comment.editBtn}
-                                    ${comment.deleteBtn}
-                            </div>
-                        </div>
-                    </div>
+<div class="ui comments">
+<h3 class="ui dividing header">Comments</h3>
 
-                    <div class="ui standard modal reply form">
-                        <div class="ui basic segment">
-                            <form action="Comment" method="POST">
-                                <div class="field">
-                                    <label for="editor">Edit Your Comment</label>
-                                    <textarea id="editor" name="commentContent" rows="10"
-                                              cols="100">${comment.content}</textarea>
-                                </div>
-                                <input type="hidden" name="commentID" value="${comment.commentID}">
-                                <input type="hidden" name="articleID" value="${comment.articleID}">
+<c:forEach var="comment" items="${commentInfoList}">
 
-                                <div class="content">
-                                    <button class="ui positive right button" type="submit" name="action"
-                                            value="update">Update</button>
-                                </div>
+    <div class="comment">
+    <a class="ui avatar">
+    <img src="User-Info/${comment.username}/avatar.jpg">
+    </a>
+    <div class="content">
+    <a class="author">${comment.username}</a>
+    <div class="metadata">
+    <span class="date">${comment.postTime}</span>
+    </div>
+    <div class="text">
+    ${comment.content}
+    </div>
+    <div class="actions">
+    ${comment.replyBtn}
+    ${comment.editBtn}
+    ${comment.deleteBtn}
+    </div>
+    </div>
 
-                            </form>
-                        </div>
-                    </div>
-                </c:forEach>
-                <form class="ui reply form" action="Comment" method="POST">
-                    <div class="field">
-                        <textarea name="comment"></textarea>
-                        <input type="hidden" name="articleID" value="${articleInfo.articleID}">
-                    </div>
-                    <button class="ui blue submit icon button" type="submit" name="action" value="create"><i
-                            class="icon edit"></i>Comment
-                    </button>
-                </form>
+    <%--Display Replied Comments--%>
+    <div class="comments">
+    <c:forEach var="commentReply" items="${comment.commentReplyInfoList}">
+        <div class="comment">
+            <a class="avatar">
+                <img src="User-Info/${commentReply.username}/avatar.jpg">
+            </a>
+            <div class="content">
+                <a class="author">${commentReply.username}</a>
+                <div class="metadata">
+                    <span class="date">${commentReply.postTime}</span>
+                </div>
+                <div class="text">
+                        ${commentReply.content}
+                </div>
+                <div class="actions">
+                    ${commentReply.deleteCommentBtn}
+                </div>
             </div>
         </div>
+    </c:forEach>
     </div>
 
 
+        <%--Edit Comments--%>
+        <div class="ui standard modal reply form editComment">
+            <div class="ui basic segment">
+                <form action="Comment" method="POST">
+                    <div class="field">
+                        <label for="editor">Edit Your Comment</label>
+                        <textarea id="editor" name="commentContent" rows="10"
+                                  cols="100">${comment.content}</textarea>
+                    </div>
+                    <input type="hidden" name="commentID" value="${comment.commentID}">
+                    <input type="hidden" name="articleID" value="${comment.articleID}">
+
+                    <div class="content">
+                        <button class="ui positive right button" type="submit" name="action"
+                                value="update">Update
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <%--Reply Comments--%>
+        <div class="ui standard modal reply form replyComment">
+            <div class="ui basic segment">
+                <form action="Comment" method="POST">
+                    <div class="field">
+                                    <textarea name="commentReplyContent" rows="10"
+                                              cols="100"></textarea>
+                        <input type="hidden" name="commentID" value="${comment.commentID}">
+                        <input type="hidden" name="articleID" value="${comment.articleID}">
+                    </div>
+
+
+                    <div class="content">
+                        <button class="ui blue labeled submit icon button" type="submit" name="action"
+                                value="reply">
+                            <i class="icon edit"></i> Add Reply
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </c:forEach>
+
+    <form class="ui reply form" action="Comment" method="POST">
+    <div class="field">
+    <textarea name="comment"></textarea>
+    <input type="hidden" name="articleID" value="${articleInfo.articleID}">
+    </div>
+    <button class="ui blue submit icon button" type="submit" name="action" value="create"><i
+    class="icon edit"></i>Comment
+    </button>
+    </form>
+
+
+    </div>
+    </div>
+    </div>
+    </div>
 </body>
 </html>
 

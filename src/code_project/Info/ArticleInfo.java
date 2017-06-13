@@ -151,13 +151,13 @@ public class ArticleInfo {
 
     public void setEditArticle(String username) {
         if (this.username.equals(username)) {
-            editArticle = "<a class='ui green labeled icon button' href=\"Article?action=edit&articleID=" + articleID + "\"><i class=\"edit icon\"></i>Edit</a>";
+            editArticle = "<button class='ui circular ui icon button editButton' href=\"Article?action=edit&articleID=" + articleID + "\">Edit</button>";
         }
     }
 
     public void setDeleteArticle(String username) {
         if (this.username.equals(username)) {
-            deleteArticle = "<a class='ui red labeled icon button' href=\"Article?action=delete&articleID=" + articleID + "\"><i class=\"erase icon\"></i>delete</a>";
+            deleteArticle = "<button class='ui circular ui icon button deleteButton' href=\"Article?action=delete&articleID=" + articleID + "\">Delete</button>";
         }
     }
 

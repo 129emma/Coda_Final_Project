@@ -1,59 +1,21 @@
-body.pushable > .pusher { /*Background Color*/
-    background: #636F8F;
+
+.ui.vertical.center.aligned.segment {
+    border: none;
+    background-color: white;
 }
 
-.ui.menu{
-    background-color: transparent;
-}
-.ui.inverted.button {
- box-shadow: none !important;
-}
-.toc.item { /*invisible sidebar icon*/
-    display: none;
+
+
+.ui.icon.menu {
+    border: none;
+    box-shadow: none;
 }
 
-img.teamIcon { /*Team Icon in Menu*/
-    height: 30px;
-    margin-top: 10px;
+.ui.icon.menu {
+    max-height: 40px;
 }
 
-.ui.vertical.masthead.center.aligned { /*Menu bottom border*/
-    border-bottom: solid 2px gainsboro;
-    height: 50px;
+i.iconClass {
+    font-size: 35px;
 }
 
-img.sideBarIcon {/*Team Icon in Side Bar*/
-    height: 30px;
-    margin-top: 10px;
-    margin-left: 10px;
-}
-
-a.toc.item { /*Side Bar Icon invisible*/
-    display: none !important;
-}
-
-.ui.search{
-    display: none !important;
-}
-
-/*Side Bar Color*/
-.ui.sidebar.vertical.menu.left.uncover.visible {
-    background-color: #DCD6D2;
-}
-
-@media only screen and (max-width: 700px) {
-
-    .iconClass{
-        display: none !important;
-    }
-
-    a.toc.item {
-        display: block !important;
-    }
-
-    .ui.search{
-        display: block !important;
-    }
- 
-
-}

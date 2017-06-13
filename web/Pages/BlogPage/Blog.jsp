@@ -14,6 +14,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>userProfilePage</title>
+
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -42,7 +44,7 @@
 
     <!-- Page Content !-->
 
-    <div class="ui text container">
+    <div class="ui text container article">
         <div class="ui shape">
             <div class="sides">
                 <div class="active side">
@@ -69,20 +71,25 @@
                         <div class="ui fitted divider header"></div>
 
                         <div class="ui labeled icon borderless four item menu">
-                            <a href="Blog?page=home" class="item">
+                            <a href="Blog?page=home" class="item cardChoice">
                                 <div class="ui icon" data-tooltip="My Article">
-                                    <i class="grey file text outline icon"></i>
+                                    <i class="ion-ios-paper-outline"></i>
                                 </div>
                             </a>
-                            <a href="Blog?page=spotlight" class="item">
+                            <a href="Blog?page=spotlight" class="item cardChoice">
                                 <div class="ui icon " data-tooltip="Spotlight">
-                                    <i class="blue world icon"></i>
+                                    <i class="ion-ios-navigate-outline"></i>
                                 </div>
 
                             </a>
-                            <a href="Article?action=create" class="item">
+                            <a href="Albums" class="item cardChoice">
+                                <div class="ui icon " data-tooltip="Albums">
+                                    <i class="ion-ios-camera-outline"></i>
+                                </div>
+                            </a>
+                            <a href="Article?action=create" class="item cardChoice">
                                 <div class="ui icon" data-tooltip="Create">
-                                    <i class="purple write icon"></i>
+                                    <i class="ion-ios-compose-outline"></i>
                                 </div>
                             </a>
                             <a href="#" class="item" id="followInfo">
@@ -115,7 +122,7 @@
                             <!--Background Image-->
                             <div class="ui image backGround">
                                 <!--fixed size for this background,maximum height is 270px-->
-                                <img  src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
+                                <img src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
                                 <!--User Icon-->
                                 <div class="ui small image iconImage">
                                     <img src="${userInfo.avatar}">
@@ -163,6 +170,13 @@
         </div>
 
     </div>
+
+    <a href="#topMenu" >
+    <div class="ui button topButton" >
+         top
+    </div>
+    </a>
+
 </div>
 
 </div>
