@@ -163,7 +163,7 @@ private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,
                 try {
                     File outputfile=new File(filePath+"/avatar."+fileExtension);
                     scaleImage(outputfile,fileExtension);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     return;
                 }
@@ -180,8 +180,8 @@ private void scaleImage(File outputFile,String fileExtension) throws IOException
             BufferedImage image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
             image.createGraphics().drawImage(ImageIO.read(new File(filePath+"/avatar."+fileExtension)).getScaledInstance(200, 200, Image.SCALE_SMOOTH),0,0,null);
             //write the thumbnail
-            avatarFilePath="User-Info/"+username+"/avatar."+fileExtension;
             ImageIO.write(image,fileExtension,outputFile);
+            avatarFilePath="User-Info/"+username+"/avatar."+fileExtension;
         }catch (IOException e){
             e.printStackTrace();
         }

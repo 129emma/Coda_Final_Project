@@ -192,10 +192,10 @@
             <div class="ui deny button">
                 Cancel
             </div>
-            <div id="submitAvatarChange" class="ui positive right icon button">
+            <button id="submitAvatarChange" class="ui positive right icon button">
                 <i class="list icon"></i>
                 Save
-            </div>
+            </button>
         </div>
     </div>
 
@@ -212,8 +212,9 @@ $('#fileButton').click(function () {
     }
 
     $("#submitAvatarChange").click(function () {
-                $("#avatarForm").submit();
-
+        $(this).addClass("loading");
+        $(this).prop("disabled", true);
+        $("#avatarForm").submit();
     });
 
     $(".rounded").each(function () {
