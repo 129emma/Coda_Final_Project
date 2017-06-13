@@ -32,38 +32,46 @@
     </jsp:include>
 
     <div class="ui container my" id="imageGallery">
-        <div class="ui dividing header">
-            <h1>Albums</h1>
-        </div>
+        <div class="ui segment"  id="gallery" style="display: none">
 
-        <div class="ui segment" id="gallery" style="display: none"> <!--this div for show up all the image/video/audio-->
-            <!-- all images should be resized for fitting container , and size for small images is 150px-->
+            <div class="ui pointing menu">
+                <a class="item active" id="showUsers">
+                    Yours
+                </a>
+                <a class="item" id="showSpotlight">
+                    Spotlight
+                </a>
+            </div>
+
             <div class="ui right close rail">
+
+
                 <div class="ui vertical labeled icon menu">
-                    <a class="item" onclick="loadUserImage()" >
-                        <i class="photo icon" ></i>
+                    <a class="item" onclick="loadUserImage()">
+                        <i class="photo icon"></i>
                         Photos
                     </a>
                     <a class="item" onclick="loadUserAudio()">
-                        <i class="video camera icon " ></i>
+                        <i class="video camera icon "></i>
                         Music
                     </a>
                     <a class="item" onclick="loadUserVideo()">
-                        <i class="video play icon" ></i>
+                        <i class="video play icon"></i>
                         Videos
                     </a>
                     <a class="item" onclick="loadUserYoutube()">
-                        <i class="youtube play icon" ></i>
+                        <i class="youtube play icon"></i>
                         Youtube
                     </a>
                 </div>
             </div>
 
-            <div id="content">
-            </div>
+   <div class="ui segment">
+       <div id="content">
+       </div>
+   </div>
 
         </div>
-
         <div class="ui center aligned vertical segment" id="loading">
             <div class="ui icon message">
                 <i class="notched circle loading icon"></i>
@@ -75,25 +83,35 @@
                 </div>
             </div>
 
-        </div>
+       </div>
     </div>
 
-
+</div>
 
 <script>
+
     function loadUserImage() {
-        loadInfo('loadUserImage');
+
+        loadInfo('Image');
+
     }
 
     function loadUserVideo() {
-        loadInfo('loadUserVideo');
+
+        loadInfo('Video');
+
+        refresh();
     }
 
     function loadUserAudio() {
-        loadInfo('loadUserAudio');
+
+        loadInfo('Audio');
+
     }
     function loadUserYoutube() {
-        loadInfo('loadUserYoutube');
+
+        loadInfo('Youtube');
+
     }
     function loadInfo(info) {
         $('#gallery').hide();
@@ -103,17 +121,55 @@
             type: 'POST',
             data: {action: info},
             success: function (data) {
-                var info=data.substring(data.indexOf('\<body\>') + 6, data.indexOf("\</body\>"));
-                if(info.length<=30){
-                    $('#content').html(" <div style='text-align: center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
-                }else {
-                    $('#content').html(info);
+                var content=data.substring(data.indexOf("<div id='"+info+"'>"), data.indexOf("<div id='"+info+"End'>"));
+                $('#content').html(content);
+                var userContentID="#user"+info+"List";
+                var spotlightContentID="#spotlight"+info+"List";
+
+                if(!$.trim( $(userContentID).html()).length){
+                    $(userContentID).html("<div style='text-align:center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
                 }
-                  console.log(info.length);
-                $('#loading').hide();
+
+                if(!$.trim( $(spotlightContentID).html()).length){
+
+                    $(spotlightContentID).html("<div style='text-align:center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
+                }
+
+                $("#showUsers").addClass("active").off().click(function () {
+                    $(userContentID).show();
+                    $(spotlightContentID).hide();
+                });
+                $("#showSpotlight").removeClass("active").off().click(function () {
+                    $(userContentID).hide();
+                    $(spotlightContentID).show();
+                });
+                refresh();
                 $('#gallery').show();
+                $('#loading').hide();
+                $(userContentID).show();
+                $(spotlightContentID).hide();
             }
         });
+    }
+
+
+
+    function refresh() {
+        handler = {
+            activate: function() {
+                if(!$(this).hasClass('dropdown browse')) {
+                    $(this)
+                        .addClass('active')
+                        .closest('.ui.menu')
+                        .find('.item')
+                        .not($(this))
+                        .removeClass('active')
+                    ;
+                }
+            }
+        };
+        $('.menu .item').on('click', handler.activate)
+        ;
     }
 
 </script>

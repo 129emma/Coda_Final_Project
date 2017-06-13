@@ -79,6 +79,29 @@ public class FollowServlet extends HttpServlet {
         try {
             List<UserInfo> followsList= UserInfoDAO.getUsersList(mySQL,followsNameList);
             List<UserInfo> followersList= UserInfoDAO.getUsersList(mySQL,followersNameList);
+
+
+            for(UserInfo follow:followsList){
+                for(UserInfo follower:followersList){
+                    if(follow.getUsername().equals(follower.getUsername())){
+                        follow.setFollowStatus("<div class=\"ui button unfollow\" title=\"unfollow\"><i class=\"heart icon\"></i></div>");
+                        break;
+                    }else{
+                        follow.setFollowStatus(" <div class=\"ui button unfollow\" title=\"unfollow\"><i class=\"remove user icon\"></i></div>");
+                    }
+                }
+            }
+            for(UserInfo follower:followersList){
+                for(UserInfo follow:followsList){
+                    if(follower.getUsername().equals(follow.getUsername())){
+                        follower.setFollowStatus("<div class=\"ui button unfollow\" title=\"unfollow\"><i class=\"heart icon\"></i></div>");
+                        break;
+                    }else{
+                        follower.setFollowStatus("<div class=\"ui button follow\" title=\"follow\"> <i class=\"add user icon\"></i></div>");
+                    }
+                }
+            }
+
             request.setAttribute("followsList",followsList);
             request.setAttribute("followsNumber",followsList.size());
             request.setAttribute("followersList",followersList);

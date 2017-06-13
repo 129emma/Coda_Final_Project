@@ -78,6 +78,10 @@ img.userAvatar {
 }
 
 
+div{
+    word-wrap: break-word;         /* All browsers since IE 5.5+ */
+    overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+}
 /*position in card*/
 .content {
     text-align: center;
@@ -95,4 +99,8 @@ img.userAvatar {
 
 div#flipright {
     background-color: transparent;
+}
+
+.ui.pointing.menu{
+    background-color:#FFFFFF;!important;
 }

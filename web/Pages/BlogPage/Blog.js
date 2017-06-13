@@ -23,9 +23,6 @@ $(document).ready(function () {
     });
 
     $(window).scroll(function () {
-        console.log($(window).scrollTop());
-        console.log($(window).height());
-        console.log($(document).height());
         if ($(window).scrollTop() + $(window).height() >= $(document).height() && process == false) {
             process = true;
             $("#Loader").show();
@@ -51,22 +48,113 @@ $(document).ready(function () {
         $(window).off('scroll');
     });
 });
-
-function loadArticles() {
-    $.ajax({
-        url: '/Article',
-        type: 'post',
-        data: {action: 'preview', articleNumber: articlesNum, page: page},
-        success: function (articlesPreview) {
-            var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
-            $("#ArticleContainer").html(preview);
-            $("#Loader").hide();
-            process = false;
-            refresh();
-        }
-    });
+function loadArticles(){
+        $.ajax({
+            url: '/Article',
+            type: 'post',
+            data: {action: 'preview', articleNumber: articlesNum, page: page},
+            success: function (articlesPreview) {
+                var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
+                $("#ArticleContainer").html(preview);
+                $("#Loader").hide();
+                process = false;
+                refresh();
+                followFunction();
+            }
+        });
 }
 
+function barFunction() {
+    handler = {
+        activate: function() {
+            if(!$(this).hasClass('dropdown browse')) {
+                $(this)
+                    .addClass('active')
+                    .closest('.ui.menu')
+                    .find('.item')
+                    .not($(this))
+                    .removeClass('active')
+                ;
+            }
+        }
+
+    };
+    $('.menu .item').on('click', handler.activate)
+    ;
+
+
+}
+function getFollowers() {
+    $("#getFollowers").off().click(function () {
+        $("#follows").hide();
+        $("#followers").show();
+    })
+}
+
+function getFollows() {
+    $("#getFollows").off().click(function () {
+        $("#follows").show();
+        $("#followers").hide();
+    })
+}
+
+function freshButtonList() {
+    $(".ui.button.unfollow").off().each(function (i,obj) {
+        $(obj).click(function () {
+            var username=$(obj).parent().siblings(".content").html();
+            $.ajax({
+                url: '/Follow',
+                type: 'post',
+                data: {action: 'unfollow', followUsername: username},
+                success: function () {
+                    console.log( $(obj).text());
+                    $(obj).removeClass("unfollow").addClass("follow").html('<i class="add user icon"></i>');
+                    freshButtonList();
+                }
+            })
+        })
+    });
+    $(".ui.button.follow").off().each(function (i,obj) {
+        $(obj).click(function () {
+            var username=$(obj).parent().siblings(".content").html();
+            $.ajax({
+                url: '/Follow',
+                type: 'post',
+                data: {action: 'follow', followUsername: username},
+                success: function () {
+                    console.log( $(obj).text());
+                    $(obj).removeClass("follow").addClass("unfollow").html('<i class="remove user icon"></i>');
+                    freshButtonList();
+                }
+            })
+        })
+    })
+
+}
+
+
+
+function  getFollowInfo(){
+    $("#ArticleContainer").html("");
+    $("#Loader").show();
+    $.ajax({
+        url:'/Follow',
+        type:'post',
+        data:{action:'getFollowInfo'},
+        success: function (followInfo) {
+            var info = followInfo.substring(followInfo.indexOf('\<body\>') + 6, followInfo.indexOf("\</body\>"));
+            $("#ArticleContainer").html(info);
+            getFollows();
+            getFollowers();
+            freshButtonList();
+            barFunction();
+            $("#followers").hide();
+            $("#follows").show();
+            $("#Loader").hide();
+
+        }
+    })
+}
 
 function followFunction() {
 

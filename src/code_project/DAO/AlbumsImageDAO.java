@@ -17,12 +17,11 @@ import java.util.List;
  */
 public class AlbumsImageDAO {
 
-    public static List<AlbumsImageInfo> getAllAlbumsImageList(AbstractDB db,String sort){
+    public static List<AlbumsImageInfo> getAllAlbumsImageList(AbstractDB db){
 
         List<AlbumsImageInfo> allAlbumsImageList = new ArrayList<>();
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsImage_beta_1 ORDER BY ?")) {
-                p.setString(1,sort);
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsImage_beta_1 ORDER BY postTime")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         allAlbumsImageList.add(AlbumsImageInfoFromResultSet(r));

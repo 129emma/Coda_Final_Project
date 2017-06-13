@@ -37,7 +37,7 @@
                 ${articleInfo.title}<span class="ui right">${articleInfo.postTime}</span>
             </h5>
             <div class="ui attached segment">
-                <p>${articleInfo.content}</p>
+               ${articleInfo.content}
             </div>
             <div id="id" style="display: none">${articleInfo.articleID}</div>
             <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
