@@ -11,47 +11,47 @@
 <html>
 <head>
     <title>ArticlePreview</title>
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+    </style>
 </head>
 <body>
 <c:forEach var="article" items="${articleInfoList}">
-        <div class="ui segment keepContent">
-            <div class="ui left close rail" style="width: 80px !important;">
+    <div class="ui segment keepContent">
+        <div class="ui left close rail" style="width: 80px !important;">
 
-                <div class="ui sticky" style="width: 80px !important;">
-                    <img class="ui raised tiny top aligned rounded image userAvatar " src="${article.userAvatar}">
-                </div>
-                <div class="ui flowing popup top left transition hidden">
-                        <div class="content">
-                            <div class="header">${article.username}</div>
-                            <div class="meta">
-                                <span class="category">Animals</span>
-                            </div>
-                            <div class="description">
-                                    ${article.followButton}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            <h5 class="ui top attached segment">
-                <a href="${article.retrieveAddress}">${article.title}</a> ${article.postTime}
-            </h5>
-
-            <div class="ui attached segment">
-                ${article.preview}
+            <div class="ui sticky" style="width: 80px !important;">
+                <img class="ui raised tiny top aligned rounded image userAvatar " src="${article.userAvatar}">
             </div>
-                <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
-            <div class="ui attached segment">
-                <div class="ui left labeled button" tabindex="0">
-                    <a class="ui basic right pointing label">
-                        999
-                    </a>
-                    <div class="ui button">
-                        <i class="heart icon"></i> Like
+            <div class="ui flowing popup top left transition hidden">
+                <div class="content">
+                    <div class="header">${article.username}</div>
+                    <div class="meta">
+                        <span class="category">Animals</span>
+                    </div>
+                    <div class="description">
+                            ${article.followButton}
                     </div>
                 </div>
             </div>
         </div>
+
+        <h5 class="ui top attached segment">
+            <a href="${article.retrieveAddress}">${article.title}</a> ${article.postTime}
+        </h5>
+
+        <div class="ui attached segment">
+                ${article.preview}
+        </div>
+            <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
+        <div class="ui attached segment">
+            <div class="ui left labeled button" tabindex="0">
+                <a class="ui basic label">
+                    <i class="heart icon"> <span style="font-family: Montserrat, sans-serif">${article.likeNum} Likes</span></i>
+                </a>
+            </div>
+        </div>
+    </div>
 </c:forEach>
 </body>
 </html>

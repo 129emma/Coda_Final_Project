@@ -39,7 +39,7 @@ public class LikeInfoDAO {
         }
     }
 
-    public static Boolean checkLikeStatus (AbstractDB db, String articleID, String likedBy) throws SQLException {
+    public static Boolean checkLikeStatus (AbstractDB db, String articleID, String likedBy) {
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM likeInfo WHERE articleID=? AND likedBy=?")) {
@@ -57,14 +57,14 @@ public class LikeInfoDAO {
         return false;
     }
 
-    public static long getLikeNum (AbstractDB db, String articleID) throws SQLException {
+    public static int getLikeNum (AbstractDB db, String articleID) throws SQLException {
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT count(likedBy) FROM likeInfo WHERE articleID=?")) {
                 p.setString(1, articleID);
                 try (ResultSet r = p.executeQuery()) {
                     if (r.next()){
-                        return r.getLong("count(likedBy)");
+                        return r.getInt("count(likedBy)");
                     }
                 }
             }

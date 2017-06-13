@@ -22,11 +22,12 @@ public class ArticleInfo {
     public String preview;
     public String userAvatar;
     public String followButton;
+    public int likeNum;
+    public String ifLiked;
+    public String ifRed;
 
 
-
-
-    public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username, String userAvatar) {
+    public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username, String userAvatar, int likeNum) {
         this.articleID = articleID;
         this.title = title;
         this.content = content;
@@ -34,6 +35,7 @@ public class ArticleInfo {
         this.tags = tags;
         this.username = username;
         this.userAvatar = userAvatar;
+        this.likeNum = likeNum;
         this.preview = content;
         this.editArticle = "";
         this.deleteArticle = "";
@@ -122,6 +124,30 @@ public class ArticleInfo {
 
     public String getDeleteArticle() {
         return deleteArticle;
+    }
+
+    public int getLikeNum() {
+        return likeNum;
+    }
+
+    public String getIfLiked() {
+        return ifLiked;
+    }
+
+    public String getIfRed() {
+        return ifRed;
+    }
+
+    public void setLikeNum(int likeNum) {
+        this.likeNum = likeNum;
+    }
+
+    public void setIfLiked(String ifLiked) {
+        this.ifLiked = ifLiked;
+    }
+
+    public void setIfRed(String ifRed) {
+        this.ifRed = ifRed;
     }
 
     public void setArticleID(int articleID) {
