@@ -33,14 +33,18 @@
 </head>
 <body>
 
-<%--<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
+<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
     <jsp:param name="SideBar" value=""/>
-</jsp:include>--%>
+</jsp:include>
 
 <div class="pusher">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
+
+
+    <%--Sidebar Article--%>
+
 
     <!-- Page Content !-->
 
@@ -153,11 +157,14 @@
     <div id="ArticleContainer" class="ui text justified container">
     </div>
 
-    <a href="#topMenu" >
-    <div class="ui button topButton" >
-         top
-    </div>
+    <%--Button for go to top menu--%>
+    <a href="#topMenu">
+        <div class="ui button topButton">
+            top
+        </div>
     </a>
+
+
 
 </div>
 </div>

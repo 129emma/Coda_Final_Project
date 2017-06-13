@@ -43,12 +43,12 @@ $(document).ready(function () {
             $('.topButton').fadeOut();
         }
 
-
-
     });
+
+
 });
 
-
+/*
 function refresh() {
     $('.ui.sticky').sticky('refresh');
 
@@ -57,7 +57,7 @@ function refresh() {
             popup: $('.custom.popup')
         });
     });
-}
+}*/
 
 function loadArticles() {
     $.ajax({

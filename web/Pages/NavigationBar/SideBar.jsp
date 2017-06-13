@@ -7,20 +7,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- SideBar Menu-->
-<div class="ui sidebar vertical menu">
-    <a href="Blog?page=home" class="item">
-        Home
-    </a>
-    <a href="Blog?page=spotlight" class="item">
-        Stoplight
-    </a>
-    <a href="Profile" class="item">
-        Profile
-    </a>
-    <a href="Albums" class="item">
-        Albums
-    </a>
-    <a href="Login?action=logout" class="item">
-        Logout
-    </a>
+<div class="ui segment responsiveMenu sidebar top" >
+    <div class="ui center aligned three column grid container">
+        <div class="row">
+            <div class="column"><a href="Blog?page=home" class="item"><i
+                    class="ion-ios-home-outline sidebarIcon"></i></a></div>
+            <div class="column">
+                <a href="Albums" class="item"><i class="ion-ios-albums-outline sidebarIcon"></i></a></div>
+            <div class="column">
+                <a href="Login?action=logout" class="item"><i
+                        class="ion-ios-upload-outline icon rotated sidebarIcon"></i></a>
+            </div>
+        </div>
+    </div>
 </div>

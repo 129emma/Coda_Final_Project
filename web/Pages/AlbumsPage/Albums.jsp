@@ -23,38 +23,70 @@
     <script src="${pageContext.request.contextPath}/Pages/AlbumsPage/Albums.js"></script>
 </head>
 <body onload="loadUserImage()">
+
 <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
     <jsp:param name="SideBar" value=""/>
 </jsp:include>
-<div class="pusher full">
+
+<div class="pusher">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
 
-    <div class="ui container my" id="imageGallery">
+    <div class="ui text container my" id="imageGallery">
         <div class="ui dividing header">
             <h1>Albums</h1>
         </div>
 
-        <div class="ui segment" id="gallery" style="display: none"> <!--this div for show up all the image/video/audio-->
+        <div class="ui basic segment responsiveMenu">
+            <div class="ui labeled borderless icon menu">
+                <a class="item" onclick="loadUserImage()">
+                    <img class="ui centered image" src="Icons/photo.png">
+                    <%--<i class="ion-ios-camera-outline albumIcons"></i>
+                    <p>Photo</p>--%>
+                </a>
+                <a class="item" onclick="loadUserAudio()">
+                    <img class="ui centered image" src="Icons/music.png">
+                    <%--<i class="ion-ios-musical-notes albumIcons"></i>
+                    <p>Music</p>--%>
+                </a>
+                <a class="item" onclick="loadUserVideo()">
+                    <img class="ui centered image" src="Icons/video.png">
+                    <%-- <i class="ion-ios-videocam-outline albumIcons"></i>
+                    <p>Videos</p>--%>
+
+                </a>
+                <a class="item" onclick="loadUserYoutube()">
+                    <img class="ui centered image" src="Icons/youtube.png">
+                    <%--<i class="ion-social-youtube-outline"></i>--%>
+                </a>
+            </div>
+        </div>
+
+        <div class="ui segment" id="gallery" style="display: none">
+            <!--this div for show up all the image/video/audio-->
             <!-- all images should be resized for fitting container , and size for small images is 150px-->
             <div class="ui right close rail">
-                <div class="ui vertical labeled icon menu">
-                    <a class="item" onclick="loadUserImage()" >
-                        <i class="photo icon" ></i>
-                        Photos
+                <div class="ui vertical labeled borderless icon menu">
+                    <a class="item" onclick="loadUserImage()">
+                        <img class="ui centered image" src="Icons/photo.png">
+                        <%--<i class="ion-ios-camera-outline albumIcons"></i>
+                        <p>Photo</p>--%>
                     </a>
                     <a class="item" onclick="loadUserAudio()">
-                        <i class="video camera icon " ></i>
-                        Music
+                        <img class="ui centered image" src="Icons/music.png">
+                        <%--<i class="ion-ios-musical-notes albumIcons"></i>
+                        <p>Music</p>--%>
                     </a>
                     <a class="item" onclick="loadUserVideo()">
-                        <i class="video play icon" ></i>
-                        Videos
+                        <img class="ui centered image" src="Icons/video.png">
+                        <%-- <i class="ion-ios-videocam-outline albumIcons"></i>
+                        <p>Videos</p>--%>
+
                     </a>
                     <a class="item" onclick="loadUserYoutube()">
-                        <i class="youtube play icon" ></i>
-                        Youtube
+                        <img class="ui centered image" src="Icons/youtube.png">
+                        <%--<i class="ion-social-youtube-outline"></i>--%>
                     </a>
                 </div>
             </div>
@@ -77,7 +109,7 @@
 
         </div>
     </div>
-
+</div>
 
 
 <script>
@@ -103,13 +135,13 @@
             type: 'POST',
             data: {action: info},
             success: function (data) {
-                var info=data.substring(data.indexOf('\<body\>') + 6, data.indexOf("\</body\>"));
-                if(info.length<=30){
+                var info = data.substring(data.indexOf('\<body\>') + 6, data.indexOf("\</body\>"));
+                if (info.length <= 30) {
                     $('#content').html(" <div style='text-align: center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
-                }else {
+                } else {
                     $('#content').html(info);
                 }
-                  console.log(info.length);
+                console.log(info.length);
                 $('#loading').hide();
                 $('#gallery').show();
             }

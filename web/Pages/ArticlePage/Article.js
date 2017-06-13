@@ -23,11 +23,13 @@ $(document)
         $('.main.menu  .ui.dropdown').dropdown({
             on: 'hover'
         });
-        refresh();
-    });
+
+        // click avatar and display article
+
+
 
         //edit comment
-     /*       $('.editBtn').each(function (i, obj) {
+        /*       $('.editBtn').each(function (i, obj) {
          console.log("1");
          console.log(obj);
          $(obj).click(function () {
@@ -40,10 +42,11 @@ $(document)
          })
          })*/
 
+
         $('.reply.editBtn').each(function () {
             $(this).click(function () {
                 $('.editComment') .modal('setting', 'transition', 'vertical flip')
-                                   .modal('show');
+                    .modal('show');
             })
         })
 
@@ -53,9 +56,15 @@ $(document)
             $(this).click(function () {
                 $('.replyComment').modal({
                     blurring:true})
-                                  .modal('show');
+                    .modal('show');
             })
         })
+
+        refresh();
+
+    });
+
+
 
 
 

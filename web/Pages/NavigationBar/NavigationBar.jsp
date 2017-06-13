@@ -9,18 +9,46 @@
 <body>
 
 
-<%--    <a href="Blog?page=home" class="item iconClass"><li class="ion-ios-home-outline"></li></a>
-    <a href="Albums" class="item ion-images"></a>
-    <a href="Login?action=logout" class="item iconClass"><li class="ion-log-out"></li> </a>
---%>
 <div class="ui vertical center aligned segment" id="topMenu">
-    <div class="ui container">
-        <div class="ui icon borderless menu">
-            <a href="Blog?page=home" class="item iconClass"><i class="ion-ios-home-outline iconClass"></i></a>
-            <a href="Albums" class="item"><i class="ion-ios-analytics-outline iconClass"></i></a>
-            <a href="Albums" class="item"><i class="ion-ios-redo-outline iconClass"></i></a>
+
+    <div class="ui stackable three column centered grid container">
+        <div class="row">
+            <div class="column invisibleforPhone">
+            </div>
+            <div class="column invisibleforPhone">
+                <div class="ui center aligned three column grid container">
+                    <div class="row">
+                        <div class="column"><a href="Blog?page=home" class="item iconClass"><i
+                                class="ion-ios-home-outline iconClass"></i></a></div>
+                        <div class="column">
+                            <a href="Albums" class="item"><i class="ion-ios-albums-outline iconClass"></i></a></div>
+                        <div class="column">
+                            <a href="Login?action=logout" class="item"><i
+                                    class="ion-ios-upload-outline icon rotated iconClass"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui center aligned three column grid container ">
+                    <div class="row">
+                        <div class="column">
+                            <a class="toc item">
+                                <i class="ion-ios-more-outline sidebarIcon"></i>
+                            </a>
+                        </div>
+                        <div class="column">
+                            <img class="ui centered image" src="Pages/NavigationBar/smallLogo.png">
+                        </div>
+                        <div class="column">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 
 </div>
 

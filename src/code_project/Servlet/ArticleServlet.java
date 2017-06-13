@@ -155,7 +155,7 @@ public class ArticleServlet extends HttpServlet {
         request.setAttribute("articleInfo", articleInfo);
         String hiddenElement = "<input type='hidden' name='articleID' value='" + articleID + "'>";
         String submitElement = "<button class='ui button' type='submit' name='action' value='update'>Submit</button> ";
-        String deleteElement = "<input type='submit' name='action' value='delete'/>";
+        String deleteElement = "<button class='ui button' type='submit' name='action' value='delete'>Delete</button>";
         request.setAttribute("hiddenElement", hiddenElement);
         request.setAttribute("submitElement", submitElement);
         request.setAttribute("deleteElement", deleteElement);

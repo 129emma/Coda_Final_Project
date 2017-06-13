@@ -4,18 +4,36 @@
     background-color: white;
 }
 
-
-
-.ui.icon.menu {
-    border: none;
-    box-shadow: none;
-}
-
-.ui.icon.menu {
-    max-height: 40px;
-}
-
 i.iconClass {
     font-size: 35px;
+    color: black;
+}
+
+i.iconClass:hover {
+    color: #457B9D;
+}
+
+i.sidebarIcon{
+    font-size: 25px;
+    color: black;
+}
+
+i.sidebarIcon:hover {
+    color: #457B9D;
+}
+
+.toc.item{
+    display: none;
+}
+
+
+@media only screen and (max-width: 700px) {
+   .invisibleforPhone{
+       display: none !important;
+   }
+
+    .toc.item{
+        display: block !important;
+    }
 }
 

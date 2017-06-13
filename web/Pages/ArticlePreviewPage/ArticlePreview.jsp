@@ -15,41 +15,45 @@
 <body>
 
 <c:forEach var="article" items="${articleInfoList}">
-        <div class="ui segment keepContent">
-            <div class="ui left close rail" style="width: 80px !important;">
-                <div class="ui sticky" style="width: 80px !important;">
-                    <img class="ui raised tiny top aligned rounded image userAvatar userAvatarToHover" src="User-Info/${article.username}/avatar.jpg">
-                </div>
-                <div class="ui custom popup top transition hidden">
-                    <div class="ui raised link card">
-                        <div class="content">
-                            <div class="header">Username</div>
-                            <div class="meta">
-                                <span class="category">Animals</span>
-                            </div>
-                            <div class="description">
-                                <p></p>
-                            </div>
+
+    <div class="ui segment keepContent">
+        <div class="ui left close rail" style="width: 80px !important;">
+            <div class="ui sticky" style="width: 80px !important;">
+                <img class="ui raised tiny top aligned rounded image userAvatar userAvatarToHover"
+                     src="User-Info/${article.username}/avatar.jpg">
+            </div>
+            <div class="ui custom popup top transition hidden">
+                <div class="ui raised link card">
+                    <div class="content">
+                        <div class="header">Username</div>
+                        <div class="meta">
+                            <span class="category">Animals</span>
                         </div>
-                        <div class="extra content">
-                            <div class="right floated author">
-                                <i class="record icon"></i> Matt
-                            </div>
+                        <div class="description">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <div class="right floated author">
+                            <i class="record icon"></i> Matt
                         </div>
                     </div>
                 </div>
             </div>
-            <h5 class="ui top attached segment">
-                <a href="${article.retrieveAddress}">${article.title}</a> ${article.postTime}
-            </h5>
-            <div class="ui attached segment">
-                <p>${article.preview}</p>
-            </div>
-                <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
-            <div class="ui attached segment">
-                        <a href="${article.retrieveAddress}"> Read More</a>
-            </div>
         </div>
+        <div class="ui top attached segment">
+            <h3 class="ui header"><a href="${article.retrieveAddress}">${article.title}</a>
+                <div class="sub header"> ${article.postTime}</div>
+            </h3>
+        </div>
+        <div class="ui attached segment">
+            <p>${article.preview}</p>
+        </div>
+            <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
+        <div class="ui attached segment">
+            <a href="${article.retrieveAddress}"> Read More</a>
+        </div>
+    </div>
 </c:forEach>
 
 </body>
