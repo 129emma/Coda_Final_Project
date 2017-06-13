@@ -45,7 +45,7 @@ $(document)
                 $('.editComment') .modal('setting', 'transition', 'vertical flip')
                                    .modal('show');
             })
-        })
+        });
 
 
         //reply comment
