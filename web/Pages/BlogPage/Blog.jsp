@@ -58,7 +58,7 @@
                             </div>
                             <!--User Icon-->
                             <div class="ui small image iconImage">
-                                <img src="${userInfo.avatar}">
+                                <img class="ui small image" src="${userInfo.avatar}">
                             </div>
                         </div>
                         <!--User Name-->
@@ -121,9 +121,7 @@
                                 <!--fixed size for this background,maximum height is 270px-->
                                 <img src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
                                 <!--User Icon-->
-                                <div class="ui small image iconImage">
-                                    <img src="${userInfo.avatar}">
-                                </div>
+                                <img class="ui small image iconImage" src="${userInfo.avatar}">
                             </div>
                         </div>
                         <div class="content">
@@ -151,32 +149,32 @@
         </div>
 
     </div>
-<div class="ui text justified container">
-    <div id="ArticleContainer" >
+    <div class="ui text justified container">
+        <div id="ArticleContainer">
 
-    </div>
-
-
-    <div class="ui center aligned vertical segment" id="Loader">
-        <div class="ui icon message">
-            <i class="notched circle loading icon"></i>
-            <div class="content">
-                <div class="header">
-                    Just one second
-                </div>
-                <p>We're loading the content for you.</p>
-            </div>
         </div>
 
-    </div>
 
-    <a href="#topMenu" >
-    <div class="ui button topButton" >
-         top
-    </div>
-    </a>
+        <div class="ui center aligned vertical segment" id="Loader">
+            <div class="ui icon message">
+                <i class="notched circle loading icon"></i>
+                <div class="content">
+                    <div class="header">
+                        Just one second
+                    </div>
+                    <p>We're loading the content for you.</p>
+                </div>
+            </div>
 
-</div>
+        </div>
+
+        <a href="#topMenu">
+            <div class="ui button topButton">
+                top
+            </div>
+        </a>
+
+    </div>
 
 </div>
 

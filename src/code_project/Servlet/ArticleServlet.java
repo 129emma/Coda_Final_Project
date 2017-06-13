@@ -213,7 +213,6 @@ public class ArticleServlet extends HttpServlet {
 
         try {
             LikeInfoDAO.like(mySQL, request.getParameter("articleID"), (String) session.getAttribute("username"));
-
         } catch (SQLException e) {
             response.sendError(500, "Failed to connect to database");
         }

@@ -34,7 +34,7 @@ public class ArticleInfo {
         this.tags = tags;
         this.username = username;
         this.userAvatar = userAvatar;
-        this.preview = content;
+        setPreview();
         this.editArticle = "";
         this.deleteArticle = "";
         this.followButton="";
@@ -52,13 +52,14 @@ public class ArticleInfo {
     public String getUserAvatar() {
         return userAvatar;
     }
-    public void setPreview(String content) {
+
+    public void setPreview() {
         int defaultEndIndex;
-        if((defaultEndIndex=content.indexOf(" ",200))!= -1){
+        if((defaultEndIndex=content.indexOf(" ",200))== -1){
             defaultEndIndex = 200;
         }
-        int endIndex = Math.min(content.length()-1,defaultEndIndex);
-        this.preview = preview;
+        int endIndex = Math.min(content.length(),defaultEndIndex);
+        this.preview = content.substring(0,endIndex);
     }
 
     public ArticleInfo(String title, String content, String tags) {

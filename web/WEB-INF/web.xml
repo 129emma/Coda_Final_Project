@@ -69,14 +69,6 @@
         <servlet-name>Profile</servlet-name>
         <url-pattern>/Profile</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>ChangeProfile</servlet-name>
-        <servlet-class>code_project.Servlet.ChangeUserProfileServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ChangeProfile</servlet-name>
-        <url-pattern>/ChangeProfile</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>AvatarEdit</servlet-name>
@@ -121,5 +113,14 @@
         <url-pattern>/GoogleLogin</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Follow</servlet-name>
+        <servlet-class>code_project.Servlet.FollowServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Follow</servlet-name>
+        <url-pattern>/Follow</url-pattern>
+    </servlet-mapping>
 
 </web-app>

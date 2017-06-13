@@ -239,7 +239,6 @@ $('#fileButton').click(function () {
 
     $('#imageFile').change(function () {
         readURL(this);
-        $(this).val("");
     })
 
 </script>
