@@ -23,6 +23,7 @@ $(document).ready(function () {
     });
 
     $(window).scroll(function () {
+
         if ($(window).scrollTop() + $(window).height() >= $(document).height() && process == false) {
             process = true;
             $("#Loader").show();
@@ -49,7 +50,8 @@ $(document).ready(function () {
     });
 });
 function loadArticles(){
-        $.ajax({
+
+        ajax=$.ajax({
             url: '/Article',
             type: 'post',
             data: {action: 'preview', articleNumber: articlesNum, page: page},
@@ -77,7 +79,6 @@ function barFunction() {
                 ;
             }
         }
-
     };
     $('.menu .item').on('click', handler.activate)
     ;
@@ -143,6 +144,8 @@ function  getFollowInfo(){
         data:{action:'getFollowInfo'},
         success: function (followInfo) {
             var info = followInfo.substring(followInfo.indexOf('\<body\>') + 6, followInfo.indexOf("\</body\>"));
+
+            console.log(info.length);
             $("#ArticleContainer").html(info);
             getFollows();
             getFollowers();
@@ -151,8 +154,11 @@ function  getFollowInfo(){
             $("#followers").hide();
             $("#follows").show();
             $("#Loader").hide();
-
+        },
+        complete: function() {
+            $(this).data('requestRunning', false);
         }
+
     })
 }
 

@@ -193,7 +193,11 @@ public class AlbumsChangeServlet extends HttpServlet {
     private String createImage(FileItem fileItem, String filePath, String username, String fileName) {
 
         String fileAddress = "<img style='margin:auto' src='User-Info/" + username + "/" + fileName + "'>";
+
+        String extension=fileName.substring(fileName.indexOf("."),fileName.length());
+
         if(!checkFile(filePath,fileName)){
+
             file = new File(filePath + fileName);
             try {
                 fileItem.write(file);
@@ -207,15 +211,15 @@ public class AlbumsChangeServlet extends HttpServlet {
 
                 File outputfile = new File(filePath + fileName);
                 //check the size of the image
-                if ((AlbumImage.getWidth() > 400) || (AlbumImage.getHeight() > 400)) {
+                if ((AlbumImage.getWidth() > 1000)) {
 
                     Double width = (double) AlbumImage.getWidth();
                     Double height = (double) AlbumImage.getHeight();
-                    double r = (height / width) * 200;
-                    BufferedImage image = new BufferedImage(200, (int) r, BufferedImage.TYPE_INT_RGB);
-                    image.createGraphics().drawImage(ImageIO.read(new File(filePath + fileName)).getScaledInstance(200, (int) r, Image.SCALE_SMOOTH), 0, 0, null);
+                    double r = (height / width) * 1000;
+                    BufferedImage image = new BufferedImage(1000, (int) r, BufferedImage.TYPE_INT_RGB);
+                    image.createGraphics().drawImage(ImageIO.read(new File(filePath + fileName)).getScaledInstance(1000, (int) r, Image.SCALE_SMOOTH), 0, 0, null);
                     //write the thumbnail
-                    ImageIO.write(image, "jpg", outputfile);
+                    ImageIO.write(image, extension, outputfile);
                 }
                 AlbumsImageDAO.createAlbumsImageInfo(mySQL, username, "User-Info/" + username + "/" + fileName, fileName);
             } catch (Exception e) {
