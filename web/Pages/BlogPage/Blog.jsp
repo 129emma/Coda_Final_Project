@@ -89,13 +89,11 @@
                                     <i class="ion-ios-compose-outline"></i>
                                 </div>
                             </a>
-                            <a href="#" class="item" id="followInfo">
+                            <a href="#" class="item" id="followIcon">
                                 <div class="ui icon" data-tooltip="Follows">
                                     <i class="heart icon"></i>
                                 </div>
                             </a>
-
-
                         </div>
                         <div class="extra content">
                             <div id="flipright" class="ui icon right floated button">
@@ -149,15 +147,13 @@
                 </div>
             </div>
         </div>
-
     </div>
 <div class="ui text justified container">
     <div id="ArticleContainer" >
 
     </div>
 
-
-    <div class="ui center aligned vertical segment" id="Loader">
+    <div  id="Loader">
         <div class="ui icon message">
             <i class="notched circle loading icon"></i>
             <div class="content">
@@ -167,7 +163,6 @@
                 <p>We're loading the content for you.</p>
             </div>
         </div>
-
     </div>
 
     <a href="#topMenu" >

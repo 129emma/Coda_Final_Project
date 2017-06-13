@@ -38,7 +38,15 @@ $(document).ready(function () {
         }
     });
 
-
+$("#form").submit(function (e) {
+       $("#articleContentSubmit").value = $("#editor").html();
+      if(!$.trim( $('#leftmenu').html()).length) {
+          alert("Content is empty!");
+          e.preventDefault();
+       }else {
+          $(this).find("#submitBtn").addClass("loading").prop("disabled",true);
+      }
+});
 
     $(function(){
         function initToolbarBootstrapBindings() {

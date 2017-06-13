@@ -126,7 +126,7 @@
                 var userContentID="#user"+info+"List";
                 var spotlightContentID="#spotlight"+info+"List";
 
-                if(!$.trim( $(userContentID).html()).length){
+                if(!$.trim( $(userContentID).html()).length){https://media.tenor.com/images/0298446350746317720765a94787c49c/tenor.gif
                     $(userContentID).html("<div style='text-align:center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
                 }
 

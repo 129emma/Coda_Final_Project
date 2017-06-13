@@ -9,7 +9,11 @@ body{
 .ui.form{
     padding-top: 1em;
 }
-
+#title{
+   width: 120px;
+    height: 38px;
+    margin-bottom: 5px
+}
 .btn{
     border: none;
     background-image: none;

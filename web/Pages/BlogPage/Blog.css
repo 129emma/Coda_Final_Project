@@ -4,7 +4,9 @@
 body{
     background-color: #565D6B;
 }
-
+.ui.large.aligned.divided.list{
+    margin: 0;!important;
+}
 a,p,h1,h2,h3,h4,h5{
     font-family: 'Raleway', sans-serif;
 }
@@ -103,4 +105,11 @@ div#flipright {
 
 .ui.pointing.menu{
     background-color:#FFFFFF;!important;
+}
+#Loader{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+#followInfo{
+    margin-bottom: 30px;
 }

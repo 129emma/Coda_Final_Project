@@ -47,20 +47,20 @@
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
 
-    <form action="/Article" method="post" onsubmit="prepareContent()">
+    <form action="/Article" method="post" id="form">
 
         <div class="ui text container edit">
             <div class="hero-unit">
                 <div id="alerts"></div>
                 <div class="ui input"> <%--Enter Title--%>
-                    <p style="font-size: large">Title: <input required type="text" id="title" name="title"
-                                                              placeholder="Your title here"
+                    <p style="font-size: large">Title: <input required type="text" id="title" maxlength="100" name="title"
+                                                              placeholder="Your title here(max length 100)"
                                                               value="${articleInfo.title}"
-                                                              style="width: 500px;height: 38px;margin-bottom: 5px"/>
+                                                              />
                 </div>
                 <%--Button in Editor--%>
                 <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-                    <div class="btn-group">
+                    <div class="btn-group" style="margin-left:5px">
                         <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b
                                 class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -143,7 +143,7 @@
                 </div>
 
                 <%--Editor--%>
-                <div id="editor">
+                <div id="editor" >
                     ${articleInfo.content}
                 </div>
 
@@ -176,11 +176,6 @@
         <p style="color: red">${information}</p>
     </c:if>
 </div>
-        <script>
-            function prepareContent() {
-                document.getElementById("articleContentSubmit").value = document.getElementById("editor").innerHTML;
-            }
-        </script>
-  </body>
+</body>
 
 </html>

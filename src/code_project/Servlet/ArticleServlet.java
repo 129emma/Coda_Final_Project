@@ -182,7 +182,7 @@ public class ArticleServlet extends HttpServlet {
         String username = (String) session.getAttribute("username");
 
         if (content == null || content.isEmpty()) {
-            String submitElement = "<button class='ui floated button' type='submit' name='action' value='create'>Submit</button>";
+            String submitElement = "<button class='ui right floated button' type='submit' id='submitBtn'>Submit</button><input type='hidden' name='action' value='create'";
             request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
             return;

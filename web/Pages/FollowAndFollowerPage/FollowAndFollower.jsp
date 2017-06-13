@@ -23,7 +23,7 @@
     </a>
 
 </div>
-<div class="ui segment">
+<div class="ui segment" id="followInfo">
 
     <div class="ui large aligned divided list" id="follows">
         <c:forEach var="follow" items="${followsList}">

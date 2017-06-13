@@ -81,7 +81,7 @@ public class AvatarEditServlet extends HttpServlet {
             // maximum file size to be uploaded.
             upload.setSizeMax( maxFileSize );
 
-//            deleteLocalAvatar(filePath);
+           deleteLocalAvatar(filePath);
 
             createUserIcon(upload,request,filePath,localIconFilePath);
 
@@ -138,16 +138,15 @@ private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,
                     //get local icon's  path
                     String localIconPath= fi.getString();
                     BufferedImage icon=null;
-                    File defaultAvatar=new File(localIconFilePath+ localIconPath);
                     try {
                         //read the local image
-                        icon= ImageIO.read(defaultAvatar);
+                        icon= ImageIO.read(new File(localIconFilePath+ localIconPath));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    String defaultAvatarFileName=defaultAvatar.getName();
-                    String extension=defaultAvatarFileName.substring(defaultAvatarFileName.indexOf("."),defaultAvatarFileName.length());
-                    File outputfile=new File(filePath+"/avatar"+extension);
+
+                    String extension=fi.getString().substring(fi.getString().indexOf(".")+1,fi.getString().length());
+                    File outputfile=new File(filePath+"/avatar."+extension);
                     ImageIO.write(icon,extension,outputfile);
                     scaleImage(outputfile,extension);
                     //write the image to the user's icon
@@ -157,12 +156,12 @@ private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,
             }else if ( !fi.isFormField () )
             {
                 fileName = fi.getName();
-                String fileExtension=fileName.substring(fileName.indexOf("."),fileName.length());
-                file = new File( filePath +"/avatar"+fileExtension) ;
+                String fileExtension=fileName.substring(fileName.indexOf(".")+1,fileName.length());
+                file = new File( filePath +"/avatar."+fileExtension) ;
                 fi.write(file);
                 BufferedImage icon=null;
                 try {
-                    File outputfile=new File(filePath+"/avatar"+fileExtension);
+                    File outputfile=new File(filePath+"/avatar."+fileExtension);
                     scaleImage(outputfile,fileExtension);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -179,9 +178,9 @@ private void createUserIcon(ServletFileUpload upload,HttpServletRequest request,
 private void scaleImage(File outputFile,String fileExtension) throws IOException{
         try {
             BufferedImage image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
-            image.createGraphics().drawImage(ImageIO.read(new File(filePath+"/avatar"+fileExtension)).getScaledInstance(200, 200, Image.SCALE_SMOOTH),0,0,null);
+            image.createGraphics().drawImage(ImageIO.read(new File(filePath+"/avatar."+fileExtension)).getScaledInstance(200, 200, Image.SCALE_SMOOTH),0,0,null);
             //write the thumbnail
-            avatarFilePath="User-Info/"+username+"/avatar"+fileExtension;
+            avatarFilePath="User-Info/"+username+"/avatar."+fileExtension;
             ImageIO.write(image,fileExtension,outputFile);
         }catch (IOException e){
             e.printStackTrace();
