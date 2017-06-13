@@ -13,13 +13,12 @@
     <title>ArticlePreview</title>
 </head>
 <body>
-
 <c:forEach var="article" items="${articleInfoList}">
         <div class="ui segment keepContent">
             <div class="ui left close rail" style="width: 80px !important;">
 
                 <div class="ui sticky" style="width: 80px !important;">
-                    <img class="ui raised tiny top aligned rounded image userAvatar " src="User-Info/${article.username}/avatar.jpg">
+                    <img class="ui raised tiny top aligned rounded image userAvatar " src="${article.userAvatar}">
                 </div>
                 <div class="ui flowing popup top left transition hidden">
                         <div class="content">
@@ -28,7 +27,7 @@
                                 <span class="category">Animals</span>
                             </div>
                             <div class="description">
-                                <button class="ui button"></button>
+                                    ${article.followButton}
                             </div>
                         </div>
                     </div>
@@ -39,7 +38,7 @@
             </h5>
 
             <div class="ui attached segment">
-                <p>${article.preview}</p>
+                ${article.preview}
             </div>
                 <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
             <div class="ui attached segment">

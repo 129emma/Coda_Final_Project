@@ -1,8 +1,9 @@
 package code_project.Servlet;
 
 import code_project.DAO.LoginInfoDAO;
-import code_project.Security.Passwords;
 import code_project.Info.LoginInfo;
+import code_project.Security.LoginStatus;
+import code_project.Security.Passwords;
 import code_project.db.MySQL;
 
 import javax.servlet.ServletException;
@@ -11,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.Writer;
 import java.sql.SQLException;
+import java.util.Random;
 
 /**
  * Created by qpen546 on 2017/5/23.
@@ -28,43 +30,31 @@ public class ChangePasswordServlet extends HttpServlet {
     private HttpSession session;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        LoginStatus.verifyStatus(request, response);
         session = request.getSession(true);
         this.request = request;
         this.response = response;
         response.setContentType("text/html");
-        String status = (String) session.getAttribute("status");
-        if (status == null) {
-            forwardWithMessage("status","Login", "logout");
-        }
+        Writer out = response.getWriter();
+        username = (String) session.getAttribute("username");
+        password = request.getParameter("password");
+        newPassword = request.getParameter("newPassword");
 
-        if (status.equals("logout")) {
-            response.sendRedirect("login");
+        loginInfo = LoginInfoDAO.getLoginInfo(mySQL, username);
+        if (loginInfo == null) {
+            out.write("Fail: Wrong username");
+        } else if (!rightPassword()) {
+            out.write("Fail: Wrong Password");
+        } else if (rightPassword()&&rightUsername()){
+            updatePassword();
+            out.write("success");
         } else {
-            username = request.getParameter("username");
-            password = request.getParameter("password");
-            newPassword = request.getParameter("newPassword");
-            if (username == null) {
-                session.setAttribute("updateMessage", "");
-                request.getRequestDispatcher("Pages/ChangePasswordPage/ChangePassword.jsp").forward(request, response);
-            }
-            loginInfo = LoginInfoDAO.getLoginInfo(mySQL, username);
-            if (loginInfo == null || !rightUsername()) {
-                forwardWithMessage("updateMessage","Pages/ChangePasswordPage/ChangePassword.jsp","Fail to update: wrong username");
-            }else if (rightPassword()) {
-                updatePassword();
-                forwardWithMessage("updateMessage","Pages/ChangePasswordPage/ChangePassword.jsp","You are successful to change the password!");
-            } else {
-                forwardWithMessage("updateMessage","Pages/ChangePasswordPage/ChangePassword.jsp","Fail to update: wrong password");
-            }
+            out.write("Fail");
         }
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        doPost(request,response);
-    }
 
-    public void forwardWithMessage(String attribute,String dispatcher,String message) throws ServletException, IOException {
-        session.setAttribute(attribute, message);
-        request.getRequestDispatcher(dispatcher).forward(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        doPost(request, response);
     }
 
     public boolean rightUsername() {
@@ -72,14 +62,15 @@ public class ChangePasswordServlet extends HttpServlet {
     }
 
     public boolean rightPassword() {
-        return Passwords.isExpectedPassword(password.toCharArray(), loginInfo.getSalt(), 5, loginInfo.getPassword());
+        return Passwords.isExpectedPassword(password.toCharArray(), loginInfo.getSalt(), loginInfo.getIterations(), loginInfo.getPassword());
     }
 
     public void updatePassword() throws ServletException, IOException {
         byte[] newSalt = Passwords.getNextSalt();
-        byte[] newHashPassword = Passwords.hash(newPassword.toCharArray(), newSalt, 5);
+        int newIterations = new Random().nextInt(1000) + 100_000;
+        byte[] newHashPassword = Passwords.hash(newPassword.toCharArray(), newSalt, newIterations);
         try {
-            LoginInfoDAO.updateLoginInfo(mySQL, username, newHashPassword, newSalt);
+            LoginInfoDAO.updateLoginInfo(mySQL, username, newHashPassword, newSalt, newIterations);
         } catch (SQLException e) {
             e.printStackTrace();
         }

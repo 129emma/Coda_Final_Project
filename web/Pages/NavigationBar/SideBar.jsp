@@ -8,7 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- SideBar Menu-->
 <div class="ui sidebar vertical menu">
-    <img class="sideBarIcon" src="../../testImage/icon_white.png">
     <a href="Blog?page=home" class="item">
         Home
     </a>

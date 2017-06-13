@@ -6,6 +6,7 @@ import code_project.DAO.LikeInfoDAO;
 import code_project.DAO.UserInfoDAO;
 import code_project.Info.ArticleInfo;
 import code_project.Info.CommentInfo;
+import code_project.Info.CommentReplyInfo;
 import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
@@ -77,17 +78,17 @@ public class ArticleServlet extends HttpServlet {
         String page = (String) request.getParameter("page");
         int articleNumber = Integer.parseInt(request.getParameter("articleNumber"));
         int totalArticleNumber = 0;
-        if(page!=null){
-            switch(page){
+        if (page != null) {
+            switch (page) {
                 case "home":
-                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL,username);
-                    articleNumber = Math.min(totalArticleNumber,articleNumber);
+                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL, username);
+                    articleNumber = Math.min(totalArticleNumber, articleNumber);
                     articleInfoList = ArticleInfoDAO.getArticleInfoList(mySQL, username, articleNumber);
                     break;
                 case "spotlight":
                     totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL);
                     articleNumber = Math.min(totalArticleNumber,articleNumber);
-                    articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, articleNumber);
+                    articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, articleNumber,username);
                     break;
             }
         }
@@ -106,7 +107,7 @@ public class ArticleServlet extends HttpServlet {
         request.getRequestDispatcher("Pages/ArticlePage/Article.jsp").forward(request, response);
     }
 
-    private void retrieveComments(HttpServletRequest request, HttpServletResponse response) {
+    private void retrieveComments(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String articleID = request.getParameter("articleID");
         String username = (String) session.getAttribute("username");
         List<CommentInfo> commentInfoList = CommentInfoDAO.getCommentInfoListByArticle(mySQL, Integer.parseInt(articleID));
@@ -115,9 +116,23 @@ public class ArticleServlet extends HttpServlet {
                 commentInfo.setReplyComment(username);
                 commentInfo.setEditComment(username);
                 commentInfo.setDeleteComment(username);
+               commentInfo.setCommentReplyInfoList(retrieveRepliedComments(commentInfo.commentID));
             }
         }
+
         request.setAttribute("commentInfoList", commentInfoList);
+
+    }
+
+    private List<CommentReplyInfo> retrieveRepliedComments(int commentID) throws ServletException, IOException {
+        List<CommentReplyInfo> commentReplyInfoList = CommentInfoDAO.getCommentReplyInfobyCommentReplyID(mySQL, commentID);
+        if (commentReplyInfoList != null) {
+            for (CommentReplyInfo commentReply : commentReplyInfoList) {
+                commentReply.setDeleteCommentReply(commentReply.commentReplyID);
+
+            }
+        }
+        return commentReplyInfoList;
     }
 
     private void updateArticle(HttpServletRequest request, HttpServletResponse response) {
@@ -137,7 +152,7 @@ public class ArticleServlet extends HttpServlet {
         ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL, articleID);
         request.setAttribute("articleInfo", articleInfo);
         String hiddenElement = "<input type='hidden' name='articleID' value='" + articleID + "'>";
-        String submitElement = "<input type='submit' name='action' value='update'/> ";
+        String submitElement = "<button class='ui button' type='submit' name='action' value='update'>Submit</button> ";
         String deleteElement = "<input type='submit' name='action' value='delete'/>";
         request.setAttribute("hiddenElement", hiddenElement);
         request.setAttribute("submitElement", submitElement);
@@ -164,10 +179,10 @@ public class ArticleServlet extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         String tag = request.getParameter("tag");
-        String username = (String)session.getAttribute("username");
+        String username = (String) session.getAttribute("username");
 
         if (content == null || content.isEmpty()) {
-            String submitElement = "<input type='submit' name='action' value='create'/>";
+            String submitElement = "<button class='ui floated button' type='submit' name='action' value='create'>Submit</button>";
             request.setAttribute("submitElement", submitElement);
             request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);
             return;
@@ -175,9 +190,9 @@ public class ArticleServlet extends HttpServlet {
 
 
         try {
-            UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL,username);
+            UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, username);
             String userAvatar = userInfo.getAvatar();
-            ArticleInfoDAO.createArticleInfo(mySQL, title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, username,userAvatar);
+            ArticleInfoDAO.createArticleInfo(mySQL, title, content, ArticleInfoDAO.getCurrentTimeStamp(), tag, username, userAvatar);
             response.sendRedirect("Blog");
         } catch (Exception e) {
             e.printStackTrace();

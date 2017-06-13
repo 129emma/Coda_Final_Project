@@ -17,6 +17,7 @@ public class CommentInfoList {
     }
 
     public List<CommentInfo> getCommentInfoList() {
+
         return commentInfoList;
     }
 }

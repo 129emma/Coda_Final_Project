@@ -26,6 +26,40 @@ $(document)
         refresh();
     });
 
+        //edit comment
+     /*       $('.editBtn').each(function (i, obj) {
+         console.log("1");
+         console.log(obj);
+         $(obj).click(function () {
+         console.log("2");
+         console.log($(obj).parent().parent().next());
+         $(obj).parent().parent().next()
+         .modal('setting', 'transition', 'vertical flip')
+         .modal('show')
+         ;
+         })
+         })*/
+
+        $('.reply.editBtn').each(function () {
+            $(this).click(function () {
+                $('.editComment') .modal('setting', 'transition', 'vertical flip')
+                                   .modal('show');
+            })
+        });
+
+
+        //reply comment
+        $('.replyBtn').each(function () {
+            $(this).click(function () {
+                $('.replyComment').modal({
+                    blurring:true})
+                                  .modal('show');
+            })
+        })
+
+
+
+
 function likeArticle() {
     var id = $('#id').text();
     $('.ui.button.dislike').off().click(function () {

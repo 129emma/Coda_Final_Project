@@ -6,24 +6,23 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<body class="full">
-    <div class="ui masthead borderless menu">
-        <div class="ui container">
-            <a class="toc item">
-                <i class="sidebar icon"></i>
-            </a>
-            <div class="ui search">
-                <div class="ui icon input">
-                    <input class="prompt" type="text" placeholder="Searching friends">
-                    <i class="search icon"></i>
-                </div>
-                <div class="results"></div>
-            </div>
-            <a href="Blog?page=home" class="item iconClass" ><i class="blue large home icon"></i></a>
-            <a href="Blog?page=spotlight" class="item iconClass"><i class="blue large world icon"></i></a>
-            <a href="Profile" class="item iconClass" ><i class="blue large user icon"></i></a>
-            <a href="Albums" class="item iconClass" ><i class="blue large camera retro icon"></i></a>
-            <a href="Login?action=logout" class="item iconClass" ><i class="blue large sign out icon"></i></a>
+<body>
+
+
+<%--    <a href="Blog?page=home" class="item iconClass"><li class="ion-ios-home-outline"></li></a>
+    <a href="Albums" class="item ion-images"></a>
+    <a href="Login?action=logout" class="item iconClass"><li class="ion-log-out"></li> </a>
+--%>
+<div class="ui vertical center aligned segment" id="topMenu">
+    <div class="ui container">
+        <div class="ui icon borderless menu">
+            <a href="Blog?page=home" class="item iconClass"><i class="ion-ios-home-outline iconClass"></i></a>
+            <a href="Albums" class="item"><i class="ion-ios-analytics-outline iconClass"></i></a>
+            <a href="Login?action=logout" class="item"><i class="ion-ios-redo-outline iconClass"></i></a>
         </div>
     </div>
+
+</div>
+
+
 </body>

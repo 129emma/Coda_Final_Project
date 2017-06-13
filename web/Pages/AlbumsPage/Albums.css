@@ -22,12 +22,19 @@ li {
 .ui.dividing.header {
     max-width: 800px;
 }
-
+.ui.pointing.menu{
+    background-color:#ffffff ;
+}
 .ui.small.image {
     margin-right: 20px;
     margin-top: 20px;
 }
-
+#gallery{
+    background-color: transparent;
+    border: none;!important;
+    box-shadow: none;!important;
+    padding-top: 0;!important;
+}
 .ui.labeled.icon.borderless.menu.secondMenu {
     border: none;
     box-shadow: none;

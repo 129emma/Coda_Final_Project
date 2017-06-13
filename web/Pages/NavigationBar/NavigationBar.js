@@ -4,24 +4,20 @@
 $(document)
     .ready(function() {
 
-        // fix menu when passed
-        $('.masthead').visibility({
-                once: false,
-                onBottomPassed: function() {
-                    $('.fixed.menu').transition('fade in');
-                },
-                onBottomPassedReverse: function() {
-                    $('.fixed.menu').transition('fade out');
-                }
-            })
-        ;
+        $('.firstMenu').visibility({
 
-        // create sidebar and attach to menu open
-        $('.ui.sidebar')
-            .sidebar('attach events', '.toc.item')
-            .sidebar('setting','transition','overlay')
-            .sidebar('toggle')
-        ;
+            once:false,
+            continuous:true,
+             onBottomPassed:function () {
+                 $('.overlay.secondMenu').visibility({
+                     type:'fixed',
+                     offset:10
+                 })
+             },
+
+        })
+
+
 
 
     })

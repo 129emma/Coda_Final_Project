@@ -12,6 +12,8 @@
     <title>Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/Pages/ProfilePage/Profile.css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/Pages/ProfilePage/Profile.js"></script>

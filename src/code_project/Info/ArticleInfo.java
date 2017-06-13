@@ -21,6 +21,10 @@ public class ArticleInfo {
     public String retrieveAddress;
     public String preview;
     public String userAvatar;
+    public String followButton;
+
+
+
 
     public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username, String userAvatar) {
         this.articleID = articleID;
@@ -33,8 +37,18 @@ public class ArticleInfo {
         this.preview = content;
         this.editArticle = "";
         this.deleteArticle = "";
+        this.followButton="";
         this.retrieveAddress = "Article?action=retrieve&articleID=" + articleID;
     }
+
+    public String getFollowButton() {
+        return followButton;
+    }
+
+    public void setFollowButton(String followButton) {
+        this.followButton = followButton;
+    }
+
     public String getUserAvatar() {
         return userAvatar;
     }
@@ -134,15 +148,16 @@ public class ArticleInfo {
         this.title = title;
     }
 
+
     public void setEditArticle(String username) {
         if (this.username.equals(username)) {
-            editArticle = "<a class='ui green labeled icon button' href=\"Article?action=edit&articleID=" + articleID + "\"><i class=\"edit icon\"></i>Edit</a>";
+            editArticle = "<button class='ui circular ui icon button editButton' href=\"Article?action=edit&articleID=" + articleID + "\">Edit</button>";
         }
     }
 
     public void setDeleteArticle(String username) {
         if (this.username.equals(username)) {
-            deleteArticle = "<a class='ui red labeled icon button' href=\"Article?action=delete&articleID=" + articleID + "\"><i class=\"erase icon\"></i>delete</a>";
+            deleteArticle = "<button class='ui circular ui icon button deleteButton' href=\"Article?action=delete&articleID=" + articleID + "\">Delete</button>";
         }
     }
 

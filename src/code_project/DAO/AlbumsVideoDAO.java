@@ -17,12 +17,11 @@ import java.util.List;
  */
 public class AlbumsVideoDAO {
 
-    public static List<AlbumsVideoInfo> getAllAlbumsVideoList(AbstractDB db,String sort){
+    public static List<AlbumsVideoInfo> getAllAlbumsVideoList(AbstractDB db){
 
         List<AlbumsVideoInfo> allAlbumsVideoList = new ArrayList<>();
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo ORDER BY ?")) {
-                p.setString(1,sort);
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo_beta_1 WHERE fileName!='No file' ORDER BY postTime ")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         allAlbumsVideoList.add(AlbumsVideoInfoFromResultSet(r));
@@ -35,12 +34,35 @@ public class AlbumsVideoDAO {
         }
         return allAlbumsVideoList;
     }
+
+
+
+    public static List<AlbumsVideoInfo> getAllAlbumsYoutubeList(AbstractDB db){
+
+        List<AlbumsVideoInfo> allAlbumsYoutubeList = new ArrayList<>();
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo_beta_1 WHERE fileName='No file' ORDER BY postTime ")) {
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        allAlbumsYoutubeList.add(AlbumsVideoInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return allAlbumsYoutubeList;
+    }
+
+
+
     public static List<AlbumsVideoInfo> getAlbumsVideoList(AbstractDB db , String username) {
 
         List<AlbumsVideoInfo> AlbumsVideoInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=? AND fileName!='No file'")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo_beta_1 WHERE username=? AND fileName!='No file'")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -57,7 +79,7 @@ public class AlbumsVideoDAO {
 
     public static Boolean checkAlbumsYoutube(AbstractDB db,String address,String username){
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=? AND address=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo_beta_1 WHERE username=? AND address=?")) {
                 p.setString(1,username);
                 p.setString(2,address);
                 try (ResultSet r = p.executeQuery()) {
@@ -76,7 +98,7 @@ public class AlbumsVideoDAO {
 
     public static void createAlbumsVideoInfo(AbstractDB db, String username,String address,String fileName) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsVideo(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsVideo_beta_1(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
                 p.setString(1, username);
                 p.setString(4,fileName);
                 p.setString(2, address);
@@ -90,7 +112,7 @@ public class AlbumsVideoDAO {
 
     public static void deleteAlbumsVideoInfo(AbstractDB db, String username,int id) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsVideo WHERE username = ? AND id=?")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsVideo_beta_1 WHERE username = ? AND id=?")) {
                 p.setString(1, username);
                 p.setInt(2, id);
                 p.executeUpdate();
@@ -105,7 +127,7 @@ public static List<AlbumsVideoInfo> getYoutubeList(AbstractDB db,String username
     List<AlbumsVideoInfo> AlbumsYoutubeList = new ArrayList<>();
 
     try (Connection c = db.connection()) {
-        try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username=? AND fileName='No file'")) {
+        try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo_beta_1 WHERE username=? AND fileName='No file'")) {
             p.setString(1,username);
             try (ResultSet r = p.executeQuery()) {
                 while (r.next()) {
@@ -125,7 +147,7 @@ public static List<AlbumsVideoInfo> getYoutubeList(AbstractDB db,String username
         AlbumsVideoInfo AlbumsVideoInfo= null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo WHERE username = ?AND id=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsVideo_beta_1 WHERE username = ?AND id=?")) {
                 p.setString(1, username);
                 p.setString(2, id);
                 try (ResultSet r = p.executeQuery()) {
