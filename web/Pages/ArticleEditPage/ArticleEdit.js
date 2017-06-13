@@ -2,9 +2,7 @@
  * Created by txie936 on 12/06/2017.
  */
 $(document).ready(function () {
-
     $('.ui.normal.dropdown').dropdown();
-
 
     $('.input').each(function () {
         $(this).change(function () {
@@ -21,10 +19,11 @@ $(document).ready(function () {
                 }
             });
             $(this).val('');
+
         });
     });
 
-    function readLink() {
+    $("#youtube").off().click(function(){
         var input = prompt("Please put your video link", "link here");
         if (input != null) {
             var data = {'action': 'createYoutube', 'youtubeAddress': input};
@@ -37,7 +36,7 @@ $(document).ready(function () {
                 }
             });
         }
-    }
+    });
 
 
 

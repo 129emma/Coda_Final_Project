@@ -86,10 +86,9 @@
               <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
             </div>
 
-            <div class="btn-group" onclick="readLink()">
+            <div class="btn-group" id="youtube">
               <a class="btn" title="Insert Youtube video"><img class="image" src="http://internetvi.ru/wp-content/uploads/2012/06/e33c1de5c8bd4c4c0bdaba9cd3657a6d.png"/></a>
             </div>
-
             <div class="btn-group" >
               <a class="btn" title="Insert image"><label for="image-input" class="myLabel">
                 <img class="image" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" >
@@ -150,6 +149,7 @@
     <c:if test="${information != null}">
       <p style="color: red">${information}</p>
     </c:if>
+  </div>
   </body>
 <script>
     function prepareContent() {
