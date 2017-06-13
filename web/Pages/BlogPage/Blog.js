@@ -33,24 +33,24 @@ $(document).ready(function () {
             loadArticles();
         }
 
-        if($(window).scrollTop()==0){
+        if ($(window).scrollTop() == 0) {
             $('.topButton').hide();
         }
 
-        if($(window).scrollTop()>100){
+        if ($(window).scrollTop() > 100) {
             $('.topButton').fadeIn();
-        }else {
+        } else {
             $('.topButton').fadeOut();
         }
 
 
-
     });
 
-    $("#followInfo").click(function (){
-         getFollowInfo();
+    $("#followInfo").click(function () {
+        getFollowInfo();
         $(window).off('scroll');
     });
+});
 
 function loadArticles() {
     $.ajax({
@@ -67,83 +67,9 @@ function loadArticles() {
     });
 }
 
-function getFollowers() {
-    $("#getFollowers").off().click(function () {
-        $("#getFollows").removeClass('active');
-        $(this).addClass('active');
-        $("#follows").hide();
-        $("#followers").show();
-    })
-}
-
-function getFollows() {
-    $("#getFollows").off().click(function () {
-        $("#getFollowers").removeClass('active');
-        $(this).addClass('active');
-        $("#follows").show();
-        $("#followers").hide();
-    })
-}
-
-function freshButtonList() {
-    $(".ui.button.unfollow").off().each(function (i,obj) {
-        $(obj).click(function () {
-            var username=$(obj).parent().siblings(".content").html();
-            $.ajax({
-                url: '/Follow',
-                type: 'post',
-                data: {action: 'unfollow', followUsername: username},
-                success: function () {
-                    console.log( $(obj).text());
-                    $(obj).removeClass("unfollow").addClass("follow").html('Follow');
-                    freshButtonList();
-                }
-            })
-        })
-    });
-    $(".ui.button.follow").off().each(function (i,obj) {
-        $(obj).click(function () {
-            var username=$(obj).parent().siblings(".content").html();
-            $.ajax({
-                url: '/Follow',
-                type: 'post',
-                data: {action: 'follow', followUsername: username},
-                success: function () {
-                    console.log( $(obj).text());
-                    $(obj).removeClass("follow").addClass("unfollow").html('Unfollow');
-                    freshButtonList();
-                }
-            })
-        })
-    })
-
-}
-
-
-
-function  getFollowInfo(){
-
-    $("#ArticleContainer").html("");
-    $("#Loader").show();
-    $.ajax({
-        url:'/Follow',
-        type:'post',
-        data:{action:'getFollowInfo'},
-        success: function (followInfo) {
-            var info = followInfo.substring(followInfo.indexOf('\<body\>') + 6, followInfo.indexOf("\</body\>"));
-            $("#ArticleContainer").html(info);
-            getFollows();
-            getFollowers();
-            freshButtonList();
-            $("#followers").hide();
-            $("#follows").show();
-            $("#Loader").hide();
-
-        }
-    })
-}
 
 function followFunction() {
+
     $('.ui.button.blue').off().each(function (i, obj) {
         $(obj).click(function () {
             var username = $(obj).parent().siblings('.header').text();

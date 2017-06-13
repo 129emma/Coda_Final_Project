@@ -82,11 +82,7 @@
                                 </div>
 
                             </a>
-                            <a href="Albums" class="item cardChoice">
-                                <div class="ui icon " data-tooltip="Albums">
-                                    <i class="ion-ios-camera-outline"></i>
-                                </div>
-                            </a>
+
                             <a href="Article?action=create" class="item cardChoice">
                                 <div class="ui icon" data-tooltip="Create">
                                     <i class="ion-ios-compose-outline"></i>

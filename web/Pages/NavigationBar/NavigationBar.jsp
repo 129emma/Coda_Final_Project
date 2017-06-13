@@ -18,7 +18,7 @@
         <div class="ui icon borderless menu">
             <a href="Blog?page=home" class="item iconClass"><i class="ion-ios-home-outline iconClass"></i></a>
             <a href="Albums" class="item"><i class="ion-ios-analytics-outline iconClass"></i></a>
-            <a href="Albums" class="item"><i class="ion-ios-redo-outline iconClass"></i></a>
+            <a href="Login?action=logout" class="item"><i class="ion-ios-redo-outline iconClass"></i></a>
         </div>
     </div>
 
