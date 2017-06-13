@@ -18,24 +18,29 @@
 </head>
 
 <body>
-<form action="${pageContext.request.contextPath}/Login" method="post">
-    <div class="login-block">
-        <h1>Register</h1>
-        <div>
+<div id="container">
+    <form action="${pageContext.request.contextPath}/Login" method="post">
+        <div class="login-block">
+            <h1>Register</h1>
             <input id="registerUsername" required type="text" name="username" class="username" placeholder="Username"/>
-            <input id="registerPassword" required type="password" name="password" class="password" placeholder="Password"/>
+            <input id="registerPassword" required type="password" name="password" class="password"
+                   placeholder="Password"/>
+            <div class="ui checked checkbox">
+                <input id="terms" type="checkbox" checked>
+                <label>I agree to the <a
+                        href="${pageContext.request.contextPath}/Pages/TermsConditionsPage/Terms&Conditions.html">terms
+                    and conditions</a></label>
+            </div>
+            <br><br>
+            <button class="ui green submit fluid button" id="registerButton" type="button"
+                    name="action">Submit</button>
+            <br>
+            <p>Already registered? Login <a href="${pageContext.request.contextPath}/Pages/LoginPage/Login.jsp">HERE</a>
+            </p>
+            <p id="message">${message}</p>
         </div>
-        <input id="registerButton" type="submit" value="register" name="action"/>
-        <div class="ui checked checkbox">
-            <input type="checkbox" checked>
-            <label>I agree to the <a href="${pageContext.request.contextPath}/Pages/TermsConditionsPage/Terms&Conditions.html">terms and conditions</a></label>
-        </div>
-        </p>
-        <p>Already registered? Login <a href="${pageContext.request.contextPath}/Pages/LoginPage/Login.jsp">HERE</a></p>
-        <p id="message">${message}</p>
-    </div>
-</form>
-
+    </form>
+</div>
 </body>
 
 </html>
