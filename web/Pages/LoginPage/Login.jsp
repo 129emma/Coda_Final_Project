@@ -24,12 +24,15 @@
         </div>
         <input type="hidden" value="login" name="action"/>
         <button id="loginButton" type="button">Login</button>
-        <p>No account yet? Register <a href="${pageContext.request.contextPath}/Pages/RegisterPage/Register.jsp">HERE</a></p>
+        <br/><br/>
         <p id="message">${message}</p>
+        <p>No account yet? Register <a href="${pageContext.request.contextPath}/Pages/RegisterPage/Register.jsp">HERE</a></p>
+
+        <div class="ui horizontal divider">Or</div>
+        <div id="my-signin2" onclick="clickDetector()"></div>
     </div>
 </form>
 <%--<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>--%>
-<div id="my-signin2" onclick="clickDetector()"></div>
 
 <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
 

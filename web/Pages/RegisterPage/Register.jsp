@@ -20,14 +20,17 @@
 <body>
 <form action="${pageContext.request.contextPath}/Login" method="post">
     <div class="login-block">
-        <h1>Your Details</h1>
-        <p>Don't panic:) We do respect your privacy! Read Terms&Conditions <a href="${pageContext.request.contextPath}/Pages/TermsConditionsPage/Terms&Conditions.html">HERE</a>
-        </p>
+        <h1>Register</h1>
         <div>
             <input id="registerUsername" required type="text" name="username" class="username" placeholder="Username"/>
             <input id="registerPassword" required type="password" name="password" class="password" placeholder="Password"/>
         </div>
         <input id="registerButton" type="submit" value="register" name="action"/>
+        <div class="ui checked checkbox">
+            <input type="checkbox" checked>
+            <label>I agree to the <a href="${pageContext.request.contextPath}/Pages/TermsConditionsPage/Terms&Conditions.html">terms and conditions</a></label>
+        </div>
+        </p>
         <p>Already registered? Login <a href="${pageContext.request.contextPath}/Pages/LoginPage/Login.jsp">HERE</a></p>
         <p id="message">${message}</p>
     </div>

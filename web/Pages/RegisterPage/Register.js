@@ -24,7 +24,7 @@ function verifyUsername(username) {
                 $("#registerButton").attr('disabled', 'disabled');
                 $("#message").css("color", "red").text(message);
             }
-            $("#message").text(message);
+            // $("#message").text(message);
         }
     });
 }
