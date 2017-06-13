@@ -1,7 +1,6 @@
 package code_project.DAO;
 
 import code_project.Info.FollowInfo;
-import code_project.Info.UserInfo;
 import code_project.db.AbstractDB;
 
 import java.sql.Connection;
@@ -21,7 +20,7 @@ public class FollowInfoDAO {
     public static void follow(AbstractDB db, String followerUsername, String followUsername) throws SQLException{
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT IGNORE INTO UserRelationship (follower, follow) VALUE (?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT IGNORE INTO UserRelationship_beta_1 (follower, follow) VALUE (?,?);")) {
                 p.setString(1, followerUsername);
                 p.setString(2, followUsername);
                 p.executeUpdate();
@@ -34,7 +33,7 @@ public class FollowInfoDAO {
 
     public static void unfollow(AbstractDB db,String followerUsername,String followUsername) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM UserRelationship WHERE follower=? AND follow=?")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM UserRelationship_beta_1 WHERE follower=? AND follow=?")) {
                 p.setString(1, followerUsername);
                 p.setString(2, followUsername);
                 p.executeUpdate();
@@ -50,7 +49,7 @@ public class FollowInfoDAO {
         List<String> followsList = new ArrayList<>();
         List<String> followersList=new ArrayList<>();
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship WHERE follower=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship_beta_1 WHERE follower=?")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -58,7 +57,7 @@ public class FollowInfoDAO {
                     }
                 }
             }
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship WHERE follow=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship_beta_1 WHERE follow=?")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -75,7 +74,7 @@ public class FollowInfoDAO {
 
 
     public static Boolean checkFollowStatus(Connection c,String username,String followUsername){
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship WHERE follower=? AND follow=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship_beta_1 WHERE follower=? AND follow=?")) {
                 p.setString(1,username);
                 p.setString(2,followUsername);
                 try (ResultSet r = p.executeQuery()) {

@@ -1,9 +1,8 @@
 package code_project.DAO;
 
-import code_project.Info.ArticleInfo;
-import code_project.Info.CommentInfo;
-import code_project.Info.CommentInfoList;
+import code_project.Info.*;
 import code_project.db.AbstractDB;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,21 +15,21 @@ import java.util.*;
  */
 public class CommentInfoDAO {
 
-    public static Map<Integer,CommentInfoList> getCommentInfoListOfAllArticle(AbstractDB db , List<ArticleInfo> articleInfoList) {
-        Map<Integer,CommentInfoList> commentInfoListsOfAllArticle= new HashMap<>();
+    public static Map<Integer, CommentInfoList> getCommentInfoListOfAllArticle(AbstractDB db, List<ArticleInfo> articleInfoList) {
+        Map<Integer, CommentInfoList> commentInfoListsOfAllArticle = new HashMap<>();
         for (ArticleInfo articleInfo : articleInfoList) {
-            CommentInfoList commentInfoList= new CommentInfoList(getCommentInfoListByArticle(db,articleInfo.getArticleID()));
-            commentInfoListsOfAllArticle.put(articleInfo.getArticleID(),commentInfoList);
+            CommentInfoList commentInfoList = new CommentInfoList(getCommentInfoListByArticle(db, articleInfo.getArticleID()));
+            commentInfoListsOfAllArticle.put(articleInfo.getArticleID(), commentInfoList);
         }
         return commentInfoListsOfAllArticle;
     }
 
-    public static List<CommentInfo> getCommentInfoListByArticle(AbstractDB db , int articleID) {
+    public static List<CommentInfo> getCommentInfoListByArticle(AbstractDB db, int articleID) {
 
         List<CommentInfo> CommentInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment WHERE articleID=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment_beta_1 WHERE articleID=?")) {
                 p.setInt(1,articleID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -45,12 +44,32 @@ public class CommentInfoDAO {
         return CommentInfoList;
     }
 
-    public static List<CommentInfo> getCommentInfoListByUsername(AbstractDB db , String username) {
+    public static List<CommentReplyInfo> getCommentReplyInfobyCommentReplyID(AbstractDB db, int commentID) {
+        List<CommentReplyInfo> commentReplyInfoList = new ArrayList<>();
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM CommentReply_beta_1 WHERE commentID=?")) {
+                p.setInt(1, commentID);
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        commentReplyInfoList.add(CommentReplyInfoFromResultSet(r));
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return commentReplyInfoList;
+    }
+
+
+    public static List<CommentInfo> getCommentInfoListByUsername(AbstractDB db, String username) {
 
         List<CommentInfo> CommentInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment WHERE username=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment_beta_1 WHERE username=?")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -65,9 +84,9 @@ public class CommentInfoDAO {
         return CommentInfoList;
     }
 
-    public static void createCommentInfo(AbstractDB db, String content, String postTime, String username, String articleID ) throws SQLException {
+    public static void createCommentInfo(AbstractDB db, String content, String postTime, String username, String articleID) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO Comment(content, postTime, username, articleID) VALUES (?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO Comment_beta_1(content, postTime, username, articleID) VALUES (?,?,?,?);")) {
                 p.setString(1, content);
                 p.setString(2, postTime);
                 p.setString(3, username);
@@ -84,7 +103,7 @@ public class CommentInfoDAO {
         CommentInfo CommentInfo = null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment WHERE commentID = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment_beta_1 WHERE commentID = ?")) {
                 p.setString(1, commentID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -99,12 +118,13 @@ public class CommentInfoDAO {
         return CommentInfo;
     }
 
-    public static void updateCommentInfo(AbstractDB db,int commentID,String content, String postTime) throws SQLException {
+    public static void updateCommentInfo(AbstractDB db, int commentID, String content, String username, String postTime) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE Comment set content =?,postTime=? AND commentID=?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE Comment_beta_1 set content =?,postTime=? WHERE username=? and commentID=?;")) {
                 p.setString(1, content);
                 p.setString(2, postTime);
-                p.setInt(3, commentID);
+                p.setString(3, username);
+                p.setInt(4, commentID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -114,8 +134,35 @@ public class CommentInfoDAO {
 
     public static void deleteCommentInfo(AbstractDB db, int commentID) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM Comment WHERE CommentID=?;")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM Comment_beta_1 WHERE CommentID=?;")) {
                 p.setInt(1, commentID);
+                p.executeUpdate();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void deleteCommentReplyInfo(AbstractDB db, int commentReplyID) throws SQLException {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM CommentReply_beta_1 WHERE commentReplyID=?;")) {
+                p.setInt(1, commentReplyID);
+                p.executeUpdate();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void replyCommentInfo(AbstractDB db, String content, String username, String postTime, int commentID, int articleID) throws SQLException {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO CommentReply_beta_1( content, postTime, username, commentID, articleID) VALUES (?,?,?,?,?);")) {
+                p.setString(1, content);
+                p.setString(2, postTime);
+                p.setString(3, username);
+                p.setInt(4, commentID);
+                p.setInt(5, articleID);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -127,11 +174,23 @@ public class CommentInfoDAO {
         return new CommentInfo(
                 r.getInt("CommentID"),
                 r.getString("content"),
-                r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
+                r.getDate("postTime").toString() + " " + r.getTime("postTime").toString(),
                 r.getString("username"),
                 r.getInt("articleID")
         );
     }
+
+    private static CommentReplyInfo CommentReplyInfoFromResultSet(ResultSet r) throws SQLException {
+        return new CommentReplyInfo(
+                r.getInt("commentReplyID"),
+                r.getString("content"),
+                r.getDate("postTime").toString() + " " + r.getTime("postTime").toString(),
+                r.getString("username"),
+                r.getInt("commentID"),
+                r.getInt("articleID")
+        );
+    }
+
 
     //Simplify to static method
     public static String getCurrentTimeStamp() {

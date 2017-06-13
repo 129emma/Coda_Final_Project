@@ -2,7 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 #section0 {
-    background: linear-gradient(#4BBFC3, #7BAABE);
+    background: linear-gradient(#565D6B, #7BAABE);
 }
 
 #section1 {
@@ -10,11 +10,15 @@
 }
 
 #section2 {
-    background: linear-gradient(#636F8F, #83628d);
+    background: linear-gradient(#636F8F, #565D6B);
 }
 
 #fp-nav ul li a span, .fp-slidesNav ul li a span {
     background-color: lightcyan;
+}
+
+a.visible.content {
+    color: white;
 }
 
 h2, a {

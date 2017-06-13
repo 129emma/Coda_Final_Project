@@ -18,7 +18,7 @@
             <div class="ui left close rail" style="width: 80px !important;">
 
                 <div class="ui sticky" style="width: 80px !important;">
-                    <img class="ui raised tiny top aligned rounded image userAvatar " src="User-Info/${article.username}/avatar.jpg">
+                    <img class="ui raised tiny top aligned rounded image userAvatar " src="${article.userAvatar}">
                 </div>
                 <div class="ui flowing popup top left transition hidden">
                         <div class="content">

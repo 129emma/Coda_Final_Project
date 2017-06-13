@@ -3,10 +3,12 @@ package code_project.DAO;
 import code_project.Info.UserInfo;
 import code_project.db.AbstractDB;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
 public class UserInfoDAO {
 
@@ -15,7 +17,7 @@ public class UserInfoDAO {
         List<UserInfo> userInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo_beta_1")) {
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         userInfoList.add(userInfoFromResultSet(r));
@@ -41,7 +43,7 @@ public class UserInfoDAO {
     public static UserInfo getUserInfo(AbstractDB db, String username) {
         UserInfo userInfo = null;
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo WHERE username = ?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo_beta_1 WHERE username = ?")) {
                 p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -58,7 +60,7 @@ public class UserInfoDAO {
 
     public static void updateUserInfo(AbstractDB db, String username,String firstName, String lastName, String email, String birthDate, String gender) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo set firstName = ?, lastName=?, email=?, birthDate=?, gender = ? WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo_beta_1 set firstName = ?, lastName=?, email=?, birthDate=?, gender = ? WHERE username = ?;")) {
                 p.setString(1, firstName);
                 p.setString(2, lastName);
                 p.setString(3, email);
@@ -74,7 +76,7 @@ public class UserInfoDAO {
 
     public static void updateUserIcon(AbstractDB db, String avatar,String username) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo set avatar=? WHERE username = ?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE UserInfo_beta_1 set avatar=? WHERE username = ?;")) {
                 p.setString(1, avatar);
                 p.setString(2, username);
                 p.executeUpdate();
@@ -86,27 +88,7 @@ public class UserInfoDAO {
 
     public static void deleteUserInfo(AbstractDB db, String username) throws SQLException {
         try (Connection c = db.connection()) {
-                try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsVideo WHERE username = ?") ){
-                    p.setString(1,username);
-                    p.executeUpdate();
-                }
-                try(PreparedStatement a=c.prepareStatement("DELETE FROM AlbumsAudio WHERE username = ?")){
-                    a.setString(1,username);
-                    a.executeUpdate();
-                }
-            try(PreparedStatement a=c.prepareStatement("DELETE FROM AlbumsImage WHERE username = ?")){
-                a.setString(1,username);
-                a.executeUpdate();
-            }
-            try(PreparedStatement a=c.prepareStatement("DELETE FROM Article WHERE username = ?")){
-                a.setString(1,username);
-                a.executeUpdate();
-            }
-            try(PreparedStatement a=c.prepareStatement("DELETE FROM Comment WHERE username = ?")){
-                a.setString(1,username);
-                a.executeUpdate();
-            }
-            try(PreparedStatement a=c.prepareStatement("DELETE FROM UserInfo WHERE username = ?")){
+            try(PreparedStatement a=c.prepareStatement("DELETE FROM UserInfo_beta_1 WHERE username = ?")){
                 a.setString(1,username);
                 a.executeUpdate();
             }
@@ -122,7 +104,7 @@ public class UserInfoDAO {
 List<UserInfo> userList=new ArrayList<>();
      try (Connection c = db.connection()) {
          for(String name:usernameList){
-             try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo WHERE username = ?")) {
+             try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserInfo_beta_1 WHERE username = ?")) {
                  p.setString(1, name);
                  try (ResultSet r = p.executeQuery()) {
                      while (r.next()) {

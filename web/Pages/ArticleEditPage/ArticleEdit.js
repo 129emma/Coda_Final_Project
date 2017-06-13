@@ -8,6 +8,7 @@ $(document).ready(function () {
         $(this).change(function () {
             var data = new FormData();
             data.append('file', $(this).prop('files')[0]);
+            $('#editor').append(data + '<div><br></div>');
             $.ajax({
                 url: '/AlbumsChange',
                 type: 'POST',
@@ -15,7 +16,7 @@ $(document).ready(function () {
                 processData: false,  // tell jQuery not to process the data
                 contentType: false,  // tell jQuery not to set contentType
                 success: function (data) {
-                    $('#editor').append(data + '<div><br></div>');
+
                 }
             });
             $(this).val('');
@@ -27,12 +28,13 @@ $(document).ready(function () {
         var input = prompt("Please put your video link", "link here");
         if (input != null) {
             var data = {'action': 'createYoutube', 'youtubeAddress': input};
+            $('#editor').append(input + '<div><br></div>');
             $.ajax({
                 url: '/AlbumsChange',
                 type: 'POST',
                 data: data,
                 success: function (data) {
-                    $('#editor').append(input + '<div><br></div>');
+
                 }
             });
         }

@@ -4,7 +4,7 @@
 var articlesNum = 3;
 var process = false;
 
-$(document).ready(function (){
+$(document).ready(function () {
 
     loadArticles();
 
@@ -21,26 +21,32 @@ $(document).ready(function (){
             context: $(this).parent().parent()
         });
     });
-    $(window).scroll(function () {
 
-        console.log(process);
-        if ($(window).scrollTop() + $(window).height()+1 >= $(document).height() && process == false) {
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() && process == false) {
             process = true;
             $("#Loader").show();
             articlesNum += 3;
             loadArticles();
         }
+
+        if ($(window).scrollTop() == 0) {
+            $('.topButton').hide();
+        }
+
+        if ($(window).scrollTop() > 100) {
+            $('.topButton').fadeIn();
+        } else {
+            $('.topButton').fadeOut();
+        }
+
+
     });
 
-    $("#followInfo").click(function (){
-         getFollowInfo();
+    $("#followInfo").click(function () {
+        getFollowInfo();
         $(window).off('scroll');
     });
-
-
-
-
-
 });
 function loadArticles(){
         $.ajax({
@@ -151,6 +157,7 @@ function  getFollowInfo(){
 }
 
 function followFunction() {
+
     $('.ui.button.blue').off().each(function (i, obj) {
         $(obj).click(function () {
             var username = $(obj).parent().siblings('.header').text();
