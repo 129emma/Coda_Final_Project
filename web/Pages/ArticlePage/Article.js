@@ -26,8 +26,6 @@ $(document)
         refresh();
     });
 
-
-
 function likeArticle() {
     var id = $('#id').text();
     $('.ui.button.dislike').off().click(function () {

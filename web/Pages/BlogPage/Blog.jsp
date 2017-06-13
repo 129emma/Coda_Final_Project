@@ -90,8 +90,6 @@
                                     <i class="purple write icon"></i>
                                 </div>
                             </a>
-
-
                         </div>
                         <div class="extra content">
                             <div id="flipright" class="ui icon right floated button">

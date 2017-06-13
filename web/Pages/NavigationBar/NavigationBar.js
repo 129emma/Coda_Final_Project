@@ -19,6 +19,8 @@ $(document)
         // create sidebar and attach to menu open
         $('.ui.sidebar')
             .sidebar('attach events', '.toc.item')
+            .sidebar('setting','transition','overlay')
+            .sidebar('toggle')
         ;
 
 
