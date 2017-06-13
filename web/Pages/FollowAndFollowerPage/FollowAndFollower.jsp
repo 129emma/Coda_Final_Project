@@ -29,7 +29,7 @@
         <c:forEach var="follow" items="${followsList}">
             <div class="item">
                 <div class="right floated content">
-                    <div class="ui button unfollow" >Unfollow</div>
+                        ${follow.followStatus}
                 </div>
                 <img class="ui avatar image" src="${follow.avatar}">
                 <div class="content">${follow.username}</div>
@@ -42,7 +42,7 @@
         <c:forEach var="follower" items="${followersList}">
             <div class="item">
                 <div class="right floated content">
-                    <div class="ui button follow"> <i class="add user icon"></i></div>
+                        ${follower.followStatus}
                 </div>
                 <img class="ui avatar image" src="${follower.avatar}">
                 <div class="content">${follower.username}</div>

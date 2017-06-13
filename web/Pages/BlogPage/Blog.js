@@ -102,7 +102,7 @@ function freshButtonList() {
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
                     console.log( $(obj).text());
-                    $(obj).removeClass("unfollow").addClass("follow").html('Follow');
+                    $(obj).removeClass("unfollow").addClass("follow").html('<i class="add user icon"></i>');
                     freshButtonList();
                 }
             })
@@ -117,7 +117,7 @@ function freshButtonList() {
                 data: {action: 'follow', followUsername: username},
                 success: function () {
                     console.log( $(obj).text());
-                    $(obj).removeClass("follow").addClass("unfollow").html('Unfollow');
+                    $(obj).removeClass("follow").addClass("unfollow").html('<i class="remove user icon"></i>');
                     freshButtonList();
                 }
             })

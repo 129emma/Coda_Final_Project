@@ -209,10 +209,12 @@ $('#fileButton').click(function () {
             .modal('show')
         ;
     }
+
     $("#submitAvatarChange").click(function () {
                 $("#avatarForm").submit();
 
     });
+
     $(".rounded").each(function () {
         $(this).click(function () {
             var src = $(this).attr('src');
@@ -220,6 +222,7 @@ $('#fileButton').click(function () {
             $('input[type=hidden]').val(src);
         });
     });
+
 
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -230,6 +233,8 @@ $('#fileButton').click(function () {
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+
 
     $('#imageFile').change(function () {
         readURL(this);

@@ -6,6 +6,7 @@ import java.util.List;
  * Created by 熊猫 on 2017/6/11.
  */
 public class FollowInfo {
+
     private List<String> follows;
     private List<String> followers;
 

@@ -132,11 +132,11 @@
                     $(spotlightContentID).html("<div style='text-align:center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
                 }
 
-                $("#showUsers").off().click(function () {
+                $("#showUsers").addClass("active").off().click(function () {
                     $(userContentID).show();
                     $(spotlightContentID).hide();
                 });
-                $("#showSpotlight").off().click(function () {
+                $("#showSpotlight").removeClass("active").off().click(function () {
                     $(userContentID).hide();
                     $(spotlightContentID).show();
                 });
