@@ -31,6 +31,7 @@ CREATE TABLE Article_beta_1 (
   content    LONGTEXT,
   postTime   DATETIME,
   tags       VARCHAR(99),
+  likeNum    BIGINT,
   username   VARCHAR(99),
   userAvatar VARCHAR(256),
   FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)

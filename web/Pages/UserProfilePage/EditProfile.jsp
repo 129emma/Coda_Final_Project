@@ -64,16 +64,7 @@
         }
 
     </style>
-<script>
-    $(document).ready(function () {
-        $.ajax({
-            url:"/User-Info/gin/avatar.jpg",
-            success: function (data) {
-            }
-        });
-    });
 
-</script>
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
@@ -193,7 +184,7 @@
                 Cancel
             </div>
             <button id="submitAvatarChange" class="ui positive right icon button">
-                <i class="list icon"></i>
+                <i id="saveIcon" class="list icon"></i>
                 Save
             </button>
         </div>

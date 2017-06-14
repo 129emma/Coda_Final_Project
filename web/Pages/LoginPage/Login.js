@@ -1,16 +1,70 @@
 /**
  * Created by pqsky on 2017/6/6.
  */
+var userClicked = false;
+
 $(document).ready(function () {
-    $("#loginButton").click(function () {
-        $('#form').submit();
-    })
+    renderButton();
+
+    $('#loginButton').click(function () {
+        var username = $('#loginUsername').val();
+        var password = $('#loginPassword').val();
+
+        if (username!= ""&& password!= "") {
+            login(username,password);
+        }else if(username == ""){
+            $('#loginBlock').transition('shake');
+            $("#message").css("color", "red").text("Please enter your username");
+        }else if(password == ""){
+            $('#loginBlock').transition('shake');
+            $("#message").css("color", "red").text("Please enter your password");
+        }
+    });
 });
+
+function login(username,passowrd) {
+    $.ajax({
+        url: '/Login',
+        type: 'post',
+        data: {action: 'login', username: username, password:passowrd},
+        success: function (message) {
+            if(message=="login"){
+                location.href = "/Blog?page=home";
+            }else{
+                $('#loginBlock').transition('shake');
+                $("#message").css("color", "red").text(message);
+            }
+        }
+    });
+}
 
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         console.log('User signed out.');
+    });
+}
+
+function clickDetector() {
+    userClicked = true;
+}
+
+function onSuccess(googleUser) {
+    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    onSignIn(googleUser)
+}
+function onFailure(error) {
+    console.log(error);
+}
+function renderButton() {
+    gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 280,
+        'height': 40,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
     });
 }
 
@@ -29,56 +83,20 @@ function onSignIn(googleUser) {
     // The ID token you need to pass to your backend:
     var idToken = googleUser.getAuthResponse().id_token;
     console.log("ID Token: " + idToken);
-    $.ajax({
-        url: '/GoogleLogin',
-        type: 'post',
-        data: {idToken: idToken},
-        success: function (result) {
-            if (result == "success") {
-                location.href = "/Blog?page=home";
-            } else {
-                $("#message").css("color", "red").text(result);
+    if (userClicked) {
+        $.ajax({
+            url: '/GoogleLogin',
+            type: 'post',
+            data: {idToken: idToken},
+            success: function (result) {
+                if (result == "success") {
+                    location.href = "/Blog?page=home";
+                } else {
+                    $("#message").css("color", "red").text(result);
+                }
             }
-        }
-    });
-}
-
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {
-        return;
+        });
+    } else {
+        signOut();
     }
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-FB.getLoginStatus(function (response) {
-    statusChangeCallback(response);
-});
-
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9&appId=466254077053335";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-    });
 }
-
-window.fbAsyncInit = function () {
-    FB.init({
-        appId: '466254077053335',
-        cookie: true,
-        xfbml: true,
-        version: 'v2.8'
-    });
-    FB.AppEvents.logPageView();
-};

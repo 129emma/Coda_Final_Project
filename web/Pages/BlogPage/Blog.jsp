@@ -58,7 +58,7 @@
                             </div>
                             <!--User Icon-->
                             <div class="ui small image iconImage">
-                                <img src="${userInfo.avatar}">
+                                <img class="ui small image" src="${userInfo.avatar}">
                             </div>
                         </div>
                         <!--User Name-->
@@ -89,11 +89,13 @@
                                     <i class="ion-ios-compose-outline"></i>
                                 </div>
                             </a>
-                            <a href="#" class="item" id="followIcon">
+                            <a href="#" class="item" id="followInfo">
                                 <div class="ui icon" data-tooltip="Follows">
                                     <i class="heart icon"></i>
                                 </div>
                             </a>
+
+
                         </div>
                         <div class="extra content">
                             <div id="flipright" class="ui icon right floated button">
@@ -119,9 +121,7 @@
                                 <!--fixed size for this background,maximum height is 270px-->
                                 <img src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
                                 <!--User Icon-->
-                                <div class="ui small image iconImage">
-                                    <img src="${userInfo.avatar}">
-                                </div>
+                                <img class="ui small image iconImage" src="${userInfo.avatar}">
                             </div>
                         </div>
                         <div class="content">
@@ -147,11 +147,12 @@
                 </div>
             </div>
         </div>
-    </div>
-<div class="ui text justified container">
-    <div id="ArticleContainer" >
 
     </div>
+    <div class="ui text justified container">
+        <div id="ArticleContainer">
+
+        </div>
 
     <div  id="Loader">
         <div class="ui icon message">
@@ -165,13 +166,13 @@
         </div>
     </div>
 
-    <a href="#topMenu" >
-    <div class="ui button topButton" >
-         top
-    </div>
-    </a>
+        <a href="#topMenu">
+            <div class="ui button topButton">
+                top
+            </div>
+        </a>
 
-</div>
+    </div>
 
 </div>
 

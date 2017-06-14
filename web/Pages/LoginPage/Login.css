@@ -1,11 +1,19 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 body {
-    background-color: #71c7d6;
+    background: linear-gradient(#565D6B, #7BAABE);
+}
+
+#container {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 form {
-    margin-top: 15em;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .login-block {
@@ -60,28 +68,9 @@ form {
 }
 
 .login-block input:active, .login-block input:focus {
-    border: 1px solid #ff656c;
+    border: 1px solid #7BAABE;
 }
 
-.login-block #loginButton {
-    width: 100%;
-    height: 40px;
-    background: #71e1ff;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px solid #3cc0e1;
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-family: Montserrat,sans-serif;
-    outline: none;
-    cursor: pointer;
-}
-
-.login-block #loginButton:hover {
-    background: #d3ffff;
-}
 
 #message {
     color: red;

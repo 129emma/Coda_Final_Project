@@ -70,7 +70,6 @@
         <url-pattern>/Profile</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>AvatarEdit</servlet-name>
         <servlet-class>code_project.Servlet.AvatarEditServlet</servlet-class>
