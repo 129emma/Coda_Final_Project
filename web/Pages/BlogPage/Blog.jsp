@@ -149,34 +149,39 @@
         </div>
 
     </div>
-<div class="ui text justified container">
-    <div id="ArticleContainer" >
+    <div class="ui text justified container">
+        <div id="ArticleContainer">
 
-    </div>
+        </div>
 
 
-    <div class="ui center aligned vertical segment" id="Loader">
-        <div class="ui icon message">
-            <i class="notched circle loading icon"></i>
-            <div class="content">
-                <div class="header">
-                    Just one second
+        <div class="ui center aligned vertical segment" id="Loader">
+            <div class="ui icon message">
+                <i class="notched circle loading icon"></i>
+                <div class="content">
+                    <div class="header">
+                        Just one second
+                    </div>
+                    <p>We're loading the content for you.</p>
                 </div>
-                <p>We're loading the content for you.</p>
             </div>
         </div>
 
+        <div class="ui message" id="noArticleMessage">
+            <i class="close icon"></i>
+            <div class="header">
+                Please create an article !
+            </div>
+            <p>Please do so :)</p>
+        </div>
+
+        <a href="#topMenu">
+            <div class="ui button topButton">
+                top
+            </div>
+        </a>
+
     </div>
-
-    <a href="#topMenu" >
-    <div class="ui button topButton" >
-         top
-    </div>
-    </a>
-
 </div>
-
-</div>
-
 </body>
 </html>

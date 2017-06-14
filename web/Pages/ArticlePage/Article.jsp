@@ -55,14 +55,6 @@
                 </div>
             </div>
 
-            <%--<div class="overlay">--%>
-            <%--<div class="ui labeled icon vertical menu">--%>
-            <%--<a class="item"><i class="twitter icon"></i> Tweet</a>--%>
-            <%--<a class="item"><i class="facebook icon"></i> Share</a>--%>
-            <%--<a class="item"><i class="mail icon"></i> E-mail</a>--%>
-            <%--</div>--%>
-            <%--</div>--%>
-
             <div class="ui comments">
                 <h3 class="ui dividing header">Comments</h3>
 

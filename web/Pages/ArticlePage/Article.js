@@ -46,7 +46,6 @@ function likeArticle() {
         console.log("likeClick");
         $(this).prop("disabled", true);
         var numLike = $('.ui.basic.right.pointing.label').text();
-        numLike = numLike + 1;
         $('.ui.basic.right.pointing.label').text(parseInt(numLike, 10) + 1);
         $('.heart.icon').addClass('red');
         $('#ifLiked').text('liked');
@@ -82,37 +81,3 @@ function likeArticle() {
         })
     });
 }
-//
-// function refresh() {
-//     var id = $('#id').text();
-//     $.ajax({
-//         url: '/Article',
-//         type: 'post',
-//         data: {action: 'checkLikeStatus', articleID: id},
-//         success: function (result) {
-//             console.log("success");
-//             if (result == 'liked') {
-//                 console.log(result);
-//                 $('.heart.icon').addClass('red');
-//                 $('#likeButton').addClass('liked');
-//                 $('#ifLiked').text('liked');
-//             } else {
-//                 $('.heart.icon').removeClass('red');
-//                 $('#likeButton').addClass('like');
-//                 $('#ifLiked').text('like');
-//             }
-//             $.ajax({
-//                 url: '/Article',
-//                 type: 'post',
-//                 data: {action: 'getLikeNum', articleID: id},
-//                 success: function (resultInt) {
-//                     console.log("success2");
-//                     console.log(resultInt);
-//                     $('.ui.basic.right.pointing.label').text(resultInt);
-//                 }
-//             });
-//             likeArticle();
-//         }
-//     });
-//
-// }

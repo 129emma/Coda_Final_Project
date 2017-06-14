@@ -2,7 +2,7 @@
  * Created by qpen546 on 5/06/2017.
  */
 
-$(document).ready(function () {
+// $(document).ready(function () {
 
     $('#fullpage').fullpage({
         continuousVertical: true,
@@ -56,7 +56,7 @@ $(document).ready(function () {
             $("#message").css("color", "red").text("Please enter your password");
         }
     });
-});
+// });
 
 function getPage(action) {
     $.ajax({
