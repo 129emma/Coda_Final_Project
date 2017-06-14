@@ -22,7 +22,7 @@ $(document).ready(function () {
         });
     });
 
-    setInterval(function () {
+    var autoRefresh = setInterval(function () {
         if ($(window).height() == $(document).height() && ajaxProcess == false) {
             ajaxProcess = true;
             $("#Loader").fadeIn();
@@ -53,13 +53,12 @@ $(document).ready(function () {
         } else {
             $('.topButton').fadeOut();
         }
-
-
     });
 
     $("#followInfo").click(function () {
         getFollowInfo();
         $(window).off('scroll');
+        clearInterval(autoRefresh);
     });
 });
 function loadArticles() {
@@ -220,14 +219,3 @@ function refresh() {
         });
     });
 }
-
-// var $content = $("#ContentContainer");
-// $("#Loader").hide();
-// if ($content.html() != articlesPreview) {
-//     $content.html(articlesPreview);
-//     ajaxProcess = false;
-// } else {
-//     setTimeout(function () {
-//         ajaxProcess = false;
-//     }, 10000);
-// }
