@@ -58,13 +58,14 @@ public class AlbumsImageDAO {
         return AlbumsImageInfoList;
     }
 
-    public static void createAlbumsImageInfo(AbstractDB db, String username,String address,String fileName) throws SQLException {
+    public static void createAlbumsImageInfo(AbstractDB db, String username,String address,String fileName,String avatar) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsImage_beta_1(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsImage_beta_1(username,address,postTime,fileName,userAvatar) VALUES (?,?,?,?,?)")) {
                 p.setString(1, username);
                 p.setString(2, address);
                 p.setString(4,fileName);
                 p.setString(3, getCurrentTimeStamp());
+                p.setString(5,avatar);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -115,7 +116,8 @@ public class AlbumsImageDAO {
                 r.getString("fileName"),
                 r.getString("username"),
                 r.getString("address"),
-                r.getDate("postTime").toString()+" "+r.getTime("postTime").toString()
+                r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
+                r.getString("userAvatar")
         );
     }
    private static String getCurrentTimeStamp() {

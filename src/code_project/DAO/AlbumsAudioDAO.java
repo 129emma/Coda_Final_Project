@@ -58,13 +58,14 @@ public class AlbumsAudioDAO {
         return AlbumsAudioInfoList;
     }
 
-    public static void createAlbumsAudioInfo(AbstractDB db, String username,String address,String fileName) throws SQLException {
+    public static void createAlbumsAudioInfo(AbstractDB db, String username,String address,String fileName,String avatar) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsAudio_beta_1(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsAudio_beta_1(username,address,postTime,fileName,userAvatar) VALUES (?,?,?,?,?)")) {
                 p.setString(1, username);
                 p.setString(2, address);
                 p.setString(3, getCurrentTimeStamp());
                 p.setString(4,fileName);
+                p.setString(5,avatar);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -115,7 +116,8 @@ public class AlbumsAudioDAO {
                 r.getString("fileName"),
                 r.getString("username"),
                 r.getString("address"),
-                r.getDate("postTime").toString()+" "+r.getTime("postTime").toString()
+                r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
+                r.getString("userAvatar")
         );
     }
 

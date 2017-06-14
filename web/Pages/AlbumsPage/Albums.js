@@ -49,7 +49,7 @@ function loadInfo(info) {
         type: 'POST',
         data: {action: info},
         success: function (data) {
-            var content = data.substring(data.indexOf("<div id='" + info + "'>"), data.indexOf("<div id='" + info + "End'>"));
+            var content = data.substring(data.indexOf("<div id='" + info + "'"), data.indexOf("<div id='" + info + "End'>"));
             $('#content').html(content);
             var userContentID = "#user" + info + "List";
             var spotlightContentID = "#spotlight" + info + "List";
