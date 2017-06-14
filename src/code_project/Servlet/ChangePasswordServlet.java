@@ -1,6 +1,7 @@
 package code_project.Servlet;
 
 import code_project.DAO.LoginInfoDAO;
+import code_project.DAO.UserInfoDAO;
 import code_project.Info.LoginInfo;
 import code_project.Security.LoginStatus;
 import code_project.Security.Passwords;
@@ -37,6 +38,10 @@ public class ChangePasswordServlet extends HttpServlet {
         response.setContentType("text/html");
         Writer out = response.getWriter();
         username = (String) session.getAttribute("username");
+        if(UserInfoDAO.googleUser(mySQL,username)){
+            out.write("Fail: google user do not need password");
+            return;
+        }
         password = request.getParameter("password");
         newPassword = request.getParameter("newPassword");
 

@@ -2,7 +2,7 @@
  * Created by qpen546 on 31/05/2017.
  */
 var articlesNum = 3;
-var process = false;
+var ajaxProcess = true;
 
 $(document).ready(function () {
 
@@ -22,10 +22,24 @@ $(document).ready(function () {
         });
     });
 
+    setInterval(function () {
+        if ($(window).height() == $(document).height() && ajaxProcess == false) {
+            ajaxProcess = true;
+            $("#Loader").fadeIn();
+            $("html, body").animate({scrollTop: $(document).height()}, 200);
+            articlesNum += 3;
+            loadArticles();
+        }
+    }, 10000);
+
+
     $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height() && process == false) {
-            process = true;
-            $("#Loader").show();
+        console.log("1: " + ajaxProcess);
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() && ajaxProcess == false) {
+            ajaxProcess = true;
+            console.log("2: " + ajaxProcess);
+            $("#Loader").fadeIn();
+            $("html, body").animate({scrollTop: $(document).height()}, 200);
             articlesNum += 3;
             loadArticles();
         }
@@ -48,26 +62,31 @@ $(document).ready(function () {
         $(window).off('scroll');
     });
 });
-function loadArticles(){
-        $.ajax({
-            url: '/Article',
-            type: 'post',
-            data: {action: 'preview', articleNumber: articlesNum, page: page},
-            success: function (articlesPreview) {
-                var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
-                $("#ArticleContainer").html(preview);
-                $("#Loader").hide();
-                process = false;
-                refresh();
-                followFunction();
-            }
-        });
+function loadArticles() {
+    $.ajax({
+        url: '/Article',
+        type: 'post',
+        data: {action: 'preview', articleNumber: articlesNum, page: page},
+        success: function (articlesPreview) {
+            console.log("3: " + ajaxProcess);
+            var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
+            $("#ArticleContainer").html(preview);
+            $("#Loader").fadeOut();
+            console.log("4: " + ajaxProcess);
+            refresh();
+            followFunction();
+            setTimeout(function () {
+                ajaxProcess = false;
+                console.log("5: " + ajaxProcess);
+            }, 3000);
+        }
+    });
 }
 
 function barFunction() {
     handler = {
-        activate: function() {
-            if(!$(this).hasClass('dropdown browse')) {
+        activate: function () {
+            if (!$(this).hasClass('dropdown browse')) {
                 $(this)
                     .addClass('active')
                     .closest('.ui.menu')
@@ -99,30 +118,30 @@ function getFollows() {
 }
 
 function freshButtonList() {
-    $(".ui.button.unfollow").off().each(function (i,obj) {
+    $(".ui.button.unfollow").off().each(function (i, obj) {
         $(obj).click(function () {
-            var username=$(obj).parent().siblings(".content").html();
+            var username = $(obj).parent().siblings(".content").html();
             $.ajax({
                 url: '/Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
-                    console.log( $(obj).text());
+                    console.log($(obj).text());
                     $(obj).removeClass("unfollow").addClass("follow").html('<i class="add user icon"></i>');
                     freshButtonList();
                 }
             })
         })
     });
-    $(".ui.button.follow").off().each(function (i,obj) {
+    $(".ui.button.follow").off().each(function (i, obj) {
         $(obj).click(function () {
-            var username=$(obj).parent().siblings(".content").html();
+            var username = $(obj).parent().siblings(".content").html();
             $.ajax({
                 url: '/Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
-                    console.log( $(obj).text());
+                    console.log($(obj).text());
                     $(obj).removeClass("follow").addClass("unfollow").html('<i class="remove user icon"></i>');
                     freshButtonList();
                 }
@@ -133,14 +152,13 @@ function freshButtonList() {
 }
 
 
-
-function  getFollowInfo(){
+function getFollowInfo() {
     $("#ArticleContainer").html("");
     $("#Loader").show();
     $.ajax({
-        url:'/Follow',
-        type:'post',
-        data:{action:'getFollowInfo'},
+        url: '/Follow',
+        type: 'post',
+        data: {action: 'getFollowInfo'},
         success: function (followInfo) {
             var info = followInfo.substring(followInfo.indexOf('\<body\>') + 6, followInfo.indexOf("\</body\>"));
             $("#ArticleContainer").html(info);
@@ -207,9 +225,9 @@ function refresh() {
 // $("#Loader").hide();
 // if ($content.html() != articlesPreview) {
 //     $content.html(articlesPreview);
-//     process = false;
+//     ajaxProcess = false;
 // } else {
 //     setTimeout(function () {
-//         process = false;
+//         ajaxProcess = false;
 //     }, 10000);
 // }

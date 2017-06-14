@@ -149,31 +149,26 @@
         </div>
 
     </div>
-    <div class="ui text justified container">
+    <div id="contentContainer" class="ui text justified container">
         <div id="ArticleContainer">
-
         </div>
-
-
-        <div class="ui center aligned vertical segment" id="Loader">
-            <div class="ui icon message">
-                <i class="notched circle loading icon"></i>
-                <div class="content">
-                    <div class="header">
-                        Just one second
-                    </div>
-                    <p>We're loading the content for you.</p>
+        <div class="ui icon message" id="Loader" hidden>
+            <i class="notched circle loading icon"></i>
+            <div class="content">
+                <div class="header">
+                    Just one second
                 </div>
+                <p>We're loading that content for you.</p>
             </div>
-
         </div>
-
         <a href="#topMenu">
             <div class="ui button topButton">
                 top
             </div>
         </a>
-
+    </div>
+    <div class="ui text container">
+        <p style="margin: auto;color: white;text-align: center;">Copyright © Today-Today CODA Team, All Rights Reserved</p>
     </div>
 
 </div>

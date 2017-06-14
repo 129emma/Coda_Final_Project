@@ -10,7 +10,6 @@ import code_project.Info.CommentReplyInfo;
 import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
-import org.json.simple.JSONArray;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -87,8 +86,8 @@ public class ArticleServlet extends HttpServlet {
                     break;
                 case "spotlight":
                     totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL);
-                    articleNumber = Math.min(totalArticleNumber,articleNumber);
-                    articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, articleNumber,username);
+                    articleNumber = Math.min(totalArticleNumber, articleNumber);
+                    articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, articleNumber, username);
                     break;
             }
         }
@@ -102,12 +101,12 @@ public class ArticleServlet extends HttpServlet {
         ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL, articleID);
         articleInfo.setEditArticle(username);
         articleInfo.setDeleteArticle(username);
-        retrieveComments(request, response);
+        retrieveComments(request, response, articleInfo);
         request.setAttribute("articleInfo", articleInfo);
         request.getRequestDispatcher("Pages/ArticlePage/Article.jsp").forward(request, response);
     }
 
-    private void retrieveComments(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void retrieveComments(HttpServletRequest request, HttpServletResponse response, ArticleInfo articleInfo) throws ServletException, IOException {
         String articleID = request.getParameter("articleID");
         String username = (String) session.getAttribute("username");
         List<CommentInfo> commentInfoList = CommentInfoDAO.getCommentInfoListByArticle(mySQL, Integer.parseInt(articleID));
@@ -115,8 +114,10 @@ public class ArticleServlet extends HttpServlet {
             for (CommentInfo commentInfo : commentInfoList) {
                 commentInfo.setReplyComment(username);
                 commentInfo.setEditComment(username);
-                commentInfo.setDeleteComment(username);
-               commentInfo.setCommentReplyInfoList(retrieveRepliedComments(commentInfo.commentID));
+                if (username.equals(commentInfo.getUsername()) || username.equals(articleInfo.getUsername())) {
+                    commentInfo.setDeleteComment();
+                }
+                commentInfo.setCommentReplyInfoList(retrieveRepliedComments(commentInfo.getCommentID(),articleInfo));
             }
         }
 
@@ -124,12 +125,14 @@ public class ArticleServlet extends HttpServlet {
 
     }
 
-    private List<CommentReplyInfo> retrieveRepliedComments(int commentID) throws ServletException, IOException {
+    private List<CommentReplyInfo> retrieveRepliedComments(int commentID,ArticleInfo articleInfo) throws ServletException, IOException {
+        String username = (String) session.getAttribute("username");
         List<CommentReplyInfo> commentReplyInfoList = CommentInfoDAO.getCommentReplyInfobyCommentReplyID(mySQL, commentID);
         if (commentReplyInfoList != null) {
             for (CommentReplyInfo commentReply : commentReplyInfoList) {
-                commentReply.setDeleteCommentReply(commentReply.commentReplyID);
-
+                if (username.equals(commentReply.getUsername()) || username.equals(articleInfo.getUsername())) {
+                    commentReply.setDeleteCommentReply(commentReply.getCommentReplyID());
+                }
             }
         }
         return commentReplyInfoList;
@@ -199,7 +202,7 @@ public class ArticleServlet extends HttpServlet {
         }
     }
 
-    private void dislikeArticle (HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void dislikeArticle(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         try {
             LikeInfoDAO.cancelLike(mySQL, request.getParameter("articleID"), (String) session.getAttribute("username"));
@@ -209,7 +212,7 @@ public class ArticleServlet extends HttpServlet {
         }
     }
 
-    private void likeArticle (HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void likeArticle(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         try {
             LikeInfoDAO.like(mySQL, request.getParameter("articleID"), (String) session.getAttribute("username"));
@@ -218,7 +221,7 @@ public class ArticleServlet extends HttpServlet {
         }
     }
 
-    private void checkLikeStatus (HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void checkLikeStatus(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain");
         try {
             if (LikeInfoDAO.checkLikeStatus(mySQL, request.getParameter("articleID"), (String) session.getAttribute("username"))) {
@@ -232,7 +235,7 @@ public class ArticleServlet extends HttpServlet {
 
     }
 
-    private void getLikeNum (HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void getLikeNum(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             long numOfLikes = LikeInfoDAO.getLikeNum(mySQL, request.getParameter("articleID"));
             response.getWriter().write(String.valueOf(numOfLikes));

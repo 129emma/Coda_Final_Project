@@ -111,19 +111,20 @@
                     <p id="usernameMessage"></p>
                 </div>
                 <div class="field">
-                    <label>Firstname:</label><input type="text" name="firstName" value="${userProfile.firstName}"/>
+                    <label>Firstname:</label><input type="text" name="firstName" value="${userProfile.firstName}"
+                                                    style="max-width: 300px"/>
                 </div>
                 <div class="field">
                     <label>Lastname:</label> <input type="text" name="lastName" value="${userProfile.lastName}"
-                                                    style="width: 300px;"/></div>
+                                                    style="max-width: 300px"/></div>
                 <div class="field">
                     <label>Email: </label><input type="email" name="email" value="${userProfile.email}"
-                                                 style="width: 300px;"/></div>
+                                                 style="max-width: 300px"/></div>
                 <div class="field">
                     <label>Birthday:</label> <input type="date" name="birthday" value="${userProfile.birthDate}"
-                                                    style="width: 300px;"/></div>
+                                                    style="max-width: 300px"/></div>
                 <div class="field">
-                    <label>Gender:</label><select name="gender" style="width: 300px">
+                    <label>Gender:</label><select name="gender" style="max-width: 300px">
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
                 </select>
@@ -132,9 +133,7 @@
                 <input class="ui submit button" type="submit" name="profileAction"
                        value="Delete"/>
             </form>
-            <%--<div class="ui dividing header">--%>
-            <%--<h3>Change Password</h3>--%>
-            <%--</div>--%>
+            <br/>
             <div id="passwordDivider" class="ui fitted horizontal divider" style="display: none;">Change Password</div>
             <form class="ui form" id="passwordForm" action="ChangePassword" method="post" style="display: none;">
                 <div class="field">
@@ -157,13 +156,7 @@
                 </div>
                 <button id="passwordBtn" class="ui submit button" type="button" value="Update">Update</button>
             </form>
-            <br>
-
-            <%--<div class="ui dividing header">--%>
-            <%--<h3>Change Details</h3>--%>
-            <%--</div>--%>
-
-        </div><!--end of edit segment-->
+        </div>
         <br>
     </div>
 </div>

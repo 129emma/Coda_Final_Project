@@ -1,10 +1,6 @@
 package code_project.Info;
 
-import jdk.nashorn.api.scripting.JSObject;
 import org.json.simple.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by txie936 on 25/05/2017.
@@ -24,8 +20,6 @@ public class ArticleInfo {
     public String followButton;
 
 
-
-
     public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username, String userAvatar) {
         this.articleID = articleID;
         this.title = title;
@@ -34,11 +28,12 @@ public class ArticleInfo {
         this.tags = tags;
         this.username = username;
         this.userAvatar = userAvatar;
-        setPreview();
+        this.preview = "";
         this.editArticle = "";
         this.deleteArticle = "";
-        this.followButton="";
+        this.followButton = "";
         this.retrieveAddress = "Article?action=retrieve&articleID=" + articleID;
+        setPreview();
     }
 
     public String getFollowButton() {
@@ -54,12 +49,17 @@ public class ArticleInfo {
     }
 
     public void setPreview() {
-        int defaultEndIndex;
-        if((defaultEndIndex=content.indexOf(" ",200))== -1){
-            defaultEndIndex = 200;
+        String[] words = content.split(" ");
+        int num = Math.min(words.length, 200);
+        for (int i = 0; i < num; i++) {
+            if (i == words.length - 1) {
+                preview += words[i];
+            } else if (i==199) {
+                preview += words[i]+"<a href='"+retrieveAddress+"'> (show more...)</a>";
+            } else {
+                preview += words[i] + " ";
+            }
         }
-        int endIndex = Math.min(content.length(),defaultEndIndex);
-        this.preview = content.substring(0,endIndex);
     }
 
     public ArticleInfo(String title, String content, String tags) {
@@ -74,18 +74,18 @@ public class ArticleInfo {
 
     public JSONObject getArticlePreviewJSON() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("articleID",articleID);
-        jsonObject.put("title",title);
-        jsonObject.put("username",username);
-        jsonObject.put("content",preview);
+        jsonObject.put("articleID", articleID);
+        jsonObject.put("title", title);
+        jsonObject.put("username", username);
+        jsonObject.put("content", preview);
         return jsonObject;
     }
 
     public JSONObject getArticleContentJSON() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("articleID",articleID);
-        jsonObject.put("title",title);
-        jsonObject.put("content",content);
+        jsonObject.put("articleID", articleID);
+        jsonObject.put("title", title);
+        jsonObject.put("content", content);
         return jsonObject;
     }
 

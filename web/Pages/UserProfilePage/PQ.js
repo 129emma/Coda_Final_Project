@@ -2,7 +2,7 @@
  * Created by qpen546 on 14/06/2017.
  */
 $(document).ready(function () {
-    console.log(googleUser);
+
     $("#newUsername").blur(function () {
         var newUsername = $('#newUsername').val();
         console.log(username);
@@ -20,7 +20,7 @@ $(document).ready(function () {
         }
     });
 
-    if(googleUser==false){
+    if(googleUser=="false"){
         $("#passwordDivider").removeAttr("style");
         $("#passwordForm").removeAttr("style");
     }
