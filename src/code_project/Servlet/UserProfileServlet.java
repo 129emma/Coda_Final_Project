@@ -58,7 +58,7 @@ private void getUserProfile(HttpServletRequest request, HttpServletResponse resp
     List<String> iconList=AvatarEditServlet.iconList();
     request.setAttribute("iconList",iconList);
     request.setAttribute("userProfile",userProfile);
-    request.getRequestDispatcher("Pages/UserProfilePage/EditProfilePage.jsp").forward(request, response);
+    request.getRequestDispatcher("Pages/UserProfilePage/EditProfile.jsp").forward(request, response);
 
 }
 

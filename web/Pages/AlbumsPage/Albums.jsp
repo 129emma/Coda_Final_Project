@@ -32,7 +32,7 @@
     </jsp:include>
 
     <div class="ui container my" id="imageGallery">
-        <div class="ui segment"  id="gallery" style="display: none">
+        <div class="ui segment" id="gallery" style="display: none">
 
             <div class="ui pointing menu">
                 <a class="item active" id="showUsers">
@@ -66,10 +66,10 @@
                 </div>
             </div>
 
-   <div class="ui segment">
-       <div id="content">
-       </div>
-   </div>
+            <div class="ui segment">
+                <div id="content">
+                </div>
+            </div>
 
         </div>
         <div class="ui center aligned vertical segment" id="loading">
@@ -83,95 +83,9 @@
                 </div>
             </div>
 
-       </div>
+        </div>
     </div>
 
 </div>
-
-<script>
-
-    function loadUserImage() {
-
-        loadInfo('Image');
-
-    }
-
-    function loadUserVideo() {
-
-        loadInfo('Video');
-
-        refresh();
-    }
-
-    function loadUserAudio() {
-
-        loadInfo('Audio');
-
-    }
-    function loadUserYoutube() {
-
-        loadInfo('Youtube');
-
-    }
-    function loadInfo(info) {
-        $('#gallery').hide();
-        $('#loading').show();
-        $.ajax({
-            url: '/Albums',
-            type: 'POST',
-            data: {action: info},
-            success: function (data) {
-                var content=data.substring(data.indexOf("<div id='"+info+"'>"), data.indexOf("<div id='"+info+"End'>"));
-                $('#content').html(content);
-                var userContentID="#user"+info+"List";
-                var spotlightContentID="#spotlight"+info+"List";
-
-                if(!$.trim( $(userContentID).html()).length){https://media.tenor.com/images/0298446350746317720765a94787c49c/tenor.gif
-                    $(userContentID).html("<div style='text-align:center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
-                }
-
-                if(!$.trim( $(spotlightContentID).html()).length){
-
-                    $(spotlightContentID).html("<div style='text-align:center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
-                }
-
-                $("#showUsers").addClass("active").off().click(function () {
-                    $(userContentID).show();
-                    $(spotlightContentID).hide();
-                });
-                $("#showSpotlight").removeClass("active").off().click(function () {
-                    $(userContentID).hide();
-                    $(spotlightContentID).show();
-                });
-                refresh();
-                $('#gallery').show();
-                $('#loading').hide();
-                $(userContentID).show();
-                $(spotlightContentID).hide();
-            }
-        });
-    }
-
-
-
-    function refresh() {
-        handler = {
-            activate: function() {
-                if(!$(this).hasClass('dropdown browse')) {
-                    $(this)
-                        .addClass('active')
-                        .closest('.ui.menu')
-                        .find('.item')
-                        .not($(this))
-                        .removeClass('active')
-                    ;
-                }
-            }
-        };
-        $('.menu .item').on('click', handler.activate)
-        ;
-    }
-
-</script>
 </body>
 </html>

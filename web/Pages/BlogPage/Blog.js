@@ -90,15 +90,15 @@ function barFunction(){
 }
 function getFollowers() {
     $("#getFollowers").off().click(function () {
-        $("#follows").hide();
-        $("#followers").show();
+        $("#followInfo").hide();
+        $("#followerInfo").show();
     })
 }
 
 function getFollows() {
     $("#getFollows").off().click(function () {
-        $("#follows").show();
-        $("#followers").hide();
+        $("#followInfo").show();
+        $("#followerInfo").hide();
     })
 }
 
@@ -108,7 +108,6 @@ function freshButtonList() {
         $(obj).off().click(function () {
             $(obj).addClass("loading");
             $(obj).prop("disabled", true);
-            $(obj).attr('disabled','disabled');
             var username=$(obj).parent().siblings(".content").html();
             $.ajax({
                 url: '/Follow',
@@ -155,22 +154,23 @@ function  getFollowInfo(){
         type:'post',
         data:{action:'getFollowInfo'},
         success: function (followInfo) {
+
             var info = followInfo.substring(followInfo.indexOf('\<body\>') + 6, followInfo.indexOf("\</body\>"));
             $("#ArticleContainer").html(info);
             getFollows();
             getFollowers();
             freshButtonList();
             barFunction();
-            var follow=$("#follows");
-            var followers=$("#followers");
-            if(!$.trim( follow.html()).length){
-                follow.html("<div style='text-align:center'><img src='https://media.tenor.com/images/0298446350746317720765a94787c49c/tenor.gif'  alt='Empty'></div>");
+            if(!$.trim( $("#follows").html()).length){
+                $("#followList").hide();
+                $("#noFollowInfo").show();
             }
-            if(!$.trim( followers.html()).length){
-               followers.html("<div style='text-align:center'><img src='https://media.tenor.com/images/0298446350746317720765a94787c49c/tenor.gif'  alt='Empty'></div>");
+            if(!$.trim( $("#followers").html()).length){
+                $("#followerList").hide();
+                $("#noFollowerInfo").show();
             }
-           followers.hide();
-           follow.show();
+            $("#followerInfo").hide();
+            $("#followInfo").show();
             $("#Loader").hide();
         }
     })

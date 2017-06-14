@@ -16,30 +16,30 @@
 <body>
 
 <div id='Image'>
-    <div id="userImageList">
+    <div id="userImageList" style="display: inline-block">
         <c:forEach var="albumsImage" items="${albumsImageInfoList}">
-            <div class="ui rounded small image">
+            <div class="responsive">
                 <div class="gallery">
                     <a target="_blank" href="${albumsImage.address}">
-                        <img src=" ${albumsImage.address}" alt="${albumsImage.fileName}">
+                        <img src="${albumsImage.address}" alt="Trolltunga Norway">
                     </a>
                     <div class="desc">${albumsImage.postTime} <a href="AlbumsChange?imageFileName=${albumsImage.fileName}&imageID=${albumsImage.id}&action=deleteImage" class="btn btn-info btn-sm">
                         <i class="trash icon"></i>
                     </a>
-                    </div>
                 </div>
+            </div>
             </div>
         </c:forEach>
     </div>
 
-    <div id="spotlightImageList">
+    <div id="spotlightImageList" style="display: inline-block">
         <c:forEach var="image" items="${imageSpotlightList}">
-            <div class="ui rounded small image">
+            <div class="responsive">
                 <div class="gallery">
                     <a target="_blank" href="${image.address}">
-                        <img src=" ${image.address}" alt="${image.fileName}">
+                        <img src="${image.address}" alt="Trolltunga Norway">
                     </a>
-                    <div class="desc">${image.postTime}<span>${image.username}</span></div>
+                    <div class="desc">${image.username}</div>
                 </div>
             </div>
         </c:forEach>
@@ -77,7 +77,7 @@
                                Your browser does not support HTML5 video.
                            </video>
                        </a>
-                       <div class="desc">${video.postTime}<span>${video.username}</span></div>
+                       <div class="desc">${video.username}</div>
                    </div>
                </c:forEach>
            </div>
@@ -114,7 +114,7 @@
                         Your browser does not support the audio tag.
                     </audio>
                 </a>
-                <div class="desc">${audio.postTime}<span>${audio.username}</span></div>
+                <div class="desc">${audio.username}</div>
             </div>
         </c:forEach>
     </div>
@@ -140,7 +140,7 @@
         <c:forEach var="youtube" items="${youtubeSpotlightList}">
             <div class="youtubeGallery">
                 <div>${youtube.address}</div>
-                <div class="desc">${youtube.postTime}<span>${youtube.username}</span></div>
+                <div class="desc">${youtube.username}</div>
             </div>
         </c:forEach>
     </div>

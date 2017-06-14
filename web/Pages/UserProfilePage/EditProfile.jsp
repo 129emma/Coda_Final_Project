@@ -19,52 +19,10 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
-    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>--%>
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
-    <style>
-        .rounded:hover {
-            cursor: pointer
-        }
-
-        .rounded{
-            width: 100px;
-            height: 100px;
-        }
-
-        .img {
-            display: inline-block;
-            margin: 5px;
-
-        }
-
-        .center, .header, .avatar {
-            text-align: center;
-        }
-
-        .avatarInfo {
-            width: 100%;
-            height: 100%;
-        }
-
-        .avatar {
-            width: 200px;
-            height: 200px;
-            margin: auto;
-        }
-
-        .ui.header {
-            margin: 0;
-        !important;
-        }
-
-        #avatarForm {
-            display: inline-block;
-        !important;
-        }
-
-    </style>
-
+    <script src="${pageContext.request.contextPath}/Pages/UserProfilePage/EditProfile.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/UserProfilePage/EditProfile.css">
 </head>
 <body>
 <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
@@ -85,7 +43,7 @@
             </div>
             <%--<button class="ui button"  id="userIcon"  onclick="showWindow2()">change</button>--%>
 
-            <form class="ui form" id="#" action="Profile" method="post">
+            <form class="ui form" id="profileForm" action="Profile" method="post">
                 <div class="field">
                     <label>Firstname:</label><input type="text" name="firstname" value="${userProfile.firstName}"
                                                     style="width: 300px;"/></div>
@@ -104,15 +62,15 @@
                     <option value="Male">Male</option>
                 </select>
                 </div>
-                <input class="ui submit button" type="submit" name="profileAction" value="Update"/>
-                <input class="ui submit button" type="submit" name="profileAction"
-                       value="Delete"/>
+                <input  type="hidden" name="profileAction" id="profileAction">
             </form>
-            <%--<div class="ui dividing header">--%>
-                <%--<h3>Change Password</h3>--%>
-            <%--</div>--%>
+            <button class="ui green button" id="updateBtn">Update</button>
+            <button class="ui red button"  id="deleteBtn">Delete</button>
             <div class="ui fitted horizontal divider">Change Password</div>
-            <form class="ui form" id="form" action="ChangePassword" method="post">
+
+
+
+            <form class="ui form" id="passwordForm" action="ChangePassword" method="post">
                 <div class="field">
                     <label>Password: </label><input type="password" name="password"
                                                     placeholder="Please Enter Your Password" style="width: 300px;"/>
@@ -126,13 +84,9 @@
                                                                  placeholder="Please Re-Enter Your New Password"
                                                                  style="width: 300px;"/>
                 </div>
-                <input class="ui submit button" type="submit" value="Update"/>
+                <button class="ui green submit button" type="submit" id="passwordBtn">Update</button>
             </form>
             <br>
-
-            <%--<div class="ui dividing header">--%>
-                <%--<h3>Change Details</h3>--%>
-            <%--</div>--%>
 
         </div><!--end of edit segment-->
         <br>
@@ -140,7 +94,7 @@
         </div>
     </div>
 
-    <div class="ui modal">
+    <div class="ui modal" id="iconWindow">
         <i class="close icon"></i>
         <div class="header">
             Avatar
@@ -163,9 +117,6 @@
                         </c:forEach>
                         <br>
                         <p></p>
-                        <%--<div class="ui button" >--%>
-                                <%--<i class="folder open icon"></i>Choose file--%>
-                        <%--</div>--%>
                         <button class="ui blue labeled icon small button" id="fileButton">
                             <i class="inverted upload icon"></i>
                            Upload
@@ -190,50 +141,15 @@
         </div>
     </div>
 
+<div class="ui small modal" id="deleteWindow">
+    <div class="header">Delete your account</div>
+    <div class="content">Are you sure you want to delete your account and all files?</div>
+    <div class="actions">
+        <div class="ui negative button">No</div>
+        <button class="ui positive right labled icon button" id="deleteAccountBtn">Yes<i class="checkmark icon"></i> </button>
+    </div>
 </div>
-<script>
 
-$('#fileButton').click(function () {
-    $('#imageFile').click();
-});
-    function showWindow2() {
-        $('.ui.modal')
-            .modal('show')
-        ;
-    }
-
-    $("#submitAvatarChange").click(function () {
-        $(this).addClass("loading");
-        $(this).prop("disabled", true);
-        $("#avatarForm").submit();
-    });
-
-    $(".rounded").each(function () {
-        $(this).click(function () {
-            var src = $(this).attr('src');
-            $("#icon").attr('src', src);
-            $('input[type=hidden]').val(src);
-        });
-    });
-
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#icon').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-
-
-    $('#imageFile').change(function () {
-        readURL(this);
-    })
-
-</script>
-
+</div>
 </body>
 </html>

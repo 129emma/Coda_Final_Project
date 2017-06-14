@@ -89,7 +89,7 @@
                                     <i class="ion-ios-compose-outline"></i>
                                 </div>
                             </a>
-                            <a href="#" class="item" id="followInfo">
+                            <a href="#" class="item" id="followIcon">
                                 <div class="ui icon" data-tooltip="Follows">
                                     <i class="heart icon"></i>
                                 </div>

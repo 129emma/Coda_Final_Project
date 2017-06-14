@@ -24,16 +24,12 @@ public class ChangePasswordServlet extends HttpServlet {
     private String username;
     private String password;
     private String newPassword;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
     private LoginInfo loginInfo;
     private HttpSession session;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LoginStatus.verifyStatus(request, response);
         session = request.getSession(true);
-        this.request = request;
-        this.response = response;
         response.setContentType("text/html");
         Writer out = response.getWriter();
         username = (String) session.getAttribute("username");

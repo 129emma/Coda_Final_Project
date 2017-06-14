@@ -39,11 +39,12 @@ $(document).ready(function () {
     });
 
 $("#form").submit(function (e) {
-       $("#articleContentSubmit").value = $("#editor").html();
-      if(!$.trim( $('#leftmenu').html()).length) {
+    var content= $("#editor").html();
+      if(!$.trim(content).length) {
           alert("Content is empty!");
           e.preventDefault();
        }else {
+          $("#articleContentSubmit").val(content);
           $(this).find("#submitBtn").addClass("loading").prop("disabled",true);
       }
 });
@@ -73,7 +74,7 @@ $("#form").submit(function (e) {
             } else {
                 $('#voiceBtn').hide();
             }
-        };
+        }
 
         function showErrorAlert (reason, detail) {
             var msg='';
@@ -83,7 +84,7 @@ $("#form").submit(function (e) {
             }
             $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+
                 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
-        };
+        }
         initToolbarBootstrapBindings();
         $('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
         window.prettyPrint && prettyPrint();
