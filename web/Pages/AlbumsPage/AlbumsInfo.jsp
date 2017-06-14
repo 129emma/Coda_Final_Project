@@ -41,7 +41,7 @@
                     <a target="_blank" href="${image.address}">
                         <img src="${image.address}" alt="Trolltunga Norway">
                     </a>
-                    <div class="desc">${image.username}</div>
+                    <div class="desc"><img class="ui avatar image" src="${image.userAvatar}" title="${image.username}"></div>
                 </div>
             </div>
         </c:forEach>
@@ -84,7 +84,7 @@
                             Your browser does not support HTML5 video.
                         </video>
                     </a>
-                    <div class="desc">${video.username}</div>
+                    <div class="desc"><img class="ui avatar image" src="${video.userAvatar}" title="${video.username}"></div>
                 </div>
             </div>
         </c:forEach>
@@ -128,7 +128,7 @@
                             Your browser does not support the audio tag.
                         </audio>
                     </a>
-                    <div class="desc">${audio.username}</div>
+                    <div class="desc"><img class="ui avatar image" src="${audio.userAvatar}" title="${audio.username}"></div>
                 </div>
             </div>
         </c:forEach>
@@ -159,7 +159,7 @@
             <div class="responsiveYoutube">
                 <div class="gallery">
                     <div>${youtube.address}</div>
-                    <div class="desc">${youtube.username}</div>
+                    <div class="desc"><img class="ui avatar image" src="${youtube.userAvatar}" title="${youtube.username}"></div>
                 </div>
             </div>
         </c:forEach>
