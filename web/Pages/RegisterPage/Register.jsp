@@ -13,14 +13,17 @@
     <title>Register</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.4/jquery.fullpage.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/RegisterPage/Register.css" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.4/jquery.fullpage.js"></script>
     <script src="${pageContext.request.contextPath}/Pages/RegisterPage/Register.js"></script>
 </head>
 
 <body>
 <div id="container">
     <form action="${pageContext.request.contextPath}/Login" method="post">
-        <div class="login-block">
+        <div id="loginBlock" class="login-block">
             <h1>Register</h1>
             <input id="registerUsername" required type="text" name="username" class="username" placeholder="Username"/>
             <input id="registerPassword" required type="password" name="password" class="password"

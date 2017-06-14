@@ -82,13 +82,14 @@ CREATE TABLE CommentReply_beta_1 (
 DROP TABLE IF EXISTS AlbumsImage_beta_1;
 
 CREATE TABLE IF NOT EXISTS AlbumsImage_beta_1 (
-  id       INT AUTO_INCREMENT,
-  fileName VARCHAR(50),
-  username VARCHAR(99),
-  address  VARCHAR(1000) NOT NULL,
-  postTime DATETIME,
+  id         INT AUTO_INCREMENT,
+  fileName   VARCHAR(50),
+  username   VARCHAR(99),
+  userAvatar VARCHAR(256),
+  address    VARCHAR(1000) NOT NULL,
+  postTime   DATETIME,
   PRIMARY KEY (id),
-  FOREIGN KEY (username) REFERENCES UserInfo_beta_1 (username)
+  FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
@@ -96,13 +97,14 @@ CREATE TABLE IF NOT EXISTS AlbumsImage_beta_1 (
 DROP TABLE IF EXISTS AlbumsVideo_beta_1;
 
 CREATE TABLE IF NOT EXISTS AlbumsVideo_beta_1 (
-  id       INT AUTO_INCREMENT,
-  fileName VARCHAR(50),
-  username VARCHAR(99),
-  address  VARCHAR(1000) NOT NULL,
-  postTime DATETIME,
+  id         INT AUTO_INCREMENT,
+  fileName   VARCHAR(50),
+  username   VARCHAR(99),
+  userAvatar VARCHAR(256),
+  address    VARCHAR(1000) NOT NULL,
+  postTime   DATETIME,
   PRIMARY KEY (id),
-  FOREIGN KEY (username) REFERENCES UserInfo_beta_1 (username)
+  FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
@@ -110,13 +112,14 @@ CREATE TABLE IF NOT EXISTS AlbumsVideo_beta_1 (
 DROP TABLE IF EXISTS AlbumsAudio_beta_1;
 
 CREATE TABLE IF NOT EXISTS AlbumsAudio_beta_1 (
-  id       INT AUTO_INCREMENT,
-  fileName VARCHAR(50),
-  username VARCHAR(99),
-  address  VARCHAR(1000) NOT NULL,
-  postTime DATETIME,
+  id         INT AUTO_INCREMENT,
+  fileName   VARCHAR(50),
+  username   VARCHAR(99),
+  userAvatar VARCHAR(256),
+  address    VARCHAR(1000) NOT NULL,
+  postTime   DATETIME,
   PRIMARY KEY (id),
-  FOREIGN KEY (username) REFERENCES UserInfo_beta_1 (username)
+  FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );

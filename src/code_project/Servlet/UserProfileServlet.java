@@ -53,31 +53,33 @@ public class UserProfileServlet extends HttpServlet {
 
 
 private void getUserProfile(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException, ServletException {
-
-    UserInfo userProfile= UserInfoDAO.getUserInfo(DB,(String)session.getAttribute("username"));
+    String username =(String)session.getAttribute("username");
+    UserInfo userProfile= UserInfoDAO.getUserInfo(DB,username);
+    boolean googleUser = UserInfoDAO.googleUser(DB,username);
     List<String> iconList=AvatarEditServlet.iconList();
     request.setAttribute("iconList",iconList);
     request.setAttribute("userProfile",userProfile);
+    request.setAttribute("googleUser",googleUser);
     request.getRequestDispatcher("Pages/UserProfilePage/EditProfilePage.jsp").forward(request, response);
 
 }
 
     private void updateUserProfile(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException, ServletException{
-
-        String firstname=request.getParameter("firstname");
-        String lastname=request.getParameter("lastname");
-        String email=request.getParameter("email");
-        String birthday=request.getParameter("birthday");
-        String gender=request.getParameter("gender");
+        String username = (String)session.getAttribute("username");
+        String newUsername=request.getParameter("username");
+        String newFirstName=request.getParameter("firstName");
+        String newLastName=request.getParameter("lastName");
+        String newEmail=request.getParameter("email");
+        String newBirthday=request.getParameter("birthday");
+        String newGender=request.getParameter("gender");
 
         try{
-            UserInfoDAO.updateUserInfo(DB,(String)session.getAttribute("username"),firstname,lastname,email,birthday,gender);
+            UserInfoDAO.updateUserInfo(DB,username,newUsername,newFirstName,newLastName,newEmail,newBirthday,newGender);
+            session.setAttribute("username",newUsername);
         }catch(Exception e){
             e.printStackTrace();
         }
-
         response.sendRedirect("Profile");
-
     }
 
     private void deleteUserProfile( HttpServletResponse response,HttpSession session) throws IOException, ServletException{

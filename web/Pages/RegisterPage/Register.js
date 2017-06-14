@@ -10,13 +10,17 @@ $(document).ready(function () {
         }
     });
 
+
+
+
     $('#registerButton').click(function () {
         var username = $('#registerUsername').val();
         var password = $('#registerPassword').val();
-        var checked = $("#terms").val();
+        var checked = $("#terms").prop("checked") == true;
         console.log(checked);
 
-        if (username!= ""&& password!= ""&& checked) {
+        if (username!= ""&& password!= ""&&checked) {
+            $("#registerButton").attr({"class":"ui loading green submit fluid button","disabled":"disabled"});
             register(username,password);
         }else if(username == ""){
             $('#loginBlock').transition('shake');
@@ -37,12 +41,15 @@ function register(username,passowrd) {
         type: 'post',
         data: {action: 'register', username: username, password:passowrd},
         success: function (message) {
-            if(message=="Success"){
+            if(message=="login"){
+                location.href = "/Blog?page=home";
+            }else if(message == "success"){
                 $("#message").css("color", "green").text("Your are success to create new account");
-                setTimeout(function(){location.href = "/Login?action=login"},3000);
+                setTimeout(function(){location.href = "/Login?action=login"},2000);
             }else{
                 $('#loginBlock').transition('shake');
                 $("#message").css("color", "red").text(message);
+                $("#registerButton").attr("class","ui green submit fluid button").removeAttr("disabled");
             }
         }
     });
@@ -59,6 +66,7 @@ function verifyUsername(username) {
                 $("#registerButton").removeAttr('disabled');
                 $("#message").css("color", "green").text(message);
             } else {
+                $('#loginBlock').transition('shake');
                 $("#registerButton").attr('disabled', 'disabled');
                 $("#message").css("color", "red").text(message);
             }

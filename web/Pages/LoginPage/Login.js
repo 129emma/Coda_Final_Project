@@ -11,6 +11,7 @@ $(document).ready(function () {
         var password = $('#loginPassword').val();
 
         if (username!= ""&& password!= "") {
+            $("#loginButton").attr({"class":"ui loading green submit fluid button","disabled":"disabled"});
             login(username,password);
         }else if(username == ""){
             $('#loginBlock').transition('shake');
@@ -33,6 +34,7 @@ function login(username,passowrd) {
             }else{
                 $('#loginBlock').transition('shake');
                 $("#message").css("color", "red").text(message);
+                $("#loginButton").attr("class","ui green submit fluid button").removeAttr("disabled");
             }
         }
     });
@@ -59,8 +61,8 @@ function onFailure(error) {
 function renderButton() {
     gapi.signin2.render('my-signin2', {
         'scope': 'profile email',
-        'width': 280,
-        'height': 40,
+        'width': 292,
+        'height': 36,
         'longtitle': true,
         'theme': 'dark',
         'onsuccess': onSuccess,
@@ -83,6 +85,7 @@ function onSignIn(googleUser) {
     // The ID token you need to pass to your backend:
     var idToken = googleUser.getAuthResponse().id_token;
     console.log("ID Token: " + idToken);
+    $("#loginSegment").addClass("loading");
     if (userClicked) {
         $.ajax({
             url: '/GoogleLogin',
@@ -93,10 +96,12 @@ function onSignIn(googleUser) {
                     location.href = "/Blog?page=home";
                 } else {
                     $("#message").css("color", "red").text(result);
+                    $("#loginSegment").removeClass("loading");
                 }
             }
         });
     } else {
         signOut();
+        $("#loginSegment").removeClass("loading");
     }
 }

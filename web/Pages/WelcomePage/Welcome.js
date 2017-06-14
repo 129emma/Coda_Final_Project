@@ -1,6 +1,7 @@
 /**
  * Created by qpen546 on 5/06/2017.
  */
+var userClicked = false;
 
 $(document).ready(function () {
 
@@ -60,6 +61,28 @@ $(document).ready(function () {
             $("#message").css("color", "red").text("Please enter your password");
         }
     });
+
+
+    $('#login').on('click', '#registerButton', function () {
+        var username = $('#registerUsername').val();
+        var password = $('#registerPassword').val();
+        var checked = $("#terms").prop("checked") == true;
+        console.log(checked);
+
+        if (username!= ""&& password!= ""&&checked) {
+            $("#registerButton").attr({"class":"ui loading green submit fluid button","disabled":"disabled"});
+            register(username,password);
+        }else if(username == ""){
+            $('#loginBlock').transition('shake');
+            $("#message").css("color", "red").text("Please enter your username");
+        }else if(password == ""){
+            $('#loginBlock').transition('shake');
+            $("#message").css("color", "red").text("Please enter your password");
+        }else if(!checked){
+            $('#loginBlock').transition('shake');
+            $("#message").css("color", "red").text("Please agree the terms and conditions");
+        }
+    });
 });
 
 function getPage(action) {
@@ -115,12 +138,34 @@ function login(username,passowrd) {
         type: 'post',
         data: {action: 'login', username: username, password:passowrd},
         success: function (message) {
-            $("#loginButton").attr("class","ui green submit fluid button").removeAttr("disabled");
+
             if(message=="login"){
                 location.href = "/Blog?page=home";
             }else{
+                $("#loginButton").attr("class","ui green submit fluid button").removeAttr("disabled");
                 $('#login').transition('shake');
                 $("#message").css("color", "red").text(message);
+            }
+        }
+    });
+}
+
+function register(username,passowrd) {
+    $.ajax({
+        url: '/Login',
+        type: 'post',
+        data: {action: 'register', username: username, password:passowrd},
+        success: function (message) {
+            if(message=="login"){
+                location.href = "/Blog?page=home";
+            }else if(message == "success"){
+                $("#message").css("color", "green").text("Your are success to create new account");
+                $("#registerButton").attr("class","ui green submit fluid button").removeAttr("disabled");
+                setTimeout(function(){location.href = "/Login?action=login"},2000);
+            }else{
+                $('#loginBlock').transition('shake');
+                $("#message").css("color", "red").text(message);
+                $("#registerButton").attr("class","ui green submit fluid button").removeAttr("disabled");
             }
         }
     });
@@ -138,7 +183,6 @@ function clickDetector() {
 }
 
 function onSuccess(googleUser) {
-    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
     onSignIn(googleUser)
 }
 function onFailure(error) {
@@ -147,8 +191,8 @@ function onFailure(error) {
 function renderButton() {
     gapi.signin2.render('my-signin2', {
         'scope': 'profile email',
-        'width': 280,
-        'height': 40,
+        'width': 292,
+        'height': 36,
         'longtitle': true,
         'theme': 'dark',
         'onsuccess': onSuccess,
@@ -157,19 +201,14 @@ function renderButton() {
 }
 
 function onSignIn(googleUser) {
-    console.log("1");
+
     // Useful data for your client-side scripts:
     var profile = googleUser.getBasicProfile();
-    console.log("2");
-    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-    console.log('Full Name: ' + profile.getName());
-    console.log('Given Name: ' + profile.getGivenName());
-    console.log('Family Name: ' + profile.getFamilyName());
-    console.log("Image URL: " + profile.getImageUrl());
-    console.log("Email: " + profile.getEmail());
+
 
     // The ID token you need to pass to your backend:
     var idToken = googleUser.getAuthResponse().id_token;
+    $("#loginSegment").addClass("loading");
     console.log("ID Token: " + idToken);
     if (userClicked) {
         $.ajax({
@@ -181,10 +220,12 @@ function onSignIn(googleUser) {
                     location.href = "/Blog?page=home";
                 } else {
                     $("#message").css("color", "red").text(result);
+                    $("#loginSegment").removeClass("loading");
                 }
             }
         });
     } else {
         signOut();
+        $("#loginSegment").removeClass("loading");
     }
 }

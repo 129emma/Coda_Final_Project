@@ -76,7 +76,11 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         switch (status) {
             case "login":
-                response.sendRedirect("Blog");
+                if(ajaxRequest){
+                    out.write("login");
+                }else {
+                    response.sendRedirect("Blog");
+                }
                 break;
             default:
                 String username = request.getParameter("username");
@@ -92,7 +96,7 @@ public class LoginServlet extends HttpServlet {
                 try {
                     LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, iterations, "/DefaultAvatar/elyse.png");
                     if(ajaxRequest){
-                        out.write("Success");
+                        out.write("success");
                     }else {
                         request.setAttribute("message", "Success to create account");
                         request.getRequestDispatcher("Pages/WelcomePage/Welcome.jsp").forward(request, response);
@@ -132,7 +136,11 @@ public class LoginServlet extends HttpServlet {
         Writer out = response.getWriter();
         switch (status) {
             case "login":
-                response.sendRedirect("Blog?page=home");
+                if (ajaxRequest) {
+                    out.write("login");
+                } else {
+                    response.sendRedirect("Blog?page=home");
+                }
                 break;
             default:
                 String username = request.getParameter("username");

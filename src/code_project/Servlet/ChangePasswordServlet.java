@@ -41,11 +41,9 @@ public class ChangePasswordServlet extends HttpServlet {
         newPassword = request.getParameter("newPassword");
 
         loginInfo = LoginInfoDAO.getLoginInfo(mySQL, username);
-        if (loginInfo == null) {
-            out.write("Fail: Wrong username");
-        } else if (!rightPassword()) {
+        if (!rightPassword()) {
             out.write("Fail: Wrong Password");
-        } else if (rightPassword()&&rightUsername()){
+        } else if (rightPassword()){
             updatePassword();
             out.write("success");
         } else {
@@ -55,10 +53,6 @@ public class ChangePasswordServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doPost(request, response);
-    }
-
-    public boolean rightUsername() {
-        return username.equals(session.getAttribute("username"));
     }
 
     public boolean rightPassword() {
