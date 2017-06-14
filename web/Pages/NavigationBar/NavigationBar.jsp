@@ -33,9 +33,19 @@
                 <div class="ui center aligned three column grid container ">
                     <div class="row">
                         <div class="column">
-                            <a class="toc item">
-                                <i class="ion-ios-more-outline sidebarIcon"></i>
-                            </a>
+                            <div class="ui accordion">
+                                <div class="title">
+                                    <a class="toc item">
+                                        <i class="ion-ios-more-outline sidebarIcon"></i>
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <p><a href="Blog?page=home" class="accoritem"></i>Home page</a></p>
+                                    <p><a href="Albums" class="accoritem">Ablum</a>
+                                    </p>
+                                    <p><a href="Login?action=logout" class="accoritem">Log out</a></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="column">
                             <img class="ui centered image" src="Pages/NavigationBar/smallLogo.png">
@@ -44,10 +54,13 @@
 
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 
 
 </div>

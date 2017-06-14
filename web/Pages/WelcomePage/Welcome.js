@@ -1,62 +1,58 @@
-/**
- * Created by qpen546 on 5/06/2017.
- */
+$('#fullpage').fullpage({
+    continuousVertical: true,
+    navigationPosition: 'left',
+    navigation: true,
 
-$(document).ready(function () {
+    afterLoad: function (anchorLink, index) {
 
-    $('#fullpage').fullpage({
-        continuousVertical: true,
-        navigationPosition: 'left',
-        navigation: true,
-
-        afterLoad: function(anchorLink, index){
-
-            if(index == 2){
-                $('.sequenced.images .image').transition({
-                    animation: 'jiggle',
-                    duration: 500,
-                    interval: 200
-                });
-            }
-            if(index == 3){
-                $('.sequenced.icons .icon').transition({
-                    animation: 'bounce',
-                    duration: 500,
-                    interval: 200
-                });
-            }
+        if (index == 2) {
+            $('.sequenced.images .image').transition({
+                animation: 'jiggle',
+                duration: 500,
+                interval: 200
+            });
         }
-    });
-
-    $('#loginBtn').click(function () {
-        checkLoginStatus("login");
-    });
-
-    $('#registerBtn').click(function () {
-        checkLoginStatus("register");
-    });
-
-    $('#login').on('blur', '#registerUsername', function () {
-        if ($('#registerUsername').val() != "") {
-            verifyUsername($(this).val());
+        if (index == 3) {
+            $('.sequenced.icons .icon').transition({
+                animation: 'bounce',
+                duration: 500,
+                interval: 200
+            });
         }
-
-    });
-
-    $('#login').on('click', '#loginButton', function () {
-
-        var username = $('#loginUsername').val();
-        var password = $('#loginPassword').val();
-
-        if (username!= ""&& password!= "") {
-            login(username,password);
-        }else if(username == ""){
-            $("#message").css("color", "red").text("Please enter your username");
-        }else if(password == ""){
-            $("#message").css("color", "red").text("Please enter your password");
-        }
-    });
+    }
 });
+
+
+
+$('#loginBtn').click(function () {
+    checkLoginStatus("login");
+});
+
+$('#registerBtn').click(function () {
+    checkLoginStatus("register");
+});
+
+$('#login').on('blur', '#registerUsername', function () {
+    if ($('#registerUsername').val() != "") {
+        verifyUsername($(this).val());
+    }
+
+});
+
+$('#login').on('click', '#loginButton', function () {
+
+    var username = $('#loginUsername').val();
+    var password = $('#loginPassword').val();
+
+    if (username != "" && password != "") {
+        login(username, password);
+    } else if (username == "") {
+        $("#message").css("color", "red").text("Please enter your username");
+    } else if (password == "") {
+        $("#message").css("color", "red").text("Please enter your password");
+    }
+});
+
 
 function getPage(action) {
     $.ajax({
@@ -64,7 +60,7 @@ function getPage(action) {
         type: 'post',
         data: {action: action},
         success: function (results) {
-            var form = results.substring(results.indexOf('\<body\>')+6,results.indexOf("\</body\>"));
+            var form = results.substring(results.indexOf('\<body\>') + 6, results.indexOf("\</body\>"));
             $('#login').html(form).modal('show');
         }
     });
@@ -76,9 +72,9 @@ function checkLoginStatus(action) {
         type: 'post',
         data: {action: 'check'},
         success: function (status) {
-            if(status=="login"){
+            if (status == "login") {
                 location.href = "/Blog?page=home";
-            }else{
+            } else {
                 getPage(action);
             }
         }
@@ -103,15 +99,15 @@ function verifyUsername(username) {
     });
 }
 
-function login(username,passowrd) {
+function login(username, passowrd) {
     $.ajax({
         url: '/Login',
         type: 'post',
-        data: {action: 'login', username: username, password:passowrd},
+        data: {action: 'login', username: username, password: passowrd},
         success: function (message) {
-            if(message=="login"){
+            if (message == "login") {
                 location.href = "/Blog?page=home";
-            }else{
+            } else {
                 $("#message").css("color", "red").text(message);
             }
         }

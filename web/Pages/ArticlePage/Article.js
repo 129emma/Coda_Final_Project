@@ -4,10 +4,10 @@
 $(document)
     .ready(function () {
         likeArticle();
-    });
+
 
         //edit comment
-     /*       $('.editBtn').each(function (i, obj) {
+        /*       $('.editBtn').each(function (i, obj) {
          console.log("1");
          console.log(obj);
          $(obj).click(function () {
@@ -22,8 +22,8 @@ $(document)
 
         $('.reply.editBtn').each(function () {
             $(this).click(function () {
-                $('.editComment') .modal('setting', 'transition', 'vertical flip')
-                                   .modal('show');
+                $('.editComment').modal('setting', 'transition', 'vertical flip')
+                    .modal('show');
             })
         });
 
@@ -32,12 +32,13 @@ $(document)
         $('.replyBtn').each(function () {
             $(this).click(function () {
                 $('.replyComment').modal({
-                    blurring:true})
-                                  .modal('show');
+                    blurring: true
+                })
+                    .modal('show');
             })
         })
 
-
+    });
 
 
 function likeArticle() {
@@ -46,7 +47,6 @@ function likeArticle() {
         console.log("likeClick");
         $(this).prop("disabled", true);
         var numLike = $('.ui.basic.right.pointing.label').text();
-        numLike = numLike + 1;
         $('.ui.basic.right.pointing.label').text(parseInt(numLike, 10) + 1);
         $('.heart.icon').addClass('red');
         $('#ifLiked').text('liked');

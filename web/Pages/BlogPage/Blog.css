@@ -1,20 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:500i,600');
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-body{
+body {
     background-color: #565D6B;
 }
 
-a,p,h1,h2,h3,h4,h5{
+a, p, h1, h2, h3, h4, h5 {
     font-family: 'Raleway', sans-serif;
 }
 
-i.ui.icon.borderless.four.item.menu{
+i.ui.icon.borderless.four.item.menu {
     font-size: 60px;
-}
-
-ul.userChoice {
-    list-style: none;
 }
 
 .left.ui.rail {
@@ -25,7 +21,7 @@ ul.userChoice {
     box-shadow: none;
 }
 
-.ui.basic.button:hover{
+.ui.basic.button:hover {
     box-shadow: none !important;
 }
 
@@ -37,6 +33,7 @@ ul.userChoice {
 img.userAvatar {
     height: 100px;
 }
+
 /*fixed background image's height*/
 .ui.image.backGround {
     overflow: hidden;
@@ -60,17 +57,12 @@ img.userAvatar {
 }
 
 /*delete other animation for buttons*/
-.ui.button{
+.ui.button {
     transition: none !important;
 }
 
-/*delete menu's border and boxshadow*/
-.four.item.menu{
-    border: none;
-    box-shadow: none;
-}
 /*change card width to fit container*/
-.ui.cards > .card, .ui.card{
+.ui.cards > .card, .ui.card {
     width: auto;
 }
 
@@ -78,11 +70,11 @@ img.userAvatar {
     box-shadow: none;
 }
 
-
-div{
-    word-wrap: break-word;         /* All browsers since IE 5.5+ */
-    overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+div {
+    word-wrap: break-word; /* All browsers since IE 5.5+ */
+    overflow-wrap: break-word; /* Renamed property in CSS3 draft spec */
 }
+
 /*position in card*/
 .content {
     text-align: center;
@@ -98,15 +90,57 @@ div{
     color: white;
 }
 
+
+.ui.pointing.menu {
+    background-color: #FFFFFF;
+!important;
+}
+
+i.cardIcons {
+    font-size: 30px;
+    color: #1D3557;
+}
+
+.ui.attached.right.aligned.segment {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 div#flipright {
     background-color: transparent;
 }
 
-@media only screen and (max-width: 700px) {
-
-
-
+div#flipleft {
+    background-color: transparent;
 }
-.ui.pointing.menu{
-    background-color:#FFFFFF;!important;
+
+a.ui.left.floated.icon.button {
+    background-color: transparent;
+}
+
+.ui.center.aligned.container.responAvatar{
+    display: none;
+}
+
+ui.segment{
+    border-radius: 0;
+    box-shadow: none;
+}
+
+@media only screen and (max-width: 900px) {
+    .ui.text.container.article {
+        padding-top: 20px;
+        padding-bottom: 4em;
+    }
+
+    .ui.center.aligned.container.responAvatar{
+        display: block !important;
+        padding-top: 2em;
+    }
+
+    .ui.left.close.rail{
+        display: none !important;
+    }
+
+
 }

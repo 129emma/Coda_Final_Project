@@ -2,9 +2,27 @@ div#ArticleContainer {
     padding-top: 100px;
 }
 
-
-
 div{
     word-wrap: break-word;         /* All browsers since IE 5.5+ */
     overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+}
+
+ui.icon.button.deleteButton:hover{
+    background-color: #F28790;
+    color: white;
+}
+
+ui.icon.button.editButton:hover{
+    background-color: #A7D3AE;
+    color: white;
+}
+
+.ui.labeled.button:not([class*="left labeled"]) > .label {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.ui.labeled.button:not([class*="left labeled"]) > .button {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

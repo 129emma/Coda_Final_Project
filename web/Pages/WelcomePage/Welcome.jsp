@@ -18,7 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.4/jquery.fullpage.js"></script>
-    <script src="${pageContext.request.contextPath}/Pages/WelcomePage/Welcome.js"></script>
+
 
 </head>
 <body>
@@ -76,5 +76,6 @@
         </div>
     </div>
 </div>
+<script src="${pageContext.request.contextPath}/Pages/WelcomePage/Welcome.js"></script>
 </body>
 </html>

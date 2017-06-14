@@ -3,20 +3,9 @@
  */
 $(document)
     .ready(function () {
-     /*   $('.toc.item').click(function () {
-            $('.responsiveMenu').sidebar('setting','transition','push')
-                .sidebar('setting','direction','top')
-                .sidebar('toggle')
-
-
-        })*/
-
-
-        $('.ui.sidebar')
-            .sidebar('attach events', '.toc.item','push')
+        $('.ui.accordion')
+            .accordion()
         ;
-
-
 
     })
 ;

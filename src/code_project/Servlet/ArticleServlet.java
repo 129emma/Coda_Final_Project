@@ -135,7 +135,7 @@ public class ArticleServlet extends HttpServlet {
         List<CommentReplyInfo> commentReplyInfoList = CommentInfoDAO.getCommentReplyInfobyCommentReplyID(mySQL, commentID);
         if (commentReplyInfoList != null) {
             for (CommentReplyInfo commentReply : commentReplyInfoList) {
-                commentReply.setDeleteCommentReply(commentReply.commentReplyID);
+                commentReply.setDeleteCommentReply(commentReply.commentReplyID,(String)session.getAttribute("username"));
 
             }
         }
@@ -159,8 +159,8 @@ public class ArticleServlet extends HttpServlet {
         ArticleInfo articleInfo = ArticleInfoDAO.getArticleInfo(mySQL, articleID);
         request.setAttribute("articleInfo", articleInfo);
         String hiddenElement = "<input type='hidden' name='articleID' value='" + articleID + "'>";
-        String submitElement = "<button class='ui button' type='submit' name='action' value='update'>Submit</button> ";
-        String deleteElement = "<button class='ui button' type='submit' name='action' value='delete'>Delete</button>";
+        String submitElement = "<button class='ui button subBtn' type='submit' name='action' value='update'>Submit</button> ";
+        String deleteElement = "<button class='ui button delBtn' type='submit' name='action' value='delete'>Delete</button>";
         request.setAttribute("hiddenElement", hiddenElement);
         request.setAttribute("submitElement", submitElement);
         request.setAttribute("deleteElement", deleteElement);

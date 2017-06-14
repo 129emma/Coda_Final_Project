@@ -17,6 +17,13 @@
 </head>
 <body>
 <c:forEach var="article" items="${articleInfoList}">
+
+
+    <div class="ui center aligned container responAvatar">
+        <img class="ui raised tiny top aligned circular centered image userAvatar " src="${article.userAvatar}">
+        <div class="followBtn">${article.followButton}</div>
+    </div>
+
     <div class="ui segment keepContent">
         <div class="ui left close rail" style="width: 80px !important;">
 
@@ -26,9 +33,7 @@
             <div class="ui flowing popup top left transition hidden">
                 <div class="content">
                     <div class="header">${article.username}</div>
-                    <div class="meta">
-                        <span class="category">Animals</span>
-                    </div>
+
                     <div class="description">
                             ${article.followButton}
                     </div>
@@ -36,20 +41,21 @@
             </div>
         </div>
 
-        <h5 class="ui top attached segment">
-            <a href="${article.retrieveAddress}">${article.title}</a> ${article.postTime}
-        </h5>
+        <div class="ui top attached segment">
+            <h3 class="ui header">
+                <a href="${article.retrieveAddress}">${article.title}</a>
+                <div class="sub header">${article.postTime}
+                </div>
+            </h3>
+        </div>
 
         <div class="ui attached segment">
                 ${article.preview}
         </div>
-            <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
-        <div class="ui attached segment">
-            <div class="ui left labeled button" tabindex="0">
-                <a class="ui basic label">
-                    <i class="heart icon"> <span style="font-family: Montserrat, sans-serif">${article.likeNum} Likes</span></i>
-                </a>
-            </div>
+        <div class="ui attached right aligned segment">
+            <span style="font-family: Montserrat, sans-serif">${article.likeNum} </span> &nbsp;&nbsp;<i
+                class="ion-android-favorite-outline"></i>
+
         </div>
     </div>
 </c:forEach>

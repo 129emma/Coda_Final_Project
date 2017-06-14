@@ -99,7 +99,7 @@ div[data-role="editor-toolbar"] {
 }
 
 
-.image {
+.image.iconImage {
     cursor: pointer;
     width:18px;
     height:18px;
@@ -109,6 +109,32 @@ div[data-role="editor-toolbar"] {
 }
 .input{
     display: none;
+}
+
+input#title {
+    min-height: 35px;
+}
+label{
+    font-size: 20px;
+}
+
+.submitBtn {
+    text-align: right;
+}
+
+button.ui.button.subBtn:hover {
+    background-color: #A7D3AE;
+    color: white;
+}
+
+button.ui.button.delBtn:hover {
+    background-color: #F28790;
+    color: white;
+}
+
+button.ui.floated.button :hover {
+    background-color: #A7D3AE;
+    color: white;
 }
 
 

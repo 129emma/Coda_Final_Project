@@ -35,7 +35,7 @@ public class CommentReplyInfo {
         replyComment ="";
     }
 
-    public void setDeleteCommentReply(int commentReplyID) {
+    public void setDeleteCommentReply(int commentReplyID,String username) {
         if (this.username.equals(username)) {
             deleteCommentBtn = "<a href=\"Comment?action=deleteCommentReply&articleID=" + articleID + "&commentReplyID=" + commentReplyID + "\"><i class='trash icon'></i></a>";
         }

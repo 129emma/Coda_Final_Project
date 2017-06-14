@@ -38,25 +38,26 @@
 </head>
 <body>
 
-<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
-    <jsp:param name="SideBar" value=""/>
-</jsp:include>
 
 <div class="pusher full">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
 
-    <form action="/Article" method="post" onsubmit="prepareContent()">
+    <div class="ui text container edit">
 
-        <div class="ui text container edit">
+        <form action="/Article" method="post" onsubmit="prepareContent()">
+
+
             <div class="hero-unit">
                 <div id="alerts"></div>
-                <div class="ui input"> <%--Enter Title--%>
-                    <p style="font-size: large">Title: <input required type="text" id="title" name="title"
-                                                              placeholder="Your title here"
-                                                              value="${articleInfo.title}"
-                                                              style="width: 500px;height: 38px;margin-bottom: 5px"/>
+                <div class="ui form"> <%--Enter Title--%>
+                    <div class="inline fields">
+                        <lable>Title:</lable>
+                        <input required type="text" id="title" name="title"
+                               placeholder="Your title here"
+                               value="${articleInfo.title}">
+                    </div>
                 </div>
                 <%--Button in Editor--%>
                 <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
@@ -112,13 +113,13 @@
                     </div>
 
                     <div class="btn-group" onclick="readLink()">
-                        <a class="btn" title="Insert Youtube video"><img class="image"
+                        <a class="btn" title="Insert Youtube video"><img class="image iconImage"
                                                                          src="http://internetvi.ru/wp-content/uploads/2012/06/e33c1de5c8bd4c4c0bdaba9cd3657a6d.png"/></a>
                     </div>
 
                     <div class="btn-group">
                         <a class="btn" title="Insert image"><label for="image-input" class="myLabel">
-                            <img class="image"
+                            <img class="image iconImage"
                                  src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png">
                         </label>
                             <input id="image-input" class="input" type="file" accept=".jpg, .gif,.png"></a>
@@ -126,14 +127,14 @@
 
                     <div class="btn-group">
                         <a class="btn" title="Insert audio"><label for="audio-input" class="myLabel">
-                            <img class="image"
+                            <img class="image iconImage"
                                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Speaker_Icon.svg/1024px-Speaker_Icon.svg.png">
                         </label>
                             <input id="audio-input" class="input" type="file" accept=".mp3,.wav"></a>
                     </div>
                     <div class="btn-group">
                         <a class="btn" title="Insert video"><label for="video-input" class="myLabel">
-                            <img class="image" src="http://simpleicon.com/wp-content/uploads/video.png">
+                            <img class="image iconImage" src="http://simpleicon.com/wp-content/uploads/video.png">
                         </label>
                             <input id="video-input" class="input" type="file" accept=".ogg,.mp4"></a>
                     </div>
@@ -169,21 +170,22 @@
                     </div>
                 </div>
                 ${hiddenElement}
-                <div class="submitBtn"> ${submitElement}</div>
-                ${deleteElement}
+                <div class="submitBtn"> ${deleteElement}${submitElement}</div>
+
             </div>
-        </div>
-        <input type="hidden" name="content" id="articleContentSubmit">
+        </form>
+    </div>
+    <input type="hidden" name="content" id="articleContentSubmit">
     </form>
     <c:if test="${information != null}">
         <p style="color: red">${information}</p>
     </c:if>
 </div>
-        <script>
-            function prepareContent() {
-                document.getElementById("articleContentSubmit").value = document.getElementById("editor").innerHTML;
-            }
-        </script>
-  </body>
+<script>
+    function prepareContent() {
+        document.getElementById("articleContentSubmit").value = document.getElementById("editor").innerHTML;
+    }
+</script>
+</body>
 
 </html>

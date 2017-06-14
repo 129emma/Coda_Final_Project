@@ -23,16 +23,15 @@
     <script src="${pageContext.request.contextPath}/Pages/AlbumsPage/Albums.js"></script>
 </head>
 <body onload="loadUserImage()">
-<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
-    <jsp:param name="SideBar" value=""/>
-</jsp:include>
+
 <div class="pusher full">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
 
-    <div class="ui container my" id="imageGallery">
-        <div class="ui segment"  id="gallery" style="display: none">
+    <div class="ui text container my" id="imageGallery">
+        <div class="ui segment" id="gallery" style="display: none">
+
 
             <div class="ui pointing menu">
                 <a class="item active" id="showUsers">
@@ -43,32 +42,6 @@
                 </a>
             </div>
 
-            <!--this div for show up all the image/video/audio-->
-        <div class="ui basic segment responsiveMenu">
-            <div class="ui labeled borderless icon menu">
-                <a class="item" onclick="loadUserImage()">
-                    <img class="ui centered image" src="Icons/photo.png">
-                    <%--<i class="ion-ios-camera-outline albumIcons"></i>
-                    <p>Photo</p>--%>
-                </a>
-                <a class="item" onclick="loadUserAudio()">
-                    <img class="ui centered image" src="Icons/music.png">
-                    <%--<i class="ion-ios-musical-notes albumIcons"></i>
-                    <p>Music</p>--%>
-                </a>
-                <a class="item" onclick="loadUserVideo()">
-                    <img class="ui centered image" src="Icons/video.png">
-                    <%-- <i class="ion-ios-videocam-outline albumIcons"></i>
-                    <p>Videos</p>--%>
-
-                </a>
-                <a class="item" onclick="loadUserYoutube()">
-                    <img class="ui centered image" src="Icons/youtube.png">
-                    <%--<i class="ion-social-youtube-outline"></i>--%>
-                </a>
-            </div>
-        </div>
-
 
             <!--this div for show up all the image/video/audio-->
             <!-- all images should be resized for fitting container , and size for small images is 150px-->
@@ -76,30 +49,23 @@
                 <div class="ui vertical labeled borderless icon menu">
                     <a class="item" onclick="loadUserImage()">
                         <img class="ui centered image" src="Icons/photo.png">
-                        <%--<i class="ion-ios-camera-outline albumIcons"></i>
-                        <p>Photo</p>--%>
                     </a>
                     <a class="item" onclick="loadUserAudio()">
                         <img class="ui centered image" src="Icons/music.png">
-                        <%--<i class="ion-ios-musical-notes albumIcons"></i>
-                        <p>Music</p>--%>
                     </a>
                     <a class="item" onclick="loadUserVideo()">
                         <img class="ui centered image" src="Icons/video.png">
-                        <%-- <i class="ion-ios-videocam-outline albumIcons"></i>
-                        <p>Videos</p>--%>
                     </a>
                     <a class="item" onclick="loadUserYoutube()">
                         <img class="ui centered image" src="Icons/youtube.png">
-                        <%--<i class="ion-social-youtube-outline"></i>--%>
                     </a>
                 </div>
             </div>
 
-   <div class="ui segment">
-       <div id="content">
-       </div>
-   </div>
+            <div class="ui segment">
+                <div id="content">
+                </div>
+            </div>
 
         </div>
         <div class="ui center aligned vertical segment" id="loading">
@@ -113,8 +79,42 @@
                 </div>
             </div>
 
-       </div>
+        </div>
     </div>
+
+
+    <div class="ui footer segment responsiveMenu">
+        <div class="ui  four column grid container">
+            <div class="center aligned row">
+                <div class="column">
+                    <a class="item" onclick="loadUserImage()">
+                        <img class="ui centered image" src="Icons/photo.png">
+
+                    </a>
+                </div>
+
+                <div class="column">
+                    <a class="item" onclick="loadUserAudio()">
+                        <img class="ui centered image" src="Icons/music.png">
+
+                    </a>
+                </div>
+
+                <div class="column">
+                    <a class="item" onclick="loadUserVideo()">
+                        <img class="ui centered image" src="Icons/video.png">
+
+                    </a>
+                </div>
+                <div class="column">
+                    <a class="item" onclick="loadUserYoutube()">
+                        <img class="ui centered image" src="Icons/youtube.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </div>
 
@@ -151,16 +151,16 @@
             type: 'POST',
             data: {action: info},
             success: function (data) {
-                var content=data.substring(data.indexOf("<div id='"+info+"'>"), data.indexOf("<div id='"+info+"End'>"));
+                var content = data.substring(data.indexOf("<div id='" + info + "'>"), data.indexOf("<div id='" + info + "End'>"));
                 $('#content').html(content);
-                var userContentID="#user"+info+"List";
-                var spotlightContentID="#spotlight"+info+"List";
+                var userContentID = "#user" + info + "List";
+                var spotlightContentID = "#spotlight" + info + "List";
 
-                if(!$.trim( $(userContentID).html()).length){
+                if (!$.trim($(userContentID).html()).length) {
                     $(userContentID).html("<div style='text-align:center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
                 }
 
-                if(!$.trim( $(spotlightContentID).html()).length){
+                if (!$.trim($(spotlightContentID).html()).length) {
 
                     $(spotlightContentID).html("<div style='text-align:center'><img src='https://media0.giphy.com/media/vLq5FWMjfN47S/giphy.gif'  alt='Loading'></div>");
                 }
@@ -183,11 +183,10 @@
     }
 
 
-
     function refresh() {
         handler = {
-            activate: function() {
-                if(!$(this).hasClass('dropdown browse')) {
+            activate: function () {
+                if (!$(this).hasClass('dropdown browse')) {
                     $(this)
                         .addClass('active')
                         .closest('.ui.menu')

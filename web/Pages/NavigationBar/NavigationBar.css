@@ -13,21 +13,20 @@ i.iconClass:hover {
     color: #457B9D;
 }
 
-i.sidebarIcon{
-    font-size: 25px;
-    color: black;
-}
-
-i.sidebarIcon:hover {
-    color: #457B9D;
-}
-
 .toc.item{
     display: none;
 }
 
+a.accoritem{
+    color: black;
+}
 
-@media only screen and (max-width: 700px) {
+a.accoritem:hover{
+    color: lightgrey;
+}
+
+
+@media only screen and (max-width: 900px) {
    .invisibleforPhone{
        display: none !important;
    }
