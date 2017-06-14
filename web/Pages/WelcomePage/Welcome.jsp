@@ -22,8 +22,6 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.4/jquery.fullpage.js"></script>
-    <script src="${pageContext.request.contextPath}/Pages/WelcomePage/Welcome.js"></script>
-
 </head>
 <body>
 <div id="fullpage">
@@ -32,9 +30,9 @@
             <div class="column">
                 <div class="ui text container">
                     <h1 class="ui inverted header">
-                        Coda Team
+                        Bubble Blog
                     </h1>
-                    <h2>Do whatever you want when you want to.</h2>
+                    <h2>Where great minds collide.</h2>
 
                     <div class="twoButtons">
                         <div id="loginBtn" class="huge ui animated  inverted button" tabindex="0">
@@ -57,28 +55,33 @@
     </div>
     <div class="section" id="section1">
         <div class="ui middle aligned center aligned grid">
-            <h1>Our team</h1>
-            <div class="ui small sequenced images">
-                <img src="https://semantic-ui.com/images/avatar2/large/elyse.png" class="ui circular image">
-                <img src="https://semantic-ui.com/images/avatar2/large/matthew.png" class="ui circular image">
-                <img src="https://semantic-ui.com/images/avatar2/large/kristy.png" class="ui circular image">
-                <img src="https://semantic-ui.com/images/avatar/large/jenny.jpg" class="ui circular image">
+            <div class="column">
+                <div class="ui small sequenced images">
+                    <img src="https://semantic-ui.com/images/avatar2/large/elyse.png" class="ui circular image">
+                    <img src="https://semantic-ui.com/images/avatar2/large/matthew.png" class="ui circular image">
+                    <img src="https://semantic-ui.com/images/avatar2/large/kristy.png" class="ui circular image">
+                    <img src="https://semantic-ui.com/images/avatar/large/jenny.jpg" class="ui circular image">
+                </div>
+                <h1>Team Coda</h1>
+                <h2>Your World. Delivered by us.</h2>
             </div>
         </div>
     </div>
     <div class="section" id="section2">
         <div class="ui middle aligned center aligned grid">
-            <h1>Seriously, put anything you want here.</h1>
-        </div>
-        <div class="ui middle aligned center aligned grid">
-            <div class="ui small sequenced icons">
-                <i class="grey massive talk outline icon"></i>
-                <i class="orange massive image icon"></i>
-                <i class="yellow massive music icon"></i>
-                <i class="green massive record icon"></i>
+            <div class="column">
+                <div class="ui small sequenced icons">
+                    <i class="grey massive talk outline icon"></i>
+                    <i class="orange massive image icon"></i>
+                    <i class="yellow massive music icon"></i>
+                    <i class="green massive record icon"></i>
+                </div>
+                <h2>Put anything you want here. </h2>
+                <h1>Seriously.</h1>
             </div>
         </div>
     </div>
 </div>
+<script src="${pageContext.request.contextPath}/Pages/WelcomePage/Welcome.js"></script>
 </body>
 </html>

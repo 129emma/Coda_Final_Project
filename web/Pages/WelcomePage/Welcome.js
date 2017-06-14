@@ -1,35 +1,37 @@
 /**
  * Created by qpen546 on 5/06/2017.
  */
+
 var userClicked = false;
+$('#fullpage').fullpage({
+    continuousVertical: true,
+    navigationPosition: 'left',
+    navigation: true,
+
+    afterLoad: function(anchorLink, index){
+
+        if(index == 2){
+            $('.sequenced.images .image').transition({
+                animation: 'jiggle',
+                duration: 500,
+                interval: 200
+            });
+        }
+        if(index == 3){
+            $('.sequenced.icons .icon').transition({
+                animation: 'bounce',
+                duration: 500,
+                interval: 200
+            });
+        }
+    }
+});
+
 
 $(document).ready(function () {
 
-    $('#fullpage').fullpage({
-        continuousVertical: true,
-        navigationPosition: 'left',
-        navigation: true,
 
-        afterLoad: function(anchorLink, index){
 
-            if(index == 2){
-                $('.sequenced.images .image').transition({
-                    animation: 'jiggle',
-                    duration: 500,
-                    interval: 200
-                });
-            }
-            if(index == 3){
-                $('.sequenced.icons .icon').transition({
-                    animation: 'bounce',
-                    duration: 500,
-                    interval: 200
-                });
-            }
-
-        }
-
-    });
 
     $('#loginBtn').click(function () {
         checkLoginStatus("login");

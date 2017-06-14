@@ -34,7 +34,6 @@ public class ArticleInfoDAO {
     }
 
 
-
     public static List<ArticleInfo> getArticleInfoList(AbstractDB db ,String username,int number) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
@@ -123,16 +122,16 @@ public class ArticleInfoDAO {
     }
 
 
-
     public static void createArticleInfo(AbstractDB db, String title,String content, String postTime, String tags,String username, String userAvatar ) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO Article_beta_1(title,content,postTime,tags,username,userAvatar) VALUES (?,?,?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO Article_beta_1(title,content,postTime,tags,username,userAvatar,likeNum) VALUES (?,?,?,?,?,?,?);")) {
                 p.setString(1, title);
                 p.setString(2, content);
                 p.setString(3, postTime);
                 p.setString(4, tags);
                 p.setString(6, userAvatar);
                 p.setString(5, username);
+                p.setInt(7,0);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -176,6 +175,18 @@ public class ArticleInfoDAO {
         }
     }
 
+    public static void updateLikeInfo(AbstractDB db, String articleID, String likeNum) throws SQLException {
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE Article_beta_1 SET likeNum=? WHERE articleID=?")) {
+                p.setString(1, likeNum);
+                p.setString(2, articleID);
+                p.executeUpdate();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void deleteArticleInfo(AbstractDB db, String username,String articleID) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM Article_beta_1 WHERE username = ? AND articleID=?;")) {
@@ -196,7 +207,8 @@ public class ArticleInfoDAO {
                 r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
                 r.getString("tags"),
                 r.getString("username"),
-                r.getString("userAvatar")
+                r.getString("userAvatar"),
+                r.getInt("likeNum")
         );
     }
 

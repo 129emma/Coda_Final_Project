@@ -94,8 +94,6 @@
                                     <i class="heart icon"></i>
                                 </div>
                             </a>
-
-
                         </div>
                         <div class="extra content">
                             <div id="flipright" class="ui icon right floated button">
@@ -160,6 +158,13 @@
                 </div>
                 <p>We're loading that content for you.</p>
             </div>
+        </div>
+        <div class="ui message" id="noArticleMessage" hidden>
+            <i class="close icon"></i>
+            <div class="header">
+                Please create an article !
+            </div>
+            <a href="Article?action=create">Click here to create one.</a>
         </div>
         <a href="#topMenu">
             <div class="ui button topButton">

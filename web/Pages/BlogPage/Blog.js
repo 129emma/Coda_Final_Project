@@ -6,6 +6,14 @@ var ajaxProcess = true;
 
 $(document).ready(function () {
 
+    $('.message .close')
+        .on('click', function() {
+            $(this)
+                .closest('.message')
+                .transition('fade')
+            ;
+        });
+
     loadArticles();
 
     $('#flipright').click(function () {
@@ -70,6 +78,11 @@ function loadArticles() {
             console.log("3: " + ajaxProcess);
             var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
             $("#ArticleContainer").html(preview);
+            if ( $("#ArticleContainer").empty()) {
+                $('#noArticleMessage').show();
+            }else{
+                $('#noArticleMessage').hide();
+            }
             $("#Loader").fadeOut();
             console.log("4: " + ajaxProcess);
             refresh();

@@ -46,22 +46,14 @@
                 ${articleInfo.deleteArticle}
                 <div class="ui right labeled button" tabindex="0">
                     <a class="ui basic right pointing label">
-
+                        ${articleInfo.likeNum}
                     </a>
-                    <div id="likeButton" class="ui button">
-                        <i class="heart icon"></i>
-                        <span id="ifLiked"></span>
-                    </div>
+                    <button id="likeButton" class="ui button ${articleInfo.ifLiked}">
+                        <i class="heart icon ${articleInfo.ifRed}"></i>
+                        <span id="ifLiked">${articleInfo.ifLiked}</span>
+                    </button>
                 </div>
             </div>
-
-            <%--<div class="overlay">--%>
-            <%--<div class="ui labeled icon vertical menu">--%>
-            <%--<a class="item"><i class="twitter icon"></i> Tweet</a>--%>
-            <%--<a class="item"><i class="facebook icon"></i> Share</a>--%>
-            <%--<a class="item"><i class="mail icon"></i> E-mail</a>--%>
-            <%--</div>--%>
-            <%--</div>--%>
 
             <div class="ui comments">
                 <h3 class="ui dividing header">Comments</h3>
@@ -156,22 +148,22 @@
                     </div>
 
 
-                    </c:forEach>
+    </c:forEach>
 
-                    <form class="ui reply form" action="Comment" method="POST">
-                        <div class="field">
-                            <textarea name="comment"></textarea>
-                            <input type="hidden" name="articleID" value="${articleInfo.articleID}">
-                        </div>
-                        <button class="ui blue submit icon button" type="submit" name="action" value="create"><i
-                                class="icon edit"></i>Comment
-                        </button>
-                    </form>
+    <form class="ui reply form" action="Comment" method="POST">
+    <div class="field">
+    <textarea name="comment"></textarea>
+    <input type="hidden" name="articleID" value="${articleInfo.articleID}">
+    </div>
+    <button class="ui blue submit icon button" type="submit" name="action" value="create"><i
+    class="icon edit"></i>Comment
+    </button>
+    </form>
 
 
-                </div>
-            </div>
-        </div>
+    </div>
+    </div>
+    </div>
     </div>
 </body>
 </html>

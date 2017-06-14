@@ -11,6 +11,9 @@
 <html>
 <head>
     <title>ArticlePreview</title>
+    <style>
+        @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+    </style>
 </head>
 <body>
 <c:forEach var="article" items="${articleInfoList}">
@@ -39,12 +42,11 @@
             ${article.preview}
         <div class="ui fitted divider"></div>
             ${article.postTime}
-        <div class="ui left labeled button" tabindex="0">
-            <a class="ui basic right pointing label">
-                999
-            </a>
-            <div class="ui button">
-                <i class="heart icon"></i> Like
+        <div class="ui attached segment">
+            <div class="ui left labeled button" tabindex="0">
+                <a class="ui basic label">
+                    <i class="heart icon"> <span style="font-family: Montserrat, sans-serif">${article.likeNum} Likes</span></i>
+                </a>
             </div>
         </div>
 
