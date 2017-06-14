@@ -1,8 +1,10 @@
 package code_project.Servlet;
 
-import code_project.DAO.UserRelationshipDAO;
+import code_project.DAO.UserInfoDAO;
+import code_project.DAO.FollowInfoDAO;
+import code_project.Info.FollowInfo;
+import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
-import code_project.db.AbstractDB;
 import code_project.db.MySQL;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by txie936 on 8/06/2017.
@@ -30,14 +33,15 @@ public class FollowServlet extends HttpServlet {
         action = request.getParameter("action");
         followUsername = request.getParameter("followUsername");
         switch (action) {
-            case "checkFollowStatus":
-                checkFollowStatus(response);
-                break;
             case "follow":
                 follow(response);
                 break;
             case "unfollow":
                 unfollow(response);
+                break;
+            case "getFollowInfo":
+             getFollowInfo(request,response);
+
                 break;
         }
     }
@@ -46,35 +50,66 @@ public class FollowServlet extends HttpServlet {
         doPost(request, response);
     }
 
-    private void checkFollowStatus(HttpServletResponse response) throws IOException {
-        response.setContentType("text/plain");
-        if (username.equals(followUsername)) {
 
-            response.getWriter().write("user");
-
-        } else if (UserRelationshipDAO.checkFollowStatus(mySQL, username, followUsername)) {
-            response.getWriter().write("followed");
-        } else {
-            response.getWriter().write("unfollowed");
-        }
-    }
 
     private void follow(HttpServletResponse response) throws IOException {
 
         try {
-            UserRelationshipDAO.follow(mySQL, username, followUsername);
+            FollowInfoDAO.follow(mySQL, username, followUsername);
 
         } catch (SQLException e) {
             response.sendError(500, "Fail to talk to the database");
         }
     }
+
 
     private void unfollow(HttpServletResponse response) throws IOException {
 
         try {
-            UserRelationshipDAO.unfollow(mySQL, username, followUsername);
+            FollowInfoDAO.unfollow(mySQL, username, followUsername);
         } catch (SQLException e) {
             response.sendError(500, "Fail to talk to the database");
         }
     }
+
+    private void getFollowInfo(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
+        FollowInfo followInfo=FollowInfoDAO.getFollowInfo(mySQL,username);
+        List<String> followsNameList= followInfo.getFollows();
+        List<String> followersNameList= followInfo.getFollowers();
+        try {
+            List<UserInfo> followsList= UserInfoDAO.getUsersList(mySQL,followsNameList);
+            List<UserInfo> followersList= UserInfoDAO.getUsersList(mySQL,followersNameList);
+
+
+            for(UserInfo follow:followsList){
+                for(UserInfo follower:followersList){
+                    if(follow.getUsername().equals(follower.getUsername())){
+                        follow.setFollowStatus("<div class=\"ui button unfollow\" title=\"unfollow\"><i class=\"heart icon\"></i></div>");
+                        break;
+                    }else{
+                        follow.setFollowStatus(" <div class=\"ui button unfollow\" title=\"unfollow\"><i class=\"remove user icon\"></i></div>");
+                    }
+                }
+            }
+            for(UserInfo follower:followersList){
+                for(UserInfo follow:followsList){
+                    if(follower.getUsername().equals(follow.getUsername())){
+                        follower.setFollowStatus("<div class=\"ui button unfollow\" title=\"unfollow\"><i class=\"heart icon\"></i></div>");
+                        break;
+                    }else{
+                        follower.setFollowStatus("<div class=\"ui button follow\" title=\"follow\"> <i class=\"add user icon\"></i></div>");
+                    }
+                }
+            }
+
+            request.setAttribute("followsList",followsList);
+            request.setAttribute("followsNumber",followsList.size());
+            request.setAttribute("followersList",followersList);
+            request.setAttribute("followersNumber",followersList.size());
+            request.getRequestDispatcher("Pages/FollowAndFollowerPage/FollowAndFollower.jsp").forward(request,response);
+        }catch (SQLException e){
+            response.sendError(500,"Fail to talk to the database");
+        }
+    }
+
 }

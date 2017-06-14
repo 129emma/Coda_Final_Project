@@ -22,6 +22,33 @@ body{
 .ui.fluid.normal.dropdown.selection.multiple {
     max-width: 150px;
 }
+/* this CSS is not part of the widget, it is here just as an example of the demo page styling.... Don't copy this one, roll your own. One
+ * of the key things about the widget is that it allows you to do your own styling!
+ */
+body{
+    background-color: #565D6B !important;
+}
+
+.ui.text.container.edit {
+    padding-top: 100px;
+}
+
+.ui.form{
+    padding-top: 1em;
+}
+
+.btn{
+    border: none;
+    background-image: none;
+}
+
+.btn:hover{
+    background-color: rgba(151, 200, 199, 0.45);
+}
+
+.ui.fluid.normal.dropdown.selection.multiple {
+    max-width: 150px;
+}
 
 #editor {
 	max-height: 600px;

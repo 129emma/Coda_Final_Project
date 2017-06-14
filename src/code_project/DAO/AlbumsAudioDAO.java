@@ -19,12 +19,12 @@ public class AlbumsAudioDAO {
 
 
 
-    public static List<AlbumsAudioInfo> getAllAlbumsAudioList(AbstractDB db,String sort){
+    public static List<AlbumsAudioInfo> getAllAlbumsAudioList(AbstractDB db){
 
         List<AlbumsAudioInfo> allAlbumsAudioList = new ArrayList<>();
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio ORDER BY ?")) {
-                p.setString(1,sort);
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio_beta_1 ORDER BY postTime")) {
+
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         allAlbumsAudioList.add(AlbumsAudioInfoFromResultSet(r));
@@ -43,7 +43,7 @@ public class AlbumsAudioDAO {
         List<AlbumsAudioInfo> AlbumsAudioInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio WHERE username=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio_beta_1 WHERE username=?")) {
                 p.setString(1,username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -60,7 +60,7 @@ public class AlbumsAudioDAO {
 
     public static void createAlbumsAudioInfo(AbstractDB db, String username,String address,String fileName) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsAudio(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsAudio_beta_1(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
                 p.setString(1, username);
                 p.setString(2, address);
                 p.setString(3, getCurrentTimeStamp());
@@ -74,7 +74,7 @@ public class AlbumsAudioDAO {
 
     public static void deleteAlbumsAudioInfo(AbstractDB db, String username,int id) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsAudio WHERE username = ? AND id=?")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsAudio_beta_1 WHERE username = ? AND id=?")) {
                 p.setString(1, username);
                 p.setInt(2, id);
                 p.executeUpdate();
@@ -91,7 +91,7 @@ public class AlbumsAudioDAO {
         AlbumsAudioInfo AlbumsAudioInfo= null;
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio WHERE username = ?AND id=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio_beta_1 WHERE username = ?AND id=?")) {
                 p.setString(1, username);
                 p.setString(2, id);
                 try (ResultSet r = p.executeQuery()) {

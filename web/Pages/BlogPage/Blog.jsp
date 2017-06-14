@@ -21,7 +21,7 @@
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js" id="semanticJS"></script>
     <script src="${pageContext.request.contextPath}/Pages/BlogPage/Blog.js"></script>
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/BlogPage/Blog.css" type="text/css">
@@ -31,13 +31,14 @@
     </script>
 
 </head>
+
 <body>
 
 <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
     <jsp:param name="SideBar" value=""/>
 </jsp:include>
 
-<div class="pusher">
+<div class="pusher full">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
@@ -60,9 +61,9 @@
                                 <img src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
                             </div>
                             <!--User Icon-->
-                            <span class="ui centered small image iconImage">
-                                <img src="User-Info/${userInfo.username}/avatar.jpg">
-                            </span>
+                            <div class="ui small image iconImage">
+                                <img src="${userInfo.avatar}">
+                            </div>
                         </div>
                         <!--User Name-->
                         <div class="content">
@@ -86,18 +87,17 @@
                                 </div>
 
                             </a>
-                            <a href="Albums" class="item cardChoice">
-                                <div class="ui icon " data-tooltip="Albums">
-                                    <i class="ion-ios-camera-outline"></i>
-                                </div>
-                            </a>
+
                             <a href="Article?action=create" class="item cardChoice">
                                 <div class="ui icon" data-tooltip="Create">
                                     <i class="ion-ios-compose-outline"></i>
                                 </div>
                             </a>
-
-
+                            <a href="#" class="item" id="followInfo">
+                                <div class="ui icon" data-tooltip="Follows">
+                                    <i class="heart icon"></i>
+                                </div>
+                            </a>
                         </div>
                         <div class="extra content">
                             <div id="flipright" class="ui icon right floated button">
@@ -124,7 +124,7 @@
                                 <img src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
                                 <!--User Icon-->
                                 <div class="ui small image iconImage">
-                                    <img src="User-Info/${userInfo.username}/avatar.jpg">
+                                    <img src="${userInfo.avatar}">
                                 </div>
                             </div>
                         </div>
@@ -153,8 +153,23 @@
         </div>
 
     </div>
+<div class="ui text justified container">
+    <div id="ArticleContainer" >
 
-    <div id="ArticleContainer" class="ui text justified container">
+    </div>
+
+
+    <div class="ui center aligned vertical segment" id="Loader">
+        <div class="ui icon message">
+            <i class="notched circle loading icon"></i>
+            <div class="content">
+                <div class="header">
+                    Just one second
+                </div>
+                <p>We're loading the content for you.</p>
+            </div>
+        </div>
+
     </div>
 
     <%--Button for go to top menu--%>
@@ -167,6 +182,8 @@
 
 
 </div>
+
 </div>
+
 </body>
 </html>

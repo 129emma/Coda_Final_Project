@@ -18,52 +18,67 @@ import java.util.List;
  */
 public class AlbumsServlet extends HttpServlet {
     MySQL DB=new MySQL();
+    private String username;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LoginStatus.verifyStatus(request, response);
         HttpSession session = request.getSession(true);
-        String username=(String)session.getAttribute("username");
+        username=(String)session.getAttribute("username");
         response.setContentType("text/html");
         String action="";
         if(request.getParameter("action")!=null){
             action=request.getParameter("action");
             switch (action){
-                case "loadUserImage":
-                    List<AlbumsImageInfo> albumsImageInfoList= AlbumsImageDAO.getAlbumsImageList(DB,username);
-                    request.setAttribute("albumsImageInfoList",albumsImageInfoList);
+                case "Image":
+                   loadImage(request);
                     break;
-                case "loadUserVideo":
-                    List<AlbumsVideoInfo> albumsVideoInfoList= AlbumsVideoDAO.getAlbumsVideoList(DB,username);
-                    request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
+                case "Video":
+                   loadVideo(request);
                     break;
-                case "loadUserAudio":
-                    List<AlbumsAudioInfo> albumsAudioInfoList=AlbumsAudioDAO.getAlbumsAudioList(DB,username);
-                    request.setAttribute("albumsAudioInfoList",albumsAudioInfoList);
+                case "Audio":
+                  loadAudio(request);
                     break;
-                case "loadUserYoutube":
-                    List<AlbumsVideoInfo> albumsYoutubeList=AlbumsVideoDAO.getYoutubeList(DB,username);
-                    request.setAttribute("albumsYoutubeList",albumsYoutubeList);
-                    break;
-                case "loadOtherUserImage":
-                    break;
-                case "loadOtherUserVideo":
-                    break;
-                case "loadOtherUserAudio":
-                    break;
-                case "loadOtherUserYoutube":
+                case "Youtube":
+                  loadYoutube(request);
                     break;
             }
             request.getRequestDispatcher("Pages/AlbumsPage/AlbumsInfo.jsp").forward(request, response);
-
         }else {
             request.getRequestDispatcher("Pages/AlbumsPage/Albums.jsp").forward(request, response);
         }
-
-
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doPost(request,response);
     }
 
+    private void loadImage(HttpServletRequest request){
+
+        List<AlbumsImageInfo> albumsImageInfoList= AlbumsImageDAO.getAlbumsImageList(DB,username);
+        List<AlbumsImageInfo> imageSpotlightList=AlbumsImageDAO.getAllAlbumsImageList(DB);
+        request.setAttribute("albumsImageInfoList",albumsImageInfoList);
+        request.setAttribute("imageSpotlightList",imageSpotlightList);
+    }
+    private void loadVideo(HttpServletRequest request){
+        List<AlbumsVideoInfo> albumsVideoInfoList= AlbumsVideoDAO.getAlbumsVideoList(DB,username);
+        List<AlbumsVideoInfo> videoSpotlightList=AlbumsVideoDAO.getAllAlbumsVideoList(DB);
+        request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
+        request.setAttribute("videoSpotlightList",videoSpotlightList);
+
+    }
+    private void loadAudio(HttpServletRequest request){
+        List<AlbumsAudioInfo> albumsAudioInfoList=AlbumsAudioDAO.getAlbumsAudioList(DB,username);
+        List<AlbumsAudioInfo> audioSpotlightList=AlbumsAudioDAO.getAllAlbumsAudioList(DB);
+        request.setAttribute("albumsAudioInfoList",albumsAudioInfoList);
+        request.setAttribute("audioSpotlightList",audioSpotlightList);
+
+    }
+    private void loadYoutube(HttpServletRequest request){
+        List<AlbumsVideoInfo> albumsYoutubeList=AlbumsVideoDAO.getYoutubeList(DB,username);
+        List<AlbumsVideoInfo> youtubeSpotlightList=AlbumsVideoDAO.getAllAlbumsYoutubeList(DB);
+        request.setAttribute("albumsYoutubeList",albumsYoutubeList);
+        request.setAttribute("youtubeSpotlightList",youtubeSpotlightList);
+
+
+    }
 
 }

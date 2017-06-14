@@ -3,33 +3,11 @@
  */
 $(document)
     .ready(function () {
-
-        // fix main menu to page on passing
-        $('.main.menu').visibility({
-            type: 'fixed'
-        });
-        $('.overlay').visibility({
-            type: 'fixed',
-            offset: 80
-        });
-        // lazy load images
-        $('.image').visibility({
-            type: 'image',
-            transition: 'vertical flip in',
-            duration: 500
-        });
-
-        // show dropdown on hover
-        $('.main.menu  .ui.dropdown').dropdown({
-            on: 'hover'
-        });
-
-        // click avatar and display article
-
-
+        likeArticle();
+    });
 
         //edit comment
-        /*       $('.editBtn').each(function (i, obj) {
+     /*       $('.editBtn').each(function (i, obj) {
          console.log("1");
          console.log(obj);
          $(obj).click(function () {
@@ -42,13 +20,12 @@ $(document)
          })
          })*/
 
-
         $('.reply.editBtn').each(function () {
             $(this).click(function () {
                 $('.editComment') .modal('setting', 'transition', 'vertical flip')
-                    .modal('show');
+                                   .modal('show');
             })
-        })
+        });
 
 
         //reply comment
@@ -56,82 +33,86 @@ $(document)
             $(this).click(function () {
                 $('.replyComment').modal({
                     blurring:true})
-                    .modal('show');
+                                  .modal('show');
             })
         })
-
-        refresh();
-
-    });
-
-
 
 
 
 
 function likeArticle() {
     var id = $('#id').text();
-    $('.ui.button.dislike').off().click(function () {
+    $('.ui.button.like').off().click(function () {
         console.log("likeClick");
         $(this).prop("disabled", true);
+        var numLike = $('.ui.basic.right.pointing.label').text();
+        numLike = numLike + 1;
+        $('.ui.basic.right.pointing.label').text(parseInt(numLike, 10) + 1);
+        $('.heart.icon').addClass('red');
+        $('#ifLiked').text('liked');
         $.ajax({
             url: '/Article',
             type: 'post',
             data: {action: 'like', articleID: id},
             success: function () {
-                // console.log(id);
-                $('.ui.button.dislike').removeClass('dislike').addClass('like');
-                $(this).prop("disabled", false);
-                refresh();
+                console.log('success');
+                $('.ui.button.like').removeClass('like').addClass('liked');
+                $('#likeButton').prop("disabled", false);
+                likeArticle();
             }
         })
     });
-    $('.ui.button.like').off().click(function () {
+    $('.ui.button.liked').off().click(function () {
         console.log("dislikeClick");
         $(this).prop("disabled", true);
+        var numLike = $('.ui.basic.right.pointing.label').text();
+        $('.ui.basic.right.pointing.label').text(parseInt(numLike, 10) - 1);
+        $('.heart.icon').removeClass('red');
+        $('#ifLiked').text('like');
         $.ajax({
             url: '/Article',
             type: 'post',
             data: {action: 'dislike', articleID: id},
             success: function () {
-                $('.ui.button.like').removeClass('like').addClass('dislike');
-                $(this).prop("disabled", false);
-                refresh();
+                console.log('success2');
+                $('.ui.button.liked').removeClass('liked').addClass('like');
+                $('#likeButton').prop("disabled", false);
+                likeArticle();
             }
         })
     });
 }
-
-function refresh() {
-    var id = $('#id').text();
-    $.ajax({
-        url: '/Article',
-        type: 'post',
-        data: {action: 'checkLikeStatus', articleID: id},
-        success: function (result) {
-            console.log("success");
-            if (result == 'liked') {
-                console.log(result);
-                $('.heart.icon').addClass('red');
-                $('#likeButton').addClass('like');
-                $('#ifLiked').text('liked');
-            } else {
-                $('.heart.icon').removeClass('red');
-                $('#likeButton').addClass('dislike');
-                $('#ifLiked').text('like');
-            }
-            $.ajax({
-                url: '/Article',
-                type: 'post',
-                data: {action: 'getLikeNum', articleID: id},
-                success: function (resultInt) {
-                    console.log("success2");
-                    console.log(resultInt);
-                    $('.ui.basic.right.pointing.label').text(resultInt);
-                }
-            });
-            likeArticle();
-        }
-    });
-
-}
+//
+// function refresh() {
+//     var id = $('#id').text();
+//     $.ajax({
+//         url: '/Article',
+//         type: 'post',
+//         data: {action: 'checkLikeStatus', articleID: id},
+//         success: function (result) {
+//             console.log("success");
+//             if (result == 'liked') {
+//                 console.log(result);
+//                 $('.heart.icon').addClass('red');
+//                 $('#likeButton').addClass('liked');
+//                 $('#ifLiked').text('liked');
+//             } else {
+//                 $('.heart.icon').removeClass('red');
+//                 $('#likeButton').addClass('like');
+//                 $('#ifLiked').text('like');
+//             }
+//             $.ajax({
+//                 url: '/Article',
+//                 type: 'post',
+//                 data: {action: 'getLikeNum', articleID: id},
+//                 success: function (resultInt) {
+//                     console.log("success2");
+//                     console.log(resultInt);
+//                     $('.ui.basic.right.pointing.label').text(resultInt);
+//                 }
+//             });
+//             likeArticle();
+//         }
+//     });
+//
+// }

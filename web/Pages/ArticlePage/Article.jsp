@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: xingjianche
+  User: qpen546
   Date: 05/06/2017
   Time: 12:14 PM
   To change this template use File | Settings | File Templates.
@@ -27,19 +27,17 @@
     <jsp:param name="SideBar" value=""/>
 </jsp:include>
 
-<div class="pusher">
+<div class="pusher full">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
     <div id="ArticleContainer" class="ui text justified container">
         <div class="ui raised segment keepContent">
-            <div class="ui top attached segment">
-                <h3 class="ui header"> ${articleInfo.title}
-                    <div class="sub header">${articleInfo.postTime}</div>
-                </h3>
-            </div>
+            <h5 class="ui top attached segment">
+                ${articleInfo.title}<span class="ui right">${articleInfo.postTime}</span>
+            </h5>
             <div class="ui attached segment">
-                <p>${articleInfo.content}</p>
+                ${articleInfo.content}
             </div>
             <div id="id" style="display: none">${articleInfo.articleID}</div>
             <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
@@ -48,12 +46,12 @@
                 ${articleInfo.deleteArticle}
                 <div class="ui right labeled button" tabindex="0">
                     <a class="ui basic right pointing label">
-
+                        ${articleInfo.likeNum}
                     </a>
-                    <div id="likeButton" class="ui button">
-                        <i class="heart icon"></i>
-                        <span id="ifLiked"></span>
-                    </div>
+                    <button id="likeButton" class="ui button ${articleInfo.ifLiked}">
+                        <i class="heart icon ${articleInfo.ifRed}"></i>
+                        <span id="ifLiked">${articleInfo.ifLiked}</span>
+                    </button>
                 </div>
             </div>
 
@@ -175,7 +173,6 @@
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>
 

@@ -40,6 +40,7 @@ public class BlogServlet extends HttpServlet {
                 case "spotlight":
                     retrieveSpotlightPage(request, response);
                     return;
+
                 default:
                     retrieveHomePage(request, response);
             }

@@ -46,8 +46,9 @@ img.userAvatar {
 /*change position of icon image*/
 .ui.small.image.iconImage {
     position: absolute;
-    left: 40%;
     bottom: 20%;
+    right: 50%;
+    transform: translateX(50%);
     border: 5px solid white;
     border-radius: 3px;
 }
@@ -78,6 +79,10 @@ img.userAvatar {
 }
 
 
+div{
+    word-wrap: break-word;         /* All browsers since IE 5.5+ */
+    overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+}
 /*position in card*/
 .content {
     text-align: center;
@@ -101,4 +106,7 @@ div#flipright {
 
 
 
+}
+.ui.pointing.menu{
+    background-color:#FFFFFF;!important;
 }
