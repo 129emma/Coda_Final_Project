@@ -102,7 +102,7 @@ public class ArticleServlet extends HttpServlet {
             articleInfo.setIfLiked("like");
             articleInfo.setIfRed("");
         }
-        retrieveComments(request, response);
+        retrieveComments(request, response, articleInfo);
         request.setAttribute("articleInfo", articleInfo);
         request.getRequestDispatcher("Pages/ArticlePage/Article.jsp").forward(request, response);
     }
