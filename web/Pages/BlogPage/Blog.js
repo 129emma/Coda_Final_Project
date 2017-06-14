@@ -6,6 +6,16 @@ var process = false;
 
 $(document).ready(function () {
 
+    $('#noArticleMessage').hide();
+
+    $('.message .close')
+        .on('click', function() {
+            $(this)
+                .closest('.message')
+                .transition('fade')
+            ;
+        });
+
     loadArticles();
 
     $('#flipright').click(function () {
@@ -54,6 +64,9 @@ function loadArticles(){
             type: 'post',
             data: {action: 'preview', articleNumber: articlesNum, page: page},
             success: function (articlesPreview) {
+                if (articlesPreview.charAt(188) == "<") {
+                    $('#noArticleMessage').show();
+                }
                 var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
                 $("#ArticleContainer").html(preview);
                 $("#Loader").hide();

@@ -39,7 +39,6 @@
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
 
-
     <!-- Page Content !-->
 
     <div class="ui text container article">
@@ -155,10 +154,10 @@
         </div>
 
     </div>
-    <div class="ui text justified container">
-        <div id="ArticleContainer">
+<div class="ui text justified container">
+    <div id="ArticleContainer" >
 
-        </div>
+    </div>
 
 
         <div class="ui center aligned vertical segment" id="Loader">
@@ -171,19 +170,23 @@
                     <p>We're loading the content for you.</p>
                 </div>
             </div>
-
         </div>
 
-        <%--Button for go to top menu--%>
+        <div class="ui message" id="noArticleMessage">
+            <i class="close icon"></i>
+            <div class="header">
+                Please create an article !
+            </div>
+            <p>Please do so :)</p>
+        </div>
+
         <a href="#topMenu">
             <div class="ui button topButton">
                 top
             </div>
         </a>
 
-
     </div>
-
 </div>
 
 </body>

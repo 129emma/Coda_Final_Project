@@ -34,7 +34,6 @@ public class ArticleInfoDAO {
     }
 
 
-
     public static List<ArticleInfo> getArticleInfoList(AbstractDB db ,String username,int number) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
