@@ -150,6 +150,14 @@
 
     </div>
     <div class="ui text justified container">
+        <div class="ui message" id="noArticleMessage">
+            <i class="close icon"></i>
+            <div class="header">
+                Please create an article !
+            </div>
+            <a href="Article?action=create">Click here to create one.</a>
+        </div>
+
         <div id="ArticleContainer">
 
         </div>
@@ -165,14 +173,6 @@
                     <p>We're loading the content for you.</p>
                 </div>
             </div>
-        </div>
-
-        <div class="ui message" id="noArticleMessage">
-            <i class="close icon"></i>
-            <div class="header">
-                Please create an article !
-            </div>
-            <p>Please do so :)</p>
         </div>
 
         <a href="#topMenu">

@@ -4,7 +4,7 @@
 $(document)
     .ready(function () {
         likeArticle();
-    });
+
 
         //edit comment
      /*       $('.editBtn').each(function (i, obj) {
@@ -35,9 +35,9 @@ $(document)
                     blurring:true})
                                   .modal('show');
             })
-        })
+        });
 
-
+    });
 
 
 function likeArticle() {
