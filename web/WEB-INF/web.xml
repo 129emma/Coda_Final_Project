@@ -112,7 +112,6 @@
         <servlet-name>GoogleLogin</servlet-name>
         <url-pattern>/GoogleLogin</url-pattern>
     </servlet-mapping>
-
     <servlet>
         <servlet-name>Follow</servlet-name>
         <servlet-class>code_project.Servlet.FollowServlet</servlet-class>
@@ -122,5 +121,6 @@
         <servlet-name>Follow</servlet-name>
         <url-pattern>/Follow</url-pattern>
     </servlet-mapping>
+
 
 </web-app>

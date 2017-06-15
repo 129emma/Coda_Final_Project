@@ -11,15 +11,24 @@ public class AlbumsVideoInfo {
     private String address;
     private String fileName;
     private String postTime;
+    private String userAvatar;
 
-    public AlbumsVideoInfo( int id,String fileName, String username,String address, String postTime) {
+
+    public AlbumsVideoInfo( int id,String fileName, String username,String address, String postTime,String userAvatar) {
      this.fileName=fileName;
         this.username = username;
         this.address = address;
         this.postTime = postTime;
         this.id=id;
+        this.userAvatar=userAvatar;
+    }
+    public String getUserAvatar() {
+        return userAvatar;
     }
 
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
 
     public String getFileName() {
         return fileName;

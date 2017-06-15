@@ -92,7 +92,7 @@
                                     </a>
                                 </div>
                                 <div class="column">
-                                    <a href="#" class="item" id="followInfo">
+                                    <a href="#" class="item" id="followIcon">
                                         <div class="ui icon" data-tooltip="Follows">
                                             <i class="ion-ios-people-outline cardIcons"></i>
                                         </div>

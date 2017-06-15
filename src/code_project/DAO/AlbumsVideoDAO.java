@@ -96,13 +96,14 @@ public class AlbumsVideoDAO {
     }
 
 
-    public static void createAlbumsVideoInfo(AbstractDB db, String username,String address,String fileName) throws SQLException {
+    public static void createAlbumsVideoInfo(AbstractDB db, String username,String address,String fileName,String avatar) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsVideo_beta_1(username,address,postTime,fileName) VALUES (?,?,?,?)")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsVideo_beta_1(username,address,postTime,fileName,userAvatar) VALUES (?,?,?,?,?)")) {
                 p.setString(1, username);
                 p.setString(4,fileName);
                 p.setString(2, address);
                 p.setString(3, getCurrentTimeStamp());
+                p.setString(5,avatar);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -171,7 +172,8 @@ public static List<AlbumsVideoInfo> getYoutubeList(AbstractDB db,String username
                 r.getString("fileName"),
                 r.getString("username"),
                 r.getString("address"),
-                r.getDate("postTime").toString()+" "+r.getTime("postTime").toString()
+                r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
+                r.getString("userAvatar")
         );
     }
 

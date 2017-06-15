@@ -19,67 +19,11 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
-    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>--%>
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
-    <style>
-        .rounded:hover {
-            cursor: pointer
-        }
-
-        .rounded {
-            width: 100px;
-            height: 100px;
-        }
-
-        .img {
-            display: inline-block;
-            margin: 5px;
-
-        }
-
-        .center, .header, .avatar {
-            text-align: center;
-        }
-
-        .avatarInfo {
-            width: 100%;
-            height: 100%;
-        }
-
-        .avatar {
-            width: 200px;
-            height: 200px;
-            margin: auto;
-        }
-
-        .ui.header {
-            margin: 0;
-        !important;
-        }
-
-        #avatarForm {
-            display: inline-block;
-        !important;
-        }
-
-    </style>
-    <script>
-        var username = '${userProfile.username}';
-        var googleUser = '${googleUser}';
-    </script>
-    <script src="${pageContext.request.contextPath}/Pages/UserProfilePage/PQ.js"></script>
-    <script>
-        $(document).ready(function () {
-            $.ajax({
-                url: "/User-Info/gin/avatar.jpg",
-                success: function (data) {
-                }
-            });
-        });
-
-    </script>
+    <script src="${pageContext.request.contextPath}/Pages/UserProfilePage/EditProfile.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/UserProfilePage/EditProfile.css">
 </head>
 <body>
 
@@ -93,13 +37,12 @@
 
             <!--id for update profile form should be changed-->
             <div class="ui fitted horizontal divider">Change Details</div>
-            <div>
-                <img src="${userProfile.avatar}" class="rounded" title="click to change avatar"
-                     onclick="showWindow2()"/>
+            <div >
+                <img src="${userProfile.avatar}" class="rounded" title="click to change avatar" onclick="showWindow2()"/>
             </div>
             <%--<button class="ui button"  id="userIcon"  onclick="showWindow2()">change</button>--%>
 
-            <form class="ui form" id="#" action="Profile" method="post">
+            <form class="ui form" id="profileForm" action="Profile" method="post">
                 <div class="field">
                     <label>Username:</label><input id="newUsername" type="text" name="username"
                                                    value="${userProfile.username}" style="max-width: 300px"/></div>
@@ -127,13 +70,15 @@
                     <option value="Male">Male</option>
                 </select>
                 </div>
-                <input id="updateBtn" class="ui submit button" type="submit" name="profileAction" value="Update"/>
-                <input class="ui submit button" type="submit" name="profileAction"
-                       value="Delete"/>
+                <input  type="hidden" name="profileAction" id="profileAction">
             </form>
-            <br/>
-            <div id="passwordDivider" class="ui fitted horizontal divider" style="display: none;">Change Password</div>
-            <form class="ui form" id="passwordForm" action="ChangePassword" method="post" style="display: none;">
+            <button class="ui green button" id="updateBtn">Update</button>
+            <button class="ui red button"  id="deleteBtn">Delete</button>
+            <div class="ui fitted horizontal divider">Change Password</div>
+
+
+
+            <form class="ui form" id="passwordForm" action="ChangePassword" method="post">
                 <div class="field">
                     <label>Password: </label><input id="password" type="password" name="password"
                                                     placeholder="Please Enter Your Password" style="width: 300px;"/>
@@ -159,12 +104,12 @@
     </div>
 </div>
 
-<div class="ui modal">
-    <i class="close icon"></i>
-    <div class="header">
-        Avatar
-    </div>
-    <div class="image content">
+    <div class="ui modal" id="iconWindow">
+        <i class="close icon"></i>
+        <div class="header">
+            Avatar
+        </div>
+        <div class="image content">
 
         <div class="avatarInfo">
             <div>
@@ -172,86 +117,48 @@
                     <img class="avatar" id="icon" src="${userProfile.avatar}">
                 </div>
 
-                <br>
-                <div class="center">
-                    <div class="ui fitted horizontal divider">Options</div>
-                    <c:forEach var="localIcon" items="${iconList}">
-                        <div class="img">
-                            <img src="${localIcon}" class="rounded" id="${localIcon}"/>
-                        </div>
-                    </c:forEach>
                     <br>
-                    <p></p>
-                    <%--<div class="ui button" >--%>
-                    <%--<i class="folder open icon"></i>Choose file--%>
-                    <%--</div>--%>
-                    <button class="ui blue labeled icon small button" id="fileButton">
-                        <i class="inverted upload icon"></i>
-                        Upload
-                    </button>
-                    <form action="AvatarEdit" id="avatarForm" method="post" style="margin: 0"
-                          enctype="multipart/form-data">
-                        <input type="hidden" name="result" id="result" value="${userProfile.avatar}">
-                        <input style="display: none" type="file" id="imageFile" accept=".jpg, .gif,.png"
-                               name="icon"/>
-                    </form>
+                    <div class="center">
+                        <div class="ui fitted horizontal divider">Options</div>
+                        <c:forEach var="localIcon" items="${iconList}">
+                            <div class="img">
+                                <img src="${localIcon}" class="rounded" id="${localIcon}"/>
+                            </div>
+                        </c:forEach>
+                        <br>
+                        <p></p>
+                        <button class="ui blue labeled icon small button" id="fileButton">
+                            <i class="inverted upload icon"></i>
+                           Upload
+                        </button>
+                        <form action="AvatarEdit" id="avatarForm" method="post" style="margin: 0" enctype="multipart/form-data">
+                            <input type="hidden" name="result" id="result" value="${userProfile.avatar}">
+                                <input style="display: none" type="file" id="imageFile" accept=".jpg, .gif,.png"
+                                       name="icon"/>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="actions">
+            <div class="ui deny button">
+                Cancel
+            </div>
+            <button id="submitAvatarChange" class="ui positive right icon button">
+                <i id="saveIcon" class="list icon"></i>
+                Save
+            </button>
+        </div>
     </div>
+
+<div class="ui small modal" id="deleteWindow">
+    <div class="header">Delete your account</div>
+    <div class="content">Are you sure you want to delete your account and all files?</div>
     <div class="actions">
-        <div class="ui deny button">
-            Cancel
-        </div>
-        <div id="submitAvatarChange" class="ui positive right icon button">
-            <i class="list icon"></i>
-            Save
-        </div>
+        <div class="ui negative button">No</div>
+        <button class="ui positive right labled icon button" id="deleteAccountBtn">Yes<i class="checkmark icon"></i> </button>
     </div>
 </div>
-
 </div>
-<script>
-
-    $('#fileButton').click(function () {
-        $('#imageFile').click();
-    });
-    function showWindow2() {
-        $('.ui.modal')
-            .modal('show')
-        ;
-    }
-
-    $("#submitAvatarChange").click(function () {
-        $("#avatarForm").submit();
-
-    });
-
-    $(".rounded").each(function () {
-        $(this).click(function () {
-            var src = $(this).attr('src');
-            $("#icon").attr('src', src);
-            $('input[type=hidden]').val(src);
-        });
-    });
-
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#icon').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-
-    $('#imageFile').change(function () {
-        readURL(this);
-    })
-
-</script>
-
 </body>
 </html>

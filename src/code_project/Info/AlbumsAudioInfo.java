@@ -9,14 +9,24 @@ public class AlbumsAudioInfo {
     private String username;
     private String address;
     private String postTime;
+    private String userAvatar;
 
 
-    public AlbumsAudioInfo(int id,String fileName, String username, String address, String postTime) {
+
+    public AlbumsAudioInfo(int id, String fileName, String username, String address, String postTime,String userAvatar) {
         this.fileName=fileName;
         this.username = username;
         this.address = address;
         this.postTime = postTime;
         this.id=id;
+        this.userAvatar=userAvatar;
+    }
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
     }
     public String getFileName() {
         return fileName;

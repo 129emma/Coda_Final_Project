@@ -1,0 +1,44 @@
+
+.rounded:hover {
+    cursor: pointer
+}
+
+.rounded{
+    width: 100px;
+    height: 100px;
+}
+
+.img {
+    display: inline-block;
+    margin: 5px;
+
+}
+
+.center, .header, .avatar {
+    text-align: center;
+}
+
+.avatarInfo {
+    width: 100%;
+    height: 100%;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+
+.ui.header {
+    margin: 0;
+!important;
+}
+
+#avatarForm {
+    display: inline-block;
+!important;
+}
+
+#saveIcon{
+    margin-right: 8px;!important;
+}

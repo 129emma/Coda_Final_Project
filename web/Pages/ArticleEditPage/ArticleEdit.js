@@ -2,15 +2,12 @@
  * Created by txie936 on 12/06/2017.
  */
 $(document).ready(function () {
-
     $('.ui.normal.dropdown').dropdown();
-
 
     $('.input').each(function () {
         $(this).change(function () {
             var data = new FormData();
             data.append('file', $(this).prop('files')[0]);
-            $('#editor').append(data + '<div><br></div>');
             $.ajax({
                 url: '/AlbumsChange',
                 type: 'POST',
@@ -18,10 +15,11 @@ $(document).ready(function () {
                 processData: false,  // tell jQuery not to process the data
                 contentType: false,  // tell jQuery not to set contentType
                 success: function (data) {
-
+                    $('#editor').append(data + '<div><br></div>');
                 }
             });
             $(this).val('');
+
         });
     });
 
@@ -29,19 +27,27 @@ $(document).ready(function () {
         var input = prompt("Please put your video link", "link here");
         if (input != null) {
             var data = {'action': 'createYoutube', 'youtubeAddress': input};
-            $('#editor').append(input + '<div><br></div>');
             $.ajax({
                 url: '/AlbumsChange',
                 type: 'POST',
                 data: data,
                 success: function (data) {
-
+                    $('#editor').append(input + '<div><br></div>');
                 }
             });
         }
     });
 
-
+$("#form").submit(function (e) {
+    var content= $("#editor").html();
+      if(!$.trim(content).length) {
+          alert("Content is empty!");
+          e.preventDefault();
+       }else {
+          $("#articleContentSubmit").val(content);
+          $(this).find("#submitBtn").addClass("loading").prop("disabled",true);
+      }
+});
 
     $(function(){
         function initToolbarBootstrapBindings() {
@@ -68,7 +74,7 @@ $(document).ready(function () {
             } else {
                 $('#voiceBtn').hide();
             }
-        };
+        }
 
         function showErrorAlert (reason, detail) {
             var msg='';
@@ -78,7 +84,7 @@ $(document).ready(function () {
             }
             $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+
                 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
-        };
+        }
         initToolbarBootstrapBindings();
         $('#editor').wysiwyg({ fileUploadError: showErrorAlert} );
         window.prettyPrint && prettyPrint();

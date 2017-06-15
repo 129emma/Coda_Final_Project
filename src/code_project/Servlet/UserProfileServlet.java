@@ -60,7 +60,7 @@ private void getUserProfile(HttpServletRequest request, HttpServletResponse resp
     request.setAttribute("iconList",iconList);
     request.setAttribute("userProfile",userProfile);
     request.setAttribute("googleUser",googleUser);
-    request.getRequestDispatcher("Pages/UserProfilePage/EditProfilePage.jsp").forward(request, response);
+    request.getRequestDispatcher("Pages/UserProfilePage/EditProfile.jsp").forward(request, response);
 
 }
 

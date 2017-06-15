@@ -10,15 +10,24 @@ public class AlbumsImageInfo {
     private String postTime;
 
     private String fileName;
+    private String userAvatar;
 
-    public AlbumsImageInfo(int id,String fileName, String username, String address, String postTime) {
+
+    public AlbumsImageInfo(int id,String fileName, String username, String address, String postTime,String userAvatar) {
        this.fileName=fileName;
         this.username = username;
         this.address = address;
         this.postTime = postTime;
         this.id=id;
+        this.userAvatar=userAvatar;
+    }
+    public String getUserAvatar() {
+        return userAvatar;
     }
 
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
     public String getFileName() {
         return fileName;
     }

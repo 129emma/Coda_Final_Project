@@ -63,7 +63,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#followInfo").click(function () {
+    $("#followIcon").click(function (){
         getFollowInfo();
         $(window).off('scroll');
         clearInterval(autoRefresh);
@@ -95,7 +95,7 @@ function loadArticles() {
     });
 }
 
-function barFunction() {
+function barFunction(){
     handler = {
         activate: function () {
             if (!$(this).hasClass('dropdown browse')) {
@@ -108,7 +108,6 @@ function barFunction() {
                 ;
             }
         }
-
     };
     $('.menu .item').on('click', handler.activate)
     ;
@@ -117,44 +116,50 @@ function barFunction() {
 }
 function getFollowers() {
     $("#getFollowers").off().click(function () {
-        $("#follows").hide();
-        $("#followers").show();
+        $("#followInfo").hide();
+        $("#followerInfo").show();
     })
 }
 
 function getFollows() {
     $("#getFollows").off().click(function () {
-        $("#follows").show();
-        $("#followers").hide();
+        $("#followInfo").show();
+        $("#followerInfo").hide();
     })
 }
 
 function freshButtonList() {
-    $(".ui.button.unfollow").off().each(function (i, obj) {
-        $(obj).click(function () {
-            var username = $(obj).parent().siblings(".content").html();
+
+    $(".ui.button.unfollow").each(function (i,obj) {
+        $(obj).off().click(function () {
+            $(obj).addClass("loading");
+            $(obj).prop("disabled", true);
+            var username=$(obj).parent().siblings(".content").html();
             $.ajax({
                 url: '/Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
-                    console.log($(obj).text());
-                    $(obj).removeClass("unfollow").addClass("follow").html('<i class="add user icon"></i>');
+                    $(obj).attr('title','follow').removeClass("unfollow loading").addClass("follow").html('<i class="add user icon"></i>');
+                    $(obj).prop("disabled", false);
                     freshButtonList();
                 }
             })
         })
     });
-    $(".ui.button.follow").off().each(function (i, obj) {
-        $(obj).click(function () {
-            var username = $(obj).parent().siblings(".content").html();
+
+    $(".ui.button.follow").each(function (i,obj){
+        $(obj).off().click(function () {
+          $(obj).addClass("loading");
+            $(obj).prop("disabled", true);
+            var username=$(obj).parent().siblings(".content").html();
             $.ajax({
                 url: '/Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
-                    console.log($(obj).text());
-                    $(obj).removeClass("follow").addClass("unfollow").html('<i class="remove user icon"></i>');
+                    $(obj).attr('title','unfollow').removeClass("follow loading").addClass("unfollow").html('<i class="remove user icon"></i>');
+                    $(obj).prop("disabled", false);
                     freshButtonList();
                 }
             })
@@ -164,32 +169,43 @@ function freshButtonList() {
 }
 
 
-function getFollowInfo() {
+
+function  getFollowInfo(){
+
     $("#ArticleContainer").html("");
     $("#Loader").show();
+
     $.ajax({
         url: '/Follow',
         type: 'post',
         data: {action: 'getFollowInfo'},
         success: function (followInfo) {
+
             var info = followInfo.substring(followInfo.indexOf('\<body\>') + 6, followInfo.indexOf("\</body\>"));
             $("#ArticleContainer").html(info);
             getFollows();
             getFollowers();
             freshButtonList();
             barFunction();
-            $("#followers").hide();
-            $("#follows").show();
+            if(!$.trim( $("#follows").html()).length){
+                $("#followList").hide();
+                $("#noFollowInfo").show();
+            }
+            if(!$.trim( $("#followers").html()).length){
+                $("#followerList").hide();
+                $("#noFollowerInfo").show();
+            }
+            $("#followerInfo").hide();
+            $("#followInfo").show();
             $("#Loader").hide();
-
         }
     })
 }
 
 function followFunction() {
 
-    $('.ui.button.blue').off().each(function (i, obj) {
-        $(obj).click(function () {
+    $('.ui.button.blue').each(function (i, obj) {
+        $(obj).off().click(function () {
             var username = $(obj).parent().siblings('.header').text();
             $(obj).prop("disabled", true);
             $.ajax({
@@ -204,8 +220,8 @@ function followFunction() {
             })
         })
     });
-    $('.ui.button.red').off().each(function (i, obj) {
-        $(obj).click(function () {
+    $('.ui.button.red').each(function (i, obj) {
+        $(obj).off().click(function () {
             var username = $(obj).parent().siblings('.header').text();
             $(obj).prop("disabled", true);
             $.ajax({

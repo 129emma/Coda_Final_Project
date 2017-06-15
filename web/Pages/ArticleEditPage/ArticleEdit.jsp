@@ -46,9 +46,10 @@
 
     <div class="ui text container edit">
 
-        <form action="/Article" method="post" onsubmit="prepareContent()">
 
+    <form action="/Article" method="post" id="form">
 
+        <div class="ui text container edit">
             <div class="hero-unit">
                 <div id="alerts"></div>
                 <div class="ui form"> <%--Enter Title--%>
@@ -61,7 +62,7 @@
                 </div>
                 <%--Button in Editor--%>
                 <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-                    <div class="btn-group">
+                    <div class="btn-group" style="margin-left:5px">
                         <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b
                                 class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -112,18 +113,15 @@
                         <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
                     </div>
 
-                    <div class="btn-group" onclick="readLink()">
-                        <a class="btn" title="Insert Youtube video"><img class="image iconImage"
-                                                                         src="http://internetvi.ru/wp-content/uploads/2012/06/e33c1de5c8bd4c4c0bdaba9cd3657a6d.png"/></a>
-                    </div>
-
-                    <div class="btn-group">
-                        <a class="btn" title="Insert image"><label for="image-input" class="myLabel">
-                            <img class="image iconImage"
-                                 src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png">
-                        </label>
-                            <input id="image-input" class="input" type="file" accept=".jpg, .gif,.png"></a>
-                    </div>
+            <div class="btn-group" id="youtube">
+              <a class="btn" title="Insert Youtube video"><img class="image" src="http://internetvi.ru/wp-content/uploads/2012/06/e33c1de5c8bd4c4c0bdaba9cd3657a6d.png"/></a>
+            </div>
+            <div class="btn-group" >
+              <a class="btn" title="Insert image"><label for="image-input" class="myLabel">
+                <img class="image" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" >
+              </label>
+                <input  id="image-input"  class="input" type="file" accept=".jpg, .gif,.png"></a>
+            </div>
 
                     <div class="btn-group">
                         <a class="btn" title="Insert audio"><label for="audio-input" class="myLabel">
@@ -147,7 +145,7 @@
                 </div>
 
                 <%--Editor--%>
-                <div id="editor">
+                <div id="editor" >
                     ${articleInfo.content}
                 </div>
 
@@ -181,11 +179,6 @@
         <p style="color: red">${information}</p>
     </c:if>
 </div>
-<script>
-    function prepareContent() {
-        document.getElementById("articleContentSubmit").value = document.getElementById("editor").innerHTML;
-    }
-</script>
 </body>
 
 </html>
