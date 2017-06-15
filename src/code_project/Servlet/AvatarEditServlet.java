@@ -56,10 +56,10 @@ public class AvatarEditServlet extends HttpServlet {
         response.setContentType("text/html");
 
         //create User-Info folder
-        File Iconfolder = new File(fullFilePath);
+        File folder = new File(fullFilePath);
 
-        if (!Iconfolder.exists()) {
-            Iconfolder.mkdir();
+        if (!folder.exists()) {
+            folder.mkdir();
         }
         //create the user's own folder under User-Info folder
         File Userfolder = new File(fullFilePath + "/" + username);
@@ -68,12 +68,12 @@ public class AvatarEditServlet extends HttpServlet {
             Userfolder.mkdir();
         }
 
-        File avatarFile=new File(fullFilePath+"/"+username+"/avatar");
+        File avatarFile = new File(fullFilePath + "/" + username + "/avatar");
         if (!avatarFile.exists()) {
             avatarFile.mkdir();
         }
         //get the user's folder path
-        filePath = servletContext.getRealPath(fullFilePath+"/"+username+"/avatar/");
+        filePath = servletContext.getRealPath(fullFilePath + "/" + username + "/avatar/");
 
         //create directory
         DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -169,7 +169,7 @@ public class AvatarEditServlet extends HttpServlet {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                    }else {
+                    } else {
                         avatarFilePath = "User-Info/" + username + "/avatar/avatar." + fileExtension;
                     }
 

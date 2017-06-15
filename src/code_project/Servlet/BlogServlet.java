@@ -30,9 +30,9 @@ public class BlogServlet extends HttpServlet {
         session = request.getSession(true);
 
         String page = request.getParameter("page");
-        if(page == null){
-            retrieveHomePage(request,response);
-        }else {
+        if (page == null) {
+            retrieveHomePage(request, response);
+        } else {
             switch (page) {
                 case "home":
                     retrieveHomePage(request, response);
@@ -52,7 +52,7 @@ public class BlogServlet extends HttpServlet {
         // Map<Integer,CommentInfoList> commentInfoListOFAllArticle = CommentInfoDAO.getCommentInfoListOfAllArticle(mySQL,articleInfoList);
         UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
         request.setAttribute("userInfo", userInfo);
-        request.setAttribute("page","spotlight");
+        request.setAttribute("page", "spotlight");
         //request.setAttribute("commentInfoListOFAllArticle",commentInfoListOFAllArticle);
         request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
     }
@@ -61,7 +61,7 @@ public class BlogServlet extends HttpServlet {
         String username = (String) session.getAttribute("username");
         UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
         request.setAttribute("userInfo", userInfo);
-        request.setAttribute("page","home");
+        request.setAttribute("page", "home");
         request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
     }
 

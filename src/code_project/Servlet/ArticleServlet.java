@@ -118,7 +118,7 @@ public class ArticleServlet extends HttpServlet {
                 if (username.equals(commentInfo.getUsername()) || username.equals(articleInfo.getUsername())) {
                     commentInfo.setDeleteComment();
                 }
-                commentInfo.setCommentReplyInfoList(retrieveRepliedComments(commentInfo.getCommentID(),articleInfo));
+                commentInfo.setCommentReplyInfoList(retrieveRepliedComments(commentInfo.getCommentID(), articleInfo));
             }
         }
 
@@ -126,7 +126,7 @@ public class ArticleServlet extends HttpServlet {
 
     }
 
-    private List<CommentReplyInfo> retrieveRepliedComments(int commentID,ArticleInfo articleInfo) throws ServletException, IOException {
+    private List<CommentReplyInfo> retrieveRepliedComments(int commentID, ArticleInfo articleInfo) throws ServletException, IOException {
         String username = (String) session.getAttribute("username");
         List<CommentReplyInfo> commentReplyInfoList = CommentInfoDAO.getCommentReplyInfobyCommentReplyID(mySQL, commentID);
         if (commentReplyInfoList != null) {

@@ -34,7 +34,7 @@ public class ChangePasswordServlet extends HttpServlet {
         response.setContentType("text/html");
         Writer out = response.getWriter();
         username = (String) session.getAttribute("username");
-        if(UserInfoDAO.googleUser(mySQL,username)){
+        if (UserInfoDAO.googleUser(mySQL, username)) {
             out.write("Fail: google user do not need password");
             return;
         }
@@ -44,7 +44,7 @@ public class ChangePasswordServlet extends HttpServlet {
         loginInfo = LoginInfoDAO.getLoginInfo(mySQL, username);
         if (!rightPassword()) {
             out.write("Fail: Wrong Password");
-        } else if (rightPassword()){
+        } else if (rightPassword()) {
             updatePassword();
             out.write("success");
         } else {

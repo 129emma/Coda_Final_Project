@@ -40,7 +40,7 @@ public class FollowServlet extends HttpServlet {
                 unfollow(response);
                 break;
             case "getFollowInfo":
-             getFollowInfo(request,response);
+                getFollowInfo(request, response);
 
                 break;
         }
@@ -49,7 +49,6 @@ public class FollowServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doPost(request, response);
     }
-
 
 
     private void follow(HttpServletResponse response) throws IOException {
@@ -72,40 +71,40 @@ public class FollowServlet extends HttpServlet {
         }
     }
 
-    private void getFollowInfo(HttpServletRequest request,HttpServletResponse response) throws IOException,ServletException{
-        FollowInfo followInfo=FollowInfoDAO.getFollowInfo(mySQL,username);
-        List<String> followsNameList= followInfo.getFollows();
-        List<String> followersNameList= followInfo.getFollowers();
+    private void getFollowInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        FollowInfo followInfo = FollowInfoDAO.getFollowInfo(mySQL, username);
+        List<String> followsNameList = followInfo.getFollows();
+        List<String> followersNameList = followInfo.getFollowers();
         try {
-            List<UserInfo> followsList= UserInfoDAO.getUsersList(mySQL,followsNameList);
-            List<UserInfo> followersList= UserInfoDAO.getUsersList(mySQL,followersNameList);
+            List<UserInfo> followsList = UserInfoDAO.getUsersList(mySQL, followsNameList);
+            List<UserInfo> followersList = UserInfoDAO.getUsersList(mySQL, followersNameList);
 
-            for(UserInfo follow:followsList){
+            for (UserInfo follow : followsList) {
                 follow.setFollowStatus(" <button class=\"ui button unfollow\" title=\"unfollow\"><i class=\"remove user icon\"></i></button>");
-                for(UserInfo follower:followersList){
-                    if(follow.getUsername().equals(follower.getUsername())){
+                for (UserInfo follower : followersList) {
+                    if (follow.getUsername().equals(follower.getUsername())) {
                         follow.setFollowStatus("<button class=\"ui button unfollow\" title=\"unfollow\"><i class=\"heart icon\"></i></button>");
                         break;
                     }
                 }
             }
-            for(UserInfo follower:followersList){
+            for (UserInfo follower : followersList) {
                 follower.setFollowStatus("<button class=\"ui button follow\" title=\"follow\"><i class=\"add user icon\"></i></button>");
-                for(UserInfo follow:followsList){
-                    if(follower.getUsername().equals(follow.getUsername())){
+                for (UserInfo follow : followsList) {
+                    if (follower.getUsername().equals(follow.getUsername())) {
                         follower.setFollowStatus("<button class=\"ui button unfollow\" title=\"unfollow\"><i class=\"heart icon\"></i></button>");
                         break;
                     }
                 }
             }
 
-            request.setAttribute("followsList",followsList);
-            request.setAttribute("followsNumber",followsList.size());
-            request.setAttribute("followersList",followersList);
-            request.setAttribute("followersNumber",followersList.size());
-            request.getRequestDispatcher("Pages/FollowAndFollowerPage/FollowAndFollower.jsp").forward(request,response);
-        }catch (SQLException e){
-            response.sendError(500,"Fail to talk to the database");
+            request.setAttribute("followsList", followsList);
+            request.setAttribute("followsNumber", followsList.size());
+            request.setAttribute("followersList", followersList);
+            request.setAttribute("followersNumber", followersList.size());
+            request.getRequestDispatcher("Pages/FollowAndFollowerPage/FollowAndFollower.jsp").forward(request, response);
+        } catch (SQLException e) {
+            response.sendError(500, "Fail to talk to the database");
         }
     }
 
