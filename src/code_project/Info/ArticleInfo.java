@@ -1,6 +1,10 @@
 package code_project.Info;
 
 import org.json.simple.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 /**
  * Created by txie936 on 25/05/2017.
@@ -21,7 +25,16 @@ public class ArticleInfo {
     public int likeNum;
     public String ifLiked;
     public String ifRed;
+    public String firstImage;
+    public String firstAudio;
+    public String firstVideo;
+    public String firstYoutube;
+    public String multimediaPreview;
+    public String textContent;
 
+    public String getMultimediaPreview() {
+        return multimediaPreview;
+    }
 
     public ArticleInfo(int articleID, String title, String content, String post_time, String tags, String username, String userAvatar, int likeNum) {
         this.articleID = articleID;
@@ -32,7 +45,9 @@ public class ArticleInfo {
         this.username = username;
         this.userAvatar = userAvatar;
         this.likeNum = likeNum;
+        textContent = content;
         this.preview = "";
+        this.multimediaPreview ="";
         this.editArticle = "";
         this.deleteArticle = "";
         this.followButton = "";
@@ -53,7 +68,13 @@ public class ArticleInfo {
     }
 
     public void setPreview() {
-        String[] words = content.split(" ");
+        Document document = Jsoup.parse(content);
+        String firstAudio = noneNullContent(document.select("audio"));
+        String firstYoutube = noneNullContent(document.select("iframe"));
+        String firstVideo = noneNullContent(document.select("video"));
+        String firstImage = noneNullContent(document.select("img"));
+        textContent = Jsoup.parse(textContent).text();
+        String[] words = textContent.split(" ");
         int num = Math.min(words.length, 200);
         for (int i = 0; i < num; i++) {
             if (i == words.length - 1) {
@@ -64,6 +85,18 @@ public class ArticleInfo {
                 preview += words[i] + " ";
             }
         }
+    }
+
+    public String noneNullContent(Elements elements){
+        String output="";
+        if(elements.size()>0){
+            for (Element element : elements) {
+                textContent = textContent.replaceAll(element.text(),"");
+            }
+            output=elements.get(0).outerHtml()+"<br/>";
+            multimediaPreview = output;
+        }
+        return output;
     }
 
     public ArticleInfo(String title, String content, String tags) {
@@ -91,6 +124,22 @@ public class ArticleInfo {
         jsonObject.put("title", title);
         jsonObject.put("content", content);
         return jsonObject;
+    }
+
+    public String getFirstImage() {
+        return firstImage;
+    }
+
+    public String getFirstAudio() {
+        return firstAudio;
+    }
+
+    public String getFirstVideo() {
+        return firstVideo;
+    }
+
+    public String getFirstYoutube() {
+        return firstYoutube;
     }
 
     public int getArticleID() {

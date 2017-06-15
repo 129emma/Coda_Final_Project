@@ -47,6 +47,7 @@
                 </span>
             </h3>
         </div>
+            ${article.multimediaPreview}
             ${article.preview}
         <div class="ui fitted divider"></div>
 
