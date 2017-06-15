@@ -5,7 +5,7 @@
       <paths name="Deployment">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$/out/artifacts/bubble_beta" web="/bubble_beta" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
