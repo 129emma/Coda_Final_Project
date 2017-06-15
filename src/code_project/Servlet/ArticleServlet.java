@@ -74,14 +74,26 @@ public class ArticleServlet extends HttpServlet {
         if (page != null) {
             switch (page) {
                 case "home":
-                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL, username);
-                    articleNumber = Math.min(totalArticleNumber, articleNumber);
+//                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL, username);
+//                    articleNumber = Math.min(totalArticleNumber, articleNumber);
                     articleInfoList = ArticleInfoDAO.getArticleInfoList(mySQL, username, articleNumber);
                     break;
                 case "spotlight":
-                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL);
-                    articleNumber = Math.min(totalArticleNumber, articleNumber);
+//                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL);
+//                    articleNumber = Math.min(totalArticleNumber, articleNumber);
                     articleInfoList = ArticleInfoDAO.getSpotlightArticleInfoList(mySQL, articleNumber, username);
+                    break;
+                case "user":
+//                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL);
+//                    articleNumber = Math.min(totalArticleNumber, articleNumber);
+                    String targetUser = request.getParameter("targetUser");
+                    articleInfoList = ArticleInfoDAO.getUserArticleInfoList(mySQL, articleNumber, username, targetUser);
+                    break;
+                case "tags":
+//                    totalArticleNumber = ArticleInfoDAO.getTotalArticleNumber(mySQL);
+//                    articleNumber = Math.min(totalArticleNumber, articleNumber);
+                    String tags = request.getParameter("tags");
+                    articleInfoList = ArticleInfoDAO.getTagsArticleInfoList(mySQL, articleNumber, username, tags);
                     break;
             }
         }

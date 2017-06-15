@@ -29,6 +29,10 @@ public class BlogServlet extends HttpServlet {
         response.setContentType("text/html");
         session = request.getSession(true);
 
+        String username = (String) session.getAttribute("username");
+        UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
+        request.setAttribute("userInfo", userInfo);
+
         String page = request.getParameter("page");
         if (page == null) {
             retrieveHomePage(request, response);
@@ -40,27 +44,38 @@ public class BlogServlet extends HttpServlet {
                 case "spotlight":
                     retrieveSpotlightPage(request, response);
                     return;
-
+                case "user":
+                    retrieveUserPage(request, response);
+                    return;
+                case "tags":
+                    retrieveTagsPage(request, response);
+                    return;
                 default:
                     retrieveHomePage(request, response);
             }
         }
     }
 
+    private void retrieveTagsPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String tags= request.getParameter("tags");
+        request.setAttribute("page", "tags");
+        request.setAttribute("tags", tags);
+        request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
+    }
+
+    private void retrieveUserPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String targetUser= request.getParameter("targetUser");
+        request.setAttribute("page", "user");
+        request.setAttribute("targetUser", targetUser);
+        request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
+    }
+
     private void retrieveSpotlightPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = (String) session.getAttribute("username");
-        // Map<Integer,CommentInfoList> commentInfoListOFAllArticle = CommentInfoDAO.getCommentInfoListOfAllArticle(mySQL,articleInfoList);
-        UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
-        request.setAttribute("userInfo", userInfo);
         request.setAttribute("page", "spotlight");
-        //request.setAttribute("commentInfoListOFAllArticle",commentInfoListOFAllArticle);
         request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
     }
 
     private void retrieveHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = (String) session.getAttribute("username");
-        UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, (String) session.getAttribute("username"));
-        request.setAttribute("userInfo", userInfo);
         request.setAttribute("page", "home");
         request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
     }

@@ -7,7 +7,7 @@ var ajaxProcess = true;
 $(document).ready(function () {
 
     $('.message .close')
-        .on('click', function() {
+        .on('click', function () {
             $(this)
                 .closest('.message')
                 .transition('fade')
@@ -63,24 +63,27 @@ $(document).ready(function () {
         }
     });
 
-    $("#followIcon").click(function (){
+    $("#followIcon").click(function () {
         getFollowInfo();
         $(window).off('scroll');
         clearInterval(autoRefresh);
     });
 });
 function loadArticles() {
+    console.log(page);
+    console.log(targetUser);
+    console.log(tags);
     $.ajax({
         url: '/Article',
         type: 'post',
-        data: {action: 'preview', articleNumber: articlesNum, page: page},
+        data: {action: 'preview', articleNumber: articlesNum, page: page, targetUser: targetUser, tags: tags},
         success: function (articlesPreview) {
             console.log("3: " + ajaxProcess);
             var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
             $("#ArticleContainer").html(preview);
             if (!$.trim($("#ArticleContainer").html()).length) {
                 $('#noArticleMessage').show();
-            }else{
+            } else {
                 $('#noArticleMessage').hide();
             }
             $("#Loader").fadeOut();
@@ -95,7 +98,7 @@ function loadArticles() {
     });
 }
 
-function barFunction(){
+function barFunction() {
     handler = {
         activate: function () {
             if (!$(this).hasClass('dropdown browse')) {
@@ -130,17 +133,17 @@ function getFollows() {
 
 function freshButtonList() {
 
-    $(".ui.button.unfollow").each(function (i,obj) {
+    $(".ui.button.unfollow").each(function (i, obj) {
         $(obj).off().click(function () {
             $(obj).addClass("loading");
             $(obj).prop("disabled", true);
-            var username=$(obj).parent().siblings(".content").html();
+            var username = $(obj).parent().siblings(".content").html();
             $.ajax({
                 url: '/Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
-                    $(obj).attr('title','follow').removeClass("unfollow loading").addClass("follow").html('<i class="add user icon"></i>');
+                    $(obj).attr('title', 'follow').removeClass("unfollow loading").addClass("follow").html('<i class="add user icon"></i>');
                     $(obj).prop("disabled", false);
                     freshButtonList();
                 }
@@ -148,17 +151,17 @@ function freshButtonList() {
         })
     });
 
-    $(".ui.button.follow").each(function (i,obj){
+    $(".ui.button.follow").each(function (i, obj) {
         $(obj).off().click(function () {
-          $(obj).addClass("loading");
+            $(obj).addClass("loading");
             $(obj).prop("disabled", true);
-            var username=$(obj).parent().siblings(".content").html();
+            var username = $(obj).parent().siblings(".content").html();
             $.ajax({
                 url: '/Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
-                    $(obj).attr('title','unfollow').removeClass("follow loading").addClass("unfollow").html('<i class="remove user icon"></i>');
+                    $(obj).attr('title', 'unfollow').removeClass("follow loading").addClass("unfollow").html('<i class="remove user icon"></i>');
                     $(obj).prop("disabled", false);
                     freshButtonList();
                 }
@@ -169,8 +172,7 @@ function freshButtonList() {
 }
 
 
-
-function  getFollowInfo(){
+function getFollowInfo() {
 
     $("#ArticleContainer").html("");
     $("#Loader").show();
@@ -187,11 +189,11 @@ function  getFollowInfo(){
             getFollowers();
             freshButtonList();
             barFunction();
-            if(!$.trim( $("#follows").html()).length){
+            if (!$.trim($("#follows").html()).length) {
                 $("#followList").hide();
                 $("#noFollowInfo").show();
             }
-            if(!$.trim( $("#followers").html()).length){
+            if (!$.trim($("#followers").html()).length) {
                 $("#followerList").hide();
                 $("#noFollowerInfo").show();
             }

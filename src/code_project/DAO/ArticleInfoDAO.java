@@ -95,7 +95,7 @@ public class ArticleInfoDAO {
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 ORDER BY postTime DESC LIMIT ? OFFSET 0")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 ORDER BY likeNum DESC LIMIT ? OFFSET 0")) {
                 p.setInt(1,pageNumber);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
@@ -121,6 +121,70 @@ public class ArticleInfoDAO {
         return articleInfoList;
     }
 
+    public static List<ArticleInfo> getUserArticleInfoList(AbstractDB db ,int pageNumber,String username, String targetUser) {
+
+        List<ArticleInfo> articleInfoList = new ArrayList<>();
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 where username=? ORDER BY postTime DESC LIMIT ?")) {
+                p.setString(1,targetUser);
+                p.setInt(2,pageNumber);
+
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        ArticleInfo articleInfo=ArticleInfoFromResultSet(r);
+                        String otherUsername=articleInfo.getUsername();
+                        if(otherUsername.equals(username)){
+                            articleInfo.setFollowButton("");
+                        }else {
+                            if(FollowInfoDAO.checkFollowStatus(c,username,otherUsername)){
+                                articleInfo.setFollowButton("<button class=\"ui red button\">Unfollow</button>");
+                            }else {
+                                articleInfo.setFollowButton("<button class=\"ui blue button\">Follow</button>");
+                            }
+                        }
+                        articleInfoList.add(articleInfo);
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return articleInfoList;
+    }
+
+    public static List<ArticleInfo> getTagsArticleInfoList(AbstractDB db ,int pageNumber,String username, String tags) {
+
+        List<ArticleInfo> articleInfoList = new ArrayList<>();
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 where tags=? ORDER BY likeNum DESC LIMIT ? OFFSET 0")) {
+                p.setString(1,tags);
+                p.setInt(2,pageNumber);
+
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        ArticleInfo articleInfo=ArticleInfoFromResultSet(r);
+                        String otherUsername=articleInfo.getUsername();
+                        if(otherUsername.equals(username)){
+                            articleInfo.setFollowButton("");
+                        }else {
+                            if(FollowInfoDAO.checkFollowStatus(c,username,otherUsername)){
+                                articleInfo.setFollowButton("<button class=\"ui red button\">Unfollow</button>");
+                            }else {
+                                articleInfo.setFollowButton("<button class=\"ui blue button\">Follow</button>");
+                            }
+                        }
+                        articleInfoList.add(articleInfo);
+                    }
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return articleInfoList;
+    }
 
     public static void createArticleInfo(AbstractDB db, String title,String content, String postTime, String tags,String username, String userAvatar ) throws SQLException {
         try (Connection c = db.connection()) {

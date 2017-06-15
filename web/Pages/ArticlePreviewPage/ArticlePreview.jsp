@@ -28,7 +28,7 @@
         <div class="ui left close rail" style="width: 80px !important;">
 
             <div class="ui sticky" style="width: 80px !important;">
-                <img class="ui raised tiny top aligned rounded image userAvatar " src="${article.userAvatar}">
+                <a href="/Blog?page=user&targetUser=${article.username}"><img class="ui raised tiny top aligned rounded image userAvatar " src="${article.userAvatar}"></a>
             </div>
             <div class="ui flowing popup top left transition hidden">
                 <div class="content">
@@ -42,7 +42,7 @@
         </div>
         <div>
             <span style="align-content: center"><a href="${article.retrieveAddress}">${article.title}</a></span>
-            <span class="ui red right ribbon label"><i class="spoon icon"></i> ${article.tags}</span>
+            <a href="/Blog?page=tags&tags=${article.tags}" class="ui red right ribbon label"><i class="spoon icon"></i> ${article.tags}</a>
         </div>
             ${article.preview}
         <div class="ui fitted divider"></div>

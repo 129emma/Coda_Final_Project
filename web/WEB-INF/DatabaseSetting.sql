@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS LikeInfo_beta_1;
 DROP TABLE IF EXISTS UserRelationship_beta_1;
 DROP TABLE IF EXISTS AlbumsAudio_beta_1;
 DROP TABLE IF EXISTS AlbumsVideo_beta_1;
@@ -30,10 +31,13 @@ CREATE TABLE Article_beta_1 (
   title      VARCHAR(99),
   content    LONGTEXT,
   postTime   DATETIME,
-  tags       VARCHAR(99),
+  tags       VARCHAR(99) NOT NULL,
   likeNum    BIGINT,
   username   VARCHAR(99),
   userAvatar VARCHAR(256),
+  FOREIGN KEY (username) REFERENCES UserInfo_beta_1 (username)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
     ON UPDATE CASCADE
     ON DELETE CASCADE
@@ -48,6 +52,9 @@ CREATE TABLE Comment_beta_1 (
   username   VARCHAR(99),
   userAvatar VARCHAR(256),
   articleID  BIGINT,
+  FOREIGN KEY (username) REFERENCES UserInfo_beta_1 (username)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
@@ -67,6 +74,9 @@ CREATE TABLE CommentReply_beta_1 (
   userAvatar     VARCHAR(256),
   articleID      BIGINT,
   commentID      BIGINT,
+  FOREIGN KEY (username) REFERENCES UserInfo_beta_1 (username)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
@@ -89,6 +99,9 @@ CREATE TABLE IF NOT EXISTS AlbumsImage_beta_1 (
   address    VARCHAR(1000) NOT NULL,
   postTime   DATETIME,
   PRIMARY KEY (id),
+  FOREIGN KEY (username) REFERENCES UserInfo_beta_1 (username)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
     ON UPDATE CASCADE
     ON DELETE CASCADE
@@ -104,6 +117,9 @@ CREATE TABLE IF NOT EXISTS AlbumsVideo_beta_1 (
   address    VARCHAR(1000) NOT NULL,
   postTime   DATETIME,
   PRIMARY KEY (id),
+  FOREIGN KEY (username) REFERENCES UserInfo_beta_1 (username)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
     ON UPDATE CASCADE
     ON DELETE CASCADE
@@ -119,6 +135,9 @@ CREATE TABLE IF NOT EXISTS AlbumsAudio_beta_1 (
   address    VARCHAR(1000) NOT NULL,
   postTime   DATETIME,
   PRIMARY KEY (id),
+  FOREIGN KEY (username) REFERENCES UserInfo_beta_1 (username)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   FOREIGN KEY (username, userAvatar) REFERENCES UserInfo_beta_1 (username, avatar)
     ON UPDATE CASCADE
     ON DELETE CASCADE
@@ -134,6 +153,21 @@ CREATE TABLE IF NOT EXISTS UserRelationship_beta_1 (
     ON UPDATE CASCADE
     ON DELETE CASCADE,
   FOREIGN KEY (follower) REFERENCES UserInfo_beta_1 (username)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+
+DROP TABLE IF EXISTS LikeInfo_beta_1;
+
+CREATE TABLE IF NOT EXISTS LikeInfo_beta_1 (
+  articleID BIGINT      NOT NULL,
+  likedBy   VARCHAR(99) NOT NULL,
+  PRIMARY KEY (articleID, likedBy),
+  FOREIGN KEY (articleID) REFERENCES Article_beta_1 (articleID)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  FOREIGN KEY (likedBy) REFERENCES UserInfo_beta_1 (username)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );

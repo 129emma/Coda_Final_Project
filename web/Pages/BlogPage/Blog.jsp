@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
     <script>
         var page = '${page}';
+        var targetUser = '${targetUser}';
+        var tags = '${tags}';
     </script>
 
 </head>

@@ -25,6 +25,7 @@
     <script src="${pageContext.request.contextPath}/Pages/UserProfilePage/EditProfile.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/UserProfilePage/EditProfile.css">
     <script>
+        var username = '${userProfile.username}'
         var googleUser = '${googleUser}';
     </script>
 </head>
