@@ -19,11 +19,14 @@
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.js"></script>
+    <%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>--%>
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
     <script src="${pageContext.request.contextPath}/Pages/UserProfilePage/EditProfile.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/UserProfilePage/EditProfile.css">
+    <script>
+        var googleUser = '${googleUser}';
+    </script>
 </head>
 <body>
 
@@ -74,11 +77,8 @@
             </form>
             <button class="ui green button" id="updateBtn">Update</button>
             <button class="ui red button"  id="deleteBtn">Delete</button>
-            <div class="ui fitted horizontal divider">Change Password</div>
-
-
-
-            <form class="ui form" id="passwordForm" action="ChangePassword" method="post">
+            <div id="passwordDivider" class="ui fitted horizontal divider" style="visibility: hidden">Change Password</div>
+            <form class="ui form" id="passwordForm" action="ChangePassword" method="post" style="visibility: hidden">
                 <div class="field">
                     <label>Password: </label><input id="password" type="password" name="password"
                                                     placeholder="Please Enter Your Password" style="width: 300px;"/>
