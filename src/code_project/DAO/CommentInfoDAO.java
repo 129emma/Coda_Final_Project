@@ -84,13 +84,14 @@ public class CommentInfoDAO {
         return CommentInfoList;
     }
 
-    public static void createCommentInfo(AbstractDB db, String content, String postTime, String username, String articleID) throws SQLException {
+    public static void createCommentInfo(AbstractDB db, String content, String postTime, String username, String articleID,String userAvatar) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO Comment_beta_1(content, postTime, username, articleID) VALUES (?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO Comment_beta_1(content, postTime, username, articleID,userAvatar) VALUES (?,?,?,?,?);")) {
                 p.setString(1, content);
                 p.setString(2, postTime);
                 p.setString(3, username);
                 p.setString(4, articleID);
+                p.setString(5, userAvatar);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -155,14 +156,15 @@ public class CommentInfoDAO {
         }
     }
 
-    public static void replyCommentInfo(AbstractDB db, String content, String username, String postTime, int commentID, int articleID) throws SQLException {
+    public static void replyCommentInfo(AbstractDB db, String content, String username, String postTime, int commentID, int articleID,String userAvatar) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT INTO CommentReply_beta_1( content, postTime, username, commentID, articleID) VALUES (?,?,?,?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT INTO CommentReply_beta_1( content, postTime, username, commentID, articleID,userAvatar) VALUES (?,?,?,?,?,?);")) {
                 p.setString(1, content);
                 p.setString(2, postTime);
                 p.setString(3, username);
                 p.setInt(4, commentID);
                 p.setInt(5, articleID);
+                p.setString(6, userAvatar);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -176,7 +178,8 @@ public class CommentInfoDAO {
                 r.getString("content"),
                 r.getDate("postTime").toString() + " " + r.getTime("postTime").toString(),
                 r.getString("username"),
-                r.getInt("articleID")
+                r.getInt("articleID"),
+                r.getString("userAvatar")
         );
     }
 
@@ -187,7 +190,8 @@ public class CommentInfoDAO {
                 r.getDate("postTime").toString() + " " + r.getTime("postTime").toString(),
                 r.getString("username"),
                 r.getInt("commentID"),
-                r.getInt("articleID")
+                r.getInt("articleID"),
+                r.getString("userAvatar")
         );
     }
 

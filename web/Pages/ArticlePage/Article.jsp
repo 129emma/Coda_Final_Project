@@ -64,7 +64,7 @@
 
                 <div class="comment">
                     <a class="ui avatar">
-                        <img src="User-Info/${comment.username}/avatar.jpg">
+                        <img src="${comment.userAvatar}">
                     </a>
                     <div class="content">
                         <a class="author">${comment.username}</a>
@@ -84,7 +84,7 @@
                         <c:forEach var="commentReply" items="${comment.commentReplyInfoList}">
                             <div class="comment">
                                 <a class="avatar">
-                                    <img src="User-Info/${commentReply.username}/avatar.jpg">
+                                    <img src="${commentReply.userAvatar}">
                                 </a>
                                 <div class="content">
                                     <a class="author">${commentReply.username}</a>

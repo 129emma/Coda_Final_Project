@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class CommentInfo {
     public int commentID, articleID;
-    public String content, postTime, username, editBtn,replyBtn, editComment, deleteBtn, deleteComment, replyComment;
+    public String content, postTime, username, editBtn,replyBtn, editComment, deleteBtn, deleteComment, replyComment,userAvatar;
 
 
     private List<CommentReplyInfo> commentReplyInfoList;
@@ -36,7 +36,7 @@ public class CommentInfo {
         deleteBtn = "<a href=\"Comment?action=delete&articleID=" + articleID + "&commentID=" + commentID + "\"><i class='trash icon'></i></a>";
     }
 
-    public CommentInfo(int commentID, String content, String postTime, String username, int articleID) {
+    public CommentInfo(int commentID, String content, String postTime, String username, int articleID,String userAvatar) {
         this.commentID = commentID;
         this.content = content;
         this.postTime = postTime;
@@ -45,8 +45,16 @@ public class CommentInfo {
         editComment = "";
         deleteComment = "";
         replyComment ="";
+        this.userAvatar = userAvatar;
     }
 
+    public String getUserAvatar() {
+        return userAvatar;
+    }
+
+    public String getReplyComment() {
+        return replyComment;
+    }
 
     public String getEditBtn() {
         return editBtn;

@@ -1,6 +1,8 @@
 package code_project.Servlet;
 
 import code_project.DAO.CommentInfoDAO;
+import code_project.DAO.UserInfoDAO;
+import code_project.Info.UserInfo;
 import code_project.db.MySQL;
 
 import javax.servlet.ServletException;
@@ -63,7 +65,9 @@ public class CommentServlet extends HttpServlet {
         String content = request.getParameter("comment");
         String postTime = CommentInfoDAO.getCurrentTimeStamp();
         try {
-            CommentInfoDAO.createCommentInfo(mySQL, content, postTime, username, articleID);
+            UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, username);
+            String userAvatar = userInfo.getAvatar();
+            CommentInfoDAO.createCommentInfo(mySQL, content, postTime, username, articleID,userAvatar);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -115,7 +119,9 @@ public class CommentServlet extends HttpServlet {
         int commentId = Integer.parseInt(request.getParameter("commentID"));
         int articleID = Integer.parseInt(request.getParameter("articleID"));
         try {
-            CommentInfoDAO.replyCommentInfo(mySQL, content, username, postTime, commentId, articleID);
+            UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, username);
+            String userAvatar = userInfo.getAvatar();
+            CommentInfoDAO.replyCommentInfo(mySQL, content, username, postTime, commentId, articleID,userAvatar);
         } catch (SQLException e) {
             e.printStackTrace();
         }
