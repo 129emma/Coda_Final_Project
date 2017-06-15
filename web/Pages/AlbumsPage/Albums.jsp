@@ -31,7 +31,7 @@
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
 
-    <div class="ui container my" id="imageGallery">
+    <div class="ui text container my" id="imageGallery">
         <div class="ui segment" id="gallery" style="display: none">
 
             <div class="ui pointing menu">
@@ -68,10 +68,16 @@
 
             <div class="ui segment" id="multimediaSegment">
                 <div id="content">
+
+
                 </div>
             </div>
 
         </div>
+
+
+
+
         <div class="ui center aligned vertical segment" id="loading">
             <div class="ui icon message">
                 <i class="notched circle loading icon"></i>

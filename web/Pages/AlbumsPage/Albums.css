@@ -1,9 +1,7 @@
 ul.userChoice {
     list-style: none;
 }
-.ui.segment{
-    max-width: 800px;
-}
+
 .ui.container.my{
     padding-top: 50px;
 }
@@ -49,13 +47,6 @@ div.gallery:hover {
     border: 1px solid #777;
 }
 
-div.gallery img {
-    width:100%;
-    height: 160px;
-}
-div.gallery audio{
-    width: 100%;!important;
-}
 div.desc {
     padding: 15px;
     text-align: center;
@@ -65,55 +56,82 @@ div.desc {
     box-sizing: border-box;
 }
 
-.responsive {
-    padding: 6px 6px;
-    float: left;
-    width: 200px;
-}
-.responsiveVideo{
-    padding: 6px 6px;
-    float: left;
+/*myWork*/
+
+
+
+
+div#Image,div#Audio,div#Video,div#Youtube{
+    width: 100%;
+    text-align: center;
 }
 
-.responsiveYoutube{
-    padding: 6px 6px;
-    width:80%;
+.responsive {
+    padding: 6px 8px;
+    float: left;
+    width: 210px;
+}
+
+div.gallery img {
+    width:100%;
+    height: 160px;
+}
+div.gallery audio{
+    width: 100%;!important;
+}
+.responsiveVideo,.responsiveYoutube{
+    padding: 6px 8px;
+    float: left;
+    width: 100%;
 }
 
 .responsiveYoutube iframe{
     width: 100%;!important;
     height: auto;
+    min-height: 220px;
 }
 
-.imageList, .audioList,.videoList,.youtubeList{
+.responsiveVideo video{
+   width:100% ;
+}
+
+.videoList,.youtubeList{
+    width: 480px;
+}
+
+
+.imageList,.audioList,.videoList,.youtubeList{
     display: inline-block;
 }
-@media only screen and (max-width: 700px){
+
+@media only screen and (max-width: 720px){
     .responsive {
         width: 195px;
         margin: 6px 6px;
     }
-    .imageList,#Image{
-        width: 500px;
-        margin-right: auto;
-        margin-left: auto;
+    .imageList,.audioList,.videoList,.youtubeList{
+        max-width: 460px;
+        width: 100%;
     }
 }
 
-@media only screen and (max-width: 500px){
+@media only screen and (max-width: 520px){
     .responsive {
         margin-bottom: 8px;
     }
 
-    #Image,.imageList,#audio,.audioList{
-        width: 220px;
-        margin-right: auto;
-        margin-left: auto;
+    .imageList,.audioList{
+        max-width: 220px;
+    }
+    .videoList,.youtubeList{
+        max-width:460px;
+    }
+    .responsiveYoutube,.responsiveVideo{
+        max-width: 460px;
+        width: 100%;
     }
 }
-.ui.segment{
-    max-width: 900px;!important;
-}
+
 .clearfix:after {
     content: "";
     display: table;

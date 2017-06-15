@@ -128,6 +128,7 @@
                             Your browser does not support the audio tag.
                         </audio>
                     </a>
+                    <div style="overflow: auto">${audio.fileName}</div>
                     <div class="desc"><img class="ui avatar image" src="${audio.userAvatar}" title="${audio.username}"></div>
                 </div>
             </div>
