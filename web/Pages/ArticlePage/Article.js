@@ -5,15 +5,25 @@ $(document)
     .ready(function () {
         likeArticle();
 
-
-//edit comment
+        //edit comment
         $('.editBtn').each(function (i, obj) {
             console.log("1");
-            console.log(obj);
+
             $(obj).click(function () {
+                console.log(obj);
+                var commentID = $(obj).attr('name');
+                var commentContent = $(obj).parent().prev( ".commentContent" ).text();
+                console.log(commentID);
+                console.log($(obj).prev( ".commentContent" ));
+                console.log(commentContent);
+                var labelName = 'Edit Your Comment';
                 console.log("2");
-                console.log($(obj).parent().parent().next().next());
-                $(obj).parent().parent().next().next()
+                $("#editorLabel").text(labelName);
+                $("#editorTextArea").text(commentContent);
+                $("#commentIDInput").val(commentID);
+                $("#articleIDInput").val(articleID);
+                $("#editorSubmitBtn").val("update");
+                $("#editor")
                     .modal('setting', 'transition', 'vertical flip')
                     .modal('show')
                 ;
@@ -21,15 +31,23 @@ $(document)
         });
 
         //reply comment
-        // $('.replyBtn').each(function (i, obj) {
-        //     $(obj).click(function () {
-        //         $(obj).parent().parent().next().next().next()
-        //             .modal({
-        //             blurring: true
-        //         })
-        //             .modal('show');
-        //     })
-        // });
+        $('.replyBtn').each(function (i, obj) {
+            console.log("1");
+            console.log(obj);
+            $(obj).click(function () {
+                console.log("2");
+                var commentID = $(obj).attr('name');
+                var labelName = 'Reply Comment Here';
+                $("#editorLabel").text(labelName);
+                $("#commentIDInput").val(commentID);
+                $("#articleIDInput").val(articleID);
+                $("#editorSubmitBtn").val("reply");
+                $("#editor")
+                    .modal('setting', 'transition', 'vertical flip')
+                    .modal('show')
+                ;
+            })
+        });
 
     });
 

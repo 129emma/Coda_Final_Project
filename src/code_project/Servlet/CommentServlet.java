@@ -99,7 +99,7 @@ public class CommentServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         int commentID = Integer.parseInt(request.getParameter("commentID"));
-        String content = request.getParameter("commentContent");
+        String content = request.getParameter("content");
         String postTime = CommentInfoDAO.getCurrentTimeStamp();
         try {
             CommentInfoDAO.updateCommentInfo(mySQL, commentID, content, username, postTime);
@@ -111,7 +111,7 @@ public class CommentServlet extends HttpServlet {
 
     private void replyCommentInfo(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        String content = request.getParameter("commentReplyContent");
+        String content = request.getParameter("content");
         String postTime = CommentInfoDAO.getCurrentTimeStamp();
         String username = (String) session.getAttribute("username");
         int commentId = Integer.parseInt(request.getParameter("commentID"));

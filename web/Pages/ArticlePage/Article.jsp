@@ -23,7 +23,7 @@
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
     <script>
-        var articleID='${articleInfo.articleID}'
+        var articleID = '${articleInfo.articleID}';
     </script>
 </head>
 <body>
@@ -71,9 +71,7 @@
                         <div class="metadata">
                             <span class="date">${comment.postTime}</span>
                         </div>
-                        <div class="text">
-                                ${comment.content}
-                        </div>
+                        <div class="text commentContent">${comment.content}</div>
                         <div class="actions">
                                 ${comment.replyBtn}
                                 ${comment.editBtn}
@@ -121,47 +119,26 @@
     </div>
 
     <%--Edit Box--%>
-    <div id="editorBox" class="ui standard modal reply form editComment">
+    <div id="editor" class="ui standard modal reply form editComment">
         <div class="ui basic segment">
             <form action="Comment" method="POST">
                 <div class="field">
                     <label id="editorLabel" for="editor"></label>
-                    <textarea id="editor" name="commentContent" rows="10"
+                    <textarea id="editorTextArea" name="content" rows="10"
                               cols="100"></textarea>
                 </div>
-                <input type="hidden" name="commentID" value="">
-                <input type="hidden" name="articleID" value="">
+                <input id="commentIDInput" type="hidden" name="commentID" value="">
+                <input id="articleIDInput" type="hidden" name="articleID" value="">
 
                 <div class="content">
-                    <button class="ui button" type="submit" name="action"
-                            value="update">Submit
+                    <button id="editorSubmitBtn" class="ui button" type="submit" name="action"
+                            value="">Submit
                     </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <%--Reply Comments--%>
-    <div class="ui standard modal reply form replyComment">
-        <div class="ui basic segment">
-            <form action="Comment" method="POST">
-                <div class="field">
-                                    <textarea name="commentReplyContent" rows="10"
-                                              cols="100"></textarea>
-                    <input type="hidden" name="commentID" value="${comment.commentID}">
-                    <input type="hidden" name="articleID" value="${comment.articleID}">
-                </div>
-
-
-                <div class="content">
-                    <button class="ui button" type="submit" name="action"
-                            value="reply">
-                        Add Reply
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
 </body>
 </html>
 

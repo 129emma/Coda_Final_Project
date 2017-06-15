@@ -22,21 +22,19 @@ public class CommentInfo {
     }
 
     public void setReplyComment(String username) {
-        replyBtn = "<a class='reply replyBtn' value='"+commentID+"'><i class='reply icon'></i></a>";
+        replyBtn = "<a class='reply replyBtn' name='"+commentID+"'><i class='reply icon'></i></a>";
         replyComment = "<a class='reply replyBtn' href=\"Comment?action=reply&commentID=" + commentID + "\">";
     }
 
     public void setEditComment(String username) {
         if (this.username.equals(username)) {
-            editBtn = "<a class='reply editBtn' value='"+commentID+"'><i class='write icon'></i></a>";
+            editBtn = "<a class='reply editBtn' name='"+commentID+"'><i class='write icon'></i></a>";
         }
     }
 
     public void setDeleteComment() {
         deleteBtn = "<a href=\"Comment?action=delete&articleID=" + articleID + "&commentID=" + commentID + "\"><i class='trash icon'></i></a>";
     }
-
-
 
     public CommentInfo(int commentID, String content, String postTime, String username, int articleID) {
         this.commentID = commentID;
