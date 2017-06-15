@@ -10,7 +10,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Blog Page</title>
+    <title>Article Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/ArticlePage/Article.css">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -23,28 +24,26 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
 </head>
 <body>
-<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
-    <jsp:param name="SideBar" value=""/>
-</jsp:include>
 
 <div class="pusher full">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
     <div id="ArticleContainer" class="ui text justified container">
-        <div class="ui raised segment keepContent">
-            <h5 class="ui top attached segment">
-                ${articleInfo.title}<span class="ui right">${articleInfo.postTime}</span>
-            </h5>
+        <div class="ui segment keepContent">
+            <div class="ui top attached segment">
+                <h2 class="ui header"> ${articleInfo.title}
+                    <div class="sub header"><span class="ui right">${articleInfo.postTime}</span></div>
+                </h2>
+            </div>
             <div class="ui attached segment">
                 ${articleInfo.content}
             </div>
             <div id="id" style="display: none">${articleInfo.articleID}</div>
-            <%--<img class="ui attached segment" src="../../testImage/icon.jpg">--%>
             <div class="ui attached segment">
                 ${articleInfo.editArticle}
                 ${articleInfo.deleteArticle}
-                <div class="ui right labeled button" tabindex="0">
+                <div class="ui right floated labeled button" tabindex="0">
                     <a class="ui basic right pointing label">
                         ${articleInfo.likeNum}
                     </a>
@@ -116,7 +115,7 @@
                                 <input type="hidden" name="articleID" value="${comment.articleID}">
 
                                 <div class="content">
-                                    <button class="ui positive right button" type="submit" name="action"
+                                    <button class="ui button" type="submit" name="action"
                                             value="update">Update
                                     </button>
                                 </div>
@@ -138,9 +137,9 @@
 
 
                                 <div class="content">
-                                    <button class="ui blue labeled submit icon button" type="submit" name="action"
+                                    <button class="ui button" type="submit" name="action"
                                             value="reply">
-                                        <i class="icon edit"></i> Add Reply
+                                       Add Reply
                                     </button>
                                 </div>
                             </form>
@@ -150,20 +149,19 @@
 
     </c:forEach>
 
-    <form class="ui reply form" action="Comment" method="POST">
-    <div class="field">
-    <textarea name="comment"></textarea>
-    <input type="hidden" name="articleID" value="${articleInfo.articleID}">
-    </div>
-    <button class="ui blue submit icon button" type="submit" name="action" value="create"><i
-    class="icon edit"></i>Comment
-    </button>
-    </form>
+                    <form class="ui reply form" action="Comment" method="POST">
+                        <div class="field">
+                            <textarea name="comment"></textarea>
+                            <input type="hidden" name="articleID" value="${articleInfo.articleID}">
+                        </div>
+                        <button class="ui icon button" type="submit" name="action" value="create">Comment
+                        </button>
+                    </form>
 
 
-    </div>
-    </div>
-    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

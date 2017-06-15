@@ -6,39 +6,64 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-<title>Login Page</title>
-<meta name="google-signin-scope" content="profile email">
-<meta name="google-signin-client_id" content="782826346139-b034vt93v6m8483o8m4jf2d94hdsbhq6.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-
 <body>
 
 
-<%--    <a href="Blog?page=home" class="item iconClass"><li class="ion-ios-home-outline"></li></a>
-    <a href="Albums" class="item ion-images"></a>
-    <a href="Login?action=logout" class="item iconClass"><li class="ion-log-out"></li> </a>
---%>
 <div class="ui vertical center aligned segment" id="topMenu">
-    <div class="ui container">
-        <div class="ui icon borderless menu">
-            <a href="Blog?page=home" class="item iconClass"><i class="ion-ios-home-outline iconClass"></i></a>
-            <a href="Albums" class="item"><i class="ion-ios-analytics-outline iconClass"></i></a>
-            <a href="Login?action=logout" class="item"><i class="ion-ios-redo-outline iconClass"></i></a>
-            <a href="#" onclick="signOut();">Sign out</a>
+
+    <div class="ui stackable three column centered grid container">
+        <div class="row">
+            <div class="column invisibleforPhone">
+            </div>
+            <div class="column invisibleforPhone">
+                <div class="ui center aligned three column grid container">
+                    <div class="row">
+                        <div class="column"><a href="Blog?page=home" class="item iconClass"><i
+                                class="ion-ios-home-outline iconClass"></i></a></div>
+                        <div class="column">
+                            <a href="Albums" class="item"><i class="ion-ios-albums-outline iconClass"></i></a></div>
+                        <div class="column">
+                            <a href="Login?action=logout" class="item"><i
+                                    class="ion-ios-upload-outline icon rotated iconClass"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui center aligned three column grid container ">
+                    <div class="row">
+                        <div class="column">
+                            <div class="ui accordion">
+                                <div class="title">
+                                    <a class="toc item">
+                                        <i class="ion-ios-more-outline sidebarIcon"></i>
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <p><a href="Blog?page=home" class="accoritem"></i>Home page</a></p>
+                                    <p><a href="Albums" class="accoritem">Ablum</a>
+                                    </p>
+                                    <p><a href="Login?action=logout" class="accoritem">Log out</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <img class="ui centered image" src="Pages/NavigationBar/smallLogo.png">
+                        </div>
+                        <div class="column">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
+</div>
+</div>
+
 
 </div>
 
-<script>
-    function signOut() {
-        gapi.auth2.init();
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-            console.log('User signed out.');
-        });
-    }
-</script>
 
 </body>

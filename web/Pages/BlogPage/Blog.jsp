@@ -34,10 +34,6 @@
 
 <body>
 
-<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
-    <jsp:param name="SideBar" value=""/>
-</jsp:include>
-
 <div class="pusher full">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
@@ -71,29 +67,38 @@
 
                         <div class="ui fitted divider header"></div>
 
-                        <div class="ui labeled icon borderless four item menu">
-                            <a href="Blog?page=home" class="item cardChoice">
-                                <div class="ui icon" data-tooltip="My Article">
-                                    <i class="ion-ios-paper-outline"></i>
+                        <div class="ui four column grid text container">
+                            <div class="center aligned row">
+                                <div class="column">
+                                    <a href="Blog?page=home" class="item cardChoice">
+                                        <div class="ui icon" data-tooltip="My Article">
+                                            <i class="ion-ios-paper-outline  cardIcons"></i>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                            <a href="Blog?page=spotlight" class="item cardChoice">
-                                <div class="ui icon " data-tooltip="Spotlight">
-                                    <i class="ion-ios-navigate-outline"></i>
-                                </div>
+                                <div class="column">
+                                    <a href="Blog?page=spotlight" class="item cardChoice">
+                                        <div class="ui icon" data-tooltip="Spotlight">
+                                            <i class="ion-ios-navigate-outline  cardIcons"></i>
+                                        </div>
 
-                            </a>
-
-                            <a href="Article?action=create" class="item cardChoice">
-                                <div class="ui icon" data-tooltip="Create">
-                                    <i class="ion-ios-compose-outline"></i>
+                                    </a>
                                 </div>
-                            </a>
-                            <a href="#" class="item" id="followInfo">
-                                <div class="ui icon" data-tooltip="Follows">
-                                    <i class="heart icon"></i>
+                                <div class="column">
+                                    <a href="Article?action=create" class="item cardChoice">
+                                        <div class="ui icon" data-tooltip="Create">
+                                            <i class="ion-ios-compose-outline  cardIcons"></i>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                                <div class="column">
+                                    <a href="#" class="item" id="followInfo">
+                                        <div class="ui icon" data-tooltip="Follows">
+                                            <i class="ion-ios-people-outline cardIcons"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="extra content">
                             <div id="flipright" class="ui icon right floated button">
@@ -137,8 +142,8 @@
                             </a>
 
                             <div id="flipleft" class="ui right floated icon button">
-                                Back
                                 <i class="left long arrow icon"></i>
+                                Back
                             </div>
                         </div>
                     </div>

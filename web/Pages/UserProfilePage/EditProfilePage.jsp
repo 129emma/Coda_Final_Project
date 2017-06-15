@@ -82,10 +82,8 @@
     </script>
 </head>
 <body>
-<jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/SideBar.jsp">
-    <jsp:param name="SideBar" value=""/>
-</jsp:include>
-<div class="pusher full">
+
+<div class="pusher">
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
