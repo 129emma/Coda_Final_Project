@@ -76,9 +76,9 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         switch (status) {
             case "login":
-                if(ajaxRequest){
+                if (ajaxRequest) {
                     out.write("login");
-                }else {
+                } else {
                     response.sendRedirect("Blog");
                 }
                 break;
@@ -95,16 +95,16 @@ public class LoginServlet extends HttpServlet {
                 byte[] hashPassword = Passwords.hash(password.toCharArray(), salt, iterations);
                 try {
                     LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, iterations, "/DefaultAvatar/elyse.png");
-                    if(ajaxRequest){
+                    if (ajaxRequest) {
                         out.write("success");
-                    }else {
+                    } else {
                         request.setAttribute("message", "Success to create account");
                         request.getRequestDispatcher("Pages/WelcomePage/Welcome.jsp").forward(request, response);
                     }
                 } catch (SQLException e) {
-                    if(ajaxRequest){
-                        out.write("Fail: "+e.getMessage());
-                    }else {
+                    if (ajaxRequest) {
+                        out.write("Fail: " + e.getMessage());
+                    } else {
                         response.sendError(500, e.getMessage());
                     }
                 }

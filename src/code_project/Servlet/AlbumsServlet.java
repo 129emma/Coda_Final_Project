@@ -17,66 +17,70 @@ import java.util.List;
  * Created by txie936 on 30/05/2017.
  */
 public class AlbumsServlet extends HttpServlet {
-    MySQL DB=new MySQL();
+    MySQL DB = new MySQL();
     private String username;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LoginStatus.verifyStatus(request, response);
         HttpSession session = request.getSession(true);
-        username=(String)session.getAttribute("username");
+        username = (String) session.getAttribute("username");
         response.setContentType("text/html");
-        String action="";
-        if(request.getParameter("action")!=null){
-            action=request.getParameter("action");
-            switch (action){
+        String action = "";
+        if (request.getParameter("action") != null) {
+            action = request.getParameter("action");
+            switch (action) {
                 case "Image":
-                   loadImage(request);
+                    loadImage(request);
                     break;
                 case "Video":
-                   loadVideo(request);
+                    loadVideo(request);
                     break;
                 case "Audio":
-                  loadAudio(request);
+                    loadAudio(request);
                     break;
                 case "Youtube":
-                  loadYoutube(request);
+                    loadYoutube(request);
                     break;
             }
             request.getRequestDispatcher("Pages/AlbumsPage/AlbumsInfo.jsp").forward(request, response);
-        }else {
+        } else {
             request.getRequestDispatcher("Pages/AlbumsPage/Albums.jsp").forward(request, response);
         }
     }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        doPost(request,response);
+        doPost(request, response);
     }
 
-    private void loadImage(HttpServletRequest request){
+    private void loadImage(HttpServletRequest request) {
 
-        List<AlbumsImageInfo> albumsImageInfoList= AlbumsImageDAO.getAlbumsImageList(DB,username);
-        List<AlbumsImageInfo> imageSpotlightList=AlbumsImageDAO.getAllAlbumsImageList(DB);
-        request.setAttribute("albumsImageInfoList",albumsImageInfoList);
-        request.setAttribute("imageSpotlightList",imageSpotlightList);
+        List<AlbumsImageInfo> albumsImageInfoList = AlbumsImageDAO.getAlbumsImageList(DB, username);
+        List<AlbumsImageInfo> imageSpotlightList = AlbumsImageDAO.getAllAlbumsImageList(DB);
+        request.setAttribute("albumsImageInfoList", albumsImageInfoList);
+        request.setAttribute("imageSpotlightList", imageSpotlightList);
     }
-    private void loadVideo(HttpServletRequest request){
-        List<AlbumsVideoInfo> albumsVideoInfoList= AlbumsVideoDAO.getAlbumsVideoList(DB,username);
-        List<AlbumsVideoInfo> videoSpotlightList=AlbumsVideoDAO.getAllAlbumsVideoList(DB);
-        request.setAttribute("albumsVideoInfoList",albumsVideoInfoList);
-        request.setAttribute("videoSpotlightList",videoSpotlightList);
 
-    }
-    private void loadAudio(HttpServletRequest request){
-        List<AlbumsAudioInfo> albumsAudioInfoList=AlbumsAudioDAO.getAlbumsAudioList(DB,username);
-        List<AlbumsAudioInfo> audioSpotlightList=AlbumsAudioDAO.getAllAlbumsAudioList(DB);
-        request.setAttribute("albumsAudioInfoList",albumsAudioInfoList);
-        request.setAttribute("audioSpotlightList",audioSpotlightList);
+    private void loadVideo(HttpServletRequest request) {
+        List<AlbumsVideoInfo> albumsVideoInfoList = AlbumsVideoDAO.getAlbumsVideoList(DB, username);
+        List<AlbumsVideoInfo> videoSpotlightList = AlbumsVideoDAO.getAllAlbumsVideoList(DB);
+        request.setAttribute("albumsVideoInfoList", albumsVideoInfoList);
+        request.setAttribute("videoSpotlightList", videoSpotlightList);
 
     }
-    private void loadYoutube(HttpServletRequest request){
-        List<AlbumsVideoInfo> albumsYoutubeList=AlbumsVideoDAO.getYoutubeList(DB,username);
-        List<AlbumsVideoInfo> youtubeSpotlightList=AlbumsVideoDAO.getAllAlbumsYoutubeList(DB);
-        request.setAttribute("albumsYoutubeList",albumsYoutubeList);
-        request.setAttribute("youtubeSpotlightList",youtubeSpotlightList);
+
+    private void loadAudio(HttpServletRequest request) {
+        List<AlbumsAudioInfo> albumsAudioInfoList = AlbumsAudioDAO.getAlbumsAudioList(DB, username);
+        List<AlbumsAudioInfo> audioSpotlightList = AlbumsAudioDAO.getAllAlbumsAudioList(DB);
+        request.setAttribute("albumsAudioInfoList", albumsAudioInfoList);
+        request.setAttribute("audioSpotlightList", audioSpotlightList);
+
+    }
+
+    private void loadYoutube(HttpServletRequest request) {
+        List<AlbumsVideoInfo> albumsYoutubeList = AlbumsVideoDAO.getYoutubeList(DB, username);
+        List<AlbumsVideoInfo> youtubeSpotlightList = AlbumsVideoDAO.getAllAlbumsYoutubeList(DB);
+        request.setAttribute("albumsYoutubeList", albumsYoutubeList);
+        request.setAttribute("youtubeSpotlightList", youtubeSpotlightList);
 
 
     }

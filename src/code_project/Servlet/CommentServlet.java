@@ -56,8 +56,6 @@ public class CommentServlet extends HttpServlet {
     }
 
 
-
-
     private void createCommentInfo(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");

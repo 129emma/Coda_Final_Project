@@ -56,10 +56,10 @@ public class AvatarEditServlet extends HttpServlet {
         response.setContentType("text/html");
 
         //create User-Info folder
-        File Iconfolder = new File(fullFilePath);
+        File folder = new File(fullFilePath);
 
-        if (!Iconfolder.exists()) {
-            Iconfolder.mkdir();
+        if (!folder.exists()) {
+            folder.mkdir();
         }
         //create the user's own folder under User-Info folder
         File Userfolder = new File(fullFilePath + "/" + username);
@@ -67,8 +67,13 @@ public class AvatarEditServlet extends HttpServlet {
         if (!Userfolder.exists()) {
             Userfolder.mkdir();
         }
+
+        File avatarFile = new File(fullFilePath + "/" + username + "/avatar");
+        if (!avatarFile.exists()) {
+            avatarFile.mkdir();
+        }
         //get the user's folder path
-        filePath = servletContext.getRealPath("/User-Info/" + username);
+        filePath = servletContext.getRealPath(fullFilePath + "/" + username + "/avatar/");
 
         //create directory
         DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -112,7 +117,7 @@ public class AvatarEditServlet extends HttpServlet {
     }
 
     private void deleteLocalAvatar(String filePath) {
-        String[] fileNameList = {"/avatar.jpg", "/avatar.gif", "/avatar.png"};
+        String[] fileNameList = {"avatar.jpg", "avatar.gif", "avatar.png"};
         for (String fileName : fileNameList) {
             File file = new File(filePath + fileName);
             if (file.exists()) {
@@ -146,7 +151,7 @@ public class AvatarEditServlet extends HttpServlet {
                         }
 
                         String extension = fi.getString().substring(fi.getString().indexOf(".") + 1, fi.getString().length());
-                        File outputfile = new File(filePath + "/avatar." + extension);
+                        File outputfile = new File(filePath + "avatar." + extension);
                         ImageIO.write(icon, extension, outputfile);
                         scaleImage(outputfile, extension);
                         //write the image to the user's icon
@@ -156,7 +161,7 @@ public class AvatarEditServlet extends HttpServlet {
                 } else if (!fi.isFormField()) {
                     fileName = fi.getName();
                     String fileExtension = fileName.substring(fileName.indexOf(".") + 1, fileName.length());
-                    file = new File(filePath + "/avatar." + fileExtension);
+                    file = new File(filePath + "avatar." + fileExtension);
                     fi.write(file);
                     if (!fileExtension.toLowerCase().equals("gif")) {
                         try {
@@ -164,8 +169,8 @@ public class AvatarEditServlet extends HttpServlet {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                    }else {
-                        avatarFilePath = "User-Info/" + username + "/avatar." + fileExtension;
+                    } else {
+                        avatarFilePath = "User-Info/" + username + "/avatar/avatar." + fileExtension;
                     }
 
                 }
@@ -179,10 +184,10 @@ public class AvatarEditServlet extends HttpServlet {
     private void scaleImage(File outputFile, String fileExtension) throws IOException {
         try {
             BufferedImage image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
-            image.createGraphics().drawImage(ImageIO.read(new File(filePath + "/avatar." + fileExtension)).getScaledInstance(200, 200, Image.SCALE_SMOOTH), 0, 0, null);
+            image.createGraphics().drawImage(ImageIO.read(new File(filePath + "/avatar/avatar." + fileExtension)).getScaledInstance(200, 200, Image.SCALE_SMOOTH), 0, 0, null);
             //write the thumbnail
             ImageIO.write(image, fileExtension, outputFile);
-            avatarFilePath = "User-Info/" + username + "/avatar." + fileExtension;
+            avatarFilePath = "User-Info/" + username + "/avatar/avatar." + fileExtension;
         } catch (IOException e) {
             e.printStackTrace();
         }
