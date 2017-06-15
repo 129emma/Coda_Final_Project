@@ -114,11 +114,11 @@
                     </div>
 
             <div class="btn-group" id="youtube">
-              <a class="btn" title="Insert Youtube video"><img class="image" src="http://internetvi.ru/wp-content/uploads/2012/06/e33c1de5c8bd4c4c0bdaba9cd3657a6d.png"/></a>
+              <a class="btn" title="Insert Youtube video"><img class="image iconImage" src="http://internetvi.ru/wp-content/uploads/2012/06/e33c1de5c8bd4c4c0bdaba9cd3657a6d.png"/></a>
             </div>
             <div class="btn-group" >
               <a class="btn" title="Insert image"><label for="image-input" class="myLabel">
-                <img class="image" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" >
+                <img class="image iconImage" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" >
               </label>
                 <input  id="image-input"  class="input" type="file" accept=".jpg, .gif,.png"></a>
             </div>
@@ -171,8 +171,7 @@
                 <div class="submitBtn"> ${deleteElement}${submitElement}</div>
 
             </div>
-        </form>
-    </div>
+        </div>
     <input type="hidden" name="content" id="articleContentSubmit">
     </form>
     <c:if test="${information != null}">
