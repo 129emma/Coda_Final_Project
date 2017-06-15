@@ -22,6 +22,9 @@
 
     <script src="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.js"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.css">
+    <script>
+        var articleID='${articleInfo.articleID}'
+    </script>
 </head>
 <body>
 
@@ -100,54 +103,7 @@
                             </div>
                         </c:forEach>
                     </div>
-
-
-                        <%--Edit Comments--%>
-                    <div class="ui standard modal reply form editComment">
-                        <div class="ui basic segment">
-                            <form action="Comment" method="POST">
-                                <div class="field">
-                                    <label for="editor">Edit Your Comment</label>
-                                    <textarea id="editor" name="commentContent" rows="10"
-                                              cols="100">${comment.content}</textarea>
-                                </div>
-                                <input type="hidden" name="commentID" value="${comment.commentID}">
-                                <input type="hidden" name="articleID" value="${comment.articleID}">
-
-                                <div class="content">
-                                    <button class="ui button" type="submit" name="action"
-                                            value="update">Update
-                                    </button>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-
-                        <%--Reply Comments--%>
-                    <div class="ui standard modal reply form replyComment">
-                        <div class="ui basic segment">
-                            <form action="Comment" method="POST">
-                                <div class="field">
-                                    <textarea name="commentReplyContent" rows="10"
-                                              cols="100"></textarea>
-                                    <input type="hidden" name="commentID" value="${comment.commentID}">
-                                    <input type="hidden" name="articleID" value="${comment.articleID}">
-                                </div>
-
-
-                                <div class="content">
-                                    <button class="ui button" type="submit" name="action"
-                                            value="reply">
-                                       Add Reply
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-
-    </c:forEach>
+                    </c:forEach>
 
                     <form class="ui reply form" action="Comment" method="POST">
                         <div class="field">
@@ -161,6 +117,49 @@
 
                 </div>
             </div>
+        </div>
+    </div>
+
+    <%--Edit Box--%>
+    <div id="editorBox" class="ui standard modal reply form editComment">
+        <div class="ui basic segment">
+            <form action="Comment" method="POST">
+                <div class="field">
+                    <label id="editorLabel" for="editor"></label>
+                    <textarea id="editor" name="commentContent" rows="10"
+                              cols="100"></textarea>
+                </div>
+                <input type="hidden" name="commentID" value="">
+                <input type="hidden" name="articleID" value="">
+
+                <div class="content">
+                    <button class="ui button" type="submit" name="action"
+                            value="update">Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <%--Reply Comments--%>
+    <div class="ui standard modal reply form replyComment">
+        <div class="ui basic segment">
+            <form action="Comment" method="POST">
+                <div class="field">
+                                    <textarea name="commentReplyContent" rows="10"
+                                              cols="100"></textarea>
+                    <input type="hidden" name="commentID" value="${comment.commentID}">
+                    <input type="hidden" name="articleID" value="${comment.articleID}">
+                </div>
+
+
+                <div class="content">
+                    <button class="ui button" type="submit" name="action"
+                            value="reply">
+                        Add Reply
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

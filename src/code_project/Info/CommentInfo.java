@@ -22,13 +22,13 @@ public class CommentInfo {
     }
 
     public void setReplyComment(String username) {
-        replyBtn = "<a class='reply replyBtn'><i class='reply icon'></i></a>";
+        replyBtn = "<a class='reply replyBtn' value='"+commentID+"'><i class='reply icon'></i></a>";
         replyComment = "<a class='reply replyBtn' href=\"Comment?action=reply&commentID=" + commentID + "\">";
     }
 
     public void setEditComment(String username) {
         if (this.username.equals(username)) {
-            editBtn = "<a class='reply editBtn'><i class='write icon'></i></a>";
+            editBtn = "<a class='reply editBtn' value='"+commentID+"'><i class='write icon'></i></a>";
         }
     }
 
