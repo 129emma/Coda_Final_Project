@@ -33,6 +33,12 @@
                 <div class="ui center aligned three column grid container ">
                     <div class="row">
                         <div class="column">
+
+                        </div>
+                        <div class="column">
+                            <img class="ui centered image" src="Pages/NavigationBar/smallLogo.png">
+                        </div>
+                        <div class="column">
                             <div class="ui accordion">
                                 <div class="title">
                                     <a class="toc item">
@@ -46,12 +52,6 @@
                                     <p><a href="Login?action=logout" class="accoritem">Log out</a></p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="column">
-                            <img class="ui centered image" src="Pages/NavigationBar/smallLogo.png">
-                        </div>
-                        <div class="column">
-
                         </div>
                     </div>
 

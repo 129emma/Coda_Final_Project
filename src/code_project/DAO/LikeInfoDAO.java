@@ -15,7 +15,7 @@ public class LikeInfoDAO {
     public static void like (AbstractDB db, String articleID, String likedBy) throws SQLException {
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("INSERT IGNORE INTO likeInfo_beta_1 (articleID, likedBy) VALUE (?,?);")) {
+            try (PreparedStatement p = c.prepareStatement("INSERT IGNORE INTO LikeInfo_beta_1 (articleID, likedBy) VALUE (?,?);")) {
                 p.setString(1, articleID);
                 p.setString(2, likedBy);
                 p.executeUpdate();
@@ -29,7 +29,7 @@ public class LikeInfoDAO {
     public static void cancelLike (AbstractDB db, String articleID, String likedBy) throws SQLException {
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("DELETE FROM likeInfo_beta_1 WHERE articleID=? AND likedBy=?")) {
+            try (PreparedStatement p = c.prepareStatement("DELETE FROM LikeInfo_beta_1 WHERE articleID=? AND likedBy=?")) {
                 p.setString(1, articleID);
                 p.setString(2, likedBy);
                 p.executeUpdate();
@@ -42,7 +42,7 @@ public class LikeInfoDAO {
     public static Boolean checkLikeStatus (AbstractDB db, String articleID, String likedBy) {
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM likeInfo_beta_1 WHERE articleID=? AND likedBy=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM LikeInfo_beta_1 WHERE articleID=? AND likedBy=?")) {
                 p.setString(1, articleID);
                 p.setString(2, likedBy);
                 try (ResultSet r = p.executeQuery()) {
@@ -60,7 +60,7 @@ public class LikeInfoDAO {
     public static int getLikeNum (AbstractDB db, String articleID) throws SQLException {
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT count(likedBy) FROM likeInfo_beta_1 WHERE articleID=?")) {
+            try (PreparedStatement p = c.prepareStatement("SELECT count(likedBy) FROM LikeInfo_beta_1 WHERE articleID=?")) {
                 p.setString(1, articleID);
                 try (ResultSet r = p.executeQuery()) {
                     if (r.next()){

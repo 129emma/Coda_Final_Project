@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html class="full">
 <head>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>Login Page</title>
     <%--<meta name="google-signin-scope" content="profile email">--%>
@@ -23,7 +24,7 @@
         <div id="loginBlock" class="login-block">
             <div id="loginSegment" class="ui basic segment">
             <h1>Login</h1>
-            <div>
+            <div class="loginDiv">
                 <input id="loginUsername" type="text" required name="username" class="username" placeholder="Username"/>
                 <input id="loginPassword" type="password" required name="password" class="password"
                        placeholder="Password"/>

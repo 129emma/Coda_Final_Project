@@ -3,14 +3,16 @@ body{
 }
 
 .ui.text.container.edit {
-    padding-top: 100px;
+    padding-top: 30px;
+}
+.hero-unit{
+    border-radius: 0px;
 }
 
 .ui.form{
     padding-top: 1em;
 }
 #title{
-   width: 120px;
     height: 38px;
     margin-bottom: 5px
 }
@@ -23,19 +25,12 @@ body{
     background-color: rgba(151, 200, 199, 0.45);
 }
 
-.ui.fluid.normal.dropdown.selection.multiple {
+.ui.fluid.normal.dropdown {
     max-width: 150px;
 }
 /* this CSS is not part of the widget, it is here just as an example of the demo page styling.... Don't copy this one, roll your own. One
  * of the key things about the widget is that it allows you to do your own styling!
  */
-body{
-    background-color: #565D6B !important;
-}
-
-.ui.text.container.edit {
-    padding-top: 100px;
-}
 
 .ui.form{
     padding-top: 1em;
@@ -46,13 +41,6 @@ body{
     background-image: none;
 }
 
-.btn:hover{
-    background-color: rgba(151, 200, 199, 0.45);
-}
-
-.ui.fluid.normal.dropdown.selection.multiple {
-    max-width: 150px;
-}
 
 #editor {
 	max-height: 600px;
@@ -126,19 +114,23 @@ label{
     text-align: right;
 }
 
-button.ui.button.subBtn:hover {
+.ui.button.subBtn:hover {
     background-color: #A7D3AE;
     color: white;
 }
 
-button.ui.button.delBtn:hover {
+.ui.button.delBtn:hover {
     background-color: #F28790;
     color: white;
 }
 
-button.ui.floated.button :hover {
+.ui.right.floated.button :hover {
     background-color: #A7D3AE;
     color: white;
+}
+.ui.segment{
+    border-radius: 0;
+    box-shadow: none;
 }
 
 

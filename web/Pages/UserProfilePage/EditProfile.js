@@ -30,20 +30,17 @@ $(document).ready(function () {
     $("#deleteBtn").click(function () {
         $('#deleteWindow').modal('show');
     });
-
-    $("#deleteAccountBtn").click(function () {
-        $(this).addClass("loading");
-        $(this).prop("disabled", true);
-        $("#profileAction").val("Delete");
-        $("#profileForm").submit();
-    });
-
-    $("#updateBtn").click(function () {
-        $(this).addClass("loading");
-        $(this).prop("disabled", true);
-        $("#profileAction").val("Update");
-        $("#profileForm").submit();
-    });
+    // $("#deleteAccountBtn").click(function () {
+    //     $(this).addClass("loading");
+    //     $(this).prop("disabled", true);
+    //     $("#profileAction").val("Delete");
+    // });
+    //
+    // $("#updateBtn").click(function () {
+    //     $(this).addClass("loading");
+    //     $(this).prop("disabled", true);
+    //     $("#profileAction").val("Update");
+    // });
 
     $("#newUsername").blur(function () {
         var newUsername = $('#newUsername').val();
@@ -93,7 +90,8 @@ $(document).ready(function () {
             $("#passwordMessageContainer").attr("class","ui negative message");
             $("#passwordMessage").text("New password is same to current password");
         }
-    })
+    });
+
 });
 
 function changePassword(password,newPassword) {
@@ -117,7 +115,27 @@ function changePassword(password,newPassword) {
     });
 }
 
-
+function verifyUsername(username) {
+    $.ajax({
+        url: '/Login',
+        type: 'post',
+        data: {action: 'verify', username: username},
+        success: function (message) {
+            var message = message;
+            if (message.includes("available")) {
+                $("#updateBtn").removeAttr('disabled');
+                $("#usernameMessageContainer").attr("class","ui positive message");
+                $("#usernameMessage").text(message);
+            } else {
+                $('#newUsername').transition('shake');
+                $("#usernameMessageContainer").attr("class","ui negative message");
+                $("#updateBtn").attr('disabled', 'disabled');
+                $("#usernameMessage").text(message);
+            }
+            // $("#message").text(message);
+        }
+    });
+}
 
 function showWindow2() {
     $('#iconWindow')

@@ -1,3 +1,7 @@
+body{
+    background-color: #91A9b2;
+}
+
 
 .rounded:hover {
     cursor: pointer
@@ -41,4 +45,8 @@
 
 #saveIcon{
     margin-right: 8px;!important;
+}
+
+.ui.text.container {
+    padding-top: 50px;
 }

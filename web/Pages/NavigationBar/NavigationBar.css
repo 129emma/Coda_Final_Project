@@ -25,6 +25,11 @@ a.accoritem:hover{
     color: lightgrey;
 }
 
+.ui.accordion{
+    pointer-events: none;
+    cursor:default;
+}
+
 
 @media only screen and (max-width: 900px) {
    .invisibleforPhone{
@@ -34,5 +39,15 @@ a.accoritem:hover{
     .toc.item{
         display: block !important;
     }
+
+    .ui.accordion{
+        pointer-events: auto !important;
+        cursor:auto;
+    }
+
+    i.ion-ios-more-outline.sidebarIcon {
+        color: black;
+    }
 }
+
 

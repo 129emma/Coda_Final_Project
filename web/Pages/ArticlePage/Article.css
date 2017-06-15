@@ -1,11 +1,10 @@
 div#ArticleContainer {
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 body{
-    background-color:#457B9D;
+    background-color: #565D6B;
 }
-
 
 div{
     word-wrap: break-word;         /* All browsers since IE 5.5+ */
@@ -13,14 +12,15 @@ div{
 }
 .ui.attached.segment{
     overflow: auto;!important;
+    border: none;
 }
 
-ui.icon.button.deleteButton:hover{
+.ui.icon.button.deleteButton:hover{
     background-color: #F28790;
     color: white;
 }
 
-ui.icon.button.editButton:hover{
+.ui.icon.button.editButton:hover{
     background-color: #A7D3AE;
     color: white;
 }
@@ -33,4 +33,14 @@ ui.icon.button.editButton:hover{
 .ui.labeled.button:not([class*="left labeled"]) > .button {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+.ui.segment.keepContent{
+    box-shadow: none;
+    border-radius: 0px;
+    border: none;
+}
+
+.ui.segment {
+    border-radius: 0;
 }

@@ -25,6 +25,7 @@
     </div>
 
     <div class="ui segment keepContent">
+        <a href="/Blog?page=tags&tags=${article.tags}" class="ui right ribbon label">${article.tags}</a>
         <div class="ui left close rail" style="width: 80px !important;">
 
             <div class="ui sticky" style="width: 80px !important;">
@@ -41,16 +42,17 @@
             </div>
         </div>
         <div>
-            <span style="align-content: center"><a href="${article.retrieveAddress}">${article.title}</a></span>
-            <a href="/Blog?page=tags&tags=${article.tags}" class="ui red right ribbon label"><i class="spoon icon"></i> ${article.tags}</a>
+            <h3 class="ui header"><a href="${article.retrieveAddress}">${article.title}</a>
+                <span style="display: block !important;" class="sub header"> ${article.postTime}
+                </span>
+            </h3>
         </div>
             ${article.preview}
         <div class="ui fitted divider"></div>
-            ${article.postTime}
+
         <div class="ui attached right aligned segment">
             <span style="font-family: Montserrat, sans-serif">${article.likeNum} </span> &nbsp;&nbsp;<i
                 class="ion-android-favorite-outline"></i>
-
         </div>
 
     </div>

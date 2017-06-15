@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>Account Setting</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css"/>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -27,17 +28,23 @@
     <script>
         var username = '${userProfile.username}'
         var googleUser = '${googleUser}';
+        var username='${userProfile.username}';
     </script>
 </head>
 <body>
 
 <div class="pusher">
+
     <jsp:include page="${pageContext.request.contextPath}/Pages/NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
+
     <%--Edit Profile--%>
     <div class="ui text container">
-        <div class="ui raised segment">
+
+
+
+        <div class="ui segment">
 
             <!--id for update profile form should be changed-->
             <div class="ui fitted horizontal divider">Change Details</div>
@@ -47,37 +54,48 @@
             <%--<button class="ui button"  id="userIcon"  onclick="showWindow2()">change</button>--%>
 
             <form class="ui form" id="profileForm" action="Profile" method="post">
-                <div class="field">
-                    <label>Username:</label><input id="newUsername" type="text" name="username"
-                                                   value="${userProfile.username}" style="max-width: 300px"/></div>
-                <div id="usernameMessageContainer"
-                     style="margin-top: 0 !important; max-width: 300px; padding: 10px 15px !important;"
-                     class="ui message hidden">
-                    <p id="usernameMessage"></p>
+                <div class="two fields">
+                    <div class="field">
+                        <label>Username:</label><input id="newUsername" type="text" pattern="[A-Za-z]{3,16}" name="username"
+                                                       value="${userProfile.username}" style="max-width: 300px"/></div>
+                    <div class="field">
+                        <label>Firstname:</label><input type="text" pattern="[A-Za-z]{2,16}" name="firstName" value="${userProfile.firstName}"
+                                                        style="max-width: 300px"/>
+                    </div>
                 </div>
-                <div class="field">
-                    <label>Firstname:</label><input type="text" name="firstName" value="${userProfile.firstName}"
-                                                    style="max-width: 300px"/>
+                <div class="two fields" >
+                    <div class="field">
+                        <div id="usernameMessageContainer"style="margin-top: 0 !important; max-width: 300px; padding: 10px 15px !important;"
+                             class="ui message hidden">
+                            <p id="usernameMessage"></p>
+                        </div>
+                     </div>
                 </div>
-                <div class="field">
-                    <label>Lastname:</label> <input type="text" name="lastName" value="${userProfile.lastName}"
-                                                    style="max-width: 300px"/></div>
-                <div class="field">
-                    <label>Email: </label><input type="email" name="email" value="${userProfile.email}"
-                                                 style="max-width: 300px"/></div>
-                <div class="field">
-                    <label>Birthday:</label> <input type="date" name="birthday" value="${userProfile.birthDate}"
-                                                    style="max-width: 300px"/></div>
-                <div class="field">
-                    <label>Gender:</label><select name="gender" style="max-width: 300px">
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                </select>
+                <div class="two fields">
+                    <div class="field">
+                        <label>Lastname:</label> <input type="text" pattern="[A-Za-z]{3,16}" name="lastName" value="${userProfile.lastName}"
+                                                        style="max-width: 300px"/></div>
+                    <div class="field">
+                        <label>Email: </label><input type="email" name="email" value="${userProfile.email}"
+                                                     style="max-width: 300px"/></div>
                 </div>
+                <div class="two fields">
+                    <div class="field">
+                        <label>Birthday:</label> <input required type="date" name="birthday" value="${userProfile.birthDate}"
+                                                        style="max-width: 300px"/></div>
+                    <div class="field">
+                        <label>Gender:</label><select name="gender" style="max-width: 300px">
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="ui error message"></div>
                 <input  type="hidden" name="profileAction" id="profileAction">
+                <button class="ui green submit button" id="updateBtn">Update</button>
+                <button class="ui red submit button"  id="deleteBtn">Delete</button>
             </form>
-            <button class="ui green button" id="updateBtn">Update</button>
-            <button class="ui red button"  id="deleteBtn">Delete</button>
+
             <div id="passwordDivider" class="ui fitted horizontal divider" style="display: none">Change Password</div>
             <form class="ui form" id="passwordForm" action="ChangePassword" method="post" style="display: none">
                 <div class="field">

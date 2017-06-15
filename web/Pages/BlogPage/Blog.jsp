@@ -179,8 +179,8 @@
             </div>
         </a>
     </div>
-    <div class="ui text container">
-        <p style="margin: auto;color: white;text-align: center;">Copyright © Today-Today CODA Team, All Rights Reserved</p>
+    <div id="copyright" class="ui text container">
+        <p style="margin: auto;color: white;text-align: center;font-size: small">Copyright © Today-Today CODA Team, All Rights Reserved</p>
     </div>
 
 </div>

@@ -41,7 +41,7 @@ h1.ui.inverted.header {
 /*for login&register page*/
 
 .login-block {
-    width: 320px;
+    max-width: 320px;
     background: #fff;
     border-radius: 5px;
     border-top: 5px solid #ffffff;
@@ -92,4 +92,12 @@ h1.ui.inverted.header {
 
 .login-block input:active, .login-block input:focus {
     border: 1px solid #ff656c;
+}
+
+
+
+@media only screen and (max-width: 400px) {
+    div#login {
+        width: 350px;
+    }
 }

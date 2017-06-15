@@ -153,17 +153,17 @@
                 <div class="ui form">
                     <div class="inline fields">
                         <label>Tag</label>
-                        <select class="ui fluid normal dropdown" multiple="" width="150px" name="tag">
+                        <select required class="ui fluid normal dropdown"  name="tag">
                             <option value="">tags</option>
                             <option value="Movie">Movie</option>
                             <option value="Food">Food</option>
                             <option value="Science">Science</option>
                             <option value="Technology">Technology</option>
                             <option value="Business">Business</option>
-                            <option value="Heaish">Health</option>
+                            <option value="Health">Health</option>
                             <option value="Music">Music</option>
                             <option value="Education">Education</option>
-                            <option value="Other">Other</option>
+                            <option value="Other" selected="selected">Other</option>
                         </select>
                     </div>
                 </div>

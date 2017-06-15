@@ -1,3 +1,11 @@
+body{
+    background-color: #565D6B;
+}
+
+.ui.segment, .ui.menu{
+    border: none;
+    border-radius: 0px;
+}
 ul.userChoice {
     list-style: none;
 }
@@ -5,6 +13,7 @@ ul.userChoice {
 .ui.container.my{
     padding-top: 50px;
 }
+
 .ui.basic.button {
     box-shadow: none;
 }
@@ -52,8 +61,8 @@ div.desc {
     text-align: center;
 }
 
-* {
-    box-sizing: border-box;
+.responsiveMenu{
+    display: none;
 }
 
 /*myWork*/
@@ -113,6 +122,11 @@ div.gallery audio{
         max-width: 460px;
         width: 100%;
     }
+
+
+    .responsiveMenu{
+        display: block !important;
+    }
 }
 
 @media only screen and (max-width: 520px){
@@ -130,10 +144,16 @@ div.gallery audio{
         max-width: 460px;
         width: 100%;
     }
+    .responsiveMenu{
+        display: block !important;
+    }
 }
 
 .clearfix:after {
     content: "";
     display: table;
     clear: both;
+}
+#loading{
+    background-color: transparent;
 }

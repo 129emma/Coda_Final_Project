@@ -1,8 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:500i,600');
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-body {
+body{
     background-color: #565D6B;
+}
+
+.ui.ribbon.label {
+    position: absolute;
+    left: 102.2%;
+}
+
+#copyright {
+    margin-top: 5%;
+    margin-bottom: 2%;
 }
 
 .ui.large.aligned.divided.list{
@@ -30,8 +40,8 @@ i.ui.icon.borderless.four.item.menu {
 }
 
 .ui.text.container.article {
-    padding-top: 100px;
-    padding-bottom: 4em;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 
 img.userAvatar {
@@ -110,8 +120,10 @@ i.cardIcons {
 }
 
 .ui.attached.right.aligned.segment {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border: none;
+    font-size: 15px;
 }
 
 div#flipright {
@@ -130,15 +142,30 @@ a.ui.left.floated.icon.button {
     display: none;
 }
 
-ui.segment{
-    border-radius: 0;
+.ui.segment.keepContent{
+    padding: 30px;
+    border: none;
+    border-radius: 0px;
     box-shadow: none;
+}
+
+i.ion-android-favorite-outline{
+    color: darkred;
+}
+
+h3.ui.header{
+    margin: 0em;
+}
+
+.ui.card{
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
 @media only screen and (max-width: 900px) {
     .ui.text.container.article {
         padding-top: 20px;
-        padding-bottom: 4em;
+        padding-bottom: 10px;
     }
 
     .ui.center.aligned.container.responAvatar{
@@ -157,4 +184,16 @@ ui.segment{
 }
 #followInfo #followerInfo{
     margin-bottom: 30px;
+}
+
+div#noArticleMessage {
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+div#Loader {
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
 }
