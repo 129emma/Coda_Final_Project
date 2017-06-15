@@ -77,8 +77,8 @@
             </form>
             <button class="ui green button" id="updateBtn">Update</button>
             <button class="ui red button"  id="deleteBtn">Delete</button>
-            <div id="passwordDivider" class="ui fitted horizontal divider" style="visibility: hidden">Change Password</div>
-            <form class="ui form" id="passwordForm" action="ChangePassword" method="post" style="visibility: hidden">
+            <div id="passwordDivider" class="ui fitted horizontal divider" style="display: none">Change Password</div>
+            <form class="ui form" id="passwordForm" action="ChangePassword" method="post" style="display: none">
                 <div class="field">
                     <label>Password: </label><input id="password" type="password" name="password"
                                                     placeholder="Please Enter Your Password" style="width: 300px;"/>

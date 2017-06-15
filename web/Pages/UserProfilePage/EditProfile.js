@@ -65,6 +65,9 @@ $(document).ready(function () {
     if(googleUser=="false"){
         $("#passwordDivider").removeAttr("style");
         $("#passwordForm").removeAttr("style");
+    }else{
+        $("#passwordDivider").remove();
+        $("#passwordForm").remove();
     }
 
     $("#passwordBtn").click(function () {
