@@ -56,7 +56,7 @@
             <form class="ui form" id="profileForm" action="Profile" method="post">
                 <div class="two fields">
                     <div class="field">
-                        <label>Username:</label><input placeholder="Please type your username(3-16 letters or numbers)" id="newUsername" type="text" pattern="[A-Za-z0-9]{3,16}" name="username"
+                        <label>Username:</label><input placeholder="Please type your username(3-16 letters or numbers)" id="newUsername" type="text" pattern="[A-Za-z0-9-]{3,16}" name="username"
                                                        value="${userProfile.username}" /></div>
                     <div class="field">
                         <label>Firstname:</label><input type="text" placeholder="Please type your firstname(2-16 letters)" pattern="[A-Za-z]{2,16}" name="firstName" value="${userProfile.firstName}"
