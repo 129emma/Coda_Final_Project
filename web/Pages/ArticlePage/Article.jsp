@@ -108,7 +108,7 @@
                             <textarea name="comment"></textarea>
                             <input type="hidden" name="articleID" value="${articleInfo.articleID}">
                         </div>
-                        <button class="ui icon button" type="submit" name="action" value="create">Comment
+                        <button id="commentSubmitBtn" class="ui icon button" type="submit" name="action" value="create">Comment
                         </button>
                     </form>
 

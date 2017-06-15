@@ -87,16 +87,16 @@
                                     </a>
                                 </div>
                                 <div class="column">
-                                    <a href="Article?action=create" class="item cardChoice">
-                                        <div class="ui icon" data-tooltip="Create">
-                                            <i class="ion-ios-compose-outline  cardIcons"></i>
+                                    <a href="#" class="item" id="followIcon">
+                                        <div class="ui icon" data-tooltip="Follows">
+                                            <i class="ion-ios-people-outline cardIcons"></i>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="column">
-                                    <a href="#" class="item" id="followIcon">
-                                        <div class="ui icon" data-tooltip="Follows">
-                                            <i class="ion-ios-people-outline cardIcons"></i>
+                                    <a href="Article?action=create" class="item cardChoice">
+                                        <div class="ui icon" data-tooltip="Create">
+                                            <i class="ion-ios-compose-outline  cardIcons"></i>
                                         </div>
                                     </a>
                                 </div>
@@ -139,10 +139,7 @@
                             </div>
                         </div>
                         <div class="extra content">
-                            <a href="Profile" class="ui left floated icon button">
-                                <i class="left setting icon"></i> Update
-                            </a>
-
+                            ${updateProfileBtn}
                             <div id="flipleft" class="ui right floated icon button">
                                 <i class="left long arrow icon"></i>
                                 Back

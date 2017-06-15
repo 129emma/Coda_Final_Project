@@ -39,6 +39,7 @@ $(document)
                 var commentID = $(obj).attr('name');
                 var labelName = 'Reply Comment Here';
                 $("#editorLabel").text(labelName);
+                $("#editorTextArea").text("");
                 $("#commentIDInput").val(commentID);
                 $("#articleIDInput").val(articleID);
                 $("#editorSubmitBtn").val("reply");
@@ -48,6 +49,77 @@ $(document)
                 ;
             })
         });
+
+        $('#editArticleBtn').click(function () {
+            $(this)
+                .attr("class","ui loading disabled button")
+                .bind('click', false)
+            ;
+            $('#deleteArticleBtn,#editorSubmitBtn,#commentSubmitBtn')
+                .attr("class","ui disabled button")
+                .bind('click', false)
+            ;
+        });
+
+        $('#deleteArticleBtn').click(function () {
+            $(this)
+                .attr("class","ui loading disabled button")
+                .bind('click', false)
+            ;
+            $('#editArticleBtn,#editorSubmitBtn,#commentSubmitBtn')
+                .attr("class","ui disabled button")
+                .bind('click', false)
+            ;
+        });
+
+        $('#editorSubmitBtn').click(function () {
+            $(this)
+                .attr("class","ui loading disabled button")
+                .bind('click', false)
+            ;
+            $('#deleteArticleBtn,#editArticleBtn,#commentSubmitBtn')
+                .attr("class","ui disabled button")
+                .bind('click', false)
+            ;
+        });
+
+        $('#commentSubmitBtn').click(function () {
+            $(this)
+                .attr("class","ui loading disabled button")
+                .bind('click', false)
+            ;
+            $('#deleteArticleBtn,#editorSubmitBtn,#editArticleBtn')
+                .attr("class","ui disabled button")
+                .bind('click', false)
+            ;
+        });
+
+        // $('#editArticleBtn').click(function () {
+        //     console.log("1");
+        //     console.log( $(this));
+        //     $(this)
+        //         .attr("class","ui loading disabled button")
+        //         .bind('click', false)
+        //     ;
+        //     console.log("2");
+        //     console.log( $('#deleteArticleBtn'));
+        //     $('#deleteArticleBtn')
+        //         .attr("class","ui disabled button")
+        //         .bind('click', false)
+        //     ;
+        //     console.log("3");
+        //     console.log( $('#editorSubmitBtn'));
+        //     $('#editorSubmitBtn')
+        //         .attr("class","ui disabled button")
+        //         .bind('click', false)
+        //     ;
+        //     console.log("4");
+        //     console.log( $('#commentSubmitBtn'));
+        //     $('#commentSubmitBtn')
+        //         .attr("class","ui disabled button")
+        //         .bind('click', false)
+        //     ;
+        // })
 
     });
 
