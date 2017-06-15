@@ -61,9 +61,6 @@ div.desc {
     text-align: center;
 }
 
-.responsiveMenu{
-    display: none;
-}
 
 /*myWork*/
 
@@ -113,6 +110,11 @@ div.gallery audio{
     display: inline-block;
 }
 
+#fixedMenu{
+    display: none;
+}
+
+
 @media only screen and (max-width: 720px){
     .responsive {
         width: 195px;
@@ -123,8 +125,11 @@ div.gallery audio{
         width: 100%;
     }
 
+    #verticalMenu{
+        display: none;
+    }
 
-    .responsiveMenu{
+    #fixedMenu{
         display: block !important;
     }
 }
@@ -144,7 +149,12 @@ div.gallery audio{
         max-width: 460px;
         width: 100%;
     }
-    .responsiveMenu{
+
+    #verticalMenu{
+        display: none;
+    }
+
+    #fixedMenu{
         display: block !important;
     }
 }

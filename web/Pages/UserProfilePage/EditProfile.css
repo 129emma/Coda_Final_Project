@@ -2,7 +2,11 @@ body{
     background-color: #91A9b2;
 }
 
-
+#avatarDiv{
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+}
 .rounded:hover {
     cursor: pointer
 }
@@ -49,4 +53,7 @@ body{
 
 .ui.text.container {
     padding-top: 50px;
+}
+#passwordDivider{
+    margin-top: 10px;
 }

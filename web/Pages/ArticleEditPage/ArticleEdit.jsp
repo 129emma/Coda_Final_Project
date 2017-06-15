@@ -56,8 +56,8 @@
                     <div class="inline fields">
                         <lable>Title:</lable>
                         <input required type="text" id="title" name="title"
-                               placeholder="Your title here"
-                               value="${articleInfo.title}">
+                               placeholder="Your title here(max-length 50)"
+                               maxlength="50" value="${articleInfo.title}">
                     </div>
                 </div>
                 <%--Button in Editor--%>

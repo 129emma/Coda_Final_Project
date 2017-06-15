@@ -197,3 +197,7 @@ div#Loader {
     border-radius: 0px;
     box-shadow: none;
 }
+
+img{
+    max-width: 100%;
+}

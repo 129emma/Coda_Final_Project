@@ -2,14 +2,16 @@
  * Created by txie936 on 14/06/2017.
  */
 $(document).ready(function () {
-
+    
+    $("#gender").val(selection);
+    
     $('#fileButton').click(function () {
         $('#imageFile').click();
     });
 
     $("#submitAvatarChange").click(function () {
         $(this).addClass("loading");
-        $(this).prop("disabled", true);
+        $(".button").prop("disabled", true);
         $("#avatarForm").submit();
         $('#result').val("");
     });
@@ -30,18 +32,22 @@ $(document).ready(function () {
     $("#deleteBtn").click(function () {
         $('#deleteWindow').modal('show');
     });
-    // $("#deleteAccountBtn").click(function () {
-    //     $(this).addClass("loading");
-    //     $(this).prop("disabled", true);
-    //     $("#profileAction").val("Delete");
-    // });
-    //
-    // $("#updateBtn").click(function () {
-    //     $(this).addClass("loading");
-    //     $(this).prop("disabled", true);
-    //     $("#profileAction").val("Update");
-    // });
 
+    $("#deleteAccountBtn").click(function () {
+        $(this).addClass("loading");
+        $(this).prop("disabled", true);
+        $("#profileAction").val("Delete");
+        $("#profileForm").submit();
+    });
+
+    $("#profileForm").submit(function () {
+        $(".ui.button").prop("disabled",true);
+        if ($("#profileAction").val()=="Update") {
+            $("#updateBtn").addClass("loading");
+        }
+    });
+    
+    
     $("#newUsername").blur(function () {
         var newUsername = $('#newUsername').val();
         console.log(username);

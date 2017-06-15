@@ -88,38 +88,8 @@
     </div>
 
 
-    <%--<div class="ui segment responsiveMenu">
-        <div class="ui four column grid container">
-            <div class="center aligned row">
-                <div class="column">
-                    <a class="item" onclick="loadUserImage()">
-                        <img class="ui centered image" src="Icons/photo.png">
-                    </a>
-                </div>
-
-                <div class="column">
-                    <a class="item" onclick="loadUserAudio()">
-                        <img class="ui centered image" src="Icons/music.png">
-
-                    </a>
-                </div>
-
-                <div class="column">
-                    <a class="item" onclick="loadUserVideo()">
-                        <img class="ui centered image" src="Icons/video.png">
-                    </a>
-                </div>
-                <div class="column">
-                    <a class="item" onclick="loadUserYoutube()">
-                        <img class="ui centered image" src="Icons/youtube.png">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>--%>
-
-
-    <div class="ui four item labeled borderless icon bottom fixed menu">
+<div id="fixedMenu">
+    <div class="ui four item labeled borderless icon bottom fixed menu" >
         <a class="item" onclick="loadUserImage()">
             <img class="ui centered image" src="Icons/photo.png">
         </a>
@@ -133,6 +103,8 @@
             <img class="ui centered image" src="Icons/youtube.png">
         </a>
     </div>
+</div>
+
 
 
 

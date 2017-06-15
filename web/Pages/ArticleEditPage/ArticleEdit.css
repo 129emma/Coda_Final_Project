@@ -93,8 +93,8 @@ div[data-role="editor-toolbar"] {
 
 .image.iconImage {
     cursor: pointer;
-    width:18px;
-    height:18px;
+    width:15px;
+    height:15px;
 }
 .myLabel{
     margin: 0;
@@ -133,4 +133,22 @@ label{
     box-shadow: none;
 }
 
+@media only screen and (max-width: 580px){
+    .hero-unit{
+        padding: 20px 20px 40px 20px;
+    }
+    #editor{
+        height: 300px;
+    }
+    .btn-group>.btn{
+        font-size:10px ;
+    }
+    .iconImage{
+        width: 10px;
+        height:10px;
+    }
+    .btn{
+        padding: 4px
+    }
 
+}

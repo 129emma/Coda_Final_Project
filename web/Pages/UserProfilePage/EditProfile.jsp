@@ -28,7 +28,7 @@
     <script>
         var username = '${userProfile.username}'
         var googleUser = '${googleUser}';
-        var username='${userProfile.username}';
+        var selection='${userProfile.gender}';
     </script>
 </head>
 <body>
@@ -48,7 +48,7 @@
 
             <!--id for update profile form should be changed-->
             <div class="ui fitted horizontal divider">Change Details</div>
-            <div >
+            <div id="avatarDiv">
                 <img src="${userProfile.avatar}" class="rounded" title="click to change avatar" onclick="showWindow2()"/>
             </div>
             <%--<button class="ui button"  id="userIcon"  onclick="showWindow2()">change</button>--%>
@@ -56,60 +56,60 @@
             <form class="ui form" id="profileForm" action="Profile" method="post">
                 <div class="two fields">
                     <div class="field">
-                        <label>Username:</label><input id="newUsername" type="text" pattern="[A-Za-z]{3,16}" name="username"
-                                                       value="${userProfile.username}" style="max-width: 300px"/></div>
+                        <label>Username:</label><input placeholder="Please type your username(3-16 letters or numbers)" id="newUsername" type="text" pattern="[A-Za-z0-9]{3,16}" name="username"
+                                                       value="${userProfile.username}" /></div>
                     <div class="field">
-                        <label>Firstname:</label><input type="text" pattern="[A-Za-z]{2,16}" name="firstName" value="${userProfile.firstName}"
-                                                        style="max-width: 300px"/>
+                        <label>Firstname:</label><input type="text" placeholder="Please type your firstname(2-16 letters)" pattern="[A-Za-z]{2,16}" name="firstName" value="${userProfile.firstName}"
+                    />
                     </div>
                 </div>
                 <div class="two fields" >
                     <div class="field">
-                        <div id="usernameMessageContainer"style="margin-top: 0 !important; max-width: 300px; padding: 10px 15px !important;"
-                             class="ui message hidden">
+                        <div id="usernameMessageContainer" class="ui message hidden">
                             <p id="usernameMessage"></p>
                         </div>
-                     </div>
+                    </div>
                 </div>
                 <div class="two fields">
                     <div class="field">
-                        <label>Lastname:</label> <input type="text" pattern="[A-Za-z]{3,16}" name="lastName" value="${userProfile.lastName}"
-                                                        style="max-width: 300px"/></div>
+                        <label>Lastname:</label> <input placeholder="Please type your lastname(2-16 letters)" type="text" pattern="[A-Za-z]{2,16}" name="lastName" value="${userProfile.lastName}"
+                    /></div>
                     <div class="field">
-                        <label>Email: </label><input type="email" name="email" value="${userProfile.email}"
-                                                     style="max-width: 300px"/></div>
+                        <label>Email: </label><input type="email" placeholder="Please type your email" name="email" value="${userProfile.email}"
+                    /></div>
                 </div>
                 <div class="two fields">
                     <div class="field">
                         <label>Birthday:</label> <input required type="date" name="birthday" value="${userProfile.birthDate}"
-                                                        style="max-width: 300px"/></div>
+                    /></div>
                     <div class="field">
-                        <label>Gender:</label><select name="gender" style="max-width: 300px">
+                        <label>Gender:</label><select name="gender" id="gender">
                         <option value="Female">Female</option>
                         <option value="Male">Male</option>
                     </select>
                     </div>
                 </div>
                 <div class="ui error message"></div>
-                <input  type="hidden" name="profileAction" id="profileAction">
+                <input  type="hidden" name="profileAction" value="Update" id="profileAction">
                 <button class="ui green submit button" id="updateBtn">Update</button>
-                <button class="ui red submit button"  id="deleteBtn">Delete</button>
+                <button class="ui red button" type="button" id="deleteBtn">Delete</button>
             </form>
+
 
             <div id="passwordDivider" class="ui fitted horizontal divider" style="display: none">Change Password</div>
             <form class="ui form" id="passwordForm" action="ChangePassword" method="post" style="display: none">
                 <div class="field">
                     <label>Password: </label><input id="password" type="password" name="password"
-                                                    placeholder="Please Enter Your Password" style="width: 300px;"/>
+                                                    placeholder="Please Enter Your Password" />
                 </div>
                 <div class="field">
                     <label>New Password:</label> <input id="newPassword" type="password" name="newPassword"
                                                         placeholder="Please Enter Your New Password"
-                                                        style="width: 300px;"/></div>
+                                                        /></div>
                 <div class="field">
                     <label>Re-enter New Password:</label> <input id="reNewPassword" type="password" name="reNewPassword"
                                                                  placeholder="Please Re-Enter Your New Password"
-                                                                 style="width: 300px;"/>
+                                                                />
                 </div>
                 <div id="passwordMessageContainer"
                      style="margin-top: 0 !important; max-width: 300px; padding: 10px 15px !important;"
@@ -160,9 +160,9 @@
             </div>
         </div>
         <div class="actions">
-            <div class="ui deny button">
+            <button class="ui deny button">
                 Cancel
-            </div>
+            </button>
             <button id="submitAvatarChange" class="ui positive right icon button">
                 <i id="saveIcon" class="list icon"></i>
                 Save
@@ -177,7 +177,6 @@
         <div class="ui negative button">No</div>
         <button class="ui positive right labled icon button" id="deleteAccountBtn">Yes<i class="checkmark icon"></i> </button>
     </div>
-</div>
 </div>
 </body>
 </html>
