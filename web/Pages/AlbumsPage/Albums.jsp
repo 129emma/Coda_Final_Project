@@ -61,12 +61,12 @@
                 </div>
             </div>
 
-            <div class="ui segment" id="multimediaSegment">
+
                 <div id="content">
 
 
                 </div>
-            </div>
+
 
         </div>
 

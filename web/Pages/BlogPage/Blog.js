@@ -213,14 +213,22 @@ function followFunction() {
 
     $('.ui.button.blue').each(function (i, obj) {
         $(obj).off().click(function () {
-            var username = $(obj).parent().siblings('.header').text();
+            var username;
+            if($(obj).parent().siblings('.header').length){
+                username = $(obj).parent().siblings('.header').text();
+            }else {
+                username=$(obj).parent().parent().next(".ui.segment.keepContent").find(".username").text();
+            }
+            console.log(username);
             $(obj).prop("disabled", true);
             $.ajax({
-                url: '/coda_bubble_beta/Follow',
+                url: '/Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
-                    $(".header:contains(" + username + ")").siblings(".description").find('.ui.button.blue').removeClass("blue").addClass("red").text('Unfollow');
+                    var element= $(".header:contains(" + username + ")");
+                    element.siblings(".description").find('.ui.button.blue').removeClass("blue").addClass("red").text('Unfollow');
+                    element.closest(".ui.segment.keepContent").prev(".ui.center.aligned.container.responAvatar").find(".ui.button.blue").removeClass("blue").addClass("red").text('Unfollow');
                     $(obj).prop("disabled", false);
                     followFunction();
                 }
@@ -229,14 +237,21 @@ function followFunction() {
     });
     $('.ui.button.red').each(function (i, obj) {
         $(obj).off().click(function () {
-            var username = $(obj).parent().siblings('.header').text();
+            var username;
+            if($(obj).parent().siblings('.header').length){
+                username = $(obj).parent().siblings('.header').text();
+            }else {
+                username=$(obj).parent().parent().next(".ui.segment.keepContent").find(".username").text();
+            }
             $(obj).prop("disabled", true);
             $.ajax({
-                url: '/coda_bubble_beta/Follow',
+                url: '/Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
-                    $(".header:contains(" + username + ")").siblings('.description').find(".ui.button.red").removeClass("red").addClass("blue").text('Follow');
+                    var element= $(".header:contains(" + username + ")");
+                    element.siblings(".description").find(".ui.button.red").removeClass("red").addClass("blue").text('Follow');
+                    element.closest(".ui.segment.keepContent").prev(".ui.center.aligned.container.responAvatar").find(".ui.button.red").removeClass("red").addClass("blue").text('Follow');
                     $(obj).prop("disabled", false);
                     followFunction();
                 }

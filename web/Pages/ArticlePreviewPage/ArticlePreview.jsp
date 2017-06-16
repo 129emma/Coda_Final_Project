@@ -33,8 +33,7 @@
             </div>
             <div class="ui flowing popup top left transition hidden">
                 <div class="content">
-                    <div class="header">${article.username}</div>
-
+                    <div class="header username">${article.username}</div>
                     <div class="description">
                             ${article.followButton}
                     </div>
@@ -55,7 +54,6 @@
             <span style="font-family: Montserrat, sans-serif">${article.likeNum} </span> &nbsp;&nbsp;<i
                 class="ion-android-favorite-outline"></i>
         </div>
-
     </div>
 </c:forEach>
 </body>

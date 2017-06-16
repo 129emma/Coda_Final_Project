@@ -45,7 +45,7 @@ function loadInfo(info) {
     $('#gallery').hide();
     $('#loading').show();
     $.ajax({
-        url: '/coda_bubble_beta/Albums',
+        url: '/Albums',
         type: 'POST',
         data: {action: info},
         success: function (data) {
@@ -53,28 +53,31 @@ function loadInfo(info) {
             $('#content').html(content);
             var userContentID = "#user" + info + "List";
             var spotlightContentID = "#spotlight" + info + "List";
-
+            var user=$(".user");
+            var spotlight=$(".spotlight");
             if (!$.trim($(userContentID).html()).length) {
-                $(userContentID).html($("#noContentInfo"));
+                $(".noUserInfo").show();
+                $(userContentID).parent().hide();
             }
 
             if (!$.trim($(spotlightContentID).html()).length) {
-                $(spotlightContentID).html($("#noContentInfo"));
+                $(".noSpotlightInfo").show();
+                $(spotlightContentID).parent().hide();
             }
 
             $("#showUsers").addClass("active").off().click(function () {
-                $(userContentID).show();
-                $(spotlightContentID).hide();
+                user.show();
+                spotlight.hide();
             });
             $("#showSpotlight").removeClass("active").off().click(function () {
-                $(userContentID).hide();
-                $(spotlightContentID).show();
+                user.hide();
+                spotlight.show();
             });
             refresh();
             $('#gallery').show();
             $('#loading').hide();
-            $(userContentID).show();
-            $(spotlightContentID).hide();
+            user.show();
+            spotlight.hide();
         }
-    })
+    });
 }
