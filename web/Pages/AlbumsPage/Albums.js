@@ -45,7 +45,7 @@ function loadInfo(info) {
     $('#gallery').hide();
     $('#loading').show();
     $.ajax({
-        url: '/Albums',
+        url: '/coda_bubble_beta/Albums',
         type: 'POST',
         data: {action: info},
         success: function (data) {
@@ -55,12 +55,11 @@ function loadInfo(info) {
             var spotlightContentID = "#spotlight" + info + "List";
 
             if (!$.trim($(userContentID).html()).length) {
-                $(userContentID).html("<img class='ui centered large image' src='http://dr35ey0x3otoq.cloudfront.net/uploads/default/original/3X/c/1/c1145577473f6c697ae5d5681498031d3de2cff6.gif'  alt='Loading'>");
+                $(userContentID).html($("#noContentInfo"));
             }
 
             if (!$.trim($(spotlightContentID).html()).length) {
-
-                $(spotlightContentID).html("<img class='ui centered large image' src='http://dr35ey0x3otoq.cloudfront.net/uploads/default/original/3X/c/1/c1145577473f6c697ae5d5681498031d3de2cff6.gif'  alt='Loading'>");
+                $(spotlightContentID).html($("#noContentInfo"));
             }
 
             $("#showUsers").addClass("active").off().click(function () {
@@ -77,5 +76,5 @@ function loadInfo(info) {
             $(userContentID).show();
             $(spotlightContentID).hide();
         }
-    });
+    })
 }

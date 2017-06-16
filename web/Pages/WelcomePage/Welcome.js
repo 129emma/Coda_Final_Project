@@ -89,7 +89,7 @@ $(document).ready(function () {
 
 function getPage(action) {
     $.ajax({
-        url: '/Login',
+        url: '/coda_bubble_beta/Login',
         type: 'post',
         data: {action: action},
         success: function (results) {
@@ -102,12 +102,12 @@ function getPage(action) {
 
 function checkLoginStatus(action) {
     $.ajax({
-        url: '/Login',
+        url: '/coda_bubble_beta/Login',
         type: 'post',
         data: {action: 'check'},
         success: function (status) {
             if(status=="login"){
-                location.href = "/Blog?page=home";
+                location.href = "/coda_bubble_beta/Blog?page=home";
             }else{
                 getPage(action);
             }
@@ -117,7 +117,7 @@ function checkLoginStatus(action) {
 
 function verifyUsername(username) {
     $.ajax({
-        url: '/Login',
+        url: '/coda_bubble_beta/Login',
         type: 'post',
         data: {action: 'verify', username: username},
         success: function (message) {
@@ -136,13 +136,13 @@ function verifyUsername(username) {
 
 function login(username,passowrd) {
     $.ajax({
-        url: '/Login',
+        url: '/coda_bubble_beta/Login',
         type: 'post',
         data: {action: 'login', username: username, password:passowrd},
         success: function (message) {
 
             if(message=="login"){
-                location.href = "/Blog?page=home";
+                location.href = "/coda_bubble_beta/Blog?page=home";
             }else{
                 $("#loginButton").attr("class","ui green submit fluid button").removeAttr("disabled");
                 $('#login').transition('shake');
@@ -154,16 +154,16 @@ function login(username,passowrd) {
 
 function register(username,passowrd) {
     $.ajax({
-        url: '/Login',
+        url: '/coda_bubble_beta/Login',
         type: 'post',
         data: {action: 'register', username: username, password:passowrd},
         success: function (message) {
             if(message=="login"){
-                location.href = "/Blog?page=home";
+                location.href = "/coda_bubble_beta/Blog?page=home";
             }else if(message == "success"){
                 $("#message").css("color", "green").text("Your are success to create new account");
                 $("#registerButton").attr("class","ui green submit fluid button").removeAttr("disabled");
-                setTimeout(function(){location.href = "/Login?action=login"},2000);
+                setTimeout(function(){location.href = "coda_bubble_beta/Login?action=login"},2000);
             }else{
                 $('#loginBlock').transition('shake');
                 $("#message").css("color", "red").text(message);
@@ -214,12 +214,12 @@ function onSignIn(googleUser) {
     console.log("ID Token: " + idToken);
     if (userClicked) {
         $.ajax({
-            url: '/GoogleLogin',
+            url: '/coda_bubble_beta/GoogleLogin',
             type: 'post',
             data: {idToken: idToken},
             success: function (result) {
                 if (result == "success") {
-                    location.href = "/Blog?page=home";
+                    location.href = "/coda_bubble_beta/Blog?page=home";
                 } else {
                     $("#message").css("color", "red").text(result);
                     $("#loginSegment").removeClass("loading");

@@ -37,22 +37,17 @@ public class AvatarEditServlet extends HttpServlet {
     private String avatarFilePath;
     static String fileName;
     MySQL DB = new MySQL();
-
+ServletContext servletContext;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LoginStatus.verifyStatus(request, response);
         HttpSession session = request.getSession(true);
         response.setContentType("text/html");
         username = (String) session.getAttribute("username");
-
         LoginStatus.verifyStatus(request, response);
-
         //get User-Info path
-        ServletContext servletContext = getServletContext();
-        String fullFilePath = servletContext.getRealPath("/User-Info");
-
-        String localIconFilePath = servletContext.getRealPath("/");
-
+       servletContext = getServletContext();
+        String fullFilePath = servletContext.getRealPath("User-Info");
         response.setContentType("text/html");
 
         //create User-Info folder
@@ -61,6 +56,7 @@ public class AvatarEditServlet extends HttpServlet {
         if (!folder.exists()) {
             folder.mkdir();
         }
+
         //create the user's own folder under User-Info folder
         File Userfolder = new File(fullFilePath + "/" + username);
 
@@ -73,22 +69,22 @@ public class AvatarEditServlet extends HttpServlet {
             avatarFile.mkdir();
         }
         //get the user's folder path
-        filePath = fullFilePath+"/"+username+"/avatar";
+        filePath = fullFilePath+"/"+username+"/avatar/";
 
         //create directory
         DiskFileItemFactory factory = new DiskFileItemFactory();
         // maximum size that will be stored in memory
-        factory.setSizeThreshold(maxMemSize);
+//        factory.setSizeThreshold(maxMemSize);
         // Location to save data that is larger than maxMemSize.
-        factory.setRepository(new File("C:\\temp"));
+//        factory.setRepository(new File("C:\\temp"));
         // Create a new file upload handler
         ServletFileUpload upload = new ServletFileUpload(factory);
         // maximum file size to be uploaded.
-        upload.setSizeMax(maxFileSize);
+//        upload.setSizeMax(maxFileSize);
 
         deleteLocalAvatar(filePath);
 
-        createUserIcon(upload, request, filePath, localIconFilePath);
+        createUserIcon(upload, request, filePath);
 
         try {
             UserInfoDAO.updateUserIcon(DB, avatarFilePath, username);
@@ -108,16 +104,16 @@ public class AvatarEditServlet extends HttpServlet {
 
     public static List<String> iconList() {
         List<String> iconList = new ArrayList<>();
-        iconList.add("DefaultAvatar\\elyse.png");
-        iconList.add("DefaultAvatar\\helen.jpg");
-        iconList.add("DefaultAvatar\\jenny.jpg");
-        iconList.add("DefaultAvatar\\matthew.png");
-        iconList.add("DefaultAvatar\\molly.png");
+        iconList.add("DefaultAvatar/elyse.png");
+        iconList.add("DefaultAvatar/helen.jpg");
+        iconList.add("DefaultAvatar/jenny.jpg");
+        iconList.add("DefaultAvatar/matthew.png");
+        iconList.add("DefaultAvatar/molly.png");
         return iconList;
     }
 
     private void deleteLocalAvatar(String filePath) {
-        String[] fileNameList = {"\\avatar.jpg", "\\avatar.gif", "\\avatar.png"};
+        String[] fileNameList = {"avatar.jpg", "avatar.gif", "avatar.png"};
         for (String fileName : fileNameList) {
             File file = new File(filePath + fileName);
             if (file.exists()) {
@@ -126,7 +122,7 @@ public class AvatarEditServlet extends HttpServlet {
         }
     }
 
-    private void createUserIcon(ServletFileUpload upload, HttpServletRequest request, String filePath, String localIconFilePath) {
+    private void createUserIcon(ServletFileUpload upload, HttpServletRequest request, String filePath) {
 
         List<String> iconList = iconList();
         try {
@@ -143,17 +139,19 @@ public class AvatarEditServlet extends HttpServlet {
                         //get local icon's  path
                         String localIconPath = fi.getString();
                         BufferedImage icon = null;
+                        String defaultPath=servletContext.getRealPath(localIconPath);
                         try {
                             //read the local image
-                            icon = ImageIO.read(new File(localIconFilePath + localIconPath));
+                            icon = ImageIO.read(new File(defaultPath));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
 
                         String extension = fi.getString().substring(fi.getString().indexOf(".") + 1, fi.getString().length());
-                        File outputfile = new File(filePath + "\\avatar." + extension);
+                        File outputfile = new File(filePath + "avatar." + extension);
                         ImageIO.write(icon, extension, outputfile);
-                        scaleImage(outputfile, extension);
+                        avatarFilePath = "User-Info/" + username + "/avatar/avatar." + extension;
+                        //scaleImage(outputfile, extension);
                         //write the image to the user's icon
                         break;
                     }
@@ -161,18 +159,18 @@ public class AvatarEditServlet extends HttpServlet {
                 } else if (!fi.isFormField()) {
                     fileName = fi.getName();
                     String fileExtension = fileName.substring(fileName.indexOf(".") + 1, fileName.length());
-                    file = new File(filePath + "\\avatar." + fileExtension);
+                    file = new File(filePath + "avatar." + fileExtension);
                     fi.write(file);
                     if (!fileExtension.toLowerCase().equals("gif")) {
                         try {
-                            scaleImage(file, fileExtension);
+                            avatarFilePath = "User-Info/" + username + "/avatar/avatar." + fileExtension;
+                           //scaleImage(file, fileExtension);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }else {
-                        avatarFilePath = "User-Info\\" + username + "\\avatar\\avatar." + fileExtension;
+                        avatarFilePath = "User-Info/" + username + "/avatar/avatar." + fileExtension;
                     }
-
                 }
             }
 
@@ -183,13 +181,11 @@ public class AvatarEditServlet extends HttpServlet {
 
     private void scaleImage(File outputFile, String fileExtension) throws IOException {
         try {
-            avatarFilePath = "User-Info\\" + username + "\\avatar\\avatar." + fileExtension;
+            avatarFilePath = "User-Info/" + username + "/avatar/avatar." + fileExtension;
             BufferedImage image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);
-
             image.createGraphics().drawImage(ImageIO.read(outputFile).getScaledInstance(200, 200, Image.SCALE_SMOOTH), 0, 0, null);
             //write the thumbnail
             ImageIO.write(image, fileExtension, outputFile);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

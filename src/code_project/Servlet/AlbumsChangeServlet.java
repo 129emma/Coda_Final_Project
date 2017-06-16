@@ -130,7 +130,7 @@ public class AlbumsChangeServlet extends HttpServlet {
 
     private void deleteFile(String username, String fileName, HttpServletResponse response) {
         ServletContext servletContext = getServletContext();
-        String imagePath = servletContext.getRealPath("/User-Info/" + username + "/");
+        String imagePath = servletContext.getRealPath("User-Info/" + username + "/");
         File file = new File(imagePath + fileName);
         file.delete();
         try {
@@ -144,7 +144,7 @@ public class AlbumsChangeServlet extends HttpServlet {
 
         ServletContext servletContext = getServletContext();
 
-        String fullFilePath = servletContext.getRealPath("/User-Info");
+        String fullFilePath = servletContext.getRealPath("User-Info");
         File folder = new File(fullFilePath);
         if (!folder.exists()) {
             folder.mkdir();
@@ -156,18 +156,18 @@ public class AlbumsChangeServlet extends HttpServlet {
         }
 
         //get the user's folder path
-        filePath = servletContext.getRealPath("/User-Info/" + username + "/");
+        filePath = servletContext.getRealPath("User-Info/" + username + "/");
 
         //create directory
         DiskFileItemFactory factory = new DiskFileItemFactory();
         // maximum size that will be stored in memory
         factory.setSizeThreshold(maxMemSize);
         // Location to save data that is larger than maxMemSize.
-        factory.setRepository(new File("C:\\temp"));
+//        factory.setRepository(new File("C:\\temp"));
         // Create a new file upload handler
         ServletFileUpload upload = new ServletFileUpload(factory);
         // maximum file size to be uploaded.
-        upload.setSizeMax(maxFileSize);
+//        upload.setSizeMax(maxFileSize);
         try {
             createNewFile(upload, request, response, filePath, username);
             //request.getRequestDispatcher("Pages/ArticleEditPage/ArticleEdit.jsp").forward(request, response);

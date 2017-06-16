@@ -12,8 +12,8 @@ $(document).ready(function () {
     $("#submitAvatarChange").click(function () {
         $(this).addClass("loading");
         $(".button").prop("disabled", true);
+        console.log( $('#result').val());
         $("#avatarForm").submit();
-        $('#result').val("");
     });
 
     $(".rounded").each(function () {
@@ -26,7 +26,8 @@ $(document).ready(function () {
 
 
     $('#imageFile').change(function () {
-        readURL(this);
+          readURL(this);
+        $('#result').val("");
     });
 
     $("#deleteBtn").click(function () {
@@ -50,8 +51,6 @@ $(document).ready(function () {
     
     $("#newUsername").blur(function () {
         var newUsername = $('#newUsername').val();
-        console.log(username);
-        console.log(newUsername);
         if (newUsername != "" && newUsername !=username) {
             verifyUsername($(this).val());
         }else if(newUsername == username){
@@ -103,7 +102,7 @@ $(document).ready(function () {
 function changePassword(password,newPassword) {
     $("#passwordBtn").attr({"class":"ui loading submit button","disabled":"disabled"});
     $.ajax({
-        url: '/ChangePassword',
+        url: '/coda_bubble_beta/ChangePassword',
         type: 'post',
         data: {password: password, newPassword:newPassword},
         success: function (message) {
@@ -123,7 +122,7 @@ function changePassword(password,newPassword) {
 
 function verifyUsername(username) {
     $.ajax({
-        url: '/Login',
+        url: '/coda_bubble_beta/Login',
         type: 'post',
         data: {action: 'verify', username: username},
         success: function (message) {

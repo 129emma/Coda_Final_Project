@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:500i,600');
-@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 body{
     background-color: #565D6B;
@@ -165,7 +165,7 @@ h3.ui.header{
 @media only screen and (max-width: 900px) {
     .ui.text.container.article {
         padding-top: 20px;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
     }
 
     .ui.center.aligned.container.responAvatar{

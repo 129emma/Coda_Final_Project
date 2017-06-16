@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:500i,600');
-@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 #section0 {
     background: linear-gradient(#565D6B, #7BAABE);
@@ -71,12 +71,12 @@ h1.ui.inverted.header {
 }
 
 .login-block input.username {
-    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
+    background: #fff url('https://i.imgur.com/u0XmBmv.png') 20px top no-repeat;
     background-size: 16px 80px;
 }
 
 .login-block input.username:focus {
-    background: #fff url('http://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
+    background: #fff url('https://i.imgur.com/u0XmBmv.png') 20px bottom no-repeat;
     background-size: 16px 80px;
 }
 
@@ -86,7 +86,7 @@ h1.ui.inverted.header {
 }
 
 .login-block input.password:focus {
-    background: #fff url('http://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
+    background: #fff url('https://i.imgur.com/Qf83FTt.png') 20px bottom no-repeat;
     background-size: 16px 80px;
 }
 

@@ -10,14 +10,14 @@ $(document)
             console.log("1");
 
             $(obj).click(function () {
-                console.log(obj);
+                // console.log(obj);
                 var commentID = $(obj).attr('name');
                 var commentContent = $(obj).parent().prev( ".commentContent" ).text();
-                console.log(commentID);
-                console.log($(obj).prev( ".commentContent" ));
-                console.log(commentContent);
+                // console.log(commentID);
+                // console.log($(obj).prev( ".commentContent" ));
+                // console.log(commentContent);
                 var labelName = 'Edit Your Comment';
-                console.log("2");
+                // console.log("2");
                 $("#editorLabel").text(labelName);
                 $("#editorTextArea").text(commentContent);
                 $("#commentIDInput").val(commentID);
@@ -32,10 +32,10 @@ $(document)
 
         //reply comment
         $('.replyBtn').each(function (i, obj) {
-            console.log("1");
-            console.log(obj);
+            // console.log("1");
+            // console.log(obj);
             $(obj).click(function () {
-                console.log("2");
+                // console.log("2");
                 var commentID = $(obj).attr('name');
                 var labelName = 'Reply Comment Here';
                 $("#editorLabel").text(labelName);
@@ -93,34 +93,6 @@ $(document)
                 .bind('click', false)
             ;
         });
-
-        // $('#editArticleBtn').click(function () {
-        //     console.log("1");
-        //     console.log( $(this));
-        //     $(this)
-        //         .attr("class","ui loading disabled button")
-        //         .bind('click', false)
-        //     ;
-        //     console.log("2");
-        //     console.log( $('#deleteArticleBtn'));
-        //     $('#deleteArticleBtn')
-        //         .attr("class","ui disabled button")
-        //         .bind('click', false)
-        //     ;
-        //     console.log("3");
-        //     console.log( $('#editorSubmitBtn'));
-        //     $('#editorSubmitBtn')
-        //         .attr("class","ui disabled button")
-        //         .bind('click', false)
-        //     ;
-        //     console.log("4");
-        //     console.log( $('#commentSubmitBtn'));
-        //     $('#commentSubmitBtn')
-        //         .attr("class","ui disabled button")
-        //         .bind('click', false)
-        //     ;
-        // })
-
     });
 
 
@@ -134,7 +106,7 @@ function likeArticle() {
         $('.heart.icon').addClass('red');
         $('#ifLiked').text('liked');
         $.ajax({
-            url: '/Article',
+            url: '/coda_bubble_beta/Article',
             type: 'post',
             data: {action: 'like', articleID: id},
             success: function () {
@@ -153,7 +125,7 @@ function likeArticle() {
         $('.heart.icon').removeClass('red');
         $('#ifLiked').text('like');
         $.ajax({
-            url: '/Article',
+            url: '/coda_bubble_beta/Article',
             type: 'post',
             data: {action: 'dislike', articleID: id},
             success: function () {

@@ -46,7 +46,7 @@
                                     </a>
                                 </div>
                                 <div class="content">
-                                    <p><a href="Blog?page=home" class="accoritem"></i>Home page</a></p>
+                                    <p><a href="Blog?page=home" class="accoritem">Home page</a></p>
                                     <p><a href="Albums" class="accoritem">Ablum</a>
                                     </p>
                                     <p><a href="Login?action=logout" class="accoritem">Log out</a></p>
@@ -60,10 +60,4 @@
         </div>
     </div>
 </div>
-</div>
-
-
-</div>
-
-
 </body>

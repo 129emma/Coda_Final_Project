@@ -94,7 +94,7 @@ public class LoginServlet extends HttpServlet {
                 int iterations = new Random().nextInt(1000) + 100_000;
                 byte[] hashPassword = Passwords.hash(password.toCharArray(), salt, iterations);
                 try {
-                    LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, iterations, "/DefaultAvatar/elyse.png");
+                    LoginInfoDAO.createLoginInfo(mySQL, username, hashPassword, salt, iterations, "DefaultAvatar/elyse.png");
                     if (ajaxRequest) {
                         out.write("success");
                     } else {

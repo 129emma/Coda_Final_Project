@@ -5,6 +5,11 @@ var articlesNum = 3;
 var ajaxProcess = true;
 
 $(document).ready(function () {
+    //fresh
+setInterval(function () {
+    $('.ui.sticky').sticky('refresh')
+},50);
+
 
     $('.message .close')
         .on('click', function () {
@@ -74,7 +79,7 @@ function loadArticles() {
     console.log(targetUser);
     console.log(tags);
     $.ajax({
-        url: '/Article',
+        url: '/coda_bubble_beta/Article',
         type: 'post',
         data: {action: 'preview', articleNumber: articlesNum, page: page, targetUser: targetUser, tags: tags},
         success: function (articlesPreview) {
@@ -139,7 +144,7 @@ function freshButtonList() {
             $(obj).prop("disabled", true);
             var username = $(obj).parent().siblings(".content").html();
             $.ajax({
-                url: '/Follow',
+                url: '/coda_bubble_beta/Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
@@ -157,7 +162,7 @@ function freshButtonList() {
             $(obj).prop("disabled", true);
             var username = $(obj).parent().siblings(".content").html();
             $.ajax({
-                url: '/Follow',
+                url: '/coda_bubble_beta/Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
@@ -178,7 +183,7 @@ function getFollowInfo() {
     $("#Loader").show();
 
     $.ajax({
-        url: '/Follow',
+        url: '/coda_bubble_beta/Follow',
         type: 'post',
         data: {action: 'getFollowInfo'},
         success: function (followInfo) {
@@ -211,7 +216,7 @@ function followFunction() {
             var username = $(obj).parent().siblings('.header').text();
             $(obj).prop("disabled", true);
             $.ajax({
-                url: '/Follow',
+                url: '/coda_bubble_beta/Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
@@ -227,7 +232,7 @@ function followFunction() {
             var username = $(obj).parent().siblings('.header').text();
             $(obj).prop("disabled", true);
             $.ajax({
-                url: '/Follow',
+                url: '/coda_bubble_beta/Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
@@ -242,7 +247,7 @@ function followFunction() {
 
 
 function refresh() {
-    $('.ui.sticky').sticky('refresh');
+
     $('.ui.sticky').each(function () {
         $(this).popup({
             popup: $(this).next('.custom.popup'),

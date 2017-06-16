@@ -23,7 +23,7 @@
 
 <body>
 <div id="container">
-    <form action="${pageContext.request.contextPath}/Login" method="post">
+    <form action="Login" method="post">
         <div id="loginBlock" class="login-block">
             <h1>Register</h1>
             <input id="registerUsername" required type="text" name="username" class="username" placeholder="Username"/>
@@ -32,7 +32,7 @@
             <div class="ui checked checkbox">
                 <input id="terms" type="checkbox" checked>
                 <label>I agree to the <a
-                        href="${pageContext.request.contextPath}/Pages/TermsConditionsPage/Terms&Conditions.html">terms
+                        href="Pages/TermsConditionsPage/Terms&Conditions.html">terms
                     and conditions</a></label>
             </div>
             <br><br>

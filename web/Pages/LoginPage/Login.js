@@ -25,12 +25,12 @@ $(document).ready(function () {
 
 function login(username,passowrd) {
     $.ajax({
-        url: '/Login',
+        url: '/coda_bubble_beta/Login',
         type: 'post',
         data: {action: 'login', username: username, password:passowrd},
         success: function (message) {
             if(message=="login"){
-                location.href = "/Blog?page=home";
+                location.href = "/coda_bubble_beta/Blog?page=home";
             }else{
                 $('#loginBlock').transition('shake');
                 $("#message").css("color", "red").text(message);
@@ -88,12 +88,12 @@ function onSignIn(googleUser) {
     $("#loginSegment").addClass("loading");
     if (userClicked) {
         $.ajax({
-            url: '/GoogleLogin',
+            url: '/coda_bubble_beta/GoogleLogin',
             type: 'post',
             data: {idToken: idToken},
             success: function (result) {
                 if (result == "success") {
-                    location.href = "/Blog?page=home";
+                    location.href = "/coda_bubble_beta/Blog?page=home";
                 } else {
                     $("#message").css("color", "red").text(result);
                     $("#loginSegment").removeClass("loading");
