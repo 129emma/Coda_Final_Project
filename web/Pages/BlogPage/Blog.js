@@ -5,11 +5,6 @@ var articlesNum = 3;
 var ajaxProcess = true;
 
 $(document).ready(function () {
-    //fresh
-setInterval(function () {
-    $('.ui.sticky').sticky('refresh')
-},50);
-
 
     $('.message .close')
         .on('click', function () {
@@ -79,7 +74,7 @@ function loadArticles() {
     console.log(targetUser);
     console.log(tags);
     $.ajax({
-        url: '/coda_bubble_beta/Article',
+        url: '../Article',
         type: 'post',
         data: {action: 'preview', articleNumber: articlesNum, page: page, targetUser: targetUser, tags: tags},
         success: function (articlesPreview) {
@@ -144,7 +139,7 @@ function freshButtonList() {
             $(obj).prop("disabled", true);
             var username = $(obj).parent().siblings(".content").html();
             $.ajax({
-                url: '/coda_bubble_beta/Follow',
+                url: '../Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
@@ -162,7 +157,7 @@ function freshButtonList() {
             $(obj).prop("disabled", true);
             var username = $(obj).parent().siblings(".content").html();
             $.ajax({
-                url: '/coda_bubble_beta/Follow',
+                url: '../Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
@@ -183,7 +178,7 @@ function getFollowInfo() {
     $("#Loader").show();
 
     $.ajax({
-        url: '/coda_bubble_beta/Follow',
+        url: '../Follow',
         type: 'post',
         data: {action: 'getFollowInfo'},
         success: function (followInfo) {
@@ -214,19 +209,19 @@ function followFunction() {
     $('.ui.button.blue').each(function (i, obj) {
         $(obj).off().click(function () {
             var username;
-            if($(obj).parent().siblings('.header').length){
+            if ($(obj).parent().siblings('.header').length) {
                 username = $(obj).parent().siblings('.header').text();
-            }else {
-                username=$(obj).parent().parent().next(".ui.segment.keepContent").find(".username").text();
+            } else {
+                username = $(obj).parent().parent().next(".ui.segment.keepContent").find(".username").text();
             }
             console.log(username);
             $(obj).prop("disabled", true);
             $.ajax({
-                url: '/Follow',
+                url: '../Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
-                    var element= $(".header:contains(" + username + ")");
+                    var element = $(".header:contains(" + username + ")");
                     element.siblings(".description").find('.ui.button.blue').removeClass("blue").addClass("red").text('Unfollow');
                     element.closest(".ui.segment.keepContent").prev(".ui.center.aligned.container.responAvatar").find(".ui.button.blue").removeClass("blue").addClass("red").text('Unfollow');
                     $(obj).prop("disabled", false);
@@ -238,10 +233,10 @@ function followFunction() {
     $('.ui.button.red').each(function (i, obj) {
         $(obj).off().click(function () {
             var username;
-            if($(obj).parent().siblings('.header').length){
+            if ($(obj).parent().siblings('.header').length) {
                 username = $(obj).parent().siblings('.header').text();
-            }else {
-                username=$(obj).parent().parent().next(".ui.segment.keepContent").find(".username").text();
+            } else {
+                username = $(obj).parent().parent().next(".ui.segment.keepContent").find(".username").text();
             }
             $(obj).prop("disabled", true);
             $.ajax({
@@ -249,7 +244,7 @@ function followFunction() {
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
-                    var element= $(".header:contains(" + username + ")");
+                    var element = $(".header:contains(" + username + ")");
                     element.siblings(".description").find(".ui.button.red").removeClass("red").addClass("blue").text('Follow');
                     element.closest(".ui.segment.keepContent").prev(".ui.center.aligned.container.responAvatar").find(".ui.button.red").removeClass("red").addClass("blue").text('Follow');
                     $(obj).prop("disabled", false);
@@ -260,8 +255,16 @@ function followFunction() {
     });
 }
 
-
 function refresh() {
+    console.log("refresh");
+    $('.multimediaPreview').each(function () {
+        console.log("select");
+        while($(this).height()==0){
+        }
+        console.log("loaded");
+        $('.ui.sticky').sticky('refresh');
+
+    });
 
     $('.ui.sticky').each(function () {
         $(this).popup({

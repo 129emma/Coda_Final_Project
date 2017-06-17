@@ -32,14 +32,14 @@
             <div class="ui checked checkbox">
                 <input id="terms" type="checkbox" checked>
                 <label>I agree to the <a
-                        href="Pages/TermsConditionsPage/Terms&Conditions.html">terms
+                        href="${pageContext.request.contextPath}/Pages/TermsConditionsPage/Terms&Conditions.html">terms
                     and conditions</a></label>
             </div>
             <br><br>
             <button class="ui green submit fluid button" id="registerButton" type="button"
                     name="action">Submit</button>
             <br>
-            <p>Already registered? Login <a href="${pageContext.request.contextPath}/Pages/LoginPage/Login.jsp">HERE</a>
+            <p>Already registered? Login <a href="${pageContext.request.contextPath}/Login?action=login">HERE</a>
             </p>
             <p id="message">${message}</p>
         </div>

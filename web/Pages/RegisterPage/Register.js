@@ -10,8 +10,11 @@ $(document).ready(function () {
         }
     });
 
-
-
+    $(this).keydown(function (event) {
+        if(event.keyCode==13){
+            $('#registerButton').click();
+        }
+    });
 
     $('#registerButton').click(function () {
         var username = $('#registerUsername').val();
@@ -37,15 +40,15 @@ $(document).ready(function () {
 
 function register(username,passowrd) {
     $.ajax({
-        url: '/coda_bubble_beta/Login',
+        url: '../Login',
         type: 'post',
         data: {action: 'register', username: username, password:passowrd},
         success: function (message) {
             if(message=="login"){
-                location.href = "/coda_bubble_beta/Blog?page=home";
+                location.href = "../Blog?page=home";
             }else if(message == "success"){
                 $("#message").css("color", "green").text("Your are success to create new account");
-                setTimeout(function(){location.href = "/coda_bubble_beta/Login?action=login"},2000);
+                setTimeout(function(){location.href = "../Login?action=login"},2000);
             }else{
                 $('#loginBlock').transition('shake');
                 $("#message").css("color", "red").text(message);
@@ -57,7 +60,7 @@ function register(username,passowrd) {
 
 function verifyUsername(username) {
     $.ajax({
-        url: '/coda_bubble_beta/Login',
+        url: '../Login',
         type: 'post',
         data: {action: 'verify', username: username},
         success: function (message) {

@@ -1,16 +1,17 @@
-body{
+body {
     background-color: #565D6B;
 }
 
-.ui.segment, .ui.menu{
+.ui.segment, .ui.menu {
     border: none;
     border-radius: 0px;
 }
+
 ul.userChoice {
     list-style: none;
 }
 
-.ui.container.my{
+.ui.container.my {
     padding-top: 50px;
 }
 
@@ -22,31 +23,37 @@ li {
     display: inline;
 }
 
-.ui.basic.button:hover{
+.ui.basic.button:hover {
     box-shadow: none !important;
 }
 
 .ui.dividing.header {
     max-width: 800px;
 }
-.ui.pointing.menu{
-    background-color:#ffffff ;
+
+.ui.pointing.menu {
+    background-color: #ffffff;
 }
+
 .ui.small.image {
     margin-right: 20px;
     margin-top: 20px;
 }
-#gallery{
+
+#gallery {
     background-color: transparent;
-    border: none;!important;
-    box-shadow: none;!important;
-    padding-top: 0;!important;
+    border: none;
+!important;
+    box-shadow: none;
+!important;
+    padding-top: 0;
+!important;
 }
+
 .ui.labeled.icon.borderless.menu.secondMenu {
     border: none;
     box-shadow: none;
 }
-
 
 div.gallery {
     border: 1px solid #ccc;
@@ -61,13 +68,9 @@ div.desc {
     text-align: center;
 }
 
-
 /*myWork*/
 
-
-
-
-div#Image,div#Audio,div#Video,div#Youtube{
+div#Image, div#Audio, div#Video, div#Youtube {
     width: 100%;
     text-align: center;
 }
@@ -79,83 +82,84 @@ div#Image,div#Audio,div#Video,div#Youtube{
 }
 
 div.gallery img {
-    width:100%;
+    width: 100%;
     height: 160px;
 }
-div.gallery audio{
-    width: 100%;!important;
+
+div.gallery audio {
+    width: 100%;
+!important;
 }
-.responsiveVideo,.responsiveYoutube{
+
+.responsiveVideo, .responsiveYoutube {
     padding: 6px 8px;
     float: left;
     width: 100%;
 }
 
-.responsiveYoutube iframe{
-    width: 100%;!important;
+.responsiveYoutube iframe {
+    width: 100%;
+!important;
     height: auto;
     min-height: 220px;
 }
 
-.responsiveVideo video{
-   width:100% ;
+.responsiveVideo video {
+    width: 100%;
 }
 
-.videoList,.youtubeList{
+.videoList, .youtubeList {
     width: 480px;
 }
 
-
-.imageList,.audioList,.videoList,.youtubeList{
+.imageList, .audioList, .videoList, .youtubeList {
     display: inline-block;
 }
 
-#fixedMenu{
+#fixedMenu {
     display: none;
 }
 
-
-@media only screen and (max-width: 720px){
+@media only screen and (max-width: 720px) {
     .responsive {
         width: 195px;
         margin: 6px 6px;
     }
-    .imageList,.audioList,.videoList,.youtubeList{
+
+    .imageList, .audioList, .videoList, .youtubeList {
         max-width: 460px;
         width: 100%;
     }
+}
 
-    #verticalMenu{
+@media only screen and (max-width: 720px) {
+
+    #verticalMenu {
         display: none;
     }
 
-    #fixedMenu{
+    #fixedMenu {
         display: block !important;
     }
+
 }
 
-@media only screen and (max-width: 520px){
+@media only screen and (max-width: 520px) {
     .responsive {
         margin-bottom: 8px;
     }
 
-    .imageList,.audioList{
+    .imageList, .audioList {
         max-width: 220px;
     }
-    .videoList,.youtubeList{
-        max-width:460px;
+
+    .videoList, .youtubeList {
+        max-width: 460px;
     }
-    .responsiveYoutube,.responsiveVideo{
+
+    .responsiveYoutube, .responsiveVideo {
         max-width: 460px;
         width: 100%;
-    }
-
-    #verticalMenu{
-        display: none;
-    }
-
-    #fixedMenu{
-        display: block !important;
     }
 }
 
@@ -164,6 +168,7 @@ div.gallery audio{
     display: table;
     clear: both;
 }
-#loading{
+
+#loading {
     background-color: transparent;
 }

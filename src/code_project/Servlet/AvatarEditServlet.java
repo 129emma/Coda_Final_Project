@@ -74,13 +74,13 @@ ServletContext servletContext;
         //create directory
         DiskFileItemFactory factory = new DiskFileItemFactory();
         // maximum size that will be stored in memory
-//        factory.setSizeThreshold(maxMemSize);
+     factory.setSizeThreshold(maxMemSize);
         // Location to save data that is larger than maxMemSize.
-//        factory.setRepository(new File("C:\\temp"));
+        factory.setRepository(new File("C:\\temp"));
         // Create a new file upload handler
         ServletFileUpload upload = new ServletFileUpload(factory);
         // maximum file size to be uploaded.
-//        upload.setSizeMax(maxFileSize);
+      upload.setSizeMax(maxFileSize);
 
         deleteLocalAvatar(filePath);
 
@@ -151,7 +151,7 @@ ServletContext servletContext;
                         File outputfile = new File(filePath + "avatar." + extension);
                         ImageIO.write(icon, extension, outputfile);
                         avatarFilePath = "User-Info/" + username + "/avatar/avatar." + extension;
-                        //scaleImage(outputfile, extension);
+                        scaleImage(outputfile, extension);
                         //write the image to the user's icon
                         break;
                     }
@@ -164,7 +164,7 @@ ServletContext servletContext;
                     if (!fileExtension.toLowerCase().equals("gif")) {
                         try {
                             avatarFilePath = "User-Info/" + username + "/avatar/avatar." + fileExtension;
-                           //scaleImage(file, fileExtension);
+                           scaleImage(file, fileExtension);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

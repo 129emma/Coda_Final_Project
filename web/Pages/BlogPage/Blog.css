@@ -198,6 +198,7 @@ div#Loader {
     box-shadow: none;
 }
 
-img{
+img,iframe,audio,video{
     max-width: 100%;
+    margin: auto;
 }

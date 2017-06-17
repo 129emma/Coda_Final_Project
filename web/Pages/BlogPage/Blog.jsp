@@ -42,7 +42,6 @@
     </jsp:include>
 
     <!-- Page Content !-->
-
     <div class="ui text container article">
         <div class="ui shape">
             <div class="sides">

@@ -4,8 +4,6 @@
 var userClicked = false;
 
 $(document).ready(function () {
-    renderButton();
-
     $('#loginButton').click(function () {
         var username = $('#loginUsername').val();
         var password = $('#loginPassword').val();
@@ -21,16 +19,24 @@ $(document).ready(function () {
             $("#message").css("color", "red").text("Please enter your password");
         }
     });
+
+    $(this).keydown(function (event) {
+        if(event.keyCode==13){
+            $('#loginButton').click();
+        }
+    })
+
+
 });
 
 function login(username,passowrd) {
     $.ajax({
-        url: '/coda_bubble_beta/Login',
+        url: '../Login',
         type: 'post',
         data: {action: 'login', username: username, password:passowrd},
         success: function (message) {
             if(message=="login"){
-                location.href = "/coda_bubble_beta/Blog?page=home";
+                location.href = "../Blog?page=home";
             }else{
                 $('#loginBlock').transition('shake');
                 $("#message").css("color", "red").text(message);
@@ -88,12 +94,12 @@ function onSignIn(googleUser) {
     $("#loginSegment").addClass("loading");
     if (userClicked) {
         $.ajax({
-            url: '/coda_bubble_beta/GoogleLogin',
+            url: '../GoogleLogin',
             type: 'post',
             data: {idToken: idToken},
             success: function (result) {
                 if (result == "success") {
-                    location.href = "/coda_bubble_beta/Blog?page=home";
+                    location.href = "../Blog?page=home";
                 } else {
                     $("#message").css("color", "red").text(result);
                     $("#loginSegment").removeClass("loading");

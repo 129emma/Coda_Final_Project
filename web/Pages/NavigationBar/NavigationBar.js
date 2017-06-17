@@ -6,6 +6,5 @@ $(document)
         $('.ui.accordion')
             .accordion()
         ;
-
     })
 ;

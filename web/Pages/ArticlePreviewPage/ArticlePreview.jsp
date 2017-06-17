@@ -20,7 +20,8 @@
 
 
     <div class="ui center aligned container responAvatar">
-        <a href="Blog?page=user&targetUser=${article.username}"><img class="ui raised tiny top aligned circular centered image userAvatar " src="${article.userAvatar}"></a>
+        <a href="Blog?page=user&targetUser=${article.username}"><img
+                class="ui raised tiny top aligned circular centered image userAvatar " src="${article.userAvatar}"></a>
         <div class="followBtn">${article.followButton}</div>
     </div>
 
@@ -29,7 +30,8 @@
         <div class="ui left close rail" style="width: 80px !important;">
 
             <div class="ui sticky" style="width: 80px !important;">
-                <a href="Blog?page=user&targetUser=${article.username}"><img class="ui raised tiny top aligned rounded image userAvatar " src="${article.userAvatar}"></a>
+                <a href="Blog?page=user&targetUser=${article.username}"><img
+                        class="ui raised tiny top aligned rounded image userAvatar " src="${article.userAvatar}"></a>
             </div>
             <div class="ui flowing popup top left transition hidden">
                 <div class="content">
@@ -46,7 +48,9 @@
                 </span>
             </h3>
         </div>
-            ${article.multimediaPreview}
+        <div class="multimediaPreview" style="width:100%;text-align:center">
+                ${article.multimediaPreview}
+        </div>
             ${article.preview}
         <div class="ui fitted divider"></div>
 

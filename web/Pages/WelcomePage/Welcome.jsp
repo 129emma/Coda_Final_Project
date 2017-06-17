@@ -57,8 +57,10 @@
                 <div class="ui small sequenced images">
                     <img src="https://semantic-ui.com/images/avatar2/large/elyse.png" class="ui circular image">
                     <img src="https://semantic-ui.com/images/avatar2/large/matthew.png" class="ui circular image">
-                    <img src="https://semantic-ui.com/images/avatar2/large/kristy.png" class="ui circular image">
-                    <img src="https://semantic-ui.com/images/avatar/large/jenny.jpg" class="ui circular image">
+                    <span class="ui fouritem">
+                        <img src="https://semantic-ui.com/images/avatar2/large/kristy.png" class="ui circular image">
+                        <img src="https://semantic-ui.com/images/avatar/large/jenny.jpg" class="ui circular image">
+                    </span>
                 </div>
                 <h1>Team Coda</h1>
                 <h2>Your World. Delivered by us.</h2>
@@ -69,10 +71,12 @@
         <div class="ui middle aligned center aligned grid">
             <div class="column">
                 <div class="ui small sequenced icons">
-                    <i class="grey massive talk outline icon"></i>
-                    <i class="orange massive image icon"></i>
-                    <i class="yellow massive music icon"></i>
-                    <i class="green massive record icon"></i>
+                    <i class="inverted massive talk outline icon"></i>
+                    <i class="inverted massive image icon"></i>
+                    <span class="ui fouritem">
+                         <i class="inverted massive music icon"></i>
+                         <i class="inverted massive record icon"></i>
+                    </span>
                 </div>
                 <h2>Put anything you want here. </h2>
                 <h1>Seriously.</h1>

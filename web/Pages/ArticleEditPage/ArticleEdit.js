@@ -9,7 +9,7 @@ $(document).ready(function () {
             var data = new FormData();
             data.append('file', $(this).prop('files')[0]);
             $.ajax({
-                url: '/coda_bubble_beta/AlbumsChange',
+                url: '../../AlbumsChange',
                 type: 'POST',
                 data: data,
                 processData: false,  // tell jQuery not to process the data
@@ -28,7 +28,7 @@ $(document).ready(function () {
         if (input != null) {
             var data = {'action': 'createYoutube', 'youtubeAddress': input};
             $.ajax({
-                url: '/coda_bubble_beta/AlbumsChange',
+                url: '../../AlbumsChange',
                 type: 'POST',
                 data: data,
                 success: function (data) {

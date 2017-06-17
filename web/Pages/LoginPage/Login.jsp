@@ -30,7 +30,7 @@
             <input type="hidden" value="login" name="action"/>
             <button class="ui green submit fluid button" id="loginButton" type="button">Submit</button>
             <br/>
-            <p>No account yet? Register <a href="${pageContext.request.contextPath}/Pages/RegisterPage/Register.jsp">HERE</a>
+            <p>No account yet? Register <a href="${pageContext.request.contextPath}/Login?action=register">HERE</a>
             </p>
             <p id="message">${message}</p>
             <div class="ui horizontal divider">Or</div>

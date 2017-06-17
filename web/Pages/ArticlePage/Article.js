@@ -106,7 +106,7 @@ function likeArticle() {
         $('.heart.icon').addClass('red');
         $('#ifLiked').text('liked');
         $.ajax({
-            url: '/coda_bubble_beta/Article',
+            url: '../../Article',
             type: 'post',
             data: {action: 'like', articleID: id},
             success: function () {
@@ -125,7 +125,7 @@ function likeArticle() {
         $('.heart.icon').removeClass('red');
         $('#ifLiked').text('like');
         $.ajax({
-            url: '/coda_bubble_beta/Article',
+            url: '../../Article',
             type: 'post',
             data: {action: 'dislike', articleID: id},
             success: function () {

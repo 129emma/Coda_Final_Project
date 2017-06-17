@@ -58,7 +58,7 @@
                         <label>Username:</label><input placeholder="Please type your username(3-16 letters or numbers)" id="newUsername" type="text" pattern="[A-Za-z0-9-]{3,16}" name="username"
                                                        value="${userProfile.username}" /></div>
                     <div class="field">
-                        <label>Firstname:</label><input type="text" placeholder="Please type your firstname(2-16 letters)" pattern="[A-Za-z]{2,16}" name="firstName" value="${userProfile.firstName}"
+                        <label>Firstname:</label><input type="text" placeholder="Please type your first name(2-16 letters)" pattern="[A-Za-z]{2,16}" name="firstName" value="${userProfile.firstName}"
                     />
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="two fields">
                     <div class="field">
-                        <label>Lastname:</label> <input placeholder="Please type your lastname(2-16 letters)" type="text" pattern="[A-Za-z]{2,16}" name="lastName" value="${userProfile.lastName}"
+                        <label>Lastname:</label> <input placeholder="Please type your last name(2-16 letters)" type="text" pattern="[A-Za-z]{2,16}" name="lastName" value="${userProfile.lastName}"
                     /></div>
                     <div class="field">
                         <label>Email: </label><input type="email" placeholder="Please type your email" name="email" value="${userProfile.email}"
