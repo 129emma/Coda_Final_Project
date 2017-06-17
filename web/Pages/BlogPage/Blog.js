@@ -33,20 +33,21 @@ $(document).ready(function () {
     var autoRefresh = setInterval(function () {
         if ($(window).height() == $(document).height() && ajaxProcess == false) {
             ajaxProcess = true;
-            $("#Loader").fadeIn();
+            $("#Loader").show();
             $("html, body").animate({scrollTop: $(document).height()}, 200);
             articlesNum += 3;
             loadArticles();
         }
-    }, 10000);
+    }, 60000);
 
 
     $(window).scroll(function () {
-        console.log("1: " + ajaxProcess);
+        if($('.ui.left.close.rail').css('display')!='none') {
+            $('.ui.sticky').sticky('refresh');
+        }
         if ($(window).scrollTop() + $(window).height() >= $(document).height() && ajaxProcess == false) {
             ajaxProcess = true;
-            console.log("2: " + ajaxProcess);
-            $("#Loader").fadeIn();
+            $("#Loader").show();
             $("html, body").animate({scrollTop: $(document).height()}, 200);
             articlesNum += 3;
             loadArticles();
@@ -70,15 +71,11 @@ $(document).ready(function () {
     });
 });
 function loadArticles() {
-    console.log(page);
-    console.log(targetUser);
-    console.log(tags);
     $.ajax({
-        url: '../Article',
+        url: 'Article',
         type: 'post',
         data: {action: 'preview', articleNumber: articlesNum, page: page, targetUser: targetUser, tags: tags},
         success: function (articlesPreview) {
-            console.log("3: " + ajaxProcess);
             var preview = articlesPreview.substring(articlesPreview.indexOf('\<body\>') + 6, articlesPreview.indexOf("\</body\>"));
             $("#ArticleContainer").html(preview);
             if (!$.trim($("#ArticleContainer").html()).length) {
@@ -86,13 +83,11 @@ function loadArticles() {
             } else {
                 $('#noArticleMessage').hide();
             }
-            $("#Loader").fadeOut();
-            console.log("4: " + ajaxProcess);
+            $("#Loader").hide();
             refresh();
             followFunction();
             setTimeout(function () {
                 ajaxProcess = false;
-                console.log("5: " + ajaxProcess);
             }, 3000);
         }
     });
@@ -139,7 +134,7 @@ function freshButtonList() {
             $(obj).prop("disabled", true);
             var username = $(obj).parent().siblings(".content").html();
             $.ajax({
-                url: '../Follow',
+                url: 'Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
@@ -157,7 +152,7 @@ function freshButtonList() {
             $(obj).prop("disabled", true);
             var username = $(obj).parent().siblings(".content").html();
             $.ajax({
-                url: '../Follow',
+                url: 'Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
@@ -178,7 +173,7 @@ function getFollowInfo() {
     $("#Loader").show();
 
     $.ajax({
-        url: '../Follow',
+        url: 'Follow',
         type: 'post',
         data: {action: 'getFollowInfo'},
         success: function (followInfo) {
@@ -217,7 +212,7 @@ function followFunction() {
             console.log(username);
             $(obj).prop("disabled", true);
             $.ajax({
-                url: '../Follow',
+                url: 'Follow',
                 type: 'post',
                 data: {action: 'follow', followUsername: username},
                 success: function () {
@@ -240,7 +235,7 @@ function followFunction() {
             }
             $(obj).prop("disabled", true);
             $.ajax({
-                url: '/Follow',
+                url: 'Follow',
                 type: 'post',
                 data: {action: 'unfollow', followUsername: username},
                 success: function () {
@@ -256,16 +251,9 @@ function followFunction() {
 }
 
 function refresh() {
-    console.log("refresh");
-    $('.multimediaPreview').each(function () {
-        console.log("select");
-        while($(this).height()==0){
-        }
-        console.log("loaded");
+    if($('.ui.left.close.rail').css('display')!='none') {
         $('.ui.sticky').sticky('refresh');
-
-    });
-
+    }
     $('.ui.sticky').each(function () {
         $(this).popup({
             popup: $(this).next('.custom.popup'),

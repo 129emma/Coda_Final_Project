@@ -102,7 +102,7 @@ $(document).ready(function () {
 function changePassword(password,newPassword) {
     $("#passwordBtn").attr({"class":"ui loading submit button","disabled":"disabled"});
     $.ajax({
-        url: '../ChangePassword',
+        url: 'ChangePassword',
         type: 'post',
         data: {password: password, newPassword:newPassword},
         success: function (message) {
@@ -122,7 +122,7 @@ function changePassword(password,newPassword) {
 
 function verifyUsername(username) {
     $.ajax({
-        url: '../Login',
+        url: 'Login',
         type: 'post',
         data: {action: 'verify', username: username},
         success: function (message) {

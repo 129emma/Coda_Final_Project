@@ -23,14 +23,14 @@
 
 <body>
 <div id="container">
-    <form action="Login" method="post">
+    <form method="post">
         <div id="loginBlock" class="login-block">
             <h1>Register</h1>
-            <input id="registerUsername" required type="text" name="username" class="username" placeholder="Username"/>
+            <input id="registerUsername" required pattern="[A-Za-z0-9-]{3,16}" type="text" name="username" class="username" placeholder="Username" title="Must be alphanumeric in 3-16 chars"/>
             <input id="registerPassword" required type="password" name="password" class="password"
                    placeholder="Password"/>
             <div class="ui checked checkbox">
-                <input id="terms" type="checkbox" checked>
+                <input id="terms" type="checkbox" checked required>
                 <label>I agree to the <a
                         href="${pageContext.request.contextPath}/Pages/TermsConditionsPage/Terms&Conditions.html">terms
                     and conditions</a></label>
@@ -41,7 +41,9 @@
             <br>
             <p>Already registered? Login <a href="${pageContext.request.contextPath}/Login?action=login">HERE</a>
             </p>
-            <p id="message">${message}</p>
+            <div id="messageContainer" class="ui message hidden">
+                <p id="message" style="text-align: justify;">${message}</p>
+            </div>
         </div>
     </form>
 </div>

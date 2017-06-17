@@ -32,7 +32,7 @@ $(document).ready(function () {
 
     $(window).on('resize', function () {
 
-        if($(window).width() < 700) {
+        if ($(window).width() < 700) {
             $('.fouritem').addClass('container');
         } else {
             $('.fouritem').removeClass('container');
@@ -56,44 +56,52 @@ $(document).ready(function () {
     $('#login').on('click', '#loginButton', function () {
         var username = $('#loginUsername').val();
         var password = $('#loginPassword').val();
-
-        if (username != "" && password != "") {
-            $("#loginButton").attr({"class": "ui loading green submit fluid button", "disabled": "disabled"});
-            login(username, password);
-        } else if (username == "") {
-            $('#login').transition('shake');
-            $("#message").css("color", "red").text("Please enter your username");
-        } else if (password == "") {
-            $('#login').transition('shake');
-            $("#message").css("color", "red").text("Please enter your password");
+        if (username!= ""&& password!= "") {
+            $("#loginButton").attr({"class":"ui loading green submit fluid button","disabled":"disabled"});
+            login(username,password);
+        }else if(username == ""){
+            $('#loginBlock').transition('shake');
+            $("#messageContainer").attr("class","ui negative message");
+            $("#message").text("Please enter your username");
+        }else if(password == ""){
+            $('#loginBlock').transition('shake');
+            $("#messageContainer").attr("class","ui negative message");
+            $("#message").text("Please enter your password");
         }
     });
 
 
     $('#login').on('click', '#registerButton', function () {
         var username = $('#registerUsername').val();
+        var validity = $('#registerUsername')[0].checkValidity();
         var password = $('#registerPassword').val();
         var checked = $("#terms").prop("checked") == true;
-        console.log(checked);
 
-        if (username != "" && password != "" && checked) {
+        if (username != "" && password != "" && checked && validity) {
             $("#registerButton").attr({"class": "ui loading green submit fluid button", "disabled": "disabled"});
             register(username, password);
         } else if (username == "") {
             $('#loginBlock').transition('shake');
-            $("#message").css("color", "red").text("Please enter your username");
+            $("#messageContainer").attr("class", "ui negative message");
+            $("#message").text("Please enter your username");
         } else if (password == "") {
             $('#loginBlock').transition('shake');
-            $("#message").css("color", "red").text("Please enter your password");
+            $("#messageContainer").attr("class", "ui negative message");
+            $("#message").text("Please enter your password");
         } else if (!checked) {
             $('#loginBlock').transition('shake');
-            $("#message").css("color", "red").text("Please agree the terms and conditions");
+            $("#messageContainer").attr("class", "ui negative message");
+            $("#message").text("Please agree the terms and conditions");
+        } else if (!validity) {
+            $('#loginBlock').transition('shake');
+            $("#messageContainer").attr("class", "ui negative message");
+            $("#message").text("Username must be alphanumeric in 3-16 chars");
         }
     });
 
-    $('#login').on('change',function () {
+    $('#login').on('change', function () {
         $(this).keydown(function (event) {
-            if(event.keyCode==13){
+            if (event.keyCode == 13) {
                 $('#loginButton').click();
                 $('#registerButton').click();
             }
@@ -110,7 +118,6 @@ function getPage(action) {
         success: function (results) {
             var form = results.substring(results.indexOf('\<body\>') + 6, results.indexOf("\</body\>"));
             $('#login').html(form).modal('show');
-            renderButton();
         }
     });
 }
@@ -131,22 +138,32 @@ function checkLoginStatus(action) {
 }
 
 function verifyUsername(username) {
-    $.ajax({
-        url: '../../Login',
-        type: 'post',
-        data: {action: 'verify', username: username},
-        success: function (message) {
-            var message = message;
-            if (message.includes("available")) {
-                $("#registerButton").removeAttr('disabled');
-                $("#message").css("color", "green").text(message);
-            } else {
-                $('#login').transition('shake');
-                $("#registerButton").attr('disabled', 'disabled');
-                $("#message").css("color", "red").text(message);
+    if ($('#registerUsername')[0].checkValidity()) {
+        $.ajax({
+            url: '../../Login',
+            type: 'post',
+            data: {action: 'verify', username: username},
+            success: function (message) {
+                var message = message;
+                if (message.includes("available")) {
+                    $("#registerButton").removeAttr('disabled');
+                    $("#messageContainer").attr("class", "ui positive message");
+                    $("#message").text(message);
+                } else {
+                    $('#loginBlock').transition('shake');
+                    $("#registerButton").attr('disabled', 'disabled');
+                    $("#messageContainer").attr("class", "ui negative message");
+                    $("#message").text(message);
+                }
             }
-        }
-    });
+        });
+    }else{
+        $('#loginBlock').transition('shake');
+        $("#registerButton").attr('disabled', 'disabled');
+        $("#messageContainer").attr("class", "ui negative message");
+        $("#message").text("Username must be alphanumeric in 3-16 chars");
+    }
+
 }
 
 function login(username, passowrd) {
@@ -161,7 +178,8 @@ function login(username, passowrd) {
             } else {
                 $("#loginButton").attr("class", "ui green submit fluid button").removeAttr("disabled");
                 $('#login').transition('shake');
-                $("#message").css("color", "red").text(message);
+                $("#messageContainer").attr("class", "ui negative message");
+                $("#message").text(message);
             }
         }
     });
@@ -176,14 +194,15 @@ function register(username, passowrd) {
             if (message == "login") {
                 location.href = "../../Blog?page=home";
             } else if (message == "success") {
-                $("#message").css("color", "green").text("Your are success to create new account");
-                $("#registerButton").attr("class", "ui green submit fluid button").removeAttr("disabled");
+                $("#messageContainer").attr("class", "ui positive message");
+                $("#message").text("You have successfully signed up");
                 setTimeout(function () {
                     location.href = "../../Login?action=login"
-                }, 2000);
+                }, 1000);
             } else {
                 $('#loginBlock').transition('shake');
-                $("#message").css("color", "red").text(message);
+                $("#messageContainer").attr("class", "ui negative message");
+                $("#message").text(message);
                 $("#registerButton").attr("class", "ui green submit fluid button").removeAttr("disabled");
             }
         }

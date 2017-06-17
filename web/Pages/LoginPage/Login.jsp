@@ -17,24 +17,29 @@
     <script src="${pageContext.request.contextPath}/Pages/LoginPage/Login.js"></script>
 </head>
 <body>
-<div id="container" >
+<div id="container">
     <form id="form" class="ui basic segment">
         <div id="loginBlock" class="login-block">
             <div id="loginSegment" class="ui basic segment">
-            <h1>Login</h1>
-            <div class="loginDiv">
-                <input id="loginUsername" type="text" required name="username" class="username" placeholder="Username"/>
-                <input id="loginPassword" type="password" required name="password" class="password"
-                       placeholder="Password"/>
-            </div>
-            <input type="hidden" value="login" name="action"/>
-            <button class="ui green submit fluid button" id="loginButton" type="button">Submit</button>
-            <br/>
-            <p>No account yet? Register <a href="${pageContext.request.contextPath}/Login?action=register">HERE</a>
-            </p>
-            <p id="message">${message}</p>
-            <div class="ui horizontal divider">Or</div>
-            <div id="my-signin2" onclick="clickDetector()"></div>
+                <h1>Login</h1>
+                <div class="loginDiv">
+                    <input id="loginUsername" type="text" required name="username" class="username"
+                           placeholder="Username"/>
+                    <input id="loginPassword" type="password" required name="password" class="password"
+                           placeholder="Password"/>
+                </div>
+                <input type="hidden" value="login" name="action"/>
+                <button class="ui green submit fluid button" id="loginButton" type="button">Submit</button>
+                <br/>
+                <p>No account yet? Register <a href="${pageContext.request.contextPath}/Login?action=register">HERE</a>
+                </p>
+
+                <div id="messageContainer" class="ui message hidden">
+                    <p id="message" style="text-align: justify;">${message}</p>
+                </div>
+
+                <div class="ui horizontal divider">Or</div>
+                <div id="my-signin2" onclick="clickDetector()"></div>
             </div>
         </div>
     </form>

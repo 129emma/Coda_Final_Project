@@ -13,10 +13,12 @@ $(document).ready(function () {
             login(username,password);
         }else if(username == ""){
             $('#loginBlock').transition('shake');
-            $("#message").css("color", "red").text("Please enter your username");
+            $("#messageContainer").attr("class","ui negative message");
+            $("#message").text("Please enter your username");
         }else if(password == ""){
             $('#loginBlock').transition('shake');
-            $("#message").css("color", "red").text("Please enter your password");
+            $("#messageContainer").attr("class","ui negative message");
+            $("#message").text("Please enter your password");
         }
     });
 
@@ -39,7 +41,8 @@ function login(username,passowrd) {
                 location.href = "../Blog?page=home";
             }else{
                 $('#loginBlock').transition('shake');
-                $("#message").css("color", "red").text(message);
+                $("#messageContainer").attr("class","ui negative message");
+                $("#message").text(message);
                 $("#loginButton").attr("class","ui green submit fluid button").removeAttr("disabled");
             }
         }

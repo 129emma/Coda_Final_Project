@@ -51,7 +51,7 @@
                             <!--Background Image-->
                             <div class="ui image backGround">
                                 <!--fixed size for this background,maximum height is 270px-->
-                                <img src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
+                                <img src="${pageContext.request.contextPath}/Pages/BlogPage/BackgourndImage/Rainbow.jpg">
                             </div>
                             <!--User Icon-->
                             <div class="ui small image iconImage">
@@ -108,8 +108,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div> <!--End of First Side-->
 
 
@@ -123,7 +121,7 @@
                             <!--Background Image-->
                             <div class="ui image backGround">
                                 <!--fixed size for this background,maximum height is 270px-->
-                                <img src="http://themes.mysitemyway.com/echelon/wp-content/uploads/2010/05/colorful.jpg">
+                                <img src="${pageContext.request.contextPath}/Pages/BlogPage/BackgourndImage/Rainbow.jpg">
                                 <!--User Icon-->
                                 <img class="ui small image iconImage" src="${userInfo.avatar}">
                             </div>
@@ -153,6 +151,15 @@
     <div id="contentContainer" class="ui text justified container">
         <div id="ArticleContainer">
         </div>
+
+        <div class="ui message" id="noArticleMessage" hidden>
+            <i class="close icon"></i>
+            <div class="header">
+                Please create an article !
+            </div>
+            <a href="Article?action=create">Click here to create one.</a>
+        </div>
+
         <div class="ui icon message" id="Loader" hidden>
             <i class="notched circle loading icon"></i>
             <div class="content">
@@ -162,13 +169,7 @@
                 <p>We're loading that content for you.</p>
             </div>
         </div>
-        <div class="ui message" id="noArticleMessage" hidden>
-            <i class="close icon"></i>
-            <div class="header">
-                Please create an article !
-            </div>
-            <a href="Article?action=create">Click here to create one.</a>
-        </div>
+
         <a href="#topMenu">
             <div class="ui button topButton">
                 top

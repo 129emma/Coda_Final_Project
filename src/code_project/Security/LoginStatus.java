@@ -21,7 +21,7 @@ public class LoginStatus {
             case "login":
                 return;
             case "logout":
-               response.sendRedirect("Login");
+                request.getRequestDispatcher("Login").forward(request, response);
                 break;
             default:
                 session.setAttribute("status", "logout");

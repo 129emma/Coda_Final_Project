@@ -36,7 +36,7 @@
 
                         </div>
                         <div class="column">
-                            <img class="ui centered image" src="Pages/NavigationBar/smallLogo.png">
+                            <img class="ui centered image" src="${pageContext.request.contextPath}/Pages/NavigationBar/smallLogo.png">
                         </div>
                         <div class="column">
                             <div class="ui accordion">
@@ -46,10 +46,10 @@
                                     </a>
                                 </div>
                                 <div class="content">
-                                    <p><a href="Blog?page=home" class="accoritem">Home page</a></p>
+                                    <p><a href="Blog?page=home" class="accoritem">Home</a></p>
                                     <p><a href="Albums" class="accoritem">Ablum</a>
                                     </p>
-                                    <p><a href="Login?action=logout" class="accoritem">Log out</a></p>
+                                    <p><a href="Login?action=logout" class="accoritem">Logout</a></p>
                                 </div>
                             </div>
                         </div>

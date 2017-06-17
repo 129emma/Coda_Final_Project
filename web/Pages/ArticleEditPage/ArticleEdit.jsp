@@ -167,7 +167,7 @@
                     </div>
                 </div>
                 ${hiddenElement}
-                <div class="submitBtn"> ${deleteElement}${submitElement}</div>
+                <div class="submitBtnSet"> ${deleteElement}${submitElement}</div>
 
             </div>
         </div>

@@ -45,7 +45,7 @@ function loadInfo(info) {
     $('#gallery').hide();
     $('#loading').show();
     $.ajax({
-        url: '../Albums',
+        url: 'Albums',
         type: 'POST',
         data: {action: info},
         success: function (data) {

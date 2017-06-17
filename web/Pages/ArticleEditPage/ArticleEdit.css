@@ -101,16 +101,20 @@ label{
     font-size: 20px;
 }
 
-.submitBtn {
+.submitBtnSet {
     text-align: right;
 }
 
-.ui.button.subBtn:hover {
+#submitBtn:hover {
     background-color: #A7D3AE;
     color: white;
 }
 
-.ui.button.delBtn:hover {
+#editBtn:hover {
+    background-color: #A7D3AE;
+    color: white;
+}
+#deleteBtn:hover {
     background-color: #F28790;
     color: white;
 }
