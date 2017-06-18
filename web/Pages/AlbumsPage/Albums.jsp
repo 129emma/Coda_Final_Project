@@ -44,7 +44,7 @@
 
             <!--this div for show up all the image/video/audio-->
             <!-- all images should be resized for fitting container , and size for small images is 150px-->
-            <div class="ui right close rail">
+            <div id="verticalMenu" class="ui right close rail">
                 <div class="ui vertical labeled borderless icon menu">
                     <a class="item" onclick="loadUserImage()">
                         <img class="ui centered image" src="Icons/photo.png">

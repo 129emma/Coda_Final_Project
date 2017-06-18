@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
                 checkProcess(request, response);
                 break;
             default:
-                request.getRequestDispatcher("Pages/WelcomePage/Welcome.jsp").forward(request, response);
+                request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
         }
     }
 
@@ -99,7 +99,7 @@ public class LoginServlet extends HttpServlet {
                         out.write("success");
                     } else {
                         request.setAttribute("message", "Success to create account");
-                        request.getRequestDispatcher("Pages/WelcomePage/Welcome.jsp").forward(request, response);
+                        request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
                     }
                 } catch (SQLException e) {
                     if (ajaxRequest) {

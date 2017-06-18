@@ -130,9 +130,10 @@ div.gallery audio {
         max-width: 460px;
         width: 100%;
     }
+
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 930px) {
 
     #verticalMenu {
         display: none;
@@ -161,6 +162,7 @@ div.gallery audio {
         max-width: 460px;
         width: 100%;
     }
+
 }
 
 .clearfix:after {
