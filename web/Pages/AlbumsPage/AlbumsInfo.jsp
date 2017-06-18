@@ -14,7 +14,6 @@
     <title>AlbumsInfo</title>
 </head>
 <body>
-
 <div id='Image' class="listContainer">
     <div class="user">
         <div class="ui segment">
@@ -74,8 +73,6 @@
     </div>
 </div>
 <div id='ImageEnd'></div>
-
-
 <div id='Video' class="listContainer">
     <div class="user">
         <div class="ui segment">
@@ -111,7 +108,6 @@
             </div>
         </div>
     </div>
-
     <div class="spotlight">
         <div class="ui segment">
             <div id="spotlightVideoList" class="videoList">
@@ -215,8 +211,6 @@
     </div>
 </div>
 <div id='AudioEnd'></div>
-
-
 <div id='Youtube' class="listContainer">
     <div class="user">
         <div class="ui segment">

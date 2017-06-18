@@ -22,12 +22,10 @@
     <script src="${pageContext.request.contextPath}/Pages/AlbumsPage/Albums.js"></script>
 </head>
 <body onload="loadUserImage()">
-
 <div class="pusher full">
     <jsp:include page="../NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
-
     <div class="ui text container my" id="imageGallery">
         <div class="ui segment" id="gallery">
             <div class="ui pointing menu">
@@ -38,8 +36,6 @@
                     Spotlight
                 </a>
             </div>
-
-
             <div id="verticalMenu" class="ui right close rail">
                 <div class="ui vertical labeled borderless icon menu">
                     <a class="item" onclick="loadUserImage()">
@@ -70,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui icon message" id="noContentInfo" style="display: none">
+        <div class="ui icon message" id="noContentInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">

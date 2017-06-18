@@ -109,7 +109,6 @@
             </div>
         </div>
     </div>
-
     <%--Edit Box--%>
     <div id="editor" class="ui standard modal reply form editComment">
         <div class="ui basic segment">

@@ -2,7 +2,7 @@ body {
     background-color: #565D6B;
 }
 
-.ui.icon.message.noUserInfo, .ui.icon.message.noSpotlightInfo,#fixedMenu {
+.ui.icon.message.noUserInfo, .ui.icon.message.noSpotlightInfo,#fixedMenu,#noContentInfo {
     display: none;
 }
 
