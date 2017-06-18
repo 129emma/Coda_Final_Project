@@ -32,7 +32,7 @@
 </head>
 <body>
 
-<div class="pusher">
+<div>
 
     <jsp:include page="../NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
@@ -50,7 +50,6 @@
             <div id="avatarDiv">
                 <img src="${userProfile.avatar}" class="rounded" title="click to change avatar" onclick="showWindow2()"/>
             </div>
-            <%--<button class="ui button"  id="userIcon"  onclick="showWindow2()">change</button>--%>
 
             <form class="ui form" id="profileForm" action="Profile" method="post">
                 <div class="two fields">
@@ -95,8 +94,8 @@
             </form>
 
 
-            <div id="passwordDivider" class="ui fitted horizontal divider" style="display: none">Change Password</div>
-            <form class="ui form" id="passwordForm" action="ChangePassword" method="post" style="display: none">
+            <div id="passwordDivider" class="ui fitted horizontal divider">Change Password</div>
+            <form class="ui form" id="passwordForm" action="ChangePassword" method="post">
                 <div class="field">
                     <label>Password: </label><input id="password" type="password" name="password"
                                                     placeholder="Please Enter Your Password" />
@@ -111,7 +110,6 @@
                                                                 />
                 </div>
                 <div id="passwordMessageContainer"
-                     style="margin-top: 0 !important; max-width: 300px; padding: 10px 15px !important;"
                      class="ui message hidden">
                     <p id="passwordMessage"></p>
                 </div>
@@ -149,9 +147,9 @@
                             <i class="inverted upload icon"></i>
                            Upload
                         </button>
-                        <form action="AvatarEdit" id="avatarForm" method="post" style="margin: 0" enctype="multipart/form-data">
+                        <form action="AvatarEdit" id="avatarForm" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="result" id="result" value="${userProfile.avatar}">
-                                <input style="display: none" type="file" id="imageFile" accept=".jpg, .gif,.png"
+                                <input type="file" id="imageFile" accept=".jpg, .gif,.png"
                                        name="icon"/>
                         </form>
 

@@ -70,3 +70,7 @@ form {
 .login-block input:active, .login-block input:focus {
     border: 1px solid #ff656c;
 }
+
+#message{
+    text-align: justify;
+}

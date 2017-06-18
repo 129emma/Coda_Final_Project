@@ -211,3 +211,7 @@ img,iframe,audio,video{
     max-width: 100%;
     margin: auto;
 }
+#noFollowerInfo{
+display: none;
+}
+

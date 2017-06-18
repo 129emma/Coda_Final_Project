@@ -42,7 +42,7 @@
             <p>Already registered? Login <a href="${pageContext.request.contextPath}/Login?action=login">HERE</a>
             </p>
             <div id="messageContainer" class="ui message hidden">
-                <p id="message" style="text-align: justify;">${message}</p>
+                <p id="message">${message}</p>
             </div>
         </div>
     </form>

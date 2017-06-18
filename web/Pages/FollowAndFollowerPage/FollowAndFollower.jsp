@@ -57,13 +57,14 @@
                     <div class="right floated content">
                             ${follower.followStatus}
                     </div>
-                    <a href="Blog?page=user&targetUser=${follower.username}"> <img class="ui avatar image" src="${follower.avatar}"><span class="username">${follower.username}</span></a>
-
+                    <a href="Blog?page=user&targetUser=${follower.username}">
+                        <img class="ui avatar image" src="${follower.avatar}">
+                        <span class="username">${follower.username}</span></a>
                 </div>
             </c:forEach>
         </div>
     </div>
-    <div class="ui icon message" id="noFollowerInfo" style="display: none">
+    <div class="ui icon message" id="noFollowerInfo">
         <i class="frown icon"></i>
         <div class="content">
             <div class="header">

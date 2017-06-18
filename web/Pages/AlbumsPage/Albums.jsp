@@ -22,7 +22,7 @@
     <script src="${pageContext.request.contextPath}/Pages/AlbumsPage/Albums.js"></script>
 </head>
 <body onload="loadUserImage()">
-<div class="pusher full">
+<div>
     <jsp:include page="../NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
