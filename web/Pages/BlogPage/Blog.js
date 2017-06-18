@@ -132,7 +132,7 @@ function freshButtonList() {
         $(obj).off().click(function () {
             $(obj).addClass("loading");
             $(obj).prop("disabled", true);
-            var username = $(obj).parent().siblings(".content").html();
+            var username = $(obj).parent().next("a").find(".username").html();
             $.ajax({
                 url: 'Follow',
                 type: 'post',
@@ -150,7 +150,7 @@ function freshButtonList() {
         $(obj).off().click(function () {
             $(obj).addClass("loading");
             $(obj).prop("disabled", true);
-            var username = $(obj).parent().siblings(".content").html();
+            var username = $(obj).parent().next("a").find(".username").html();
             $.ajax({
                 url: 'Follow',
                 type: 'post',

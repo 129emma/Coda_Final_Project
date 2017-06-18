@@ -33,7 +33,7 @@
                     <div class="right floated content">
                             ${follow.followStatus}
                     </div>
-                    <a href="Blog?page=user&targetUser=${follow.username}"><img class="ui avatar image" src="${follow.avatar}"><span>${follow.username}</span></a>
+                    <a href="Blog?page=user&targetUser=${follow.username}"><img class="ui avatar image" src="${follow.avatar}"><span class="username">${follow.username}</span></a>
                 </div>
             </c:forEach>
         </div>
@@ -59,7 +59,7 @@
                     <div class="right floated content">
                             ${follower.followStatus}
                     </div>
-                    <a href="Blog?page=user&targetUser=${follower.username}"> <img class="ui avatar image" src="${follower.avatar}"><span>${follower.username}</span></a>
+                    <a href="Blog?page=user&targetUser=${follower.username}"> <img class="ui avatar image" src="${follower.avatar}"><span class="username">${follower.username}</span></a>
 
                 </div>
             </c:forEach>
