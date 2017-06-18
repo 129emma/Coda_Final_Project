@@ -2,9 +2,13 @@ body {
     background-color: #565D6B;
 }
 
+.ui.icon.message.noUserInfo, .ui.icon.message.noSpotlightInfo {
+    display: none;
+}
+
 .ui.segment, .ui.menu {
     border: none;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 ul.userChoice {
@@ -48,6 +52,7 @@ li {
 !important;
     padding-top: 0;
 !important;
+    display: none;
 }
 
 .ui.labeled.icon.borderless.menu.secondMenu {
@@ -67,8 +72,6 @@ div.desc {
     padding: 15px;
     text-align: center;
 }
-
-/*myWork*/
 
 div#Image, div#Audio, div#Video, div#Youtube {
     width: 100%;

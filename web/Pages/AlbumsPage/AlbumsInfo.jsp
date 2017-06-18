@@ -36,7 +36,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noUserInfo" style="display: none">
+        <div class="ui icon message noUserInfo" >
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -62,7 +62,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noSpotlightInfo" style="display: none">
+        <div class="ui icon message noSpotlightInfo" >
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -101,7 +101,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noUserInfo" style="display: none">
+        <div class="ui icon message noUserInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -133,7 +133,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noSpotlightInfo" style="display: none">
+        <div class="ui icon message noSpotlightInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -171,7 +171,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noUserInfo" style="display: none">
+        <div class="ui icon message noUserInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -203,7 +203,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noSpotlightInfo" style="display: none">
+        <div class="ui icon message noSpotlightInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -236,7 +236,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noUserInfo" style="display: none">
+        <div class="ui icon message noUserInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -260,7 +260,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noSpotlightInfo" style="display: none">
+        <div class="ui icon message noSpotlightInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">

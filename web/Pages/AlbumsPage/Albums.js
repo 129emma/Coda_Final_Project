@@ -53,8 +53,8 @@ function loadInfo(info) {
             $('#content').html(content);
             var userContentID = "#user" + info + "List";
             var spotlightContentID = "#spotlight" + info + "List";
-            var user=$(".user");
-            var spotlight=$(".spotlight");
+            var user = $(".user");
+            var spotlight = $(".spotlight");
             if (!$.trim($(userContentID).html()).length) {
                 $(".noUserInfo").show();
                 $(userContentID).parent().hide();
