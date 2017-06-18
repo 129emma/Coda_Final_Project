@@ -12,8 +12,6 @@
     <title>Friends</title>
 </head>
 <body>
-
-
 <div class="ui pointing menu">
     <a class="item active" id="getFollows">
         Follows
