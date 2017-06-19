@@ -17,9 +17,6 @@ import java.io.Writer;
 import java.sql.SQLException;
 import java.util.Random;
 
-/**
- * Created by qpen546 on 2017/5/23.
- */
 public class ChangePasswordServlet extends HttpServlet {
     private MySQL mySQL = new MySQL();
     private String username;

@@ -1,8 +1,6 @@
 package code_project.Servlet;
 
-import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.UserInfoDAO;
-import code_project.Info.ArticleInfo;
 import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
@@ -15,12 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by txie936 on 29/05/2017.
- */
 public class UserProfileServlet extends HttpServlet {
     private MySQL DB = new MySQL();
 
@@ -38,8 +32,6 @@ public class UserProfileServlet extends HttpServlet {
                     break;
                 case "Delete":
                     deleteUserProfile(response, session);
-
-
             }
         }
     }

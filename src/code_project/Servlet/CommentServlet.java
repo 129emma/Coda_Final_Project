@@ -13,9 +13,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/**
- * Created by qpen546 on 29/05/2017.
- */
 public class CommentServlet extends HttpServlet {
     private MySQL mySQL = new MySQL();
 
@@ -35,9 +32,6 @@ public class CommentServlet extends HttpServlet {
                 break;
             case "deleteCommentReply":
                 deleteCommentReplyInfo(request, response);
-                break;
-            case "edit":
-                editCommentInfo(request, response);
                 break;
             case "update":
                 updateCommentInfo(request, response);
@@ -67,7 +61,7 @@ public class CommentServlet extends HttpServlet {
         try {
             UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, username);
             String userAvatar = userInfo.getAvatar();
-            CommentInfoDAO.createCommentInfo(mySQL, content, postTime, username, articleID,userAvatar);
+            CommentInfoDAO.createCommentInfo(mySQL, content, postTime, username, articleID, userAvatar);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -93,9 +87,6 @@ public class CommentServlet extends HttpServlet {
         }
     }
 
-    private void editCommentInfo(HttpServletRequest request, HttpServletResponse response) {
-
-    }
 
     private void updateCommentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
@@ -121,7 +112,7 @@ public class CommentServlet extends HttpServlet {
         try {
             UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, username);
             String userAvatar = userInfo.getAvatar();
-            CommentInfoDAO.replyCommentInfo(mySQL, content, username, postTime, commentId, articleID,userAvatar);
+            CommentInfoDAO.replyCommentInfo(mySQL, content, username, postTime, commentId, articleID, userAvatar);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -4,17 +4,13 @@ import code_project.DAO.AlbumsAudioDAO;
 import code_project.DAO.AlbumsImageDAO;
 import code_project.DAO.AlbumsVideoDAO;
 import code_project.DAO.UserInfoDAO;
-import code_project.Info.AlbumsVideoInfo;
-import code_project.Info.ArticleInfo;
 import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
-import com.sun.deploy.net.HttpResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.lang.StringEscapeUtils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
@@ -26,18 +22,11 @@ import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by txie936 on 30/05/2017.
- */
 public class AlbumsChangeServlet extends HttpServlet {
     MySQL mySQL = new MySQL();
     private static final long serialVersionUID = 1L;

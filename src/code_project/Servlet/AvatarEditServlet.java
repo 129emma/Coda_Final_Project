@@ -1,9 +1,6 @@
 package code_project.Servlet;
 
-import code_project.DAO.ArticleInfoDAO;
 import code_project.DAO.UserInfoDAO;
-import code_project.Info.ArticleInfo;
-import code_project.Info.UserInfo;
 import code_project.Security.LoginStatus;
 import code_project.db.MySQL;
 import org.apache.commons.fileupload.FileItem;
@@ -19,14 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by txie936 on 29/05/2017.
- */
 public class AvatarEditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private String filePath;
@@ -37,7 +32,7 @@ public class AvatarEditServlet extends HttpServlet {
     private String avatarFilePath;
     static String fileName;
     MySQL DB = new MySQL();
-ServletContext servletContext;
+    ServletContext servletContext;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LoginStatus.verifyStatus(request, response);
@@ -46,7 +41,7 @@ ServletContext servletContext;
         username = (String) session.getAttribute("username");
         LoginStatus.verifyStatus(request, response);
         //get User-Info path
-       servletContext = getServletContext();
+        servletContext = getServletContext();
         String fullFilePath = servletContext.getRealPath("User-Info");
         response.setContentType("text/html");
 
@@ -64,23 +59,23 @@ ServletContext servletContext;
             Userfolder.mkdir();
         }
 
-        File avatarFile=new File(fullFilePath+"/"+username+"/avatar");
+        File avatarFile = new File(fullFilePath + "/" + username + "/avatar");
         if (!avatarFile.exists()) {
             avatarFile.mkdir();
         }
         //get the user's folder path
-        filePath = fullFilePath+"/"+username+"/avatar/";
+        filePath = fullFilePath + "/" + username + "/avatar/";
 
         //create directory
         DiskFileItemFactory factory = new DiskFileItemFactory();
         // maximum size that will be stored in memory
-     factory.setSizeThreshold(maxMemSize);
+        factory.setSizeThreshold(maxMemSize);
         // Location to save data that is larger than maxMemSize.
         factory.setRepository(new File("C:\\temp"));
         // Create a new file upload handler
         ServletFileUpload upload = new ServletFileUpload(factory);
         // maximum file size to be uploaded.
-      upload.setSizeMax(maxFileSize);
+        upload.setSizeMax(maxFileSize);
 
         deleteLocalAvatar(filePath);
 
@@ -139,7 +134,7 @@ ServletContext servletContext;
                         //get local icon's  path
                         String localIconPath = fi.getString();
                         BufferedImage icon = null;
-                        String defaultPath=servletContext.getRealPath(localIconPath);
+                        String defaultPath = servletContext.getRealPath(localIconPath);
                         try {
                             //read the local image
                             icon = ImageIO.read(new File(defaultPath));
@@ -164,11 +159,11 @@ ServletContext servletContext;
                     if (!fileExtension.toLowerCase().equals("gif")) {
                         try {
                             avatarFilePath = "User-Info/" + username + "/avatar/avatar." + fileExtension;
-                           scaleImage(file, fileExtension);
+                            scaleImage(file, fileExtension);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                    }else {
+                    } else {
                         avatarFilePath = "User-Info/" + username + "/avatar/avatar." + fileExtension;
                     }
                 }

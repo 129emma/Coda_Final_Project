@@ -1,6 +1,4 @@
-/**
- * Created by txie936 on 12/06/2017.
- */
+
 $(document).ready(function () {
     $('.ui.normal.dropdown').dropdown();
     $('.input').each(function () {

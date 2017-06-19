@@ -6,9 +6,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-/**
- * Created by txie936 on 25/05/2017.
- */
 public class ArticleInfo {
     public int articleID;
     public String content;
@@ -47,7 +44,7 @@ public class ArticleInfo {
         this.likeNum = likeNum;
         textContent = content;
         this.preview = "";
-        this.multimediaPreview ="";
+        this.multimediaPreview = "";
         this.editArticle = "";
         this.deleteArticle = "";
         this.followButton = "";
@@ -79,21 +76,21 @@ public class ArticleInfo {
         for (int i = 0; i < num; i++) {
             if (i == words.length - 1) {
                 preview += words[i];
-            } else if (i==199) {
-                preview += words[i]+"<a href='"+retrieveAddress+"'> (show more...)</a>";
+            } else if (i == 199) {
+                preview += words[i] + "<a href='" + retrieveAddress + "'> (show more...)</a>";
             } else {
                 preview += words[i] + " ";
             }
         }
     }
 
-    public String noneNullContent(Elements elements){
-        String output="";
-        if(elements.size()>0){
+    public String noneNullContent(Elements elements) {
+        String output = "";
+        if (elements.size() > 0) {
             for (Element element : elements) {
-                textContent = textContent.replaceAll(element.text(),"");
+                textContent = textContent.replaceAll(element.text(), "");
             }
-            output=elements.get(0).outerHtml()+"<br/>";
+            output = elements.get(0).outerHtml() + "<br/>";
             multimediaPreview = output;
         }
         return output;

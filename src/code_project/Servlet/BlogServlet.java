@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * Created by qpen546 on 25/05/2017.
- */
 public class BlogServlet extends HttpServlet {
     MySQL mySQL = new MySQL();
     HttpSession session;
@@ -57,7 +54,7 @@ public class BlogServlet extends HttpServlet {
         String updateProfileBtn = "<a href='Profile' class='ui left floated icon button'><i class='left setting icon'></i> Update</a>";
         request.setAttribute("updateProfileBtn", updateProfileBtn);
 
-        String tags= request.getParameter("tags");
+        String tags = request.getParameter("tags");
         request.setAttribute("page", "tags");
         request.setAttribute("tags", tags);
         request.getRequestDispatcher("Pages/BlogPage/Blog.jsp").forward(request, response);
@@ -65,7 +62,7 @@ public class BlogServlet extends HttpServlet {
 
     private void retrieveUserPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = (String) session.getAttribute("username");
-        String targetUser= request.getParameter("targetUser");
+        String targetUser = request.getParameter("targetUser");
         UserInfo userInfo = UserInfoDAO.getUserInfo(mySQL, targetUser);
         request.setAttribute("userInfo", userInfo);
 

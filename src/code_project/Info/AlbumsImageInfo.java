@@ -1,8 +1,5 @@
 package code_project.Info;
 
-/**
- * Created by txie936 on 31/05/2017.
- */
 public class AlbumsImageInfo {
     private int id;
     private String username;
@@ -13,14 +10,15 @@ public class AlbumsImageInfo {
     private String userAvatar;
 
 
-    public AlbumsImageInfo(int id,String fileName, String username, String address, String postTime,String userAvatar) {
-       this.fileName=fileName;
+    public AlbumsImageInfo(int id, String fileName, String username, String address, String postTime, String userAvatar) {
+        this.fileName = fileName;
         this.username = username;
         this.address = address;
         this.postTime = postTime;
-        this.id=id;
-        this.userAvatar=userAvatar;
+        this.id = id;
+        this.userAvatar = userAvatar;
     }
+
     public String getUserAvatar() {
         return userAvatar;
     }
@@ -28,6 +26,7 @@ public class AlbumsImageInfo {
     public void setUserAvatar(String userAvatar) {
         this.userAvatar = userAvatar;
     }
+
     public String getFileName() {
         return fileName;
     }
@@ -67,9 +66,6 @@ public class AlbumsImageInfo {
     public void setPostTime(String postTime) {
         this.postTime = postTime;
     }
-
-
-
 
 
 }

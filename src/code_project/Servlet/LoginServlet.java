@@ -16,9 +16,6 @@ import java.io.Writer;
 import java.sql.SQLException;
 import java.util.Random;
 
-/**
- * Created by qpen546 on 23/05/2017.
- */
 public class LoginServlet extends HttpServlet {
     private MySQL mySQL = new MySQL();
     private HttpSession session;

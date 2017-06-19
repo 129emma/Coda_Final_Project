@@ -1,8 +1,5 @@
 package code_project.Info;
 
-/**
- * Created by txie936 on 31/05/2017.
- */
 public class AlbumsVideoInfo {
 
 
@@ -14,14 +11,15 @@ public class AlbumsVideoInfo {
     private String userAvatar;
 
 
-    public AlbumsVideoInfo( int id,String fileName, String username,String address, String postTime,String userAvatar) {
-     this.fileName=fileName;
+    public AlbumsVideoInfo(int id, String fileName, String username, String address, String postTime, String userAvatar) {
+        this.fileName = fileName;
         this.username = username;
         this.address = address;
         this.postTime = postTime;
-        this.id=id;
-        this.userAvatar=userAvatar;
+        this.id = id;
+        this.userAvatar = userAvatar;
     }
+
     public String getUserAvatar() {
         return userAvatar;
     }
@@ -37,9 +35,6 @@ public class AlbumsVideoInfo {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
-
-
-
 
 
     public int getId() {
@@ -73,8 +68,6 @@ public class AlbumsVideoInfo {
     public void setPostTime(String postTime) {
         this.postTime = postTime;
     }
-
-
 
 
 }

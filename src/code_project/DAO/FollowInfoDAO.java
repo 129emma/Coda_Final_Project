@@ -10,14 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by txie936 on 8/06/2017.
- */
 public class FollowInfoDAO {
 
 
-
-    public static void follow(AbstractDB db, String followerUsername, String followUsername) throws SQLException{
+    public static void follow(AbstractDB db, String followerUsername, String followUsername) throws SQLException {
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT IGNORE INTO UserRelationship_beta_1 (follower, follow) VALUE (?,?);")) {
@@ -31,7 +27,7 @@ public class FollowInfoDAO {
     }
 
 
-    public static void unfollow(AbstractDB db,String followerUsername,String followUsername) throws SQLException {
+    public static void unfollow(AbstractDB db, String followerUsername, String followUsername) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM UserRelationship_beta_1 WHERE follower=? AND follow=?")) {
                 p.setString(1, followerUsername);
@@ -45,12 +41,12 @@ public class FollowInfoDAO {
     }
 
 
-    public static FollowInfo getFollowInfo(AbstractDB db, String username){
+    public static FollowInfo getFollowInfo(AbstractDB db, String username) {
         List<String> followsList = new ArrayList<>();
-        List<String> followersList=new ArrayList<>();
+        List<String> followersList = new ArrayList<>();
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship_beta_1 WHERE follower=?")) {
-                p.setString(1,username);
+                p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         followsList.add(r.getString("follow"));
@@ -58,7 +54,7 @@ public class FollowInfoDAO {
                 }
             }
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship_beta_1 WHERE follow=?")) {
-                p.setString(1,username);
+                p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         followersList.add(r.getString("follower"));
@@ -68,20 +64,20 @@ public class FollowInfoDAO {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        FollowInfo followInfo=new FollowInfo(followsList,followersList);
+        FollowInfo followInfo = new FollowInfo(followsList, followersList);
         return followInfo;
     }
 
 
-    public static Boolean checkFollowStatus(Connection c,String username,String followUsername){
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship_beta_1 WHERE follower=? AND follow=?")) {
-                p.setString(1,username);
-                p.setString(2,followUsername);
-                try (ResultSet r = p.executeQuery()) {
-                   if(r.next()){
-                        return true;
-                    }
+    public static Boolean checkFollowStatus(Connection c, String username, String followUsername) {
+        try (PreparedStatement p = c.prepareStatement("SELECT * FROM UserRelationship_beta_1 WHERE follower=? AND follow=?")) {
+            p.setString(1, username);
+            p.setString(2, followUsername);
+            try (ResultSet r = p.executeQuery()) {
+                if (r.next()) {
+                    return true;
                 }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

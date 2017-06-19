@@ -79,7 +79,7 @@ public class LoginInfoDAO {
         return username;
     }
 
-    public static void createLoginInfo(AbstractDB db, String username, byte[] password, byte[] salt,int iterations, String avatar) throws SQLException {
+    public static void createLoginInfo(AbstractDB db, String username, byte[] password, byte[] salt, int iterations, String avatar) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO UserInfo_beta_1 (username, password, salt,iterations, avatar) VALUE (?,?,?,?,?);")) {
                 p.setString(1, username);

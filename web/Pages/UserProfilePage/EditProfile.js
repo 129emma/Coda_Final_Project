@@ -1,6 +1,4 @@
-/**
- * Created by txie936 on 14/06/2017.
- */
+
 $(document).ready(function () {
     
     $("#gender").val(selection);

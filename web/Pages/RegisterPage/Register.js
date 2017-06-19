@@ -1,6 +1,4 @@
-/**
- * Created by qpen546 on 5/06/2017.
- */
+
 
 $(document).ready(function () {
     $("#registerUsername").blur(function () {

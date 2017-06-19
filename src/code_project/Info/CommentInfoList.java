@@ -2,9 +2,6 @@ package code_project.Info;
 
 import java.util.List;
 
-/**
- * Created by qpen546 on 29/05/2017.
- */
 public class CommentInfoList {
     public List<CommentInfo> commentInfoList;
 

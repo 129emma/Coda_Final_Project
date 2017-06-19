@@ -16,9 +16,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by txie936 on 8/06/2017.
- */
 public class FollowServlet extends HttpServlet {
 
     private MySQL mySQL = new MySQL();

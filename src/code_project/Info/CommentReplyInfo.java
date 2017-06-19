@@ -2,12 +2,9 @@ package code_project.Info;
 
 import java.util.List;
 
-/**
- * Created by qpen546 on 29/05/2017.
- */
 public class CommentReplyInfo {
-    public int commentReplyID,articleID, commentID;
-    public String content, postTime, deleteCommentBtn, username,editComment, deleteCommentReply, replyComment,userAvatar;
+    public int commentReplyID, articleID, commentID;
+    public String content, postTime, deleteCommentBtn, username, editComment, deleteCommentReply, replyComment, userAvatar;
 
 
     private List<CommentReplyInfo> commentReplyInfoList;
@@ -22,8 +19,7 @@ public class CommentReplyInfo {
     }
 
 
-
-    public CommentReplyInfo(int commentReplyID, String content, String postTime, String username, int commentID, int articleID,String userAvatar) {
+    public CommentReplyInfo(int commentReplyID, String content, String postTime, String username, int commentID, int articleID, String userAvatar) {
         this.commentReplyID = commentReplyID;
         this.content = content;
         this.postTime = postTime;
@@ -32,7 +28,7 @@ public class CommentReplyInfo {
         this.articleID = articleID;
         editComment = "";
         deleteCommentReply = "";
-        replyComment ="";
+        replyComment = "";
         this.userAvatar = userAvatar;
     }
 
@@ -42,11 +38,11 @@ public class CommentReplyInfo {
 
     public void setDeleteCommentReply(int commentReplyID) {
 
-            deleteCommentBtn = "<a href=\"Comment?action=deleteCommentReply&articleID=" + articleID + "&commentReplyID=" + commentReplyID + "\"><i class='trash icon'></i></a>";
+        deleteCommentBtn = "<a href=\"Comment?action=deleteCommentReply&articleID=" + articleID + "&commentReplyID=" + commentReplyID + "\"><i class='trash icon'></i></a>";
 
     }
 
-    public String getDeleteCommentBtn(){
+    public String getDeleteCommentBtn() {
         return deleteCommentBtn;
     }
 
@@ -54,9 +50,13 @@ public class CommentReplyInfo {
         return commentID;
     }
 
-    public int getCommentReplyID(){return commentReplyID;}
+    public int getCommentReplyID() {
+        return commentReplyID;
+    }
 
-    public int getArticleID(){return articleID;}
+    public int getArticleID() {
+        return articleID;
+    }
 
     public String getContent() {
         return content;

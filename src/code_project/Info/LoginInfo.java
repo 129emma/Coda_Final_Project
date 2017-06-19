@@ -3,18 +3,15 @@ package code_project.Info;
 import java.sql.Blob;
 import java.sql.SQLException;
 
-/**
- * Represents an article, which has a title and a body of text.
- */
 public class LoginInfo {
 
     private String username;
-    private byte[] password,salt;
+    private byte[] password, salt;
     private int iterations;
 
     public LoginInfo(String username, Blob password, Blob salt, int iterations) throws SQLException {
         this.username = username;
-        this.password = password.getBytes(1,(int) password.length());
+        this.password = password.getBytes(1, (int) password.length());
         this.salt = salt.getBytes(1, (int) salt.length());
         this.iterations = iterations;
     }
@@ -31,7 +28,9 @@ public class LoginInfo {
         return password;
     }
 
-    public byte[] getSalt() { return salt; }
+    public byte[] getSalt() {
+        return salt;
+    }
 
     public void setUsername(String username) {
         this.username = username;

@@ -10,9 +10,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-/*
- * Created by qpen546 on 29/05/2017.
- */
 public class CommentInfoDAO {
 
     public static Map<Integer, CommentInfoList> getCommentInfoListOfAllArticle(AbstractDB db, List<ArticleInfo> articleInfoList) {
@@ -30,7 +27,7 @@ public class CommentInfoDAO {
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment_beta_1 WHERE articleID=?")) {
-                p.setInt(1,articleID);
+                p.setInt(1, articleID);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         CommentInfoList.add(CommentInfoFromResultSet(r));
@@ -70,7 +67,7 @@ public class CommentInfoDAO {
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM Comment_beta_1 WHERE username=?")) {
-                p.setString(1,username);
+                p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         CommentInfoList.add(CommentInfoFromResultSet(r));
@@ -84,7 +81,7 @@ public class CommentInfoDAO {
         return CommentInfoList;
     }
 
-    public static void createCommentInfo(AbstractDB db, String content, String postTime, String username, String articleID,String userAvatar) throws SQLException {
+    public static void createCommentInfo(AbstractDB db, String content, String postTime, String username, String articleID, String userAvatar) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO Comment_beta_1(content, postTime, username, articleID,userAvatar) VALUES (?,?,?,?,?);")) {
                 p.setString(1, content);
@@ -121,7 +118,7 @@ public class CommentInfoDAO {
 
     public static void updateCommentInfo(AbstractDB db, int commentID, String content, String username, String postTime) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE Comment_beta_1 set content =?,postTime=? WHERE username=? and commentID=?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE Comment_beta_1 SET content =?,postTime=? WHERE username=? AND commentID=?;")) {
                 p.setString(1, content);
                 p.setString(2, postTime);
                 p.setString(3, username);
@@ -156,7 +153,7 @@ public class CommentInfoDAO {
         }
     }
 
-    public static void replyCommentInfo(AbstractDB db, String content, String username, String postTime, int commentID, int articleID,String userAvatar) throws SQLException {
+    public static void replyCommentInfo(AbstractDB db, String content, String username, String postTime, int commentID, int articleID, String userAvatar) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO CommentReply_beta_1( content, postTime, username, commentID, articleID,userAvatar) VALUES (?,?,?,?,?,?);")) {
                 p.setString(1, content);

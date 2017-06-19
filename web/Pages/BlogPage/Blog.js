@@ -1,6 +1,4 @@
-/**
- * Created by qpen546 on 31/05/2017.
- */
+
 var articlesNum = 3;
 var ajaxProcess = true;
 

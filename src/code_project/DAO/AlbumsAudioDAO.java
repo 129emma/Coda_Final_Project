@@ -12,14 +12,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by txie936 on 3/06/2017.
- */
 public class AlbumsAudioDAO {
 
 
-
-    public static List<AlbumsAudioInfo> getAllAlbumsAudioList(AbstractDB db){
+    public static List<AlbumsAudioInfo> getAllAlbumsAudioList(AbstractDB db) {
 
         List<AlbumsAudioInfo> allAlbumsAudioList = new ArrayList<>();
         try (Connection c = db.connection()) {
@@ -38,13 +34,13 @@ public class AlbumsAudioDAO {
         return allAlbumsAudioList;
     }
 
-    public static List<AlbumsAudioInfo> getAlbumsAudioList(AbstractDB db , String username) {
+    public static List<AlbumsAudioInfo> getAlbumsAudioList(AbstractDB db, String username) {
 
         List<AlbumsAudioInfo> AlbumsAudioInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio_beta_1 WHERE username=?")) {
-                p.setString(1,username);
+                p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         AlbumsAudioInfoList.add(AlbumsAudioInfoFromResultSet(r));
@@ -58,14 +54,14 @@ public class AlbumsAudioDAO {
         return AlbumsAudioInfoList;
     }
 
-    public static void createAlbumsAudioInfo(AbstractDB db, String username,String address,String fileName,String avatar) throws SQLException {
+    public static void createAlbumsAudioInfo(AbstractDB db, String username, String address, String fileName, String avatar) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO AlbumsAudio_beta_1(username,address,postTime,fileName,userAvatar) VALUES (?,?,?,?,?)")) {
                 p.setString(1, username);
                 p.setString(2, address);
                 p.setString(3, getCurrentTimeStamp());
-                p.setString(4,fileName);
-                p.setString(5,avatar);
+                p.setString(4, fileName);
+                p.setString(5, avatar);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -73,7 +69,7 @@ public class AlbumsAudioDAO {
         }
     }
 
-    public static void deleteAlbumsAudioInfo(AbstractDB db, String username,int id) throws SQLException {
+    public static void deleteAlbumsAudioInfo(AbstractDB db, String username, int id) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM AlbumsAudio_beta_1 WHERE username = ? AND id=?")) {
                 p.setString(1, username);
@@ -86,10 +82,9 @@ public class AlbumsAudioDAO {
     }
 
 
+    public static AlbumsAudioInfo getAlbumsAudioInfo(AbstractDB db, String username, String id) {
 
-    public static AlbumsAudioInfo getAlbumsAudioInfo(AbstractDB db, String username,String id) {
-
-        AlbumsAudioInfo AlbumsAudioInfo= null;
+        AlbumsAudioInfo AlbumsAudioInfo = null;
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM AlbumsAudio_beta_1 WHERE username = ?AND id=?")) {
@@ -109,14 +104,13 @@ public class AlbumsAudioDAO {
     }
 
 
-
     private static AlbumsAudioInfo AlbumsAudioInfoFromResultSet(ResultSet r) throws SQLException {
         return new AlbumsAudioInfo(
                 r.getInt("id"),
                 r.getString("fileName"),
                 r.getString("username"),
                 r.getString("address"),
-                r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
+                r.getDate("postTime").toString() + " " + r.getTime("postTime").toString(),
                 r.getString("userAvatar")
         );
     }
@@ -125,5 +119,5 @@ public class AlbumsAudioDAO {
     private static String getCurrentTimeStamp() {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
-    
+
 }

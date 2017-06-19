@@ -1,6 +1,4 @@
-/**
- * Created by xingjianche on 05/06/2017.
- */
+
 $(document).ready(function () {
     likeArticle();
     //edit comment

@@ -19,16 +19,9 @@ import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 import java.util.Collections;
 
-//import com.google.api.client.json.jackson2.JacksonFactory;
-
-
-/**
- * Created by qpen546 on 10/06/2017.
- */
 public class GoogleLoginServlet extends HttpServlet {
     private MySQL mySQL = new MySQL();
-    private boolean emailVerified;
-    private String email, name, avatar, locale, lastName, firstName, username, googleID;
+    private String email, name, avatar, lastName, firstName, username, googleID;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Writer out = response.getWriter();
@@ -49,16 +42,15 @@ public class GoogleLoginServlet extends HttpServlet {
                         out.write("success");
                     }
                 } else {
-                    out.write("fail code 1");
+                    out.write("Fail: invalid ID Token");
                 }
             } catch (GeneralSecurityException e) {
-                e.printStackTrace();
-                out.write("fail code 2");
+                out.write("Fail: security error");
             } catch (SQLException e) {
-                out.write("fail code 3");
+                out.write("Fail: invalid user information");
             }
         } else {
-            out.write("fail code 4");
+            out.write("Fail: no ID Token");
         }
     }
 
@@ -87,10 +79,8 @@ public class GoogleLoginServlet extends HttpServlet {
 
             // Get profile information from payload
             email = payload.getEmail();
-            emailVerified = Boolean.valueOf(payload.getEmailVerified());
             name = (String) payload.get("name");
             avatar = (String) payload.get("picture");
-            locale = (String) payload.get("locale");
             lastName = (String) payload.get("family_name");
             firstName = (String) payload.get("given_name");
 

@@ -21,9 +21,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by txie936 on 29/05/2017.
- */
 public class ArticleServlet extends HttpServlet {
     private MySQL mySQL = new MySQL();
     HttpSession session;

@@ -8,18 +8,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-/**
- * Created by txie936 on 25/05/2017.
- */
+
 public class ArticleInfoDAO {
 
-    public static List<ArticleInfo> getArticleInfoList(AbstractDB db ,String username) {
+    public static List<ArticleInfo> getArticleInfoList(AbstractDB db, String username) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 WHERE username=?")) {
-                p.setString(1,username);
+                p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         articleInfoList.add(ArticleInfoFromResultSet(r));
@@ -34,14 +32,14 @@ public class ArticleInfoDAO {
     }
 
 
-    public static List<ArticleInfo> getArticleInfoList(AbstractDB db ,String username,int number) {
+    public static List<ArticleInfo> getArticleInfoList(AbstractDB db, String username, int number) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 WHERE username=? ORDER BY postTime DESC LIMIT ?")) {
-                p.setString(1,username);
-                p.setInt(2,number);
+                p.setString(1, username);
+                p.setInt(2, number);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         articleInfoList.add(ArticleInfoFromResultSet(r));
@@ -55,7 +53,7 @@ public class ArticleInfoDAO {
         return articleInfoList;
     }
 
-    public static int getTotalArticleNumber(AbstractDB db){
+    public static int getTotalArticleNumber(AbstractDB db) {
         int totalArticleNumber = 0;
         try (Connection c = db.connection()) {
             try (Statement stmt = c.createStatement()) {
@@ -72,11 +70,11 @@ public class ArticleInfoDAO {
         return totalArticleNumber;
     }
 
-    public static int getTotalArticleNumber(AbstractDB db, String username){
+    public static int getTotalArticleNumber(AbstractDB db, String username) {
         int totalArticleNumber = 0;
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT COUNT(*) FROM Article_beta_1 WHERE username=?")){
-                p.setString(1,username);
+            try (PreparedStatement p = c.prepareStatement("SELECT COUNT(*) FROM Article_beta_1 WHERE username=?")) {
+                p.setString(1, username);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
                         totalArticleNumber = r.getInt(1);
@@ -90,56 +88,23 @@ public class ArticleInfoDAO {
         return totalArticleNumber;
     }
 
-    public static List<ArticleInfo> getSpotlightArticleInfoList(AbstractDB db ,int pageNumber,String username) {
+    public static List<ArticleInfo> getSpotlightArticleInfoList(AbstractDB db, int pageNumber, String username) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 ORDER BY likeNum DESC LIMIT ? OFFSET 0")) {
-                p.setInt(1,pageNumber);
+                p.setInt(1, pageNumber);
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        ArticleInfo articleInfo=ArticleInfoFromResultSet(r);
-                        String otherUsername=articleInfo.getUsername();
-                      if(otherUsername.equals(username)){
-                          articleInfo.setFollowButton("");
-                      }else {
-                          if(FollowInfoDAO.checkFollowStatus(c,username,otherUsername)){
-                              articleInfo.setFollowButton("<button class=\"ui red button\">Unfollow</button>");
-                          }else {
-                              articleInfo.setFollowButton("<button class=\"ui blue button\">Follow</button>");
-                          }
-                      }
-                    articleInfoList.add(articleInfo);
-                    }
-                }
-            }
-
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return articleInfoList;
-    }
-
-    public static List<ArticleInfo> getUserArticleInfoList(AbstractDB db ,int pageNumber,String username, String targetUser) {
-
-        List<ArticleInfo> articleInfoList = new ArrayList<>();
-
-        try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 where username=? ORDER BY postTime DESC LIMIT ?")) {
-                p.setString(1,targetUser);
-                p.setInt(2,pageNumber);
-
-                try (ResultSet r = p.executeQuery()) {
-                    while (r.next()) {
-                        ArticleInfo articleInfo=ArticleInfoFromResultSet(r);
-                        String otherUsername=articleInfo.getUsername();
-                        if(otherUsername.equals(username)){
+                        ArticleInfo articleInfo = ArticleInfoFromResultSet(r);
+                        String otherUsername = articleInfo.getUsername();
+                        if (otherUsername.equals(username)) {
                             articleInfo.setFollowButton("");
-                        }else {
-                            if(FollowInfoDAO.checkFollowStatus(c,username,otherUsername)){
+                        } else {
+                            if (FollowInfoDAO.checkFollowStatus(c, username, otherUsername)) {
                                 articleInfo.setFollowButton("<button class=\"ui red button\">Unfollow</button>");
-                            }else {
+                            } else {
                                 articleInfo.setFollowButton("<button class=\"ui blue button\">Follow</button>");
                             }
                         }
@@ -154,25 +119,58 @@ public class ArticleInfoDAO {
         return articleInfoList;
     }
 
-    public static List<ArticleInfo> getTagsArticleInfoList(AbstractDB db ,int pageNumber,String username, String tags) {
+    public static List<ArticleInfo> getUserArticleInfoList(AbstractDB db, int pageNumber, String username, String targetUser) {
 
         List<ArticleInfo> articleInfoList = new ArrayList<>();
 
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 where tags=? ORDER BY likeNum DESC LIMIT ? OFFSET 0")) {
-                p.setString(1,tags);
-                p.setInt(2,pageNumber);
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 WHERE username=? ORDER BY postTime DESC LIMIT ?")) {
+                p.setString(1, targetUser);
+                p.setInt(2, pageNumber);
 
                 try (ResultSet r = p.executeQuery()) {
                     while (r.next()) {
-                        ArticleInfo articleInfo=ArticleInfoFromResultSet(r);
-                        String otherUsername=articleInfo.getUsername();
-                        if(otherUsername.equals(username)){
+                        ArticleInfo articleInfo = ArticleInfoFromResultSet(r);
+                        String otherUsername = articleInfo.getUsername();
+                        if (otherUsername.equals(username)) {
                             articleInfo.setFollowButton("");
-                        }else {
-                            if(FollowInfoDAO.checkFollowStatus(c,username,otherUsername)){
+                        } else {
+                            if (FollowInfoDAO.checkFollowStatus(c, username, otherUsername)) {
                                 articleInfo.setFollowButton("<button class=\"ui red button\">Unfollow</button>");
-                            }else {
+                            } else {
+                                articleInfo.setFollowButton("<button class=\"ui blue button\">Follow</button>");
+                            }
+                        }
+                        articleInfoList.add(articleInfo);
+                    }
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return articleInfoList;
+    }
+
+    public static List<ArticleInfo> getTagsArticleInfoList(AbstractDB db, int pageNumber, String username, String tags) {
+
+        List<ArticleInfo> articleInfoList = new ArrayList<>();
+
+        try (Connection c = db.connection()) {
+            try (PreparedStatement p = c.prepareStatement("SELECT * FROM Article_beta_1 WHERE tags=? ORDER BY likeNum DESC LIMIT ? OFFSET 0")) {
+                p.setString(1, tags);
+                p.setInt(2, pageNumber);
+
+                try (ResultSet r = p.executeQuery()) {
+                    while (r.next()) {
+                        ArticleInfo articleInfo = ArticleInfoFromResultSet(r);
+                        String otherUsername = articleInfo.getUsername();
+                        if (otherUsername.equals(username)) {
+                            articleInfo.setFollowButton("");
+                        } else {
+                            if (FollowInfoDAO.checkFollowStatus(c, username, otherUsername)) {
+                                articleInfo.setFollowButton("<button class=\"ui red button\">Unfollow</button>");
+                            } else {
                                 articleInfo.setFollowButton("<button class=\"ui blue button\">Follow</button>");
                             }
                         }
@@ -186,7 +184,7 @@ public class ArticleInfoDAO {
         return articleInfoList;
     }
 
-    public static void createArticleInfo(AbstractDB db, String title,String content, String postTime, String tags,String username, String userAvatar ) throws SQLException {
+    public static void createArticleInfo(AbstractDB db, String title, String content, String postTime, String tags, String username, String userAvatar) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("INSERT INTO Article_beta_1(title,content,postTime,tags,username,userAvatar,likeNum) VALUES (?,?,?,?,?,?,?);")) {
                 p.setString(1, title);
@@ -195,7 +193,7 @@ public class ArticleInfoDAO {
                 p.setString(4, tags);
                 p.setString(6, userAvatar);
                 p.setString(5, username);
-                p.setInt(7,0);
+                p.setInt(7, 0);
                 p.executeUpdate();
             }
         } catch (ClassNotFoundException e) {
@@ -203,7 +201,7 @@ public class ArticleInfoDAO {
         }
     }
 
-    public static ArticleInfo getArticleInfo(AbstractDB db,String articleID) {
+    public static ArticleInfo getArticleInfo(AbstractDB db, String articleID) {
 
         ArticleInfo articleInfo = null;
 
@@ -223,9 +221,9 @@ public class ArticleInfoDAO {
         return articleInfo;
     }
 
-    public static void updateArticleInfo(AbstractDB db,String articleID,String content,String title, String postTime, String tags,String username) throws SQLException {
+    public static void updateArticleInfo(AbstractDB db, String articleID, String content, String title, String postTime, String tags, String username) throws SQLException {
         try (Connection c = db.connection()) {
-            try (PreparedStatement p = c.prepareStatement("UPDATE Article_beta_1 set content =?, title=?,postTime=?, tags=? WHERE username = ? AND articleID=?;")) {
+            try (PreparedStatement p = c.prepareStatement("UPDATE Article_beta_1 SET content =?, title=?,postTime=?, tags=? WHERE username = ? AND articleID=?;")) {
                 p.setString(1, content);
                 p.setString(2, title);
                 p.setString(3, postTime);
@@ -251,7 +249,7 @@ public class ArticleInfoDAO {
         }
     }
 
-    public static void deleteArticleInfo(AbstractDB db, String username,String articleID) throws SQLException {
+    public static void deleteArticleInfo(AbstractDB db, String username, String articleID) throws SQLException {
         try (Connection c = db.connection()) {
             try (PreparedStatement p = c.prepareStatement("DELETE FROM Article_beta_1 WHERE username = ? AND articleID=?;")) {
                 p.setString(1, username);
@@ -268,7 +266,7 @@ public class ArticleInfoDAO {
                 r.getInt("articleID"),
                 r.getString("title"),
                 r.getString("content"),
-                r.getDate("postTime").toString()+" "+r.getTime("postTime").toString(),
+                r.getDate("postTime").toString() + " " + r.getTime("postTime").toString(),
                 r.getString("tags"),
                 r.getString("username"),
                 r.getString("userAvatar"),

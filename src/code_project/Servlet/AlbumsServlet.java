@@ -13,9 +13,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by txie936 on 30/05/2017.
- */
 public class AlbumsServlet extends HttpServlet {
     MySQL DB = new MySQL();
     private String username;
