@@ -56,19 +56,4 @@ body{
 }
 #passwordDivider{
     margin-top: 10px;
-    display: none;
-}
-#passwordForm{
-    display: none;
-}
-#passwordMessageContainer{
-    margin-top: 0 !important;
-    max-width: 300px;
-    padding: 10px 15px !important;
-}
-#avatarForm{
-    margin: 0
-}
-#imageFile{
-    display: none
 }

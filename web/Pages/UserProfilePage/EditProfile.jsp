@@ -26,7 +26,7 @@
 </head>
 <body>
 
-<div>
+<div class="pusher">
 
     <jsp:include page="../NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
@@ -44,6 +44,7 @@
             <div id="avatarDiv">
                 <img src="${userProfile.avatar}" class="rounded" title="click to change avatar" onclick="showWindow2()"/>
             </div>
+            <%--<button class="ui button"  id="userIcon"  onclick="showWindow2()">change</button>--%>
 
             <form class="ui form" id="profileForm" action="Profile" method="post">
                 <div class="two fields">
@@ -88,8 +89,8 @@
             </form>
 
 
-            <div id="passwordDivider" class="ui fitted horizontal divider">Change Password</div>
-            <form class="ui form" id="passwordForm" action="ChangePassword" method="post">
+            <div id="passwordDivider" class="ui fitted horizontal divider" style="display: none">Change Password</div>
+            <form class="ui form" id="passwordForm" action="ChangePassword" method="post" style="display: none">
                 <div class="field">
                     <label>Password: </label><input id="password" type="password" name="password"
                                                     placeholder="Please Enter Your Password" />
@@ -97,13 +98,14 @@
                 <div class="field">
                     <label>New Password:</label> <input id="newPassword" type="password" name="newPassword"
                                                         placeholder="Please Enter Your New Password"
-                                                        /></div>
+                /></div>
                 <div class="field">
                     <label>Re-enter New Password:</label> <input id="reNewPassword" type="password" name="reNewPassword"
                                                                  placeholder="Please Re-Enter Your New Password"
-                                                                />
+                />
                 </div>
                 <div id="passwordMessageContainer"
+                     style="margin-top: 0 !important; max-width: 300px; padding: 10px 15px !important;"
                      class="ui message hidden">
                     <p id="passwordMessage"></p>
                 </div>
@@ -114,12 +116,12 @@
     </div>
 </div>
 
-    <div class="ui modal" id="iconWindow">
-        <i class="close icon"></i>
-        <div class="header">
-            Avatar
-        </div>
-        <div class="image content">
+<div class="ui modal" id="iconWindow">
+    <i class="close icon"></i>
+    <div class="header">
+        Avatar
+    </div>
+    <div class="image content">
 
         <div class="avatarInfo">
             <div>
@@ -127,40 +129,40 @@
                     <img class="avatar" id="icon" src="${userProfile.avatar}">
                 </div>
 
+                <br>
+                <div class="center">
+                    <div class="ui fitted horizontal divider">Options</div>
+                    <c:forEach var="localIcon" items="${iconList}">
+                        <div class="img">
+                            <img src="${localIcon}" class="rounded" id="${localIcon}"/>
+                        </div>
+                    </c:forEach>
                     <br>
-                    <div class="center">
-                        <div class="ui fitted horizontal divider">Options</div>
-                        <c:forEach var="localIcon" items="${iconList}">
-                            <div class="img">
-                                <img src="${localIcon}" class="rounded" id="${localIcon}"/>
-                            </div>
-                        </c:forEach>
-                        <br>
-                        <p></p>
-                        <button class="ui blue labeled icon small button" id="fileButton">
-                            <i class="inverted upload icon"></i>
-                           Upload
-                        </button>
-                        <form action="AvatarEdit" id="avatarForm" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="result" id="result" value="${userProfile.avatar}">
-                                <input type="file" id="imageFile" accept=".jpg, .gif,.png"
-                                       name="icon"/>
-                        </form>
+                    <p></p>
+                    <button class="ui blue labeled icon small button" id="fileButton">
+                        <i class="inverted upload icon"></i>
+                        Upload
+                    </button>
+                    <form action="AvatarEdit" id="avatarForm" method="post" style="margin: 0" enctype="multipart/form-data">
+                        <input type="hidden" name="result" id="result" value="${userProfile.avatar}">
+                        <input style="display: none" type="file" id="imageFile" accept=".jpg, .gif,.png"
+                               name="icon"/>
+                    </form>
 
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="actions">
-            <button class="ui deny button">
-                Cancel
-            </button>
-            <button id="submitAvatarChange" class="ui positive right icon button">
-                <i id="saveIcon" class="list icon"></i>
-                Save
-            </button>
-        </div>
     </div>
+    <div class="actions">
+        <button class="ui deny button">
+            Cancel
+        </button>
+        <button id="submitAvatarChange" class="ui positive right icon button">
+            <i id="saveIcon" class="list icon"></i>
+            Save
+        </button>
+    </div>
+</div>
 
 <div class="ui small modal" id="deleteWindow">
     <div class="header">Delete your account</div>

@@ -1,8 +1,7 @@
-
 $(document).ready(function () {
-    
+
     $("#gender").val(selection);
-    
+
     $('#fileButton').click(function () {
         $('#imageFile').click();
     });
@@ -24,7 +23,7 @@ $(document).ready(function () {
 
 
     $('#imageFile').change(function () {
-          readURL(this);
+        readURL(this);
         $('#result').val("");
     });
 
@@ -45,8 +44,8 @@ $(document).ready(function () {
             $("#updateBtn").addClass("loading");
         }
     });
-    
-    
+
+
     $("#newUsername").blur(function () {
         var newUsername = $('#newUsername').val();
         if (newUsername != "" && newUsername !=username) {

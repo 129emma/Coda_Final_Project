@@ -114,7 +114,7 @@ function getFollowers() {
     $("#getFollowers").off().click(function () {
         $("#followInfo").hide();
         $("#followerInfo").show();
-        $("#noFollowerInfo").hide();
+
     })
 }
 
@@ -122,7 +122,7 @@ function getFollows() {
     $("#getFollows").off().click(function () {
         $("#followInfo").show();
         $("#followerInfo").hide();
-        $("#noFollowInfo").hide();
+
     })
 }
 
