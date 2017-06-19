@@ -36,7 +36,7 @@
 
 <body>
 
-<div class="pusher full">
+<div>
     <jsp:include page="../NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>

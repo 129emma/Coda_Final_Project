@@ -4,12 +4,20 @@
 body{
     background-color: #565D6B;
 }
-
+.ui.left.close.rail,.ui.sticky{
+    width: 80px !important;
+}
 .ui.ribbon.label {
     position: absolute;
     left: 102.2%;
 }
-
+.sub.header{
+    display: block !important;
+}
+.multimediaPreview{
+    width:100%;
+    text-align:center;
+}
 #copyright {
     margin-top: 5%;
     margin-bottom: 2%;
@@ -97,7 +105,9 @@ div{
 .content {
     text-align: center;
 }
-
+.likeNum{
+    font-family: Montserrat, sans-serif;
+}
 .ui.button.topButton {
     display: none;
     bottom: 0px;
@@ -126,15 +136,8 @@ i.cardIcons {
     font-size: 15px;
 }
 
-div#flipright {
-    background-color: transparent;
-}
 
-div#flipleft {
-    background-color: transparent;
-}
-
-a.ui.left.floated.icon.button {
+a.ui.left.floated.icon.button,div#flipright,div#flipleft{
     background-color: transparent;
 }
 
@@ -177,6 +180,12 @@ h3.ui.header{
     }
 
 }
+@media only screen and (max-width: 560px) {
+    iframe,video{
+        height: auto;
+        min-height: 200px;
+    }
+}
 
 #Loader{
     margin-bottom: 20px;
@@ -202,3 +211,7 @@ img,iframe,audio,video{
     max-width: 100%;
     margin: auto;
 }
+#noFollowerInfo{
+display: none;
+}
+

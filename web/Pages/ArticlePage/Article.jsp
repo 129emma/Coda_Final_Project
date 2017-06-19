@@ -26,7 +26,7 @@
 </head>
 <body>
 
-<div class="pusher full">
+<div>
     <jsp:include page="../NavigationBar/NavigationBar.jsp">
         <jsp:param name="NavigationBar" value=""/>
     </jsp:include>
@@ -40,7 +40,7 @@
             <div class="ui attached segment">
                 ${articleInfo.content}
             </div>
-            <div id="id" style="display: none">${articleInfo.articleID}</div>
+            <div id="id">${articleInfo.articleID}</div>
             <div class="ui attached segment">
                 ${articleInfo.editArticle}
                 ${articleInfo.deleteArticle}
@@ -54,12 +54,9 @@
                     </button>
                 </div>
             </div>
-
             <div class="ui comments">
                 <h3 class="ui dividing header">Comments</h3>
-
                 <c:forEach var="comment" items="${commentInfoList}">
-
                 <div class="comment">
                     <a class="ui avatar">
                         <img src="${comment.userAvatar}">
@@ -76,7 +73,6 @@
                                 ${comment.deleteBtn}
                         </div>
                     </div>
-
                         <%--Display Replied Comments--%>
                     <div class="comments">
                         <c:forEach var="commentReply" items="${comment.commentReplyInfoList}">
@@ -100,22 +96,19 @@
                         </c:forEach>
                     </div>
                     </c:forEach>
-
                     <form class="ui reply form" action="Comment" method="POST">
                         <div class="field">
                             <textarea name="comment"></textarea>
                             <input type="hidden" name="articleID" value="${articleInfo.articleID}">
                         </div>
-                        <button id="commentSubmitBtn" class="ui icon button" type="submit" name="action" value="create">Comment
+                        <button id="commentSubmitBtn" class="ui icon button" type="submit" name="action" value="create">
+                            Comment
                         </button>
                     </form>
-
-
                 </div>
             </div>
         </div>
     </div>
-
     <%--Edit Box--%>
     <div id="editor" class="ui standard modal reply form editComment">
         <div class="ui basic segment">
@@ -136,7 +129,6 @@
             </form>
         </div>
     </div>
-
 </body>
 </html>
 

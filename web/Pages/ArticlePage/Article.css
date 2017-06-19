@@ -5,7 +5,9 @@ div#ArticleContainer {
 body{
     background-color: #565D6B;
 }
-
+#id{
+    display: none;
+}
 div{
     word-wrap: break-word;         /* All browsers since IE 5.5+ */
     overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
@@ -42,7 +44,7 @@ div{
 
 .ui.segment.keepContent{
     box-shadow: none;
-    border-radius: 0px;
+    border-radius: 0;
     border: none;
 }
 
@@ -50,6 +52,18 @@ div{
     border-radius: 0;
 }
 
-img{
+img,iframe,audio,video{
     max-width: 100%;
+    margin: auto;
+}
+@media only screen and (max-width: 390px) {
+    .ui.button {
+        font-size: 10px;!important;
+    }
+}
+@media only screen and (max-width: 530px) {
+      iframe,video{
+       height: auto;
+        min-height: 200px;
+    }
 }

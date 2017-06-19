@@ -35,7 +35,7 @@
                 </p>
 
                 <div id="messageContainer" class="ui message hidden">
-                    <p id="message" style="text-align: justify;">${message}</p>
+                    <p id="message">${message}</p>
                 </div>
 
                 <div class="ui horizontal divider">Or</div>
@@ -43,7 +43,6 @@
             </div>
         </div>
     </form>
-    <%--<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>--%>
 </div>
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </body>

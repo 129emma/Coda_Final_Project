@@ -14,7 +14,6 @@
     <title>AlbumsInfo</title>
 </head>
 <body>
-
 <div id='Image' class="listContainer">
     <div class="user">
         <div class="ui segment">
@@ -36,7 +35,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noUserInfo" style="display: none">
+        <div class="ui icon message noUserInfo" >
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -62,7 +61,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noSpotlightInfo" style="display: none">
+        <div class="ui icon message noSpotlightInfo" >
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -74,8 +73,6 @@
     </div>
 </div>
 <div id='ImageEnd'></div>
-
-
 <div id='Video' class="listContainer">
     <div class="user">
         <div class="ui segment">
@@ -101,7 +98,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noUserInfo" style="display: none">
+        <div class="ui icon message noUserInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -111,7 +108,6 @@
             </div>
         </div>
     </div>
-
     <div class="spotlight">
         <div class="ui segment">
             <div id="spotlightVideoList" class="videoList">
@@ -133,7 +129,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noSpotlightInfo" style="display: none">
+        <div class="ui icon message noSpotlightInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -171,7 +167,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noUserInfo" style="display: none">
+        <div class="ui icon message noUserInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -203,7 +199,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noSpotlightInfo" style="display: none">
+        <div class="ui icon message noSpotlightInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -215,8 +211,6 @@
     </div>
 </div>
 <div id='AudioEnd'></div>
-
-
 <div id='Youtube' class="listContainer">
     <div class="user">
         <div class="ui segment">
@@ -236,7 +230,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noUserInfo" style="display: none">
+        <div class="ui icon message noUserInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">
@@ -260,7 +254,7 @@
                 </c:forEach>
             </div>
         </div>
-        <div class="ui icon message noSpotlightInfo" style="display: none">
+        <div class="ui icon message noSpotlightInfo">
             <i class="frown icon"></i>
             <div class="content">
                 <div class="header">

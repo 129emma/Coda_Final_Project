@@ -3,7 +3,6 @@
  */
 $(document).ready(function () {
     $('.ui.normal.dropdown').dropdown();
-
     $('.input').each(function () {
         $(this).change(function () {
             var data = new FormData();

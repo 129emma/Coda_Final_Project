@@ -2,9 +2,13 @@ body {
     background-color: #565D6B;
 }
 
+.ui.icon.message.noUserInfo, .ui.icon.message.noSpotlightInfo,#fixedMenu,#noContentInfo {
+    display: none;
+}
+
 .ui.segment, .ui.menu {
     border: none;
-    border-radius: 0px;
+    border-radius: 0;
 }
 
 ul.userChoice {
@@ -48,6 +52,7 @@ li {
 !important;
     padding-top: 0;
 !important;
+    display: none;
 }
 
 .ui.labeled.icon.borderless.menu.secondMenu {
@@ -68,8 +73,6 @@ div.desc {
     text-align: center;
 }
 
-/*myWork*/
-
 div#Image, div#Audio, div#Video, div#Youtube {
     width: 100%;
     text-align: center;
@@ -82,13 +85,11 @@ div#Image, div#Audio, div#Video, div#Youtube {
 }
 
 div.gallery img {
-    width: 100%;
     height: 160px;
 }
 
-div.gallery audio {
-    width: 100%;
-!important;
+div.gallery audio,div.gallery img,.responsiveVideo video {
+    width: 100%; !important;
 }
 
 .responsiveVideo, .responsiveYoutube {
@@ -98,14 +99,9 @@ div.gallery audio {
 }
 
 .responsiveYoutube iframe {
-    width: 100%;
-!important;
+    width: 100%;  !important;
     height: auto;
     min-height: 220px;
-}
-
-.responsiveVideo video {
-    width: 100%;
 }
 
 .videoList, .youtubeList {
@@ -114,10 +110,6 @@ div.gallery audio {
 
 .imageList, .audioList, .videoList, .youtubeList {
     display: inline-block;
-}
-
-#fixedMenu {
-    display: none;
 }
 
 @media only screen and (max-width: 720px) {
@@ -154,12 +146,11 @@ div.gallery audio {
         max-width: 220px;
     }
 
-    .videoList, .youtubeList {
+    .videoList, .youtubeList,.responsiveYoutube, .responsiveVideo {
         max-width: 460px;
     }
 
     .responsiveYoutube, .responsiveVideo {
-        max-width: 460px;
         width: 100%;
     }
 
