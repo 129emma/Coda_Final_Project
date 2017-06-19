@@ -66,10 +66,10 @@ function disableCommentBtn() {
 function likeArticle() {
     var id = $('#id').text();
     $('.ui.button.like').off().click(function () {
+        console.log("likeClick");
         $(this).prop("disabled", true);
-        var lable = $('.ui.basic.right.pointing.label');
-        var numLike = lable.text();
-        lable.text(parseInt(numLike, 10) + 1);
+        var numLike = $('.ui.basic.right.pointing.label').text();
+        $('.ui.basic.right.pointing.label').text(parseInt(numLike, 10) + 1);
         $('.heart.icon').addClass('red');
         $('#ifLiked').text('liked');
         $.ajax({
@@ -77,17 +77,18 @@ function likeArticle() {
             type: 'post',
             data: {action: 'like', articleID: id},
             success: function () {
-                $(this).removeClass('like').addClass('liked');
+                console.log('success');
+                $('.ui.button.like').removeClass('like').addClass('liked');
                 $('#likeButton').prop("disabled", false);
                 likeArticle();
             }
         })
     });
     $('.ui.button.liked').off().click(function () {
+        console.log("dislikeClick");
         $(this).prop("disabled", true);
-        var label = $('.ui.basic.right.pointing.label')
-        var numLike = label.text();
-        label.text(parseInt(numLike, 10) - 1);
+        var numLike = $('.ui.basic.right.pointing.label').text();
+        $('.ui.basic.right.pointing.label').text(parseInt(numLike, 10) - 1);
         $('.heart.icon').removeClass('red');
         $('#ifLiked').text('like');
         $.ajax({
@@ -95,7 +96,8 @@ function likeArticle() {
             type: 'post',
             data: {action: 'dislike', articleID: id},
             success: function () {
-                $(this).removeClass('liked').addClass('like');
+                console.log('success2');
+                $('.ui.button.liked').removeClass('liked').addClass('like');
                 $('#likeButton').prop("disabled", false);
                 likeArticle();
             }

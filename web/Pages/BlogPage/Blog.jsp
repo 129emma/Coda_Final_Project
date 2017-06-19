@@ -104,7 +104,6 @@
                     </div>
                 </div> <!--End of First Side-->
 
-
                 <!--Another Side-->
 
                 <div class="side">

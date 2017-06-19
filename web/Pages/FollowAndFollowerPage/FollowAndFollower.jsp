@@ -45,7 +45,6 @@
 <div id="followerInfo">
     <div class="ui segment" id="followerList">
         <div class="ui large aligned divided list" id="followers">
-
             <c:forEach var="follower" items="${followersList}">
                 <div class="item">
                     <div class="right floated content">
@@ -58,7 +57,7 @@
             </c:forEach>
         </div>
     </div>
-    <div class="ui icon message" id="noFollowerInfo">
+    <div class="ui icon message" id="noFollowerInfo" style="display:none;">
         <i class="frown icon"></i>
         <div class="content">
             <div class="header">

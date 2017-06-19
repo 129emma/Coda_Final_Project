@@ -114,6 +114,7 @@ function getFollowers() {
     $("#getFollowers").off().click(function () {
         $("#followInfo").hide();
         $("#followerInfo").show();
+        $("#noFollowerInfo").hide();
     })
 }
 
@@ -121,6 +122,7 @@ function getFollows() {
     $("#getFollows").off().click(function () {
         $("#followInfo").show();
         $("#followerInfo").hide();
+        $("#noFollowInfo").hide();
     })
 }
 
@@ -166,16 +168,13 @@ function freshButtonList() {
 
 
 function getFollowInfo() {
-
     $("#ArticleContainer").html("");
     $("#Loader").show();
-
     $.ajax({
         url: 'Follow',
         type: 'post',
         data: {action: 'getFollowInfo'},
         success: function (followInfo) {
-
             var info = followInfo.substring(followInfo.indexOf('\<body\>') + 6, followInfo.indexOf("\</body\>"));
             $("#ArticleContainer").html(info);
             getFollows();
@@ -198,7 +197,6 @@ function getFollowInfo() {
 }
 
 function followFunction() {
-
     $('.ui.button.blue').each(function (i, obj) {
         $(obj).off().click(function () {
             var username;
@@ -247,7 +245,6 @@ function followFunction() {
         })
     });
 }
-
 function refresh() {
     if($('.ui.left.close.rail').css('display')!='none') {
         $('.ui.sticky').sticky('refresh');
