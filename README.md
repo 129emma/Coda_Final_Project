@@ -1,13 +1,13 @@
-[![GitHub release](https://img.shields.io/github/release/129emma/Coda_Final_Project.svg)]()
 
 
-# Coda Final Project
+
+# Coda Final Project [![GitHub release](https://img.shields.io/github/release/129emma/Coda_Final_Project.svg)]()
 - PGCert final group project 
 - Group memeber: Qian, Che, Gin, Emma
 
-![](http://progressed.io/bar/100?title=completed)
 
-# Features
+
+# Features ![](http://progressed.io/bar/100?title=completed)
 - Basic Functionalities
      - Register as a new user
      - Add/Edit/Delete an article
