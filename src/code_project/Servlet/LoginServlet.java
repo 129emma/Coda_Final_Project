@@ -95,7 +95,7 @@ public class LoginServlet extends HttpServlet {
                     if (ajaxRequest) {
                         out.write("success");
                     } else {
-                        request.setAttribute("message", "Success to create account");
+                        request.setAttribute("message", "Account has been successfully created!");
                         request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
                     }
                 } catch (SQLException e) {
@@ -112,16 +112,16 @@ public class LoginServlet extends HttpServlet {
     private void logoutProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         switch (status) {
             case "logout":
-                request.setAttribute("message", "You already logout!");
+                request.setAttribute("message", "You have already logged out!");
                 break;
             case "login":
                 session.setAttribute("status", "logout");
                 session.removeAttribute("username");
-                request.setAttribute("message", "You are success to logout!");
+                request.setAttribute("message", "You have successfully logged out!");
                 break;
             default:
                 session.setAttribute("status", "logout");
-                request.setAttribute("message", "You didn't login yet!");
+                request.setAttribute("message", "You haven't logged in yet!");
                 break;
         }
         request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
@@ -155,7 +155,7 @@ public class LoginServlet extends HttpServlet {
                     if (ajaxRequest) {
                         out.write("Fail to login: username not exist");
                     } else {
-                        request.setAttribute("message", "Fail to login: username not exist");
+                        request.setAttribute("message", "Failed to login: username doesn't exist");
                         request.getRequestDispatcher("Pages/LoginPage/Login.jsp").forward(request, response);
                     }
                     return;
